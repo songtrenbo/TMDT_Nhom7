@@ -1,0 +1,136 @@
+﻿@model TMDT.Models.SanPham
+
+@{
+    ViewBag.Title = "CT_SanPham";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5">
+            <img src="@Model.Hinh" alt="" class="img-fluid">
+        </div>
+        <div class="col-5 container-fluid">
+            <div class="row">
+                <h1 class="col-12"><b>@Model.TenSanPham</b></h1>
+            </div>
+            <div class="row">
+                <h4 class="col-2">Thương hiệu: </h4>
+                <div class="col-2"></div>
+                <h4 class="col-8"> @Model.ThuongHieu.TenThuongHieu</h4>
+            </div>
+            <div class="row">
+                <h4 class="col-2">Giá: </h4>
+                <div class="col-2"></div>
+                <h4 class="col-8"> @Model.GiaBan</h4>
+            </div>
+            <button class="btn-buy">
+                Mua ngay
+            </button>
+            <button class="btn-addtocart">
+                Thêm vào giỏ hàng
+            </button>
+        </div>
+    </div>
+    <br /><br />
+    <div class="row">
+        <h3>Mô tả laptop</h3>
+    </div>
+    <br /><br />
+    <div class="row">
+        <div class="col-2">
+            <h4>Màn hình:</h4>
+        </div>
+        <div class="col-10">
+            <h4>@Model.ManHinh</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <h4>CPU:</h4>
+        </div>
+        <div class="col-10">
+            <h4>@Model.CPU.TenCPU (@Model.CPU.HangCPU)</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <h4>RAM:</h4>
+        </div>
+        <div class="col-10">
+            <h4>@Model.RAM GB</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <h4>GPU:</h4>
+        </div>
+        <div class="col-10">
+            <h4>@Model.GPU.TenGPU (@Model.GPU.LoaiGPU)</h4>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-2">
+            <h4>Bảo hành:</h4>
+        </div>
+        <div class="col-10">
+            <h4>@Model.BaoHanh tháng</h4>
+        </div>
+    </div>
+</div>
+
+
+<br /><br /><br />
+
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+<style>
+    .btn-buy {
+        width: 30%;
+        position: absolute;
+        bottom: 0;
+        padding: 10px;
+        background-color: white;
+        border: none;
+        color: #EE0033;
+        box-shadow: 0px 2px 15px #F24060;
+        transition: all 0.3s ease 0s;
+    }
+
+        .btn-buy:hover {
+            background-color: #2EE59D;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            border-color: rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+    .btn-addtocart {
+        width: 50%;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 10px;
+        background-color: white;
+        border: none;
+        color: #4834D4;
+        box-shadow: 0px 2px 15px #4B38D5;
+        transition: all 0.3s ease 0s;
+    }
+
+        .btn-addtocart:hover {
+            background-color: #2EE59D;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            border-color: rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+</style>

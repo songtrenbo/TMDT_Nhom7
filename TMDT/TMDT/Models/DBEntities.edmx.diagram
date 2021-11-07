@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="74063149476a449098b946395837f649" Name="Diagram1">
+        <EntityTypeShape EntityType="DBLaptopModel.CPU" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.CTHoaDon" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.DanhMuc" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.GPU" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.HoaDon" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.NguoiDung" Width="1.5" PointX="0.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.PhieuQuaTang" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Quyen" Width="1.5" PointX="1.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.SanPham" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.ThuongHieu" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaCPU__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__CTHoaDon__MaHoaD__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__CTHoaDon__MaSanP__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaDanhM__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaGPU__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__HoaDon__MaKhachH__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__NguoiDung__MaQuy__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaThuon__48CFD27E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
