@@ -159,24 +159,24 @@ GO
 --Danh mục
 INSERT INTO DanhMuc
     (TenDanhMuc, Hinh, NgayTao, IsDeleted, IsLockEdit)
-VALUES(N'Gaming đồ họa', N'', N'2021-11-05', 0, 1),--1
-    (N'Doanh nhân', N'', N'2021-11-05', 0, 1),--2
-    (N'Mỏng nhẹ', N'', N'2021-11-05', 0, 1),--3
-    (N'Sinh viên', N'', N'2021-11-05', 0, 1),--4
-    (N'Văn phòng', N'', N'2021-11-05', 0, 1)--5
+VALUES(N'Gaming đồ họa', N'https://images.fpt.shop/unsafe/fit-in/125x125/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/9/9/637352691284513627_Group%2073@3x.png', N'2021-11-05', 0, 1),--1
+    (N'Doanh nhân', N'https://images.fpt.shop/unsafe/fit-in/125x125/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/9/9/637352693282588825_Group%2073@3x.png', N'2021-11-05', 0, 1),--2
+    (N'Mỏng nhẹ', N'https://images.fpt.shop/unsafe/fit-in/125x125/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/9/9/637352694501010620_Group%2073@3x.png', N'2021-11-05', 0, 1),--3
+    (N'Sinh viên', N'https://images.fpt.shop/unsafe/fit-in/125x125/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/9/10/637353308751863585_Img@3x.png', N'2021-11-05', 0, 1),--4
+    (N'Văn phòng', N'https://images.fpt.shop/unsafe/fit-in/125x125/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/9/9/637352695747985641_Group%2073@3x.png', N'2021-11-05', 0, 1)--5
 GO
 
 --Thương hiệu
 INSERT INTO ThuongHieu
     (TenThuongHieu, Hinh, NgayTao, IsDeleted, IsLockEdit)
-VALUES(N'Macbook', N'', N'2021-11-05', 0, 1),--1
-    (N'Asus', N'', N'2021-11-05', 0, 1),--2
-    (N'Acer nhẹ', N'', N'2021-11-05', 0, 1),--3
-    (N'Dell', N'', N'2021-11-05', 0, 1),--4
-    (N'HP', N'', N'2021-11-05', 0, 1),--5
-    (N'Lenovo', N'', N'2021-11-05', 0, 1),--6
-    (N'Microsoft', N'', N'2021-11-05', 0, 1),--7
-    (N'MSI', N'', N'2021-11-05', 0, 1)--8
+VALUES(N'Macbook', N'https://images.fpt.shop/unsafe/fit-in/108x40/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/8/26/637340494668267616_Macbook-Apple@2x.jpg', N'2021-11-05', 0, 1),--1
+    (N'Asus', N'https://images.fpt.shop/unsafe/fit-in/108x40/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/8/26/637340494666861275_Asus.jpg', N'2021-11-05', 0, 1),--2
+    (N'Acer nhẹ', N'https://images.fpt.shop/unsafe/fit-in/108x40/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/8/26/637340494666704995_Acer@2x.jpg', N'2021-11-05', 0, 1),--3
+    (N'Dell', N'https://images.fpt.shop/unsafe/fit-in/108x40/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/8/26/637340494666861275_Dell@2x.jpg', N'2021-11-05', 0, 1),--4
+    (N'HP', N'https://images.fpt.shop/unsafe/fit-in/108x40/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/7/15/637619564183327279_HP@2x.png', N'2021-11-05', 0, 1),--5
+    (N'Lenovo', N'https://images.fpt.shop/unsafe/fit-in/108x40/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/8/26/637340494668267616_Lenovo@2x.jpg', N'2021-11-05', 0, 1),--6
+    (N'Microsoft', N'https://images.fpt.shop/unsafe/fit-in/108x40/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2021/1/13/637461259692529909_Microsoft@2x.png', N'2021-11-05', 0, 1),--7
+    (N'MSI', N'https://images.fpt.shop/unsafe/fit-in/108x40/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/8/26/637340493755614653_MSI@2x.jpg', N'2021-11-05', 0, 1)--8
 GO
 
 --CPU

@@ -10,7 +10,7 @@
 <div class="container-fluid" style="height:378px">
     <div id="carouselIndicators"
          class="carousel slide"
-         data-ride="carousel" >
+         data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselIndicators"
                 data-slide-to="0"
@@ -45,7 +45,9 @@
         </a>
     </div>
 </div>
-<br /><br /><br />
+<br />
+<br />
+<br />
 <!-- banner-->
 
 <h4 style="margin-top:2%">Thương hiệu</h4>
@@ -55,26 +57,13 @@
 <div class="container-fluid" style="background-color:#EE0033; padding:10px">
     <div class="top-content">
         <div class="container-fluid">
-            <div id="carousel-example" class="carousel slide" data-ride="carousel" data-interval="false" >
+            <div id="carousel-example" class="carousel slide" data-ride="carousel" data-interval="false">
                 <div class="carousel-inner carousel-inners2 row w-100 mx-auto" role="listbox" style="height:200px;">
-                    @{
-                        int c = 0;
-                        foreach (var item in ViewBag.thuonghieu)
-                        {
-                            if (c == 0)
-                            {
-                                <div class="carousel-item carousel-i col-12 col-sm-6 col-md-4 col-lg-3 active img-thumbnail" style="height:200px;">
-                                    <a href="#"><img src="@item.Hinh" class="img-fluid mx-auto d-block" style="height:200px"></a>
-                                </div>
-                                c++;
-                            }
-                            else
-                            {
-                                <div class="carousel-item carousel-i col-12 col-sm-6 col-md-4 col-lg-3 img-thumbnail" style="height:200px">
-                                    <a href="#"><img src="@item.Hinh" class="img-fluid mx-auto d-block" style="height:200px"></a>
-                                </div>
-                            }
-                        }
+                    @foreach (var item in ViewBag.thuonghieu)
+                    {
+                        <div class="carousel-item carousel-i col-12 col-sm-6 col-md-4 col-lg-3 @if( item.MaThuongHieu == 1) {<text>active</text>} img-thumbnail" style="height:200px;">
+                            <a href="#"><img src="@item.Hinh" class="img-fluid mx-auto d-block" style="height:200px"></a>
+                        </div>
                     }
                 </div>
                 <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev">
@@ -176,7 +165,7 @@
         if (idx >= totalItems - (itemsPerSlide - 1)) {
             var it = itemsPerSlide - (totalItems - idx);
             for (var i = 0; i < it; i++) {
-                if (e.direction == "left" && i > 1) {
+                if (e.direction == "left") {
                     $(".carousel-i").eq(i).appendTo(".carousel-inners2");
                 } else {
                     $(".carousel-i").eq(0).appendTo(".carousel-inners2");
@@ -186,126 +175,143 @@
     });
 </script>
 <style>
-  /*
-    code by Iatek LLC 2018 - CC 2.0 License - Attribution required
-    code customized by Azmind.com
-*/
-@@media (min-width: 768px) and (max-width: 991px) {
-    .carousel-inner .active.col-md-4.carousel-i + .carousel-i + .carousel-i + .carousel-i {
-        position: absolute;
-        top: 0;
-        right: -33.3333%;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
-}
-@@media (min-width: 576px) and (max-width: 768px) {
-    .carousel-inner .active.col-sm-6.carousel-i + .carousel-i + .carousel-i {
-        position: absolute;
-        top: 0;
-        right: -50%;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
-}
-@@media (min-width: 576px) {
-    .carousel-i {
-        margin-right: 0;
-    }
-    .carousel-inner .active + .carousel-i {
-        display: block;
-    }
-    .carousel-inner .carousel-i.active:not(.carousel-i-right):not(.carousel-i-left),
-    .carousel-inner .carousel-i.active:not(.carousel-i-right):not(.carousel-i-left) + .carousel-i {
-        transition: none;
-    }
-    .carousel-inner .carousel-i-next {
-        position: relative;
-        transform: translate3d(0, 0, 0);
-    }
-    .active.carousel-i-left + .carousel-i-next.carousel-i-left,
-    .carousel-i-next.carousel-i-left + .carousel-i,
-    .carousel-i-next.carousel-i-left + .carousel-i + .carousel-i {
-        position: relative;
-        transform: translate3d(-100%, 0, 0);
-        visibility: visible;
-    }
-    .carousel-inner .carousel-i-prev.carousel-i-right {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
+        /*
+        code by Iatek LLC 2018 - CC 2.0 License - Attribution required
+        code customized by Azmind.com
+    */
+        @@media (min-width: 768px) and (max-width: 991px) {
+            .carousel-inner .active.col-md-4.carousel-i + .carousel-i + .carousel-i + .carousel-i {
+                position: absolute;
+                top: 0;
+                right: -33.3333%;
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+        }
 
-    .active.carousel-i-right + .carousel-i-prev.carousel-i-right,
-    .carousel-i-prev.carousel-i-right + .carousel-i,
-    .carousel-i-prev.carousel-i-right + .carousel-i + .carousel-i {
-        position: relative;
-        transform: translate3d(100%, 0, 0);
-        visibility: visible;
-        display: block;
-        visibility: visible;
-    }
-}
-@@media (min-width: 768px) {
-    .carousel-inner .active + .carousel-i + .carousel-i {
-        display: block;
-    }
-    .carousel-inner .carousel-i.active:not(.carousel-i-right):not(.carousel-i-left) + .carousel-i + .carousel-i {
-        transition: none;
-    }
-    .carousel-inner .carousel-i-next {
-        position: relative;
-        transform: translate3d(0, 0, 0);
-    }
-    .carousel-i-next.carousel-i-left + .carousel-i + .carousel-i + .carousel-i {
-        position: relative;
-        transform: translate3d(-100%, 0, 0);
-        visibility: visible;
-    }
-    .carousel-i-prev.carousel-i-right + .carousel-i + .carousel-i + .carousel-i {
-        position: relative;
-        transform: translate3d(100%, 0, 0);
-        visibility: visible;
-        display: block;
-        visibility: visible;
-    }
-}
-@@media (min-width: 991px) {
-    .carousel-inner .active + .carousel-i + .carousel-i + .carousel-i {
-        display: block;
-    }
-    .carousel-inner .carousel-i.active:not(.carousel-i-right):not(.carousel-i-left) + .carousel-i + .carousel-i + .carousel-i {
-        transition: none;
-    }
-    .carousel-inner .active.col-lg-3.carousel-i + .carousel-i + .carousel-i + .carousel-i + .carousel-i {
-        position: absolute;
-        top: 0;
-        right: -25%;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
-    .carousel-i-next.carousel-i-left + .carousel-i + .carousel-i + .carousel-i + .carousel-i {
-        position: relative;
-        transform: translate3d(-100%, 0, 0);
-        visibility: visible;
-    }
+        @@media (min-width: 576px) and (max-width: 768px) {
+            .carousel-inner .active.col-sm-6.carousel-i + .carousel-i + .carousel-i {
+                position: absolute;
+                top: 0;
+                right: -50%;
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+        }
 
-    .carousel-i-prev.carousel-i-right + .carousel-i + .carousel-i + .carousel-i + .carousel-i {
-        position: relative;
-        transform: translate3d(100%, 0, 0);
-        visibility: visible;
-        display: block;
-        visibility: visible;
-    }
-}
-    .carousel-control-next,
-    .carousel-control-prev /*, .carousel-indicators */ {
-        filter: invert(100%);
-    }
+        @@media (min-width: 576px) {
+            .carousel-i {
+                margin-right: 0;
+            }
+
+            .carousel-inner .active + .carousel-i {
+                display: block;
+            }
+
+            .carousel-inner .carousel-i.active:not(.carousel-i-right):not(.carousel-i-left),
+            .carousel-inner .carousel-i.active:not(.carousel-i-right):not(.carousel-i-left) + .carousel-i {
+                transition: none;
+            }
+
+            .carousel-inner .carousel-i-next {
+                position: relative;
+                transform: translate3d(0, 0, 0);
+            }
+
+            .active.carousel-i-left + .carousel-i-next.carousel-i-left,
+            .carousel-i-next.carousel-i-left + .carousel-i,
+            .carousel-i-next.carousel-i-left + .carousel-i + .carousel-i {
+                position: relative;
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+
+            .carousel-inner .carousel-i-prev.carousel-i-right {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+
+            .active.carousel-i-right + .carousel-i-prev.carousel-i-right,
+            .carousel-i-prev.carousel-i-right + .carousel-i,
+            .carousel-i-prev.carousel-i-right + .carousel-i + .carousel-i {
+                position: relative;
+                transform: translate3d(100%, 0, 0);
+                visibility: visible;
+                display: block;
+                visibility: visible;
+            }
+        }
+
+        @@media (min-width: 768px) {
+            .carousel-inner .active + .carousel-i + .carousel-i {
+                display: block;
+            }
+
+            .carousel-inner .carousel-i.active:not(.carousel-i-right):not(.carousel-i-left) + .carousel-i + .carousel-i {
+                transition: none;
+            }
+
+            .carousel-inner .carousel-i-next {
+                position: relative;
+                transform: translate3d(0, 0, 0);
+            }
+
+            .carousel-i-next.carousel-i-left + .carousel-i + .carousel-i + .carousel-i {
+                position: relative;
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+
+            .carousel-i-prev.carousel-i-right + .carousel-i + .carousel-i + .carousel-i {
+                position: relative;
+                transform: translate3d(100%, 0, 0);
+                visibility: visible;
+                display: block;
+                visibility: visible;
+            }
+        }
+
+        @@media (min-width: 991px) {
+            .carousel-inner .active + .carousel-i + .carousel-i + .carousel-i {
+                display: block;
+            }
+
+            .carousel-inner .carousel-i.active:not(.carousel-i-right):not(.carousel-i-left) + .carousel-i + .carousel-i + .carousel-i {
+                transition: none;
+            }
+
+            .carousel-inner .active.col-lg-3.carousel-i + .carousel-i + .carousel-i + .carousel-i + .carousel-i {
+                position: absolute;
+                top: 0;
+                right: -25%;
+                z-index: -1;
+                display: block;
+                visibility: visible;
+            }
+
+            .carousel-i-next.carousel-i-left + .carousel-i + .carousel-i + .carousel-i + .carousel-i {
+                position: relative;
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+
+            .carousel-i-prev.carousel-i-right + .carousel-i + .carousel-i + .carousel-i + .carousel-i {
+                position: relative;
+                transform: translate3d(100%, 0, 0);
+                visibility: visible;
+                display: block;
+                visibility: visible;
+            }
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev /*, .carousel-indicators */ {
+            filter: invert(100%);
+        }
 </style>
