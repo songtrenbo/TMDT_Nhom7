@@ -9,7 +9,7 @@ namespace TMDT.Controllers
 {
     public class SanPhamController : Controller
     {
-        DBLaptopEntities database = new DBLaptopEntities();
+        DBLaptopEntities1 database = new DBLaptopEntities1();
         // GET: SanPham
         public ActionResult Index()
         {

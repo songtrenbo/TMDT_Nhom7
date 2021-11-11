@@ -13,10 +13,10 @@ namespace TMDT.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBLaptopEntities : DbContext
+    public partial class DBLaptopEntities1 : DbContext
     {
-        public DBLaptopEntities()
-            : base("name=DBLaptopEntities")
+        public DBLaptopEntities1()
+            : base("name=DBLaptopEntities1")
         {
         }
     
@@ -25,14 +25,17 @@ namespace TMDT.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CPU> CPUs { get; set; }
         public virtual DbSet<CTHoaDon> CTHoaDons { get; set; }
         public virtual DbSet<DanhMuc> DanhMucs { get; set; }
         public virtual DbSet<GPU> GPUs { get; set; }
+        public virtual DbSet<Hinh> Hinhs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<PhieuQuaTang> PhieuQuaTangs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
+        public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<ThuongHieu> ThuongHieux { get; set; }
     }
