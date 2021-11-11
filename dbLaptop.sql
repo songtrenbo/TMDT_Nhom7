@@ -28,8 +28,7 @@ CREATE TABLE NguoiDung
     Password VARCHAR(1000) NOT NULL DEFAULT 0,
     Email NVARCHAR(100) NULL,
     DiemThuong INT DEFAULT 0,
-    MaQuyen INT NOT NULL DEFAULT 4,
-    -- 1: admin && 2: quản lý && 3: nhân viên && 4: khách
+    MaQuyen INT NOT NULL DEFAULT 4,-- 1: admin && 2: quản lý && 3: nhân viên && 4: khách
     NgayTao DATETIME NOT NUll,
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
@@ -72,6 +71,7 @@ CREATE TABLE CPU
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
 );
+
 CREATE TABLE GPU
 (
     MaGPU INT IDENTITY PRIMARY KEY,
@@ -82,6 +82,7 @@ CREATE TABLE GPU
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
 );
+
 CREATE TABLE SanPham
 (
     MaSanPham INT IDENTITY PRIMARY KEY,
@@ -93,6 +94,8 @@ CREATE TABLE SanPham
     GiaBan INT DEFAULT 0,
     GiaGiam INT DEFAULT 0,
     PhanTramGiamGia INT DEFAULT 0,
+    DiemRate INT DEFAULT 0,
+    SoLuotRate INT DEFAULT 0,
     BaoHanh INT NOT NULL,
     MaCPU INT NOT NULL,
     RAM NVARCHAR(255) NOT NULL,--4, 8, 16, 32
@@ -101,7 +104,6 @@ CREATE TABLE SanPham
     Hinh NVARCHAR(255) NOT NULL,
     NgayTao DATETIME NOT NUll,
     NgayChinhSua DATETIME,
-    IsDeleted BIT DEFAULT 0,
     IsHide BIT DEFAULT 0,
     FOREIGN KEY (MaDanhMuc) REFERENCES dbo.DanhMuc(MaDanhMuc),
     FOREIGN KEY (MaThuongHieu) REFERENCES dbo.ThuongHieu(MaThuongHieu),
@@ -109,6 +111,18 @@ CREATE TABLE SanPham
     FOREIGN KEY (MaGPU) REFERENCES dbo.GPU(MaGPU),
 );
 
+
+CREATE TABLE Hinh
+(
+    MaHinh INT IDENTITY PRIMARY KEY,
+    MaSanPham INT NOT NULL,
+    TenHinh NVARCHAR(255) NOT NULL,
+    [Path] NVARCHAR(255) NOT NULL,
+    NgayTao DATETIME NOT NUll,
+    NgayChinhSua DATETIME,
+    IsDeleted BIT DEFAULT 0,
+    FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
+);
 
 CREATE TABLE PhieuQuaTang
 (
@@ -129,7 +143,7 @@ CREATE TABLE HoaDon
     NgayMua DATETIME NOT NULL,
     TongThanhToan INT DEFAULT 0,
     MaKhachHang INT NOT NULL,
-    FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(maNguoiDung),
+    FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
 );
 
 CREATE TABLE CTHoaDon
@@ -143,6 +157,34 @@ CREATE TABLE CTHoaDon
     FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
     FOREIGN KEY (MaHoaDon) REFERENCES dbo.HoaDon(MaHoaDon),
 );
+
+CREATE TABLE Comment
+(
+    MaComment INT IDENTITY PRIMARY KEY,
+    MaSanPham INT NOT NULL,
+    MaKhachHang INT NOT NULL,
+    NoiDung NVARCHAR(255) NOT NULL,
+    NgayTao DATETIME NOT NULL,
+    NgayChinhSua DATETIME NOT NULL,
+    FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
+    FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
+);
+
+CREATE TABLE Rate
+(
+    MaRate INT IDENTITY PRIMARY KEY,
+    MaSanPham INT NOT NULL,
+    MaKhachHang INT NOT NULL,
+    Diem INT NOT NULL,
+    NgayTao DATETIME NOT NULL,
+    NgayChinhSua DATETIME NOT NULL,
+    FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
+    FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
+);
+
+GO
+
+
 
 
 
@@ -223,31 +265,6 @@ VALUES(null, N'Card Onboard', N'2021-11-05'),--1
 GO
 
 
-CREATE TRIGGER UTG_AutoCapNhatSLHeThong
-ON SanPham FOR INSERT,UPDATE, DELETE
-AS
-BEGIN
-    update DanhMuc
-	set SoLuong = (select count(*)
-    from SanPham
-    where SanPham.MaDanhMuc = DanhMuc.MaDanhMuc AND SanPham.IsHide = 0)
-
-    update ThuongHieu
-	set SoLuong = (select count(*)
-    from SanPham
-    where SanPham.MaThuongHieu = ThuongHieu.MaThuongHieu AND SanPham.IsHide = 0)
-
-    update CPU
-	set SoLuong = (select count(*)
-    from SanPham
-    where SanPham.MaCPU = CPU.MaCPU AND SanPham.IsHide = 0)
-
-    update GPU
-	set SoLuong = (select count(*)
-    from SanPham
-    where SanPham.MaGPU = GPU.MaGPU AND SanPham.IsHide = 0)
-END
-GO
 
 --Sản phẩm
 INSERT INTO SanPham
@@ -256,3 +273,5 @@ VALUES(N'Laptop Gaming Acer Aspire 7 A715 42G R1SB', 1, 2, 5, 18000000, 19990000
     (N'Laptop gaming Lenovo Legion 5 Pro 16ACH6H 82JQ005YVN', 1, 6, 5, 45000000, 49990000, 24, 14, 16, 7, N'16.0 inch WQXGA (2560x1600) IPS 500nits Anti-glare, 165Hz, 100% sRGB, Dolby Vision, HDR 400, Free-Sync, G-Sync, DC dimmer', N'', N'2021-11-05'),
     (N'Laptop Apple MacBook Pro M1 2020 8GB/256GB (MYD82SA/A)', 3, 1, 5, 30000000, 33490000, 12, 17, 8, 1, N'13.3 inch', N'', N'2021-11-05')
 	
+
+
