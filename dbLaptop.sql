@@ -141,8 +141,12 @@ CREATE TABLE HoaDon
 (
     MaHoaDon INT IDENTITY PRIMARY KEY,
     NgayMua DATETIME NOT NULL,
-    TongThanhToan INT DEFAULT 0,
     MaKhachHang INT NOT NULL,
+    MaPhieuQuaTang INT,
+    SoTienGiam INT DEFAULT 0,
+    PhiGiaoHang INT,
+    TinhTrang INT DEFAULT 1,--1: Chờ xác nhận, 2: Chờ lấy hàng, 3: Đang giao, 4: Đã giao, 5: Đã hủy, 6: Trả hàng
+    TongThanhToan INT DEFAULT 0,
     FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
 );
 
