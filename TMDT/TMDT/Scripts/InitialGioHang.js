@@ -2,7 +2,7 @@
     if (gioHang.length <= 0)
         location.pathname = "/GioHang/GioHangRong";
     else
-        $("#gioHangMain").text("Giỏ hàng (" + soSP + ")");
+        $(".MainGioHang").append(' Giỏ hàng (' + soSP + ')');
     for (var i = 0; i < gioHang.length; i++) {
 
         tableBody = $("table tbody");
