@@ -6,31 +6,28 @@
 }
 
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-5">
+        <div class="col-md-5">
             <img src="@Model.Hinh" alt="" class="img-fluid">
         </div>
-        <div class="col-5 container-fluid">
+        <div class="col-md-5 container">
             <div class="row">
-                <h1 class="col-12"><b>@Model.TenSanPham</b></h1>
+                <p class="col-md-12"><strong>@Model.TenSanPham</strong></p>
+                <p class="col-md-12"><strong>Thông tin chung:</strong></p>
             </div>
             <div class="row">
-                <h4 class="col-2">Thương hiệu: </h4>
-                <div class="col-2"></div>
-                <h4 class="col-8"> @Model.ThuongHieu.TenThuongHieu</h4>
+                <div class="col-md-12 col-sm-12">
+                    <ul>
+                        <li><span><strong>Nhà sản xuất: </strong>@Model.ThuongHieu.TenThuongHieu</span></li>
+                        <li><span><strong>Bảo hành: </strong>@Model.BaoHanh tháng</span></li>
+                        <li><span><strong>Giá: </strong>@Model.GiaBan</span></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6 col-sm-12"><button class=" btn-buy">Mua ngay</button></div>
+                <div class="col-md-6 col-sm-12"><button class="btn-addtocart">Thêm vào giỏ hàng</button></div>
             </div>
-            <div class="row">
-                <h4 class="col-2">Giá: </h4>
-                <div class="col-2"></div>
-                <h4 class="col-8"> @Model.GiaBan</h4>
-            </div>
-            <button class="btn-buy">
-                Mua ngay
-            </button>
-            <button class="btn-addtocart">
-                Thêm vào giỏ hàng
-            </button>
         </div>
     </div>
     <br /><br />
@@ -38,51 +35,34 @@
         <h3>Mô tả laptop</h3>
     </div>
     <br /><br />
-    <div class="row">
-        <div class="col-2">
-            <h4>Màn hình:</h4>
-        </div>
-        <div class="col-10">
-            <h4>@Model.ManHinh</h4>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-2">
-            <h4>CPU:</h4>
-        </div>
-        <div class="col-10">
-            <h4>@Model.CPU.TenCPU (@Model.CPU.HangCPU)</h4>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-2">
-            <h4>RAM:</h4>
-        </div>
-        <div class="col-10">
-            <h4>@Model.RAM GB</h4>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-2">
-            <h4>GPU:</h4>
-        </div>
-        <div class="col-10">
-            <h4>@Model.GPU.TenGPU (@Model.GPU.LoaiGPU)</h4>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-2">
-            <h4>Bảo hành:</h4>
-        </div>
-        <div class="col-10">
-            <h4>@Model.BaoHanh tháng</h4>
-        </div>
-    </div>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>CPU:</th>
+                <td>@Model.CPU.HangCPU @Model.CPU.TenCPU</td>
+            </tr>
+            <tr>
+                <th>RAM:</th>
+                <td>@Model.RAM GB</td>
+            </tr>
+            <tr>
+                <th>Ổ cứng</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Card đồ họa</th>
+                <td>@Model.GPU.LoaiGPU @Model.GPU.TenGPU</td>
+            </tr>
+            <tr>
+                <th>Màn hình:</th>
+                <td>@Model.ManHinh</td>
+            </tr>
+            <tr>
+                <th>Pin:</th>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 
@@ -94,8 +74,8 @@
 </p>*@
 <style>
     .btn-buy {
-        width: 30%;
-        position: absolute;
+        /*width: 30%;*/
+        position: relative;
         bottom: 0;
         padding: 10px;
         background-color: white;
@@ -114,8 +94,8 @@
         }
 
     .btn-addtocart {
-        width: 50%;
-        position: absolute;
+        /*width: 50%;*/
+        position: relative;
         bottom: 0;
         right: 0;
         padding: 10px;

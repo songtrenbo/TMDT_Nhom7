@@ -83,6 +83,16 @@ CREATE TABLE GPU
     IsDeleted BIT DEFAULT 0,
 );
 
+CREATE TABLE OCung
+(
+    MaOCung INT IDENTITY PRIMARY KEY,
+    LoaiOCung INT DEFAULT 1,--1: SSD, 2: HDD
+    DungLuong INT DEFAULT 128,
+    NgayTao DATETIME NOT NUll,
+    NgayChinhSua DATETIME,
+    IsDeleted BIT DEFAULT 0,
+);
+
 CREATE TABLE SanPham
 (
     MaSanPham INT IDENTITY PRIMARY KEY,
@@ -101,6 +111,8 @@ CREATE TABLE SanPham
     RAM NVARCHAR(255) NOT NULL,--4, 8, 16, 32
     MaGPU INT NOT NULL,
     ManHinh NVARCHAR(255) NOT NULL,
+    Pin NVARCHAR(255) NOT NULL,
+    MaOCung INT NOT NULL,
     Hinh NVARCHAR(255) NOT NULL,
     NgayTao DATETIME NOT NUll,
     NgayChinhSua DATETIME,
@@ -109,6 +121,7 @@ CREATE TABLE SanPham
     FOREIGN KEY (MaThuongHieu) REFERENCES dbo.ThuongHieu(MaThuongHieu),
     FOREIGN KEY (MaCPU) REFERENCES dbo.CPU(MaCPU),
     FOREIGN KEY (MaGPU) REFERENCES dbo.GPU(MaGPU),
+    FOREIGN KEY (MaOCung) REFERENCES dbo.OCung(MaOCung),
 );
 
 
@@ -148,6 +161,7 @@ CREATE TABLE HoaDon
     TinhTrang INT DEFAULT 1,--1: Chờ xác nhận, 2: Chờ lấy hàng, 3: Đang giao, 4: Đã giao, 5: Đã hủy, 6: Trả hàng
     TongThanhToan INT DEFAULT 0,
     FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
+    FOREIGN KEY (MaPhieuQuaTang) REFERENCES dbo.PhieuQuaTang(MaPhieuQuaTang),
 );
 
 CREATE TABLE CTHoaDon
@@ -268,14 +282,23 @@ VALUES(null, N'Card Onboard', N'2021-11-05'),--1
     (N'MX450 2GB', N'NVIDIA GeForce', N'2021-11-05')--13
 GO
 
+--OCung
+INSERT INTO GPU
+    (LoaiOCung, DungLuong, NgayTao)
+VALUES(N'SSD', 128, N'2021-11-05'),--1
+(N'SSD', 256, N'2021-11-05'),--2
+(N'SSD', 512, N'2021-11-05'),--3
+(N'SSD', 1024, N'2021-11-05')--4
+GO
+
 
 
 --Sản phẩm
 INSERT INTO SanPham
-    (TenSanPham, MaDanhMuc, MaThuongHieu, SoLuong, GiaNhap, GiaBan, BaoHanh, MaCPU, RAM, MaGPU, ManHinh, Hinh, NgayTao)
-VALUES(N'Laptop Gaming Acer Aspire 7 A715 42G R1SB', 1, 2, 5, 18000000, 19990000, 12, 11, 8, 12, N'15.6" FHD (1920 x 1080) IPS, Anti-Glare, 144Hz', N'', N'2021-11-05'),
-    (N'Laptop gaming Lenovo Legion 5 Pro 16ACH6H 82JQ005YVN', 1, 6, 5, 45000000, 49990000, 24, 14, 16, 7, N'16.0 inch WQXGA (2560x1600) IPS 500nits Anti-glare, 165Hz, 100% sRGB, Dolby Vision, HDR 400, Free-Sync, G-Sync, DC dimmer', N'', N'2021-11-05'),
-    (N'Laptop Apple MacBook Pro M1 2020 8GB/256GB (MYD82SA/A)', 3, 1, 5, 30000000, 33490000, 12, 17, 8, 1, N'13.3 inch', N'', N'2021-11-05')
+    (TenSanPham, MaDanhMuc, MaThuongHieu, SoLuong, GiaNhap, GiaBan, BaoHanh, MaCPU, RAM, MaGPU, ManHinh,Pin, MaOCung, Hinh, NgayTao)
+VALUES(N'Laptop Gaming Acer Aspire 7 A715 42G R1SB', 1, 2, 5, 18000000, 19990000, 12, 11, 8, 12, N'15.6" FHD (1920 x 1080) IPS, Anti-Glare, 144Hz', N'4 Cell 48Whr', 2, N'https://product.hstatic.net/1000026716/product/laptop_gaming_acer_aspire_7_a715_42g_r1sb_9520016e22274791bb4e1697764c57c4.jpg', N'2021-11-05'),
+    (N'Laptop gaming Lenovo Legion 5 Pro 16ACH6H 82JQ005YVN', 1, 6, 5, 45000000, 49990000, 24, 14, 16, 7, N'16.0 inch WQXGA (2560x1600) IPS 500nits Anti-glare, 165Hz, 100% sRGB, Dolby Vision, HDR 400, Free-Sync, G-Sync, DC dimmer', N'80Whrs', 4, N'https://phucanhcdn.com/media/product/43536_lap_len_leg5p82jq005yvn_a.jpg', N'2021-11-05'),
+    (N'Laptop Apple MacBook Pro M1 2020 8GB/256GB (MYD82SA/A)', 3, 1, 5, 30000000, 33490000, 12, 17, 8, 1, N'13.3 inch', N'Built‑in 58.2‑watt‑hour lithium‑polymer battery, 61W USB‑C Power Adapter', 2, N'https://lh3.googleusercontent.com/6iW6tc0lHp4paCYznq-gC5mEXEGMSBmrSq2I4MaXdPne5XWQI4l8m-bGRVCRFH94d4PEqtUIdH3FERr-VNDWaT2k9qcZ5Ey_PQ=w1000-rw', N'2021-11-05')
 	
 
 
