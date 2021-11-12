@@ -283,12 +283,11 @@ VALUES(null, N'Card Onboard', N'2021-11-05'),--1
 GO
 
 --OCung
-INSERT INTO GPU
-    (LoaiOCung, DungLuong, NgayTao)
-VALUES(N'SSD', 128, N'2021-11-05'),--1
-(N'SSD', 256, N'2021-11-05'),--2
-(N'SSD', 512, N'2021-11-05'),--3
-(N'SSD', 1024, N'2021-11-05')--4
+INSERT INTO OCung (LoaiOCung, DungLuong, NgayTao)
+VALUES(1, 128, N'2021-11-05'),--1
+(1, 256, N'2021-11-05'),--2
+(1, 512, N'2021-11-05'),--3
+(1, 1024, N'2021-11-05')--4
 GO
 
 
@@ -301,4 +300,11 @@ VALUES(N'Laptop Gaming Acer Aspire 7 A715 42G R1SB', 1, 2, 5, 18000000, 19990000
     (N'Laptop Apple MacBook Pro M1 2020 8GB/256GB (MYD82SA/A)', 3, 1, 5, 30000000, 33490000, 12, 17, 8, 1, N'13.3 inch', N'Built‑in 58.2‑watt‑hour lithium‑polymer battery, 61W USB‑C Power Adapter', 2, N'https://lh3.googleusercontent.com/6iW6tc0lHp4paCYznq-gC5mEXEGMSBmrSq2I4MaXdPne5XWQI4l8m-bGRVCRFH94d4PEqtUIdH3FERr-VNDWaT2k9qcZ5Ey_PQ=w1000-rw', N'2021-11-05')
 	
 
-
+INSERT INTO NguoiDung(Ten, Username, Password, MaQuyen, NgayTao)
+VALUES(N'admin',N'admin',N'123',1,N'2021-11-05'),
+(N'quanly',N'quanly',N'123',2,N'2021-11-05'),
+(N'nhanvien',N'nhanvien',N'123',3,N'2021-11-05'),
+(N'khach1',N'khach1',N'123',4,N'2021-11-05'),
+(N'khach2',N'khach2',N'123',4,N'2021-11-05'),
+(N'khach3',N'khach3',N'123',4,N'2021-11-05')
+GO
