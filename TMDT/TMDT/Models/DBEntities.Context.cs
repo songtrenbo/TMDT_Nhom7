@@ -13,10 +13,10 @@ namespace TMDT.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBLaptopEntities1 : DbContext
+    public partial class DBLaptopEntities : DbContext
     {
-        public DBLaptopEntities1()
-            : base("name=DBLaptopEntities1")
+        public DBLaptopEntities()
+            : base("name=DBLaptopEntities")
         {
         }
     
