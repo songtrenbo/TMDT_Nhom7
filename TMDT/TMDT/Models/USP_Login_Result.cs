@@ -24,7 +24,6 @@ namespace TMDT.Models
         public int MaQuyen { get; set; }
         public System.DateTime NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<bool> IsLocked { get; set; }
+        public Nullable<bool> Status { get; set; }
     }
 }

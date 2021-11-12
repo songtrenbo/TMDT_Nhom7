@@ -205,7 +205,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\admin-style.css" />
-    <Content Include="Content\images\banner.png" />
+    <Content Include="Content\images\banner1.png" />
     <Content Include="Content\images\banner2.png" />
     <Content Include="Content\images\banner3.png" />
     <Content Include="Content\images\logodps.png" />
@@ -261,6 +261,7 @@
     <Content Include="Views\Shared\_LayoutXemThongTinCaNhan.cshtml" />
     <Content Include="Views\NguoiDung\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\NguoiDung\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

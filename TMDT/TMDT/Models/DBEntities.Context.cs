@@ -54,5 +54,34 @@ namespace TMDT.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_Login_Result>("USP_Login", usernameParameter, passwordParameter);
         }
+    
+        public virtual int USP_Register(string ten, string username, string password, string diaChi, string sdt, string email)
+        {
+            var tenParameter = ten != null ?
+                new ObjectParameter("ten", ten) :
+                new ObjectParameter("ten", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var diaChiParameter = diaChi != null ?
+                new ObjectParameter("diaChi", diaChi) :
+                new ObjectParameter("diaChi", typeof(string));
+    
+            var sdtParameter = sdt != null ?
+                new ObjectParameter("sdt", sdt) :
+                new ObjectParameter("sdt", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_Register", tenParameter, usernameParameter, passwordParameter, diaChiParameter, sdtParameter, emailParameter);
+        }
     }
 }

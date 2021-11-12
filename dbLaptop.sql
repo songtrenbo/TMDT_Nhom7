@@ -31,8 +31,7 @@ CREATE TABLE NguoiDung
     MaQuyen INT NOT NULL DEFAULT 4,-- 1: admin && 2: quản lý && 3: nhân viên && 4: khách
     NgayTao DATETIME NOT NUll,
     NgayChinhSua DATETIME,
-    IsDeleted BIT DEFAULT 0,
-    IsLocked BIT DEFAULT 0,
+    Status BIT DEFAULT 1,--1: active, 2: lock, 3: deleted
     FOREIGN KEY (MaQuyen) REFERENCES dbo.Quyen(MaQuyen),
 );
 
@@ -207,7 +206,16 @@ CREATE PROC USP_Login
 @username VARCHAR(100), @password VARCHAR(100)
 AS
 BEGIN
-	SELECT * FROM dbo.NguoiDung WHERE Username = @username AND Password = @password AND IsDeleted = 0 AND IsLocked = 0
+	SELECT * FROM dbo.NguoiDung WHERE Username = @username AND Password = @password AND Status = 1
+END
+GO
+
+CREATE PROC USP_Register
+@ten NVARCHAR(100), @username VARCHAR(100), @password VARCHAR(100), @diaChi NVARCHAR(100), @sdt VARCHAR(100), @email VARCHAR(100)
+AS
+BEGIN
+	INSERT NguoiDung(Ten, Username, Password, DiaChi, SDT, Email, NgayTao)
+	VALUES(@ten, @username, @password, @diaChi, @sdt, @email, GETDATE())
 END
 GO
 
@@ -314,3 +322,4 @@ VALUES(N'admin',N'admin',N'123',1,N'2021-11-05'),
 (N'khach2',N'khach2',N'123',4,N'2021-11-05'),
 (N'khach3',N'khach3',N'123',4,N'2021-11-05')
 GO
+select *from NguoiDung

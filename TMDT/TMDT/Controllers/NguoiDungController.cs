@@ -20,7 +20,14 @@ namespace TMDT.Controllers
         [HttpPost]
         public ActionResult DangNhap(NguoiDung _user)
         {
-            var check = Login(_user.Username, _user.Password);
+            string username = _user.Username;
+            string password = _user.Password;
+            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            {
+                ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
+                return View("Index");
+            }
+            var check = Login(username, password);
             if (check == null)
             {
                 ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
@@ -47,10 +54,62 @@ namespace TMDT.Controllers
                 }
             }
         }
-        public ActionResult LogOutUser()
+        public ActionResult DangXuat()
         {
             Session.Abandon();
             return RedirectToAction("Index", "TrangChu");
+        }
+
+        public ActionResult DangKy()
+        {
+            NguoiDung nguoidung = new NguoiDung();
+            return View(nguoidung);
+        }
+
+        [HttpPost]
+        public ActionResult DangKy(NguoiDung _user)
+        {
+            var check_ID = database.NguoiDungs.Where(s => s.Username == _user.Username).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                if (check_ID == null)
+                {
+                    database.Configuration.ValidateOnSaveEnabled = false;
+                    _user.MaQuyen = 4;
+                    _user.NgayTao = DateTime.Now;
+                    object[] sqlParams =
+                    {
+                        new SqlParameter("@ten",_user.Ten),
+                        new SqlParameter("@username",_user.Username),
+                        new SqlParameter("@password",_user.Password),
+                        new SqlParameter("@diaChi",_user.DiaChi??""),
+                        new SqlParameter("@sdt",_user.SDT??""),
+                        new SqlParameter("@email",_user.Email??"")
+                    };
+                    var result = database.Database.ExecuteSqlCommand("USP_Register @ten, @username, @password, @diaChi, @sdt, @email", sqlParams);
+                    if (result>0)
+                    {
+                        database.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "loi";
+                        return View();
+                    }
+                }
+                else
+                {
+                    ViewBag.Error = "Tài khoản đã tồn tại";
+                    return View();
+                }
+            }
+            if (check_ID != null)
+            {
+                ViewBag.Error = "Tài khoản đã tồn tại";
+                return View();
+            }
+            return View();
         }
 
         public NguoiDung Login(string username, string password)
