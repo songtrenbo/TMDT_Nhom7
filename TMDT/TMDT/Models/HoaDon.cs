@@ -32,5 +32,6 @@ namespace TMDT.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHoaDon> CTHoaDons { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }
+        public virtual PhieuQuaTang PhieuQuaTang { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace TMDT.Controllers
 {
     public class NguoiDungController : Controller
     {
-        DBLaptopEntities database = new DBLaptopEntities();
+        DBLaptopEntities1 database = new DBLaptopEntities1();
         // GET: DangNhap
         public ActionResult Index()
         {
@@ -43,10 +43,45 @@ namespace TMDT.Controllers
                 }
             }
         }
-        public ActionResult LogOutUser()
+        public ActionResult DangXuat()
         {
             Session.Abandon();
             return RedirectToAction("Index", "TrangChu");
+        }
+
+        public ActionResult DangKy()
+        {
+            NguoiDung nguoidung = new NguoiDung();
+            return View(nguoidung);
+        }
+
+        [HttpPost]
+        public ActionResult DangKy(NguoiDung _user)
+        {
+            var check_ID = database.NguoiDungs.Where(s => s.Username == _user.Username).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                if (check_ID == null)
+                {
+                    database.Configuration.ValidateOnSaveEnabled = false;
+                    _user.MaQuyen = 4;
+                    _user.NgayTao = DateTime.Now;
+                    database.NguoiDungs.Add(_user);
+                    database.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Error = "Tài khoản đã tồn tại";
+                    return View();
+                }
+            }
+            if (check_ID != null)
+            {
+                ViewBag.Error = "Tài khoản đã tồn tại";
+                return View();
+            }
+            return View();
         }
     }
 }

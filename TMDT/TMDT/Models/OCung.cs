@@ -12,25 +12,22 @@ namespace TMDT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuQuaTang
+    public partial class OCung
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PhieuQuaTang()
+        public OCung()
         {
-            this.HoaDons = new HashSet<HoaDon>();
+            this.SanPhams = new HashSet<SanPham>();
         }
     
-        public int MaPhieuQuaTang { get; set; }
-        public Nullable<int> GiaTri { get; set; }
-        public Nullable<int> TongSoLuong { get; set; }
-        public Nullable<int> SoLuongConLai { get; set; }
+        public int MaOCung { get; set; }
+        public Nullable<int> LoaiOCung { get; set; }
+        public Nullable<int> DungLuong { get; set; }
         public System.DateTime NgayTao { get; set; }
-        public System.DateTime NgayKichHoat { get; set; }
-        public System.DateTime NgayKetThuc { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public Nullable<int> DiemThuongDoi { get; set; }
+        public Nullable<System.DateTime> NgayChinhSua { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoaDon> HoaDons { get; set; }
+        public virtual ICollection<SanPham> SanPhams { get; set; }
     }
 }

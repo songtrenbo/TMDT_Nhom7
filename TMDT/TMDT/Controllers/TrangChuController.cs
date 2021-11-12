@@ -9,7 +9,7 @@ namespace TMDT.Controllers
 {
     public class TrangChuController : Controller
     {
-        DBLaptopEntities database = new DBLaptopEntities();
+        DBLaptopEntities1 database = new DBLaptopEntities1();
         public ActionResult Index()
         {
             ViewBag.thuonghieu = database.ThuongHieux.ToList();

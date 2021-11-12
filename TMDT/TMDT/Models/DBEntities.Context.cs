@@ -13,10 +13,10 @@ namespace TMDT.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBLaptopEntities : DbContext
+    public partial class DBLaptopEntities1 : DbContext
     {
-        public DBLaptopEntities()
-            : base("name=DBLaptopEntities")
+        public DBLaptopEntities1()
+            : base("name=DBLaptopEntities1")
         {
         }
     
@@ -33,6 +33,7 @@ namespace TMDT.Models
         public virtual DbSet<Hinh> Hinhs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
+        public virtual DbSet<OCung> OCungs { get; set; }
         public virtual DbSet<PhieuQuaTang> PhieuQuaTangs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
