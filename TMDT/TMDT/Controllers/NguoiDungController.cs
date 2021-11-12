@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,10 +20,10 @@ namespace TMDT.Controllers
         [HttpPost]
         public ActionResult DangNhap(NguoiDung _user)
         {
-            var check = database.NguoiDungs.Where(s => s.Username == _user.Username && s.Password == _user.Password).FirstOrDefault();
+            var check = Login(_user.Username, _user.Password);
             if (check == null)
             {
-                ViewBag.ErrorInfo = "Sai Info";
+                ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
                 return View("Index");
             }
             else
@@ -33,13 +34,16 @@ namespace TMDT.Controllers
                 Session["maQuyen"] = check.MaQuyen;
                 Session["id"] = check.MaNguoiDung;
                 ViewBag.Ten = check.Ten;
-                if (check.MaQuyen == 2)
+                switch (check.MaQuyen)
                 {
-                    return RedirectToAction("Index", "Admin");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "TrangChu");
+                    case 1:
+                        return RedirectToAction("Index", "Admin");
+                    case 2:
+                        return RedirectToAction("Index", "QuanLy");
+                    case 3:
+                        return RedirectToAction("Index", "NhanVien");
+                    default:
+                        return RedirectToAction("Index", "TrangChu");
                 }
             }
         }
@@ -47,6 +51,17 @@ namespace TMDT.Controllers
         {
             Session.Abandon();
             return RedirectToAction("Index", "TrangChu");
+        }
+
+        public NguoiDung Login(string username, string password)
+        {
+            object[] sqlParams =
+            {
+                new SqlParameter("@username",username),
+                new SqlParameter("@password",password),
+            };
+            var result = database.Database.SqlQuery<NguoiDung>("USP_Login @username, @password", sqlParams).FirstOrDefault();
+            return result;
         }
     }
 }

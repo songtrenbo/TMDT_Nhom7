@@ -25,11 +25,14 @@
                         <b>Mật khẩu</b>
                         @Html.TextBoxFor(model => model.Password, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập mật khẩu", @type = "password" })
                         @Html.ValidationMessageFor(model => model.Password)
-                        @if (ViewBag.ErrorInfo == null)
-                        {
-                            <p>@ViewBag.ErrorInfo</p>
-                        }
                     </div>
+                    @if (ViewBag.ErrorInfo != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <p>@ViewBag.ErrorInfo</p>
+                        </div>
+                        
+                    }
                     <button type="submit" value="Login" class="btn btn-danger btn-block" style="padding: 10px;"><b>Đăng nhập</b></button>
                     <input value="Trở về" class="btn btn-primary btn-block" type="button" style="padding: 10px;" onclick="location.href='@Url.Action("Index", "TrangChu")'" />
                     <hr>

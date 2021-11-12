@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
@@ -175,6 +176,9 @@
     <Compile Include="Models\NguoiDung.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OCung.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PhieuQuaTang.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -188,6 +192,9 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThuongHieu.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USP_Login_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -253,6 +260,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_LayoutXemThongTinCaNhan.cshtml" />
     <Content Include="Views\NguoiDung\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

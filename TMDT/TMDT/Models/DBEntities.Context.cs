@@ -12,6 +12,8 @@ namespace TMDT.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DBLaptopEntities : DbContext
     {
@@ -33,10 +35,24 @@ namespace TMDT.Models
         public virtual DbSet<Hinh> Hinhs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
+        public virtual DbSet<OCung> OCungs { get; set; }
         public virtual DbSet<PhieuQuaTang> PhieuQuaTangs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<ThuongHieu> ThuongHieux { get; set; }
+    
+        public virtual ObjectResult<USP_Login_Result> USP_Login(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_Login_Result>("USP_Login", usernameParameter, passwordParameter);
+        }
     }
 }

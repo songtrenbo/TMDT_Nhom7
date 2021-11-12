@@ -108,6 +108,17 @@
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="IsLocked" Type="bit" />
         </EntityType>
+        <EntityType Name="OCung">
+          <Key>
+            <PropertyRef Name="MaOCung" />
+          </Key>
+          <Property Name="MaOCung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoaiOCung" Type="int" />
+          <Property Name="DungLuong" Type="int" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
+          <Property Name="NgayChinhSua" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
         <EntityType Name="PhieuQuaTang">
           <Key>
             <PropertyRef Name="MaPhieuQuaTang" />
@@ -164,6 +175,8 @@
           <Property Name="RAM" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="MaGPU" Type="int" Nullable="false" />
           <Property Name="ManHinh" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Pin" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MaOCung" Type="int" Nullable="false" />
           <Property Name="Hinh" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="NgayTao" Type="datetime" Nullable="false" />
           <Property Name="NgayChinhSua" Type="datetime" />
@@ -182,7 +195,7 @@
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="IsLockEdit" Type="bit" />
         </EntityType>
-        <Association Name="FK__Comment__MaKhach__6383C8BA">
+        <Association Name="FK__Comment__MaKhach__6A30C649">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -194,7 +207,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Comment__MaSanPh__628FA481">
+        <Association Name="FK__Comment__MaSanPh__693CA210">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -206,7 +219,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTHoaDon__MaHoaD__5FB337D6">
+        <Association Name="FK__CTHoaDon__MaHoaD__66603565">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
           <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -218,7 +231,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTHoaDon__MaSanP__5EBF139D">
+        <Association Name="FK__CTHoaDon__MaSanP__656C112C">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -230,7 +243,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Hinh__MaSanPham__4F7CD00D">
+        <Association Name="FK__Hinh__MaSanPham__5535A963">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="Hinh" Type="Self.Hinh" Multiplicity="*" />
           <ReferentialConstraint>
@@ -242,7 +255,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__MaKhachH__5BE2A6F2">
+        <Association Name="FK__HoaDon__MaKhachH__619B8048">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -251,6 +264,18 @@
             </Principal>
             <Dependent Role="HoaDon">
               <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__MaPhieuQ__628FA481">
+          <End Role="PhieuQuaTang" Type="Self.PhieuQuaTang" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhieuQuaTang">
+              <PropertyRef Name="MaPhieuQuaTang" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="MaPhieuQuaTang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -266,7 +291,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rate__MaKhachHan__6754599E">
+        <Association Name="FK__Rate__MaKhachHan__6E01572D">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -278,7 +303,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rate__MaSanPham__66603565">
+        <Association Name="FK__Rate__MaSanPham__6D0D32F4">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -290,7 +315,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__MaCPU__4AB81AF0">
+        <Association Name="FK__SanPham__MaCPU__4F7CD00D">
           <End Role="CPU" Type="Self.CPU" Multiplicity="1" />
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
           <ReferentialConstraint>
@@ -302,7 +327,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__MaDanhM__48CFD27E">
+        <Association Name="FK__SanPham__MaDanhM__4D94879B">
           <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="1" />
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
           <ReferentialConstraint>
@@ -314,7 +339,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__MaGPU__4BAC3F29">
+        <Association Name="FK__SanPham__MaGPU__5070F446">
           <End Role="GPU" Type="Self.GPU" Multiplicity="1" />
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
           <ReferentialConstraint>
@@ -326,7 +351,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__MaThuon__49C3F6B7">
+        <Association Name="FK__SanPham__MaOCung__5165187F">
+          <End Role="OCung" Type="Self.OCung" Multiplicity="1" />
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OCung">
+              <PropertyRef Name="MaOCung" />
+            </Principal>
+            <Dependent Role="SanPham">
+              <PropertyRef Name="MaOCung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SanPham__MaThuon__4E88ABD4">
           <End Role="ThuongHieu" Type="Self.ThuongHieu" Multiplicity="1" />
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
           <ReferentialConstraint>
@@ -338,6 +375,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="USP_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="DBLaptopModelStoreContainer">
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPU" EntityType="Self.CPU" Schema="dbo" store:Type="Tables" />
@@ -347,60 +388,69 @@
           <EntitySet Name="Hinh" EntityType="Self.Hinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OCung" EntityType="Self.OCung" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhieuQuaTang" EntityType="Self.PhieuQuaTang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThuongHieu" EntityType="Self.ThuongHieu" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Comment__MaKhach__6383C8BA" Association="Self.FK__Comment__MaKhach__6383C8BA">
+          <AssociationSet Name="FK__Comment__MaKhach__6A30C649" Association="Self.FK__Comment__MaKhach__6A30C649">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK__Comment__MaSanPh__628FA481" Association="Self.FK__Comment__MaSanPh__628FA481">
+          <AssociationSet Name="FK__Comment__MaSanPh__693CA210" Association="Self.FK__Comment__MaSanPh__693CA210">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTHoaDon__MaHoaD__5FB337D6" Association="Self.FK__CTHoaDon__MaHoaD__5FB337D6">
+          <AssociationSet Name="FK__CTHoaDon__MaHoaD__66603565" Association="Self.FK__CTHoaDon__MaHoaD__66603565">
             <End Role="HoaDon" EntitySet="HoaDon" />
             <End Role="CTHoaDon" EntitySet="CTHoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTHoaDon__MaSanP__5EBF139D" Association="Self.FK__CTHoaDon__MaSanP__5EBF139D">
+          <AssociationSet Name="FK__CTHoaDon__MaSanP__656C112C" Association="Self.FK__CTHoaDon__MaSanP__656C112C">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="CTHoaDon" EntitySet="CTHoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__Hinh__MaSanPham__4F7CD00D" Association="Self.FK__Hinh__MaSanPham__4F7CD00D">
+          <AssociationSet Name="FK__Hinh__MaSanPham__5535A963" Association="Self.FK__Hinh__MaSanPham__5535A963">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="Hinh" EntitySet="Hinh" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__MaKhachH__5BE2A6F2" Association="Self.FK__HoaDon__MaKhachH__5BE2A6F2">
+          <AssociationSet Name="FK__HoaDon__MaKhachH__619B8048" Association="Self.FK__HoaDon__MaKhachH__619B8048">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__MaPhieuQ__628FA481" Association="Self.FK__HoaDon__MaPhieuQ__628FA481">
+            <End Role="PhieuQuaTang" EntitySet="PhieuQuaTang" />
             <End Role="HoaDon" EntitySet="HoaDon" />
           </AssociationSet>
           <AssociationSet Name="FK__NguoiDung__MaQuy__2D27B809" Association="Self.FK__NguoiDung__MaQuy__2D27B809">
             <End Role="Quyen" EntitySet="Quyen" />
             <End Role="NguoiDung" EntitySet="NguoiDung" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rate__MaKhachHan__6754599E" Association="Self.FK__Rate__MaKhachHan__6754599E">
+          <AssociationSet Name="FK__Rate__MaKhachHan__6E01572D" Association="Self.FK__Rate__MaKhachHan__6E01572D">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
             <End Role="Rate" EntitySet="Rate" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rate__MaSanPham__66603565" Association="Self.FK__Rate__MaSanPham__66603565">
+          <AssociationSet Name="FK__Rate__MaSanPham__6D0D32F4" Association="Self.FK__Rate__MaSanPham__6D0D32F4">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="Rate" EntitySet="Rate" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__MaCPU__4AB81AF0" Association="Self.FK__SanPham__MaCPU__4AB81AF0">
+          <AssociationSet Name="FK__SanPham__MaCPU__4F7CD00D" Association="Self.FK__SanPham__MaCPU__4F7CD00D">
             <End Role="CPU" EntitySet="CPU" />
             <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__MaDanhM__48CFD27E" Association="Self.FK__SanPham__MaDanhM__48CFD27E">
+          <AssociationSet Name="FK__SanPham__MaDanhM__4D94879B" Association="Self.FK__SanPham__MaDanhM__4D94879B">
             <End Role="DanhMuc" EntitySet="DanhMuc" />
             <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__MaGPU__4BAC3F29" Association="Self.FK__SanPham__MaGPU__4BAC3F29">
+          <AssociationSet Name="FK__SanPham__MaGPU__5070F446" Association="Self.FK__SanPham__MaGPU__5070F446">
             <End Role="GPU" EntitySet="GPU" />
             <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__MaThuon__49C3F6B7" Association="Self.FK__SanPham__MaThuon__49C3F6B7">
+          <AssociationSet Name="FK__SanPham__MaOCung__5165187F" Association="Self.FK__SanPham__MaOCung__5165187F">
+            <End Role="OCung" EntitySet="OCung" />
+            <End Role="SanPham" EntitySet="SanPham" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SanPham__MaThuon__4E88ABD4" Association="Self.FK__SanPham__MaThuon__4E88ABD4">
             <End Role="ThuongHieu" EntitySet="ThuongHieu" />
             <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
@@ -420,8 +470,8 @@
           <Property Name="NoiDung" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__Comment__MaKhach__6383C8BA" FromRole="Comment" ToRole="NguoiDung" />
-          <NavigationProperty Name="SanPham" Relationship="Self.FK__Comment__MaSanPh__628FA481" FromRole="Comment" ToRole="SanPham" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__Comment__MaKhach__6A30C649" FromRole="Comment" ToRole="NguoiDung" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK__Comment__MaSanPh__693CA210" FromRole="Comment" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="CPU">
           <Key>
@@ -435,7 +485,7 @@
           <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaCPU__4AB81AF0" FromRole="CPU" ToRole="SanPham" />
+          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaCPU__4F7CD00D" FromRole="CPU" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="CTHoaDon">
           <Key>
@@ -447,8 +497,8 @@
           <Property Name="DonGia" Type="Int32" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="ThanhTien" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="HoaDon" Relationship="Self.FK__CTHoaDon__MaHoaD__5FB337D6" FromRole="CTHoaDon" ToRole="HoaDon" />
-          <NavigationProperty Name="SanPham" Relationship="Self.FK__CTHoaDon__MaSanP__5EBF139D" FromRole="CTHoaDon" ToRole="SanPham" />
+          <NavigationProperty Name="HoaDon" Relationship="Self.FK__CTHoaDon__MaHoaD__66603565" FromRole="CTHoaDon" ToRole="HoaDon" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK__CTHoaDon__MaSanP__656C112C" FromRole="CTHoaDon" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="DanhMuc">
           <Key>
@@ -462,7 +512,7 @@
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="IsLockEdit" Type="Boolean" />
-          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaDanhM__48CFD27E" FromRole="DanhMuc" ToRole="SanPham" />
+          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaDanhM__4D94879B" FromRole="DanhMuc" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="GPU">
           <Key>
@@ -475,7 +525,7 @@
           <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaGPU__4BAC3F29" FromRole="GPU" ToRole="SanPham" />
+          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaGPU__5070F446" FromRole="GPU" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="Hinh">
           <Key>
@@ -488,7 +538,7 @@
           <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="SanPham" Relationship="Self.FK__Hinh__MaSanPham__4F7CD00D" FromRole="Hinh" ToRole="SanPham" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK__Hinh__MaSanPham__5535A963" FromRole="Hinh" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="HoaDon">
           <Key>
@@ -502,8 +552,9 @@
           <Property Name="PhiGiaoHang" Type="Int32" />
           <Property Name="TinhTrang" Type="Int32" />
           <Property Name="TongThanhToan" Type="Int32" />
-          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaHoaD__5FB337D6" FromRole="HoaDon" ToRole="CTHoaDon" />
-          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__HoaDon__MaKhachH__5BE2A6F2" FromRole="HoaDon" ToRole="NguoiDung" />
+          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaHoaD__66603565" FromRole="HoaDon" ToRole="CTHoaDon" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__HoaDon__MaKhachH__619B8048" FromRole="HoaDon" ToRole="NguoiDung" />
+          <NavigationProperty Name="PhieuQuaTang" Relationship="Self.FK__HoaDon__MaPhieuQ__628FA481" FromRole="HoaDon" ToRole="PhieuQuaTang" />
         </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
@@ -522,10 +573,22 @@
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="IsLocked" Type="Boolean" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__MaKhach__6383C8BA" FromRole="NguoiDung" ToRole="Comment" />
-          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaKhachH__5BE2A6F2" FromRole="NguoiDung" ToRole="HoaDon" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__MaKhach__6A30C649" FromRole="NguoiDung" ToRole="Comment" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaKhachH__619B8048" FromRole="NguoiDung" ToRole="HoaDon" />
           <NavigationProperty Name="Quyen" Relationship="Self.FK__NguoiDung__MaQuy__2D27B809" FromRole="NguoiDung" ToRole="Quyen" />
-          <NavigationProperty Name="Rates" Relationship="Self.FK__Rate__MaKhachHan__6754599E" FromRole="NguoiDung" ToRole="Rate" />
+          <NavigationProperty Name="Rates" Relationship="Self.FK__Rate__MaKhachHan__6E01572D" FromRole="NguoiDung" ToRole="Rate" />
+        </EntityType>
+        <EntityType Name="OCung">
+          <Key>
+            <PropertyRef Name="MaOCung" />
+          </Key>
+          <Property Name="MaOCung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoaiOCung" Type="Int32" />
+          <Property Name="DungLuong" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaOCung__5165187F" FromRole="OCung" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="PhieuQuaTang">
           <Key>
@@ -540,6 +603,7 @@
           <Property Name="NgayKetThuc" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="DiemThuongDoi" Type="Int32" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaPhieuQ__628FA481" FromRole="PhieuQuaTang" ToRole="HoaDon" />
         </EntityType>
         <EntityType Name="Quyen">
           <Key>
@@ -563,8 +627,8 @@
           <Property Name="Diem" Type="Int32" Nullable="false" />
           <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__Rate__MaKhachHan__6754599E" FromRole="Rate" ToRole="NguoiDung" />
-          <NavigationProperty Name="SanPham" Relationship="Self.FK__Rate__MaSanPham__66603565" FromRole="Rate" ToRole="SanPham" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__Rate__MaKhachHan__6E01572D" FromRole="Rate" ToRole="NguoiDung" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK__Rate__MaSanPham__6D0D32F4" FromRole="Rate" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="SanPham">
           <Key>
@@ -586,18 +650,21 @@
           <Property Name="RAM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaGPU" Type="Int32" Nullable="false" />
           <Property Name="ManHinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaOCung" Type="Int32" Nullable="false" />
           <Property Name="Hinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="IsHide" Type="Boolean" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__MaSanPh__628FA481" FromRole="SanPham" ToRole="Comment" />
-          <NavigationProperty Name="CPU" Relationship="Self.FK__SanPham__MaCPU__4AB81AF0" FromRole="SanPham" ToRole="CPU" />
-          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaSanP__5EBF139D" FromRole="SanPham" ToRole="CTHoaDon" />
-          <NavigationProperty Name="DanhMuc" Relationship="Self.FK__SanPham__MaDanhM__48CFD27E" FromRole="SanPham" ToRole="DanhMuc" />
-          <NavigationProperty Name="GPU" Relationship="Self.FK__SanPham__MaGPU__4BAC3F29" FromRole="SanPham" ToRole="GPU" />
-          <NavigationProperty Name="Hinhs" Relationship="Self.FK__Hinh__MaSanPham__4F7CD00D" FromRole="SanPham" ToRole="Hinh" />
-          <NavigationProperty Name="Rates" Relationship="Self.FK__Rate__MaSanPham__66603565" FromRole="SanPham" ToRole="Rate" />
-          <NavigationProperty Name="ThuongHieu" Relationship="Self.FK__SanPham__MaThuon__49C3F6B7" FromRole="SanPham" ToRole="ThuongHieu" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__MaSanPh__693CA210" FromRole="SanPham" ToRole="Comment" />
+          <NavigationProperty Name="CPU" Relationship="Self.FK__SanPham__MaCPU__4F7CD00D" FromRole="SanPham" ToRole="CPU" />
+          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaSanP__656C112C" FromRole="SanPham" ToRole="CTHoaDon" />
+          <NavigationProperty Name="DanhMuc" Relationship="Self.FK__SanPham__MaDanhM__4D94879B" FromRole="SanPham" ToRole="DanhMuc" />
+          <NavigationProperty Name="GPU" Relationship="Self.FK__SanPham__MaGPU__5070F446" FromRole="SanPham" ToRole="GPU" />
+          <NavigationProperty Name="Hinhs" Relationship="Self.FK__Hinh__MaSanPham__5535A963" FromRole="SanPham" ToRole="Hinh" />
+          <NavigationProperty Name="OCung" Relationship="Self.FK__SanPham__MaOCung__5165187F" FromRole="SanPham" ToRole="OCung" />
+          <NavigationProperty Name="Rates" Relationship="Self.FK__Rate__MaSanPham__6D0D32F4" FromRole="SanPham" ToRole="Rate" />
+          <NavigationProperty Name="ThuongHieu" Relationship="Self.FK__SanPham__MaThuon__4E88ABD4" FromRole="SanPham" ToRole="ThuongHieu" />
         </EntityType>
         <EntityType Name="ThuongHieu">
           <Key>
@@ -611,9 +678,9 @@
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="IsLockEdit" Type="Boolean" />
-          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaThuon__49C3F6B7" FromRole="ThuongHieu" ToRole="SanPham" />
+          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaThuon__4E88ABD4" FromRole="ThuongHieu" ToRole="SanPham" />
         </EntityType>
-        <Association Name="FK__Comment__MaKhach__6383C8BA">
+        <Association Name="FK__Comment__MaKhach__6A30C649">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -625,7 +692,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Comment__MaSanPh__628FA481">
+        <Association Name="FK__Comment__MaSanPh__693CA210">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -637,7 +704,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__MaCPU__4AB81AF0">
+        <Association Name="FK__SanPham__MaCPU__4F7CD00D">
           <End Role="CPU" Type="Self.CPU" Multiplicity="1" />
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
           <ReferentialConstraint>
@@ -649,7 +716,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTHoaDon__MaHoaD__5FB337D6">
+        <Association Name="FK__CTHoaDon__MaHoaD__66603565">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
           <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -661,7 +728,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTHoaDon__MaSanP__5EBF139D">
+        <Association Name="FK__CTHoaDon__MaSanP__656C112C">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -673,7 +740,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__MaDanhM__48CFD27E">
+        <Association Name="FK__SanPham__MaDanhM__4D94879B">
           <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="1" />
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
           <ReferentialConstraint>
@@ -685,7 +752,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__MaGPU__4BAC3F29">
+        <Association Name="FK__SanPham__MaGPU__5070F446">
           <End Role="GPU" Type="Self.GPU" Multiplicity="1" />
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
           <ReferentialConstraint>
@@ -697,7 +764,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Hinh__MaSanPham__4F7CD00D">
+        <Association Name="FK__Hinh__MaSanPham__5535A963">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="Hinh" Type="Self.Hinh" Multiplicity="*" />
           <ReferentialConstraint>
@@ -709,7 +776,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__MaKhachH__5BE2A6F2">
+        <Association Name="FK__HoaDon__MaKhachH__619B8048">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -718,6 +785,18 @@
             </Principal>
             <Dependent Role="HoaDon">
               <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HoaDon__MaPhieuQ__628FA481">
+          <End Role="PhieuQuaTang" Type="Self.PhieuQuaTang" Multiplicity="0..1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhieuQuaTang">
+              <PropertyRef Name="MaPhieuQuaTang" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="MaPhieuQuaTang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -733,7 +812,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rate__MaKhachHan__6754599E">
+        <Association Name="FK__Rate__MaKhachHan__6E01572D">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -745,7 +824,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rate__MaSanPham__66603565">
+        <Association Name="FK__SanPham__MaOCung__5165187F">
+          <End Role="OCung" Type="Self.OCung" Multiplicity="1" />
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OCung">
+              <PropertyRef Name="MaOCung" />
+            </Principal>
+            <Dependent Role="SanPham">
+              <PropertyRef Name="MaOCung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rate__MaSanPham__6D0D32F4">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -757,7 +848,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SanPham__MaThuon__49C3F6B7">
+        <Association Name="FK__SanPham__MaThuon__4E88ABD4">
           <End Role="ThuongHieu" Type="Self.ThuongHieu" Multiplicity="1" />
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
           <ReferentialConstraint>
@@ -778,64 +869,92 @@
           <EntitySet Name="Hinhs" EntityType="Self.Hinh" />
           <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
           <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
+          <EntitySet Name="OCungs" EntityType="Self.OCung" />
           <EntitySet Name="PhieuQuaTangs" EntityType="Self.PhieuQuaTang" />
           <EntitySet Name="Quyens" EntityType="Self.Quyen" />
           <EntitySet Name="Rates" EntityType="Self.Rate" />
           <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
           <EntitySet Name="ThuongHieux" EntityType="Self.ThuongHieu" />
-          <AssociationSet Name="FK__Comment__MaKhach__6383C8BA" Association="Self.FK__Comment__MaKhach__6383C8BA">
+          <AssociationSet Name="FK__Comment__MaKhach__6A30C649" Association="Self.FK__Comment__MaKhach__6A30C649">
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Comment__MaSanPh__628FA481" Association="Self.FK__Comment__MaSanPh__628FA481">
+          <AssociationSet Name="FK__Comment__MaSanPh__693CA210" Association="Self.FK__Comment__MaSanPh__693CA210">
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__MaCPU__4AB81AF0" Association="Self.FK__SanPham__MaCPU__4AB81AF0">
+          <AssociationSet Name="FK__SanPham__MaCPU__4F7CD00D" Association="Self.FK__SanPham__MaCPU__4F7CD00D">
             <End Role="CPU" EntitySet="CPUs" />
             <End Role="SanPham" EntitySet="SanPhams" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTHoaDon__MaHoaD__5FB337D6" Association="Self.FK__CTHoaDon__MaHoaD__5FB337D6">
+          <AssociationSet Name="FK__CTHoaDon__MaHoaD__66603565" Association="Self.FK__CTHoaDon__MaHoaD__66603565">
             <End Role="HoaDon" EntitySet="HoaDons" />
             <End Role="CTHoaDon" EntitySet="CTHoaDons" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTHoaDon__MaSanP__5EBF139D" Association="Self.FK__CTHoaDon__MaSanP__5EBF139D">
+          <AssociationSet Name="FK__CTHoaDon__MaSanP__656C112C" Association="Self.FK__CTHoaDon__MaSanP__656C112C">
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="CTHoaDon" EntitySet="CTHoaDons" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__MaDanhM__48CFD27E" Association="Self.FK__SanPham__MaDanhM__48CFD27E">
+          <AssociationSet Name="FK__SanPham__MaDanhM__4D94879B" Association="Self.FK__SanPham__MaDanhM__4D94879B">
             <End Role="DanhMuc" EntitySet="DanhMucs" />
             <End Role="SanPham" EntitySet="SanPhams" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__MaGPU__4BAC3F29" Association="Self.FK__SanPham__MaGPU__4BAC3F29">
+          <AssociationSet Name="FK__SanPham__MaGPU__5070F446" Association="Self.FK__SanPham__MaGPU__5070F446">
             <End Role="GPU" EntitySet="GPUs" />
             <End Role="SanPham" EntitySet="SanPhams" />
           </AssociationSet>
-          <AssociationSet Name="FK__Hinh__MaSanPham__4F7CD00D" Association="Self.FK__Hinh__MaSanPham__4F7CD00D">
+          <AssociationSet Name="FK__Hinh__MaSanPham__5535A963" Association="Self.FK__Hinh__MaSanPham__5535A963">
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="Hinh" EntitySet="Hinhs" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__MaKhachH__5BE2A6F2" Association="Self.FK__HoaDon__MaKhachH__5BE2A6F2">
+          <AssociationSet Name="FK__HoaDon__MaKhachH__619B8048" Association="Self.FK__HoaDon__MaKhachH__619B8048">
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="HoaDon" EntitySet="HoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HoaDon__MaPhieuQ__628FA481" Association="Self.FK__HoaDon__MaPhieuQ__628FA481">
+            <End Role="PhieuQuaTang" EntitySet="PhieuQuaTangs" />
             <End Role="HoaDon" EntitySet="HoaDons" />
           </AssociationSet>
           <AssociationSet Name="FK__NguoiDung__MaQuy__2D27B809" Association="Self.FK__NguoiDung__MaQuy__2D27B809">
             <End Role="Quyen" EntitySet="Quyens" />
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rate__MaKhachHan__6754599E" Association="Self.FK__Rate__MaKhachHan__6754599E">
+          <AssociationSet Name="FK__Rate__MaKhachHan__6E01572D" Association="Self.FK__Rate__MaKhachHan__6E01572D">
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
             <End Role="Rate" EntitySet="Rates" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rate__MaSanPham__66603565" Association="Self.FK__Rate__MaSanPham__66603565">
+          <AssociationSet Name="FK__SanPham__MaOCung__5165187F" Association="Self.FK__SanPham__MaOCung__5165187F">
+            <End Role="OCung" EntitySet="OCungs" />
+            <End Role="SanPham" EntitySet="SanPhams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rate__MaSanPham__6D0D32F4" Association="Self.FK__Rate__MaSanPham__6D0D32F4">
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="Rate" EntitySet="Rates" />
           </AssociationSet>
-          <AssociationSet Name="FK__SanPham__MaThuon__49C3F6B7" Association="Self.FK__SanPham__MaThuon__49C3F6B7">
+          <AssociationSet Name="FK__SanPham__MaThuon__4E88ABD4" Association="Self.FK__SanPham__MaThuon__4E88ABD4">
             <End Role="ThuongHieu" EntitySet="ThuongHieux" />
             <End Role="SanPham" EntitySet="SanPhams" />
           </AssociationSet>
+          <FunctionImport Name="USP_Login" ReturnType="Collection(DBLaptopModel.USP_Login_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="USP_Login_Result">
+          <Property Type="Int32" Name="MaNguoiDung" Nullable="false" />
+          <Property Type="String" Name="Ten" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SDT" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="DiemThuong" Nullable="true" />
+          <Property Type="Int32" Name="MaQuyen" Nullable="false" />
+          <Property Type="DateTime" Name="NgayTao" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="NgayChinhSua" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+          <Property Type="Boolean" Name="IsLocked" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -953,6 +1072,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OCungs">
+            <EntityTypeMapping TypeName="DBLaptopModel.OCung">
+              <MappingFragment StoreEntitySet="OCung">
+                <ScalarProperty Name="MaOCung" ColumnName="MaOCung" />
+                <ScalarProperty Name="LoaiOCung" ColumnName="LoaiOCung" />
+                <ScalarProperty Name="DungLuong" ColumnName="DungLuong" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayChinhSua" ColumnName="NgayChinhSua" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PhieuQuaTangs">
             <EntityTypeMapping TypeName="DBLaptopModel.PhieuQuaTang">
               <MappingFragment StoreEntitySet="PhieuQuaTang">
@@ -1011,6 +1142,8 @@
                 <ScalarProperty Name="RAM" ColumnName="RAM" />
                 <ScalarProperty Name="MaGPU" ColumnName="MaGPU" />
                 <ScalarProperty Name="ManHinh" ColumnName="ManHinh" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="MaOCung" ColumnName="MaOCung" />
                 <ScalarProperty Name="Hinh" ColumnName="Hinh" />
                 <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
                 <ScalarProperty Name="NgayChinhSua" ColumnName="NgayChinhSua" />
@@ -1032,6 +1165,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_Login" FunctionName="DBLaptopModel.Store.USP_Login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBLaptopModel.USP_Login_Result">
+                <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DiemThuong" ColumnName="DiemThuong" />
+                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayChinhSua" ColumnName="NgayChinhSua" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

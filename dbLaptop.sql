@@ -203,7 +203,13 @@ CREATE TABLE Rate
 GO
 
 
-
+CREATE PROC USP_Login
+@username VARCHAR(100), @password VARCHAR(100)
+AS
+BEGIN
+	SELECT * FROM dbo.NguoiDung WHERE Username = @username AND Password = @password AND IsDeleted = 0 AND IsLocked = 0
+END
+GO
 
 
 
