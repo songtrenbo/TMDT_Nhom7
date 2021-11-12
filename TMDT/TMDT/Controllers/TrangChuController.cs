@@ -7,7 +7,7 @@ using TMDT.Models;
 
 namespace TMDT.Controllers
 {
-    public class HomeController : Controller
+    public class TrangChuController : Controller
     {
         DBLaptopEntities database = new DBLaptopEntities();
         public ActionResult Index()
@@ -17,18 +17,5 @@ namespace TMDT.Controllers
             return View(sanpham);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

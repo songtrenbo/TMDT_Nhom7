@@ -1,0 +1,62 @@
+﻿@model TMDT.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+
+@using (Html.BeginForm("DangNhap", "NguoiDung"))
+{
+    @Html.AntiForgeryToken()
+    <section class="container-fluid bg">
+        <section class="row justify-content-center">
+            <section class="col-12 col-sm-8 col-md-4 form-container">
+                <form class="form-container">
+                    <div class="form-group">
+                        <b>Tài khoản</b>
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập tài khoản" })
+                        @Html.ValidationMessageFor(model => model.Username)
+
+                    </div>
+                    <div class="form-group">
+                        <b>Mật khẩu</b>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập mật khẩu", @type = "password" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                        @if (ViewBag.ErrorInfo == null)
+                        {
+                            <p>@ViewBag.ErrorInfo</p>
+                        }
+                    </div>
+                    <button type="submit" value="Login" class="btn btn-danger btn-block" style="padding: 10px;"><b>Đăng nhập</b></button>
+                    <input value="Trở về" class="btn btn-primary btn-block" type="button" style="padding: 10px;" onclick="location.href='@Url.Action("Index", "TrangChu")'" />
+                    <hr>
+                    <div class="form-group">
+                        <p style="float: left;">Bạn chưa có tài khoản? <a href="@Url.Action("RegisterUser", "NguoiDung")" class="card-link">Đăng ký ngay</a></p>
+
+                    </div>
+                    <br>
+                </form>
+            </section>
+        </section>
+    </section>
+}
+<style>
+    .bg {
+    }
+
+    .form-container {
+        background: #fff;
+        margin-top: 5%;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0px #000;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+</style>
+
