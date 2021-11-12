@@ -4,6 +4,11 @@
     ViewBag.Title = "CT_SanPham";
     Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
 }
+<link href="~/Scripts/Alert/sweetalert2.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
+}
+
 
 
 <div class="container">
@@ -24,10 +29,11 @@
                         <li><span><strong>Giá: </strong>@Model.GiaBan</span></li>
                     </ul>
                 </div>
-                
+
                 <div class="col-md-6 col-sm-12"><button class=" btn-buy">Mua ngay</button></div>
                 <br /><br /><br />
-                <div class="col-md-6 col-sm-12"><button class="btn-addtocart">Thêm vào giỏ hàng</button></div>
+                <div class="col-md-6 col-sm-12"><button class="btn-addtocart" onclick="ThemGioHang(@Model.MaSanPham, '@Model.TenSanPham',@Model.GiaBan,@Model.SoLuong,'@Model.Hinh')">Thêm vào giỏ hàng</button></div>
+
             </div>
         </div>
     </div>
@@ -67,17 +73,19 @@
 </div>
 
 
-<br /><br /><br />
+<br />
+<br />
+<br />
 
 @*<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
 <style>
     .btn-buy {
         /*width: 30%;*/
         position: relative;
-        width:80%;
+        width: 80%;
         bottom: 0;
         padding: 10px;
         background-color: white;
@@ -98,7 +106,7 @@
     .btn-addtocart {
         /*width: 50%;*/
         position: relative;
-        width:100%;
+        width: 100%;
         bottom: 0;
         right: 0;
         padding: 10px;

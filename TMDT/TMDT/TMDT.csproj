@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
@@ -205,6 +206,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\admin-style.css" />
+    <Content Include="Content\css\GioHang.css" />
+    <Content Include="Content\css\GioHangRong.css" />
     <Content Include="Content\images\banner1.png" />
     <Content Include="Content\images\banner2.png" />
     <Content Include="Content\images\banner3.png" />
@@ -223,6 +226,12 @@
       <DependentUpon>DBEntities.edmx</DependentUpon>
       <LastGenOutput>DBEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Alert\sweetalert2.all.js" />
+    <Content Include="Scripts\Alert\sweetalert2.all.min.js" />
+    <Content Include="Scripts\Alert\sweetalert2.css" />
+    <Content Include="Scripts\Alert\sweetalert2.js" />
+    <Content Include="Scripts\Alert\sweetalert2.min.css" />
+    <Content Include="Scripts\Alert\sweetalert2.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\DBEntities.edmx">
@@ -233,6 +242,8 @@
       <DependentUpon>DBEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\funcGiohang.js" />
+    <Content Include="Scripts\InitialGioHang.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -262,6 +273,8 @@
     <Content Include="Views\NguoiDung\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\NguoiDung\DangKy.cshtml" />
+    <Content Include="Views\GioHang\HienThiGioHang.cshtml" />
+    <Content Include="Views\GioHang\GioHangRong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

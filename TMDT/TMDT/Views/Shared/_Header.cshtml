@@ -3,7 +3,7 @@
 
 
 
-
+    <script src="~/Scripts/funcGiohang.js"></script>
 
     <nav class="navbar navbar-expand-xl navbar-dark stiky-top" style="background-color: #EE0033;">
         <nav class="navbar navbar-expand-xl navbar-dark container">
@@ -12,7 +12,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapse_target">
-                <a class="navbar-brand" href="@Url.Action("Index", "TrangChu")"><img src="~/Content/images/logodps.png" height="40" alt="" loading="lazy"/></a>
+                <a class="navbar-brand" href="@Url.Action("Index", "TrangChu")"><img src="~/Content/images/logodps.png" height="35" alt="" loading="lazy" /></a>
 
                 <div class="form-group has-search mb-3 w-auto my-auto d-none d-sm-flex">
                     <span class="fa fa-search form-control-feedback"></span>
@@ -30,13 +30,9 @@
                     </li>
 
                     <li class="nav-item">
-                        <button class="btn" style="color: white;">
-                            <i class="bi bi-cart4"
-                               style="font-size: 1.2em;color: white;"></i>
-                            Giỏ hàng (0)
-                        </button>
+                        <button type="button" class="MainGioHang btn" onload="GetSoSP()" onclick="GioHangPage()" style="color: white;"><i class="bi bi-cart4" style="font-size: 1.2em;color: white;"></i></button>
                     </li>
-                 
+
                     <li class="nav-item dropdown">
                         @if (Session["NguoiDung"] == null)
                         {

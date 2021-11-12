@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "HienThiGioHang";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+<link href="~/Scripts/Alert/sweetalert2.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
+    <script src="~/Scripts/InitialGioHang.js"></script>
+}
+
+<style>
+    #DelAll:hover {
+        color: red;
+    }
+</style>
+
+<link href="~/Content/css/GioHang.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row">
+        <aside class="col-lg-9" style="text-align:right;">
+            <a href="#" id="DelAll" style="color:blue;" onclick="ConfirmXoaToanBoGioHang(this)">Xóa tất cả</a>
+        </aside>
+        <aside class="col-lg-3">
+        </aside>
+    </div>
+    <div class="row">
+        <aside class="col-lg-9">
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">
+                                    <input id="checkAllid" type="checkbox" onClick="CheckAllCheckbox(this)" />
+                                </th>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col" width="150">Giá</th>
+                                <th scope="col" width="200" style="text-align:center">Số lượng</th>
+                                <th scope="col" class="text-right d-none d-md-block"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </aside>
+        <aside class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <dl class="dlist-align">
+                        <dt>Tổng giá:</dt>
+                        <dd id="TotalPrice" class="text-right ml-3">0</dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt>Giảm giá:</dt>
+                        <dd id="Discount" class="text-right text-danger ml-3">0</dd>
+                    </dl>
+                    <dl class="dlist-align">
+                        <dt>Tổng tiền:</dt>
+                        <dd id="Total" class="text-right text-dark b ml-3"><strong>0</strong></dd>
+                    </dl>
+                    <hr> <a href="#" class="btn btn-muahang" data-abc="true"> Mua hàng </a>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Bạn có phiếu giảm giá?</label>
+                            <div class="input-group"> <input type="text" class="form-control coupon" name="" placeholder="Mã phiếu giảm giá"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon">Áp dụng</button> </span> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <hr />
+    <div class="row" style="margin-bottom:20px; margin-top:10px;">
+        <aside class="col-lg-9">
+            <div class="row">
+                <div class="col-sm-8">
+                    <a href="/TrangChu/Index" class="btn btn-tieptucmua" style="width:auto" data-abc="true"> Tiếp tục mua hàng </a>
+                </div>
+                <div class="col-sm-2">
+                    <h5>Tạm tính:</h5>
+                </div>
+                <div class="col-sm-2">
+                    <h4 id="TamTinh" style="text-align:right;">0</h4>
+                </div>
+            </div>
+        </aside>
+        <aside class="col-lg-3">
+        </aside>
+    </div>
+</div>
+
+<style>
+
+    .btn-muahang {
+        width: 70%;
+        padding: 10px;
+        margin-left: 15%;
+        background-color: white;
+        border: none;
+        color: #EE0033;
+        font-weight:bold;
+        box-shadow: 0px 2px 15px #F24060;
+        transition: all 0.3s ease 0s;
+    }
+
+        .btn-muahang:hover {
+            background-color: #2EE59D;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            border-color: rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+    .btn-tieptucmua {
+        width: 70%;
+        padding: 10px;
+        margin-left: 15%;
+        background-color: white;
+        border: none;
+        color: blue;
+        box-shadow: 0px 2px 15px blue;
+        transition: all 0.3s ease 0s;
+    }
+
+        .btn-tieptucmua:hover {
+            background-color: #2EE59D;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            border-color: rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+</style>
