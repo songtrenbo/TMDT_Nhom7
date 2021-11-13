@@ -269,12 +269,13 @@
     <Content Include="Views\KhachHang\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\_LayoutXemThongTinCaNhan.cshtml" />
+    <Content Include="Views\Shared\_LayoutCaNhan.cshtml" />
     <Content Include="Views\NguoiDung\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\NguoiDung\DangKy.cshtml" />
     <Content Include="Views\GioHang\HienThiGioHang.cshtml" />
     <Content Include="Views\GioHang\GioHangRong.cshtml" />
+    <Content Include="Views\NguoiDung\ThongTinCaNhan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -214,6 +214,9 @@ CREATE PROC USP_Register
 @ten NVARCHAR(100), @username VARCHAR(100), @password VARCHAR(100), @diaChi NVARCHAR(100), @sdt VARCHAR(100), @email VARCHAR(100)
 AS
 BEGIN
+	IF @diaChi ='' SET @diaChi = null
+	IF @sdt ='' SET @sdt = null
+	IF @email ='' SET @email = null
 	INSERT NguoiDung(Ten, Username, Password, DiaChi, SDT, Email, NgayTao)
 	VALUES(@ten, @username, @password, @diaChi, @sdt, @email, GETDATE())
 END

@@ -46,7 +46,7 @@
                                 <i class="bi bi-person-circle" style="font-size: 1.2em;color: white;"></i> Tên KH
                             </button>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Thông tin cá nhân</a>
+                                <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan","NguoiDung",new {id= Session["id"]})">Thông tin cá nhân</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="@Url.Action("DangXuat","NguoiDung")">Đăng xuất</a>
                             </div>

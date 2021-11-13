@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -65,7 +67,46 @@ namespace TMDT.Controllers
             NguoiDung nguoidung = new NguoiDung();
             return View(nguoidung);
         }
-
+        public ActionResult ThongTinCaNhan(int id)
+        {
+            return View(database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault());
+        }
+        public ActionResult CapNhatThongTinCaNhan(int id)
+        {
+            return View(database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault());
+        }
+        [HttpPost]
+        public ActionResult CapNhatThongTinCaNhan(NguoiDung nguoiDung)
+        {
+            //if(ModelState.IsValid)
+            try
+            {
+                //var nguoiDung1 = database.NguoiDungs.Where(s => s.MaNguoiDung == nguoiDung.MaNguoiDung).FirstOrDefault();
+                //nguoiDung1 = nguoiDung;
+                nguoiDung.NgayChinhSua = DateTime.Now;
+                nguoiDung.ConfirmPass = nguoiDung.Password;
+                database.Entry(nguoiDung).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("ThongTinCaNhan", new { id = nguoiDung.MaNguoiDung });
+            }
+            catch (DbEntityValidationException e)
+            {
+                string a = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    a+=("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State)+"\n";
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        a+=("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage) + "\n";
+                    }
+                }
+                //throw;
+                return Content(a);
+            }
+            return RedirectToAction("ThongTinCaNhan", new { id = nguoiDung.MaNguoiDung });
+        }
         [HttpPost]
         public ActionResult DangKy(NguoiDung _user)
         {
