@@ -12,7 +12,7 @@ CREATE TABLE Quyen
 (
     MaQuyen INT IDENTITY PRIMARY KEY,
     TenQuyen NVARCHAR(50) NOT NULL,
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
     IsLockEdit BIT DEFAULT 0,
@@ -29,7 +29,7 @@ CREATE TABLE NguoiDung
     Email NVARCHAR(100) NULL,
     DiemThuong INT DEFAULT 0,
     MaQuyen INT NOT NULL DEFAULT 4,-- 1: admin && 2: quản lý && 3: nhân viên && 4: khách
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     Status BIT DEFAULT 1,--1: active, 2: lock, 3: deleted
     FOREIGN KEY (MaQuyen) REFERENCES dbo.Quyen(MaQuyen),
@@ -39,9 +39,10 @@ CREATE TABLE DanhMuc
 (
     MaDanhMuc INT IDENTITY PRIMARY KEY,
     TenDanhMuc NVARCHAR(255) NOT NULL,
+    SeoTitle NVARCHAR(255),
     Hinh NVARCHAR(255),
     SoLuong INT DEFAULT 0,
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
     IsLockEdit BIT DEFAULT 0,
@@ -53,7 +54,7 @@ CREATE TABLE ThuongHieu
     TenThuongHieu NVARCHAR(255) NOT NULL,
     Hinh NVARCHAR(255) NOT NULL,
     SoLuong INT DEFAULT 0,
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
     IsLockEdit BIT DEFAULT 0,
@@ -66,7 +67,7 @@ CREATE TABLE CPU
     TenCPU NVARCHAR(255) NOT NULL,
     HangCPU NVARCHAR(255) NOT NULL,--Intel, AMD, Apple
     SoLuong INT DEFAULT 0,
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
 );
@@ -77,7 +78,7 @@ CREATE TABLE GPU
     TenGPU NVARCHAR(255),
     LoaiGPU NVARCHAR(255) NOT NULL,--NVIDIA GeForce, AMD Radeon, Card Onboard
     SoLuong INT DEFAULT 0,
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
 );
@@ -87,7 +88,7 @@ CREATE TABLE OCung
     MaOCung INT IDENTITY PRIMARY KEY,
     LoaiOCung INT DEFAULT 1,--1: SSD, 2: HDD
     DungLuong INT DEFAULT 128,
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
 );
@@ -97,14 +98,15 @@ CREATE TABLE SanPham
     MaSanPham INT IDENTITY PRIMARY KEY,
     TenSanPham NVARCHAR(255) NOT NULL,
     MaDanhMuc INT NOT NULL,
+    SeoTitle NVARCHAR(255),
     MaThuongHieu INT NOT NULL,
     SoLuong INT DEFAULT 0,
     GiaNhap INT DEFAULT 0,
     GiaBan INT DEFAULT 0,
     GiaGiam INT DEFAULT 0,
-    PhanTramGiamGia INT DEFAULT 0,
     DiemRate INT DEFAULT 0,
     SoLuotRate INT DEFAULT 0,
+    LuotXem INT DEFAULT 0,
     BaoHanh INT NOT NULL,
     MaCPU INT NOT NULL,
     RAM NVARCHAR(255) NOT NULL,--4, 8, 16, 32
@@ -113,7 +115,7 @@ CREATE TABLE SanPham
     Pin NVARCHAR(255) NOT NULL,
     MaOCung INT NOT NULL,
     Hinh NVARCHAR(255) NOT NULL,
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsHide BIT DEFAULT 0,
     FOREIGN KEY (MaDanhMuc) REFERENCES dbo.DanhMuc(MaDanhMuc),
@@ -130,7 +132,7 @@ CREATE TABLE Hinh
     MaSanPham INT NOT NULL,
     TenHinh NVARCHAR(255) NOT NULL,
     [Path] NVARCHAR(255) NOT NULL,
-    NgayTao DATETIME NOT NUll,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsDeleted BIT DEFAULT 0,
     FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
@@ -142,7 +144,7 @@ CREATE TABLE PhieuQuaTang
     GiaTri INT DEFAULT 0,
     TongSoLuong INT DEFAULT 0,
     SoLuongConLai INT DEFAULT 0,
-    NgayTao DATETIME NOT NULL,
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayKichHoat DATETIME NOT NULL,
     NgayKetThuc DATETIME NOT NULL,
     IsActive BIT DEFAULT 0,
@@ -154,12 +156,15 @@ CREATE TABLE HoaDon
     MaHoaDon INT IDENTITY PRIMARY KEY,
     NgayMua DATETIME NOT NULL,
     MaKhachHang INT NOT NULL,
+    MaNVDuyet INT,
+    NgayTao DATETIME DEFAULT GETDATE(),
     MaPhieuQuaTang INT,
     SoTienGiam INT DEFAULT 0,
     PhiGiaoHang INT,
     TinhTrang INT DEFAULT 1,--1: Chờ xác nhận, 2: Chờ lấy hàng, 3: Đang giao, 4: Đã giao, 5: Đã hủy, 6: Trả hàng
     TongThanhToan INT DEFAULT 0,
     FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
+    FOREIGN KEY (MaNVDuyet) REFERENCES dbo.NguoiDung(MaNguoiDung),
     FOREIGN KEY (MaPhieuQuaTang) REFERENCES dbo.PhieuQuaTang(MaPhieuQuaTang),
 );
 
@@ -175,51 +180,19 @@ CREATE TABLE CTHoaDon
     FOREIGN KEY (MaHoaDon) REFERENCES dbo.HoaDon(MaHoaDon),
 );
 
-CREATE TABLE Comment
+CREATE TABLE DanhGia
 (
-    MaComment INT IDENTITY PRIMARY KEY,
-    MaSanPham INT NOT NULL,
-    MaKhachHang INT NOT NULL,
-    NoiDung NVARCHAR(255) NOT NULL,
-    NgayTao DATETIME NOT NULL,
-    NgayChinhSua DATETIME NOT NULL,
-    FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
-    FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
-);
-
-CREATE TABLE Rate
-(
-    MaRate INT IDENTITY PRIMARY KEY,
+    MaDanhGia INT IDENTITY PRIMARY KEY,
     MaSanPham INT NOT NULL,
     MaKhachHang INT NOT NULL,
     Diem INT NOT NULL,
-    NgayTao DATETIME NOT NULL,
+    NoiDung NVARCHAR(255),
+    NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME NOT NULL,
     FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
     FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
 );
 
-GO
-
-
-CREATE PROC USP_Login
-@username VARCHAR(100), @password VARCHAR(100)
-AS
-BEGIN
-	SELECT * FROM dbo.NguoiDung WHERE Username = @username AND Password = @password AND Status = 1
-END
-GO
-
-CREATE PROC USP_Register
-@ten NVARCHAR(100), @username VARCHAR(100), @password VARCHAR(100), @diaChi NVARCHAR(100), @sdt VARCHAR(100), @email VARCHAR(100)
-AS
-BEGIN
-	IF @diaChi ='' SET @diaChi = null
-	IF @sdt ='' SET @sdt = null
-	IF @email ='' SET @email = null
-	INSERT NguoiDung(Ten, Username, Password, DiaChi, SDT, Email, NgayTao)
-	VALUES(@ten, @username, @password, @diaChi, @sdt, @email, GETDATE())
-END
 GO
 
 
@@ -311,12 +284,13 @@ GO
 
 --Sản phẩm
 INSERT INTO SanPham
-    (TenSanPham, MaDanhMuc, MaThuongHieu, SoLuong, GiaNhap, GiaBan, BaoHanh, MaCPU, RAM, MaGPU, ManHinh,Pin, MaOCung, Hinh, NgayTao)
-VALUES(N'Laptop Gaming Acer Aspire 7 A715 42G R1SB', 1, 2, 5, 18000000, 19990000, 12, 11, 8, 12, N'15.6" FHD (1920 x 1080) IPS, Anti-Glare, 144Hz', N'4 Cell 48Whr', 2, N'https://product.hstatic.net/1000026716/product/laptop_gaming_acer_aspire_7_a715_42g_r1sb_9520016e22274791bb4e1697764c57c4.jpg', N'2021-11-05'),
-    (N'Laptop gaming Lenovo Legion 5 Pro 16ACH6H 82JQ005YVN', 1, 6, 5, 45000000, 49990000, 24, 14, 16, 7, N'16.0 inch WQXGA (2560x1600) IPS 500nits Anti-glare, 165Hz, 100% sRGB, Dolby Vision, HDR 400, Free-Sync, G-Sync, DC dimmer', N'80Whrs', 4, N'https://phucanhcdn.com/media/product/43536_lap_len_leg5p82jq005yvn_a.jpg', N'2021-11-05'),
-    (N'Laptop Apple MacBook Pro M1 2020 8GB/256GB (MYD82SA/A)', 3, 1, 5, 30000000, 33490000, 12, 17, 8, 1, N'13.3 inch', N'Built‑in 58.2‑watt‑hour lithium‑polymer battery, 61W USB‑C Power Adapter', 2, N'https://lh3.googleusercontent.com/6iW6tc0lHp4paCYznq-gC5mEXEGMSBmrSq2I4MaXdPne5XWQI4l8m-bGRVCRFH94d4PEqtUIdH3FERr-VNDWaT2k9qcZ5Ey_PQ=w1000-rw', N'2021-11-05')
-	
-
+    (TenSanPham, MaDanhMuc, SeoTitle, MaThuongHieu, SoLuong, GiaNhap, GiaBan, BaoHanh, MaCPU, RAM, MaGPU, ManHinh,Pin, MaOCung, Hinh, NgayTao)
+VALUES(N'Laptop Gaming Acer Aspire 7 A715 42G R1SB', 1, 'laptop-gaming-acer-aspire-7-a715-42g-r1sb', 2, 5, 18000000, 19990000, 12, 11, 8, 12, N'15.6" FHD (1920 x 1080) IPS, Anti-Glare, 144Hz', N'4 Cell 48Whr', 2, N'https://product.hstatic.net/1000026716/product/laptop_gaming_acer_aspire_7_a715_42g_r1sb_9520016e22274791bb4e1697764c57c4.jpg', N'2021-11-05'),
+    (N'Laptop Apple MacBook Pro M1 2020 8GB/256GB (MYD82SA/A)', 3, 'apple-macbook-pro-2020-m1-myd82saa', 1, 5, 30000000, 33490000, 12, 17, 8, 1, N'13.3 inch', N'Built‑in 58.2‑watt‑hour lithium‑polymer battery, 61W USB‑C Power Adapter', 2, N'https://lh3.googleusercontent.com/6iW6tc0lHp4paCYznq-gC5mEXEGMSBmrSq2I4MaXdPne5XWQI4l8m-bGRVCRFH94d4PEqtUIdH3FERr-VNDWaT2k9qcZ5Ey_PQ=w1000-rw', N'2021-11-05')
+INSERT INTO SanPham
+    (TenSanPham, MaDanhMuc, SeoTitle, MaThuongHieu, SoLuong, GiaNhap, GiaBan, GiaGiam, BaoHanh, MaCPU, RAM, MaGPU, ManHinh,Pin, MaOCung, Hinh, NgayTao)	
+	VALUES 
+    (N'Laptop gaming Lenovo Legion 5 Pro 16ACH6H 82JQ005YVN', 1, 'laptop-gaming-lenovo-legion-5-pro-16ach6h-82jq005yvn', 6, 5, 45000000, 49990000, 40000000, 24, 14, 16, 7, N'16.0 inch WQXGA (2560x1600) IPS 500nits Anti-glare, 165Hz, 100% sRGB, Dolby Vision, HDR 400, Free-Sync, G-Sync, DC dimmer', N'80Whrs', 4, N'https://phucanhcdn.com/media/product/43536_lap_len_leg5p82jq005yvn_a.jpg', N'2021-11-05')
 INSERT INTO NguoiDung(Ten, Username, Password, MaQuyen, NgayTao)
 VALUES(N'admin',N'admin',N'123',1,N'2021-11-05'),
 (N'quanly',N'quanly',N'123',2,N'2021-11-05'),
@@ -326,3 +300,4 @@ VALUES(N'admin',N'admin',N'123',1,N'2021-11-05'),
 (N'khach3',N'khach3',N'123',4,N'2021-11-05')
 GO
 select *from NguoiDung
+select *from SanPham

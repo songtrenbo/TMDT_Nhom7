@@ -275,7 +275,7 @@
 									"font": "Arial;13;0",
 									"left": 604.5,
 									"top": 220.5,
-									"width": 174,
+									"width": 173,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8odOh/UQSIo4="
@@ -471,7 +471,7 @@
 									"font": "Arial;13;0",
 									"left": 458,
 									"top": 300.5,
-									"width": 163,
+									"width": 162,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8odPKbERBp9s="
@@ -665,7 +665,7 @@
 									"font": "Arial;13;0",
 									"left": 766,
 									"top": 356.5,
-									"width": 106,
+									"width": 105,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8odQFJkRvAA0="
@@ -864,7 +864,7 @@
 									"font": "Arial;13;0",
 									"left": 797,
 									"top": 276.5,
-									"width": 216,
+									"width": 215,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8odQ42kSdweo="
@@ -1253,7 +1253,7 @@
 									"font": "Arial;13;0",
 									"left": 445,
 									"top": 428.5,
-									"width": 99,
+									"width": 98,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8odZ4z0Xg1g0="
@@ -1651,7 +1651,7 @@
 									"font": "Arial;13;0",
 									"left": 543,
 									"top": 348.5,
-									"width": 71,
+									"width": 70,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8oda7lEZUTe8="
@@ -1850,7 +1850,7 @@
 									"font": "Arial;13;0",
 									"left": 639,
 									"top": 396.5,
-									"width": 72,
+									"width": 71,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8odbdYkaOcMs="
@@ -2239,7 +2239,7 @@
 									"font": "Arial;13;0",
 									"left": 970.5,
 									"top": 452.5,
-									"width": 126,
+									"width": 125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8okoFBFgsGP4="
@@ -2438,7 +2438,7 @@
 									"font": "Arial;13;0",
 									"left": 1215.5,
 									"top": 452.5,
-									"width": 152,
+									"width": 151,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8okqf81iX/EA="
@@ -2797,9 +2797,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 806,
-											"top": 745,
+											"top": 751.5,
 											"width": 69,
-											"height": 39,
+											"height": 26,
 											"text": "Xem lịch sử mua sắm",
 											"wordWrap": true
 										},
@@ -2833,9 +2833,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 801,
-									"top": 738,
+									"top": 744.5,
 									"width": 79,
-									"height": 51,
+									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8okv7qlxG0K8="
 									},
@@ -3034,7 +3034,7 @@
 									"font": "Arial;13;0",
 									"left": 536,
 									"top": 620.5,
-									"width": 154,
+									"width": 153,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8okxEu1zIq/E="
@@ -3694,9 +3694,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 169.5,
-											"top": 94.5,
+											"top": 101,
 											"width": 86,
-											"height": 39,
+											"height": 26,
 											"text": "Tìm kiếm sản phẩm theo tên",
 											"wordWrap": true
 										},
@@ -3730,9 +3730,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 164.5,
-									"top": 87.5,
+									"top": 94,
 									"width": 96,
-									"height": 51,
+									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8ok3EYWFWdgA="
 									},
@@ -4132,7 +4132,7 @@
 									"font": "Arial;13;0",
 									"left": 402.5,
 									"top": 788.5,
-									"width": 127,
+									"width": 126,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8ok5LcGP3MNg="
@@ -4331,7 +4331,7 @@
 									"font": "Arial;13;0",
 									"left": 397,
 									"top": 836.5,
-									"width": 100,
+									"width": 99,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8olAX0G5GfWg="
@@ -4530,7 +4530,7 @@
 									"font": "Arial;13;0",
 									"left": 407,
 									"top": 892.5,
-									"width": 149,
+									"width": 148,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8olBGPm86yVA="
@@ -4928,7 +4928,7 @@
 									"font": "Arial;13;0",
 									"left": 402,
 									"top": 500.5,
-									"width": 163,
+									"width": 162,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8olddmKXxf3Y="
@@ -5091,9 +5091,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 643.5,
-											"top": 745,
+											"top": 751.5,
 											"width": 98,
-											"height": 39,
+											"height": 26,
 											"text": "Xem các voucher đang có",
 											"wordWrap": true
 										},
@@ -5127,9 +5127,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 638.5,
-									"top": 738,
+									"top": 744.5,
 									"width": 108,
-									"height": 51,
+									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8olenqKfQ+20="
 									},
@@ -5719,7 +5719,7 @@
 									"font": "Arial;13;0",
 									"left": 736.5,
 									"top": 548.5,
-									"width": 79,
+									"width": 78,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8opLbnzChTAY="
@@ -7105,7 +7105,7 @@
 									"font": "Arial;13;0",
 									"left": 965,
 									"top": 764.5,
-									"width": 99,
+									"width": 98,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8opieAFm86XE="
@@ -11952,7 +11952,7 @@
 									"font": "Arial;13;0",
 									"left": 404,
 									"top": 212.5,
-									"width": 173,
+									"width": 172,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8olTTCprYMVE="
@@ -12114,11 +12114,11 @@
 												"$ref": "AAAAAAF8olTzepsFzHw="
 											},
 											"font": "Arial;13;1",
-											"left": 794,
+											"left": 796,
 											"top": 171.5,
-											"width": 88,
+											"width": 98,
 											"height": 13,
-											"text": "Tạo đơn hàng"
+											"text": "Duyệt đơn hàng"
 										},
 										{
 											"_type": "LabelView",
@@ -12149,9 +12149,9 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 789,
+									"left": 791,
 									"top": 164.5,
-									"width": 99,
+									"width": 109.5185546875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8olTzepsGwRw="
@@ -12251,7 +12251,7 @@
 							"containerChangeable": true,
 							"left": 768,
 							"top": 160,
-							"width": 140,
+							"width": 154,
 							"height": 35,
 							"nameCompartment": {
 								"$ref": "AAAAAAF8olTzepsFzHw="
@@ -12347,7 +12347,7 @@
 									"font": "Arial;13;0",
 									"left": 767.5,
 									"top": 268.5,
-									"width": 151,
+									"width": 150,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8olU68Zs45qM="
@@ -12538,7 +12538,7 @@
 									"font": "Arial;13;0",
 									"left": 407.5,
 									"top": 332.5,
-									"width": 150,
+									"width": 149,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8olVj8ZtnkDM="
@@ -13215,8 +13215,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 691,
-									"top": 205,
+									"left": 857,
+									"top": 223,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -13235,8 +13235,8 @@
 										"$ref": "AAAAAAF8oloUormveuY="
 									},
 									"font": "Arial;13;0",
-									"left": 667,
-									"top": 176,
+									"left": 803,
+									"top": 216,
 									"width": 53.49169921875,
 									"height": 13,
 									"alpha": 4.294369068928155,
@@ -13258,8 +13258,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 686,
-									"top": 176,
+									"left": 828,
+									"top": 222,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -13271,13 +13271,13 @@
 							],
 							"font": "Arial;13;0",
 							"head": {
-								"$ref": "AAAAAAF8olTTCprWu1I="
+								"$ref": "AAAAAAF8olU68Zs2rTI="
 							},
 							"tail": {
 								"$ref": "AAAAAAF8olTzepsEaTI="
 							},
 							"lineStyle": 1,
-							"points": "767:187;612:208",
+							"points": "844:195;842:263",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF8oloUormyVeQ="
@@ -13435,7 +13435,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"width": 93,
+											"width": 95.13232421875,
 											"height": 13,
 											"text": "(from NhanVien)"
 										},
@@ -13613,7 +13613,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF8olPPbplchR8="
 					},
-					"name": "Tạo đơn hàng",
+					"name": "Duyệt đơn hàng",
 					"ownedElements": [
 						{
 							"_type": "UMLExtend",
@@ -13625,7 +13625,7 @@
 								"$ref": "AAAAAAF8olTzepsCNNM="
 							},
 							"target": {
-								"$ref": "AAAAAAF8olTTCprUGu0="
+								"$ref": "AAAAAAF8olU68Zs0wu8="
 							}
 						}
 					]

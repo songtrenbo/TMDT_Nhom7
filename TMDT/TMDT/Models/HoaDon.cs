@@ -23,6 +23,8 @@ namespace TMDT.Models
         public int MaHoaDon { get; set; }
         public System.DateTime NgayMua { get; set; }
         public int MaKhachHang { get; set; }
+        public Nullable<int> MaNVDuyet { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<int> MaPhieuQuaTang { get; set; }
         public Nullable<int> SoTienGiam { get; set; }
         public Nullable<int> PhiGiaoHang { get; set; }
@@ -32,6 +34,7 @@ namespace TMDT.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHoaDon> CTHoaDons { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }
+        public virtual NguoiDung NguoiDung1 { get; set; }
         public virtual PhieuQuaTang PhieuQuaTang { get; set; }
     }
 }

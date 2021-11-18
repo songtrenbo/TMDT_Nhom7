@@ -17,23 +17,23 @@ namespace TMDT.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
         {
-            this.Comments = new HashSet<Comment>();
             this.CTHoaDons = new HashSet<CTHoaDon>();
+            this.DanhGias = new HashSet<DanhGia>();
             this.Hinhs = new HashSet<Hinh>();
-            this.Rates = new HashSet<Rate>();
         }
     
         public int MaSanPham { get; set; }
         public string TenSanPham { get; set; }
         public int MaDanhMuc { get; set; }
+        public string SeoTitle { get; set; }
         public int MaThuongHieu { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<int> GiaNhap { get; set; }
         public Nullable<int> GiaBan { get; set; }
         public Nullable<int> GiaGiam { get; set; }
-        public Nullable<int> PhanTramGiamGia { get; set; }
         public Nullable<int> DiemRate { get; set; }
         public Nullable<int> SoLuotRate { get; set; }
+        public Nullable<int> LuotXem { get; set; }
         public int BaoHanh { get; set; }
         public int MaCPU { get; set; }
         public string RAM { get; set; }
@@ -42,22 +42,20 @@ namespace TMDT.Models
         public string Pin { get; set; }
         public int MaOCung { get; set; }
         public string Hinh { get; set; }
-        public System.DateTime NgayTao { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsHide { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
         public virtual CPU CPU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHoaDon> CTHoaDons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
         public virtual DanhMuc DanhMuc { get; set; }
         public virtual GPU GPU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hinh> Hinhs { get; set; }
         public virtual OCung OCung { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rate> Rates { get; set; }
         public virtual ThuongHieu ThuongHieu { get; set; }
     }
 }

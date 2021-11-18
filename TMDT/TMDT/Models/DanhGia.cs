@@ -12,13 +12,14 @@ namespace TMDT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Rate
+    public partial class DanhGia
     {
-        public int MaRate { get; set; }
+        public int MaDanhGia { get; set; }
         public int MaSanPham { get; set; }
         public int MaKhachHang { get; set; }
         public int Diem { get; set; }
-        public System.DateTime NgayTao { get; set; }
+        public string NoiDung { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
         public System.DateTime NgayChinhSua { get; set; }
     
         public virtual NguoiDung NguoiDung { get; set; }

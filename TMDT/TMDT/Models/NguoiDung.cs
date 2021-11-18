@@ -19,9 +19,9 @@ namespace TMDT.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NguoiDung()
         {
-            this.Comments = new HashSet<Comment>();
+            this.DanhGias = new HashSet<DanhGia>();
             this.HoaDons = new HashSet<HoaDon>();
-            this.Rates = new HashSet<Rate>();
+            this.HoaDons1 = new HashSet<HoaDon>();
         }
     
         public int MaNguoiDung { get; set; }
@@ -56,16 +56,16 @@ namespace TMDT.Models
         public string Email { get; set; }
         public Nullable<int> DiemThuong { get; set; }
         public int MaQuyen { get; set; }
-        public System.DateTime NgayTao { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<DanhGia> DanhGias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
-        public virtual Quyen Quyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rate> Rates { get; set; }
+        public virtual ICollection<HoaDon> HoaDons1 { get; set; }
+        public virtual Quyen Quyen { get; set; }
     }
 }

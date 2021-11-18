@@ -96,8 +96,16 @@
                         <p class="card-text">
                             @item.TenSanPham
                         </p>
-                        <p> @item.GiaBan VNĐ</p>
-
+                        @if (@item.GiaGiam > 0)
+                        {
+                            <p><del>@item.GiaBan VNĐ</del></p>
+                            <p> @item.GiaGiam VNĐ</p>
+                        }
+                        else
+                        {
+                            <p><br /></p>
+                            <p> @item.GiaBan VNĐ</p>
+                        }
                         <button class="btn-buy" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">
                             Mua ngay
                         </button>
@@ -305,6 +313,7 @@
     .item-thuonghieu {
         transition: all 0.3s ease 0s;
     }
+
         .item-thuonghieu:hover {
             box-shadow: 2px 2px 2px black;
             transform: translateY(-5px);

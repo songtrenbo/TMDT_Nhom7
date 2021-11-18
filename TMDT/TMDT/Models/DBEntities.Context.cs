@@ -12,8 +12,6 @@ namespace TMDT.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class DBLaptopEntities : DbContext
     {
@@ -27,9 +25,9 @@ namespace TMDT.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CPU> CPUs { get; set; }
         public virtual DbSet<CTHoaDon> CTHoaDons { get; set; }
+        public virtual DbSet<DanhGia> DanhGias { get; set; }
         public virtual DbSet<DanhMuc> DanhMucs { get; set; }
         public virtual DbSet<GPU> GPUs { get; set; }
         public virtual DbSet<Hinh> Hinhs { get; set; }
@@ -38,50 +36,7 @@ namespace TMDT.Models
         public virtual DbSet<OCung> OCungs { get; set; }
         public virtual DbSet<PhieuQuaTang> PhieuQuaTangs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
-        public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<ThuongHieu> ThuongHieux { get; set; }
-    
-        public virtual ObjectResult<USP_Login_Result> USP_Login(string username, string password)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_Login_Result>("USP_Login", usernameParameter, passwordParameter);
-        }
-    
-        public virtual int USP_Register(string ten, string username, string password, string diaChi, string sdt, string email)
-        {
-            var tenParameter = ten != null ?
-                new ObjectParameter("ten", ten) :
-                new ObjectParameter("ten", typeof(string));
-    
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            var diaChiParameter = diaChi != null ?
-                new ObjectParameter("diaChi", diaChi) :
-                new ObjectParameter("diaChi", typeof(string));
-    
-            var sdtParameter = sdt != null ?
-                new ObjectParameter("sdt", sdt) :
-                new ObjectParameter("sdt", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("email", email) :
-                new ObjectParameter("email", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_Register", tenParameter, usernameParameter, passwordParameter, diaChiParameter, sdtParameter, emailParameter);
-        }
     }
 }

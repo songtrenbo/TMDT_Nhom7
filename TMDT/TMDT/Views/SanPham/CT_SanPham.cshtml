@@ -26,7 +26,16 @@
                     <ul>
                         <li><span><strong>Nhà sản xuất: </strong>@Model.ThuongHieu.TenThuongHieu</span></li>
                         <li><span><strong>Bảo hành: </strong>@Model.BaoHanh tháng</span></li>
-                        <li><span><strong>Giá: </strong>@Model.GiaBan</span></li>
+                        @if (Model.GiaGiam.Value>0)
+                        {
+                            <li><span><strong>Giá cũ: </strong><del>@Model.GiaBan</del></span></li>
+                            <li><span><strong>Giá KM: </strong>@Model.GiaGiam</span></li>
+                        }
+                        else
+                        {
+                            <li><span><strong>Giá: </strong>@Model.GiaBan</span></li>
+                        }
+
                     </ul>
                 </div>
 

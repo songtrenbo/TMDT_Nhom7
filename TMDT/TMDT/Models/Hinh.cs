@@ -18,7 +18,7 @@ namespace TMDT.Models
         public int MaSanPham { get; set; }
         public string TenHinh { get; set; }
         public string Path { get; set; }
-        public System.DateTime NgayTao { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     

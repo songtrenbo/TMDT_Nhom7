@@ -24,7 +24,7 @@ namespace TMDT.Models
         public string TenThuongHieu { get; set; }
         public string Hinh { get; set; }
         public Nullable<int> SoLuong { get; set; }
-        public System.DateTime NgayTao { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<bool> IsLockEdit { get; set; }

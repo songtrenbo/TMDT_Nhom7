@@ -24,7 +24,7 @@ namespace TMDT.Models
         public Nullable<int> GiaTri { get; set; }
         public Nullable<int> TongSoLuong { get; set; }
         public Nullable<int> SoLuongConLai { get; set; }
-        public System.DateTime NgayTao { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
         public System.DateTime NgayKichHoat { get; set; }
         public System.DateTime NgayKetThuc { get; set; }
         public Nullable<bool> IsActive { get; set; }

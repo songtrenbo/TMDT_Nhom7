@@ -29,7 +29,7 @@ namespace TMDT.Controllers
                 ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
                 return View("Index");
             }
-            var check = Login(username, password);
+            var check = database.NguoiDungs.Where(s => s.Username.Equals(_user.Username) && s.Password.Equals(_user.Password) &&s.Status==true).FirstOrDefault();
             if (check == null)
             {
                 ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
@@ -68,10 +68,6 @@ namespace TMDT.Controllers
             return View(nguoidung);
         }
         public ActionResult ThongTinCaNhan(int id)
-        {
-            return View(database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault());
-        }
-        public ActionResult CapNhatThongTinCaNhan(int id)
         {
             return View(database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault());
         }
@@ -116,28 +112,13 @@ namespace TMDT.Controllers
                 if (check_ID == null)
                 {
                     database.Configuration.ValidateOnSaveEnabled = false;
+                    _user.DiemThuong = 0;
                     _user.MaQuyen = 4;
                     _user.NgayTao = DateTime.Now;
-                    object[] sqlParams =
-                    {
-                        new SqlParameter("@ten",_user.Ten),
-                        new SqlParameter("@username",_user.Username),
-                        new SqlParameter("@password",_user.Password),
-                        new SqlParameter("@diaChi",_user.DiaChi??""),
-                        new SqlParameter("@sdt",_user.SDT??""),
-                        new SqlParameter("@email",_user.Email??"")
-                    };
-                    var result = database.Database.ExecuteSqlCommand("USP_Register @ten, @username, @password, @diaChi, @sdt, @email", sqlParams);
-                    if (result>0)
-                    {
-                        database.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        ViewBag.Error = "loi";
-                        return View();
-                    }
+                    _user.Status = true;
+                    database.NguoiDungs.Add(_user);
+                    database.SaveChanges();
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -153,15 +134,5 @@ namespace TMDT.Controllers
             return View();
         }
 
-        public NguoiDung Login(string username, string password)
-        {
-            object[] sqlParams =
-            {
-                new SqlParameter("@username",username),
-                new SqlParameter("@password",password),
-            };
-            var result = database.Database.SqlQuery<NguoiDung>("USP_Login @username, @password", sqlParams).FirstOrDefault();
-            return result;
-        }
     }
 }

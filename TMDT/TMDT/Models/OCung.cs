@@ -23,7 +23,7 @@ namespace TMDT.Models
         public int MaOCung { get; set; }
         public Nullable<int> LoaiOCung { get; set; }
         public Nullable<int> DungLuong { get; set; }
-        public System.DateTime NgayTao { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
