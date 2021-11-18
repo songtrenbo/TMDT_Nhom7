@@ -156,6 +156,10 @@ CREATE TABLE HoaDon
     MaHoaDon INT IDENTITY PRIMARY KEY,
     NgayMua DATETIME NOT NULL,
     MaKhachHang INT NOT NULL,
+    TenKhach NVARCHAR(255) NOT NULL, 
+    DiaChi NVARCHAR(255), 
+    SDT VARCHAR(15) NOT NULL, 
+    PhuongThucThanhToan INT DEFAULT 1,--1: COD, 2: paypal 
     MaNVDuyet INT,
     NgayTao DATETIME DEFAULT GETDATE(),
     MaPhieuQuaTang INT,
