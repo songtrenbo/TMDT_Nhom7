@@ -39,7 +39,7 @@ namespace TMDT.Controllers
             {
                 database.Configuration.ValidateOnSaveEnabled = false;
                 Session["NguoiDung"] = check.Ten;
-                //Session["ten"] = check.Ten;
+                Session["ten"] = check.Ten;
                 Session["maQuyen"] = check.MaQuyen;
                 Session["id"] = check.MaNguoiDung;
                 ViewBag.Ten = check.Ten;
@@ -77,8 +77,6 @@ namespace TMDT.Controllers
             //if(ModelState.IsValid)
             try
             {
-                //var nguoiDung1 = database.NguoiDungs.Where(s => s.MaNguoiDung == nguoiDung.MaNguoiDung).FirstOrDefault();
-                //nguoiDung1 = nguoiDung;
                 nguoiDung.NgayChinhSua = DateTime.Now;
                 nguoiDung.ConfirmPass = nguoiDung.Password;
                 database.Entry(nguoiDung).State = EntityState.Modified;
@@ -101,7 +99,7 @@ namespace TMDT.Controllers
                 //throw;
                 return Content(a);
             }
-            return RedirectToAction("ThongTinCaNhan", new { id = nguoiDung.MaNguoiDung });
+            //return RedirectToAction("ThongTinCaNhan", new { id = nguoiDung.MaNguoiDung });
         }
         [HttpPost]
         public ActionResult DangKy(NguoiDung _user)

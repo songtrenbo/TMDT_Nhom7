@@ -1,60 +1,70 @@
 ﻿<header>
 
+    <style>
+        nav > li > a, nav > li > a:focus, nav > li > a:focus:hover {
+            text-decoration: none;
+            background-color: transparent !important;
+            color: white;
+            
+        }
 
+        .navbar-nav {
+            margin-left: auto;
+        }
+    </style>
 
 
     <script src="~/Scripts/funcGiohang.js"></script>
 
-    <nav class="navbar navbar-expand-xl navbar-dark stiky-top" style="background-color: #EE0033;">
-        <nav class="navbar navbar-expand-xl navbar-dark container">
-
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+    <nav class="navbar navbar-expand-xl navbar-dark fixed-top" style="background-color: #EE0033;">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "TrangChu")"><img src="~/Content/images/logodps.png" height="35" alt="" loading="lazy" /></a>
+            <div class="form-group has-search mb-3 w-auto my-auto d-none d-sm-flex">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="text" class="form-control" placeholder="Search" style="border-radius: 90px; width: 400px;">
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="collapse_target">
-                <a class="navbar-brand" href="@Url.Action("Index", "TrangChu")"><img src="~/Content/images/logodps.png" height="35" alt="" loading="lazy" /></a>
 
-                <div class="form-group has-search mb-3 w-auto my-auto d-none d-sm-flex">
-                    <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control" placeholder="Search" style="border-radius: 90px; width: 400px;">
-                </div>
-
-                <ul class="navbar-nav nav justify-content-end ml-auto">
-
+            <div class="collapse navbar-collapse navbar-nav ml-auto" id="navbarNavDropdown">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <button class="btn" style="color: white;" onclick="location.href='@Url.Action("Index", "TrangChu")'">
-                            <i class="bi bi-house-door-fill"
-                               style="font-size: 1.2em;"></i>
-                            Trang chủ
-                        </button>
+                        <a class="nav-link text-white" href="@Url.Action("Index", "TrangChu")">
+                            <i class="bi bi-house-door-fill" style="font-size: 1.2em;"></i>Trang chủ
+                        </a>
                     </li>
-
                     <li class="nav-item">
-                        <button type="button" class="MainGioHang btn" onload="GetSoSP()" onclick="GioHangPage()" style="color: white;"><i class="bi bi-cart4" style="font-size: 1.2em;color: white;"></i></button>
+                        <a class="nav-link text-white MainGioHang" style="cursor: pointer;" onload="GetSoSP()" onclick="GioHangPage()">
+                            <i class="bi bi-cart4" style="font-size: 1.2em;"></i>
+                        </a>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        @if (Session["NguoiDung"] == null)
-                        {
-                            <button class="btn" style="color: white;" onclick="location.href='@Url.Action("Index", "NguoiDung")'"><i class="bi bi-person-circle" style="font-size: 1.2em;color: white;"></i> Đăng nhập</button>
-                        }
-                        else
-                        {
-
-                            <button class="btn nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-expanded="false" style="color: white;">
-                                <i class="bi bi-person-circle" style="font-size: 1.2em;color: white;"></i> Tên KH
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @if (Session["NguoiDung"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" style="cursor: pointer;" onclick="location.href='@Url.Action("Index", "NguoiDung")'">
+                                <i class="bi bi-person-circle" style="font-size: 1.2em;color: white;"></i> Đăng nhập
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle" style="font-size: 1.2em"></i> Hi @Session["ten"]
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan","NguoiDung",new {id= Session["id"]})">Thông tin cá nhân</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="@Url.Action("DangXuat","NguoiDung")">Đăng xuất</a>
                             </div>
 
-                        }
-                    </li>
+                        </li>
+                    }
                 </ul>
             </div>
-        </nav>
+        </div>
+
     </nav>
+    <div style="margin-top: 70px"></div>
 </header>

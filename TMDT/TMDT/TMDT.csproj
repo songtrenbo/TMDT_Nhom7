@@ -198,7 +198,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\admin-style.css" />
+    <Content Include="Content\css\sidebar.css" />
     <Content Include="Content\css\GioHang.css" />
     <Content Include="Content\css\GioHangRong.css" />
     <Content Include="Content\images\banner1.png" />
@@ -269,6 +269,8 @@
     <Content Include="Views\GioHang\HienThiGioHang.cshtml" />
     <Content Include="Views\GioHang\GioHangRong.cshtml" />
     <Content Include="Views\NguoiDung\ThongTinCaNhan.cshtml" />
+    <Content Include="Views\Shared\_Head.cshtml" />
+    <Content Include="Views\Shared\_Foot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
