@@ -201,9 +201,9 @@
     <Content Include="Content\css\sidebar.css" />
     <Content Include="Content\css\GioHang.css" />
     <Content Include="Content\css\GioHangRong.css" />
-    <Content Include="Content\images\banner1.png" />
-    <Content Include="Content\images\banner2.png" />
-    <Content Include="Content\images\banner3.png" />
+    <Content Include="Content\images\banner_one.png" />
+    <Content Include="Content\images\banner_three.png" />
+    <Content Include="Content\images\banner_two.png" />
     <Content Include="Content\images\logodps.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
