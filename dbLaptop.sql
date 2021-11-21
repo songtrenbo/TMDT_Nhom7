@@ -31,7 +31,7 @@ CREATE TABLE NguoiDung
     MaQuyen INT NOT NULL DEFAULT 4,-- 1: admin && 2: quản lý && 3: nhân viên && 4: khách
     NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
-    Status BIT DEFAULT 1,--1: active, 2: lock, 3: deleted
+    Status INT DEFAULT 1,--1: active, 2: lock, 3: deleted
     FOREIGN KEY (MaQuyen) REFERENCES dbo.Quyen(MaQuyen),
 );
 
@@ -296,12 +296,12 @@ INSERT INTO SanPham
 	VALUES 
     (N'Laptop gaming Lenovo Legion 5 Pro 16ACH6H 82JQ005YVN', 1, 'laptop-gaming-lenovo-legion-5-pro-16ach6h-82jq005yvn', 6, 5, 45000000, 49990000, 40000000, 24, 14, 16, 7, N'16.0 inch WQXGA (2560x1600) IPS 500nits Anti-glare, 165Hz, 100% sRGB, Dolby Vision, HDR 400, Free-Sync, G-Sync, DC dimmer', N'80Whrs', 4, N'https://phucanhcdn.com/media/product/43536_lap_len_leg5p82jq005yvn_a.jpg', N'2021-11-05')
 INSERT INTO NguoiDung(Ten, Username, Password, MaQuyen, NgayTao)
-VALUES(N'admin',N'admin',N'123',1,N'2021-11-05'),
-(N'quanly',N'quanly',N'123',2,N'2021-11-05'),
-(N'nhanvien',N'nhanvien',N'123',3,N'2021-11-05'),
-(N'khach1',N'khach1',N'123',4,N'2021-11-05'),
-(N'khach2',N'khach2',N'123',4,N'2021-11-05'),
-(N'khach3',N'khach3',N'123',4,N'2021-11-05')
+VALUES(N'admin',N'admin',N'202cb962ac59075b964b07152d234b70',1,N'2021-11-05'),
+(N'quanly',N'quanly',N'202cb962ac59075b964b07152d234b70',2,N'2021-11-05'),
+(N'nhanvien',N'nhanvien',N'202cb962ac59075b964b07152d234b70',3,N'2021-11-05'),
+(N'khach1',N'khach1',N'202cb962ac59075b964b07152d234b70',4,N'2021-11-05'),
+(N'khach2',N'khach2',N'202cb962ac59075b964b07152d234b70',4,N'2021-11-05'),
+(N'khach3',N'khach3',N'202cb962ac59075b964b07152d234b70',4,N'2021-11-05')
 GO
 select *from NguoiDung
 select *from SanPham

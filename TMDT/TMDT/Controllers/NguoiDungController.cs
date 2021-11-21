@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TMDT.Models;
+using TMDT.Utility;
 
 namespace TMDT.Controllers
 {
@@ -22,28 +23,33 @@ namespace TMDT.Controllers
         [HttpPost]
         public ActionResult DangNhap(NguoiDung _user)
         {
+            if (String.IsNullOrEmpty(_user.Username) || String.IsNullOrEmpty(_user.Password))
+                return View("DangNhap");
             string username = _user.Username;
-            string password = _user.Password;
-            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            string password = Utils.Crypto(_user.Password);
+
+            var checkUser = database.NguoiDungs.Where(s => s.Username.Equals(username) && s.Password.Equals(password)).FirstOrDefault();
+            //if (checkUser.Status == 2)
+            //{
+            //    ViewBag.ErrorInfo = "Tài khoản bị khóa";
+            //    return View("DangNhap");
+            //}
+            //if (checkUser.Status == 3)
+            //{
+            //    ViewBag.ErrorInfo = "Tài khoản đã bị xóa;
+            //    return View("DangNhap");
+            //}
+            if (checkUser == null)
             {
                 ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
-                return View("Index");
-            }
-            var check = database.NguoiDungs.Where(s => s.Username.Equals(_user.Username) && s.Password.Equals(_user.Password) &&s.Status==true).FirstOrDefault();
-            if (check == null)
-            {
-                ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
-                return View("Index");
+                return View("DangNhap");
             }
             else
             {
                 database.Configuration.ValidateOnSaveEnabled = false;
-                Session["NguoiDung"] = check.Ten;
-                Session["ten"] = check.Ten;
-                Session["maQuyen"] = check.MaQuyen;
-                Session["id"] = check.MaNguoiDung;
-                ViewBag.Ten = check.Ten;
-                switch (check.MaQuyen)
+                Session["Account"] = checkUser;
+                //ViewBag.Ten = check.Ten;
+                switch (checkUser.MaQuyen)
                 {
                     case 1:
                         return RedirectToAction("Index", "Admin");
@@ -88,11 +94,11 @@ namespace TMDT.Controllers
                 string a = "";
                 foreach (var eve in e.EntityValidationErrors)
                 {
-                    a+=("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State)+"\n";
+                    a += ("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State) + "\n";
                     foreach (var ve in eve.ValidationErrors)
                     {
-                        a+=("- Property: \"{0}\", Error: \"{1}\"",
+                        a += ("- Property: \"{0}\", Error: \"{1}\"",
                             ve.PropertyName, ve.ErrorMessage) + "\n";
                     }
                 }
@@ -110,6 +116,8 @@ namespace TMDT.Controllers
                 if (check_ID == null)
                 {
                     database.Configuration.ValidateOnSaveEnabled = false;
+                    _user.Password = Utils.Crypto(_user.Password);
+                    _user.ConfirmPass = _user.Password;
                     _user.DiemThuong = 0;
                     _user.MaQuyen = 4;
                     _user.NgayTao = DateTime.Now;

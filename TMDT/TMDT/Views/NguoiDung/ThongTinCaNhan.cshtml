@@ -4,8 +4,9 @@
     Layout = "~/Views/Shared/_LayoutCaNhan.cshtml";
 }
 
-<h2>ThongTinCaNhan</h2>
 
+@section Header{
+    Thông tin tài khoản}
 @using (Html.BeginForm("CapNhatThongTinCaNhan", "NguoiDung", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -22,7 +23,8 @@
                     @Html.HiddenFor(model => model.MaQuyen)
                     @Html.HiddenFor(model => model.Status)
                     @Html.HiddenFor(model => model.NgayChinhSua)
-                    @{Model.ConfirmPass = Model.Password + "bairfnaew";}
+                    @{Model.ConfirmPass = Model.Password;}
+                    @*@{Model.ConfirmPass = Model.Password + "bairfnaew";}*@
                     @Html.HiddenFor(model => model.ConfirmPass)
 
                     <div class="form-row">

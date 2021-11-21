@@ -5,17 +5,17 @@
             text-decoration: none;
             background-color: transparent !important;
             color: white;
-            
         }
 
         .navbar-nav {
             margin-left: auto;
         }
-        .navbar-nav> .nav-item:hover {
-            border-radius: 10px;
-            background-color: #A10022;
-            transition: all 0.3s ease 0s;
-        }
+
+            .navbar-nav > .nav-item:hover {
+                border-radius: 10px;
+                background-color: #A10022;
+                transition: all 0.3s ease 0s;
+            }
     </style>
 
 
@@ -40,13 +40,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white MainGioHang" style="cursor: pointer;" onload="GetSoSP()" onclick="GioHangPage()">
+                        <a class="nav-link text-white MainGioHang" style="cursor: pointer;" onclick="GioHangPage()">
                             <i class="bi bi-cart4" style="font-size: 1.2em;"></i>
                         </a>
                     </li>
 
                     <li class="nav-item dropdown">
-                        @if (Session["NguoiDung"] == null)
+                        @if (Session["Account"] == null)
                         {
                             <a class="nav-link text-white" style="cursor: pointer;" onclick="location.href='@Url.Action("DangNhap", "NguoiDung")'">
                                 <i class="bi bi-person-circle" style="font-size: 1.2em;color: white;"></i> Đăng nhập
@@ -54,11 +54,12 @@
                         }
                         else
                         {
+                            var acc = (TMDT.Models.NguoiDung)Session["Account"];
                             <a class="nav-link text-white dropdown-toggle btn" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                <i class="bi bi-person-circle" style="font-size: 1.2em"></i> Hi @Session["ten"]
+                                <i class="bi bi-person-circle" style="font-size: 1.2em"></i> Hi @acc.Ten
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan","NguoiDung",new {id= Session["id"]})">Thông tin cá nhân</a>
+                                <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan","NguoiDung",new {id= acc.MaNguoiDung})">Thông tin cá nhân</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="@Url.Action("DangXuat","NguoiDung")">Đăng xuất</a>
                             </div>
