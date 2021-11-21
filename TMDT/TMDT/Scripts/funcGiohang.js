@@ -1,4 +1,5 @@
-﻿var gioHang = [];
+﻿//Khởi tạo và get giỏ hàng
+var gioHang = [];
 var soSP = 0;
 var tongTien = 0;
 if (window.localStorage)
@@ -13,9 +14,10 @@ if (gioHang.length > 0)
         }
     }
 window.onload = function () {
+    $(".MainGioHang").html('<i class="bi bi-cart4" style="font-size: 1.2em;color: white;"></i>');
     $(".MainGioHang").append(' Giỏ hàng (' + soSP + ')');
 }
-
+// Thêm giỏ hàng
 function ThemGioHang(maSP, tenSP, gia, soLuongTon, hinh) {
     var exist = false;
     for (i in gioHang)
@@ -45,6 +47,7 @@ function ThemGioHang(maSP, tenSP, gia, soLuongTon, hinh) {
     }
     window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
 }
+//Success Noti
 function AddSuccess() {
     Swal.fire({
         icon: 'success',
@@ -52,41 +55,9 @@ function AddSuccess() {
         showConfirmButton: false,
         timer: 1500
     })
-    $("#gioHangMain").text("Giỏ hàng (" + soSP + ")");
+    $(".MainGioHang").html('<i class="bi bi-cart4" style="font-size: 1.2em;color: white;"></i>');
+    $(".MainGioHang").append(' Giỏ hàng (' + soSP + ')');
 }
-
-
-function CheckAllCheckbox(source) {
-    var checkedValue = $('.checkAllid').is(":checked");
-    checkboxes = document.getElementsByName('foo');
-    for (var i = 0, n = checkboxes.length; i < n; i++) {
-        checkboxes[i].checked = source.checked;
-    }
-    if (checkedValue) {
-        for (var i = 0; i < gioHang.length; i++) {
-            gioHang[i].buyCheck = false;
-        }
-    }
-    else {
-        for (var i = 0; i < gioHang.length; i++) {
-            gioHang[i].buyCheck = true;
-        }
-    }
-    window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
-    location.reload();
-}
-
-function TinhTien(choose) {
-    var maSP = choose.getAttribute("data-id");
-    for (var i = 0; i < gioHang.length; i++) {
-        if (gioHang[i].maSanPham == maSP) {
-            gioHang[i].buyCheck = !gioHang[i].buyCheck;
-        }
-    }
-    window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
-    location.reload();
-}
-
 
 function GioHangPage() {
     if (gioHang.length > 0)
@@ -94,7 +65,7 @@ function GioHangPage() {
     else
         location.pathname = "/GioHang/GioHangRong";
 }
-
+//Xác nhận xóa 1 sản phẩm trong giỏ hàng
 function ConfirmXoaGioHang(sanPham) {
     Swal.fire({
         title: 'Xác nhận xóa sản phẩm?',
@@ -116,6 +87,7 @@ function ConfirmXoaGioHang(sanPham) {
         }
     })
 }
+//Xác nhận xóa toàn bộ sản phẩm trong giỏ hàng
 function ConfirmXoaToanBoGioHang() {
     Swal.fire({
         title: 'Xác nhận xóa toàn bộ giỏ hàng không?',
@@ -138,7 +110,7 @@ function ConfirmXoaToanBoGioHang() {
         }
     })
 }
-
+//Xóa 1 sản phẩm trong giỏ hàng
 function XoaGioHang(maSP) {
     var tmp = gioHang;
     window.localStorage.removeItem("gioHang");
@@ -150,7 +122,7 @@ function XoaGioHang(maSP) {
     window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
     location.reload();
 }
-
+//Xóa toàn bộ giỏ hàng
 function XoaToanBoGioHang() {
     window.localStorage.removeItem("gioHang");
     gioHang = [];
@@ -158,7 +130,7 @@ function XoaToanBoGioHang() {
     tongTien = 0;
     location.pathname = "/GioHang/GioHangRong";
 }
-
+//Tăng số lượng 1 sản phẩm trong giỏ hàng
 function increaseValue(num) {
     var maSP = num.getAttribute("data-id");
     for (var i = 0; i < gioHang.length; i++) {
@@ -176,26 +148,67 @@ function increaseValue(num) {
     window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
     location.reload();
 }
-
-
-
+//Giảm số lượng sản phẩm trong giỏ hàng
 function decreaseValue(num) {
     var maSP = num.getAttribute("data-id");
     for (var i = 0; i < gioHang.length; i++) {
-        if (gioHang[i].soLuong - 1 < 1) {
-            gioHang[i].soLuong = 1;
-        }
-        else {
-            gioHang[i].soLuong--;
-            soSP--;
-            //    tongTien -= gioHang[i].giaBan;
-        }
+        if (gioHang[i].maSanPham == maSP)
+            if (gioHang[i].soLuong - 1 < 1) {
+                gioHang[i].soLuong = 1;
+            }
+            else {
+                gioHang[i].soLuong--;
+                soSP--;
+                //    tongTien -= gioHang[i].giaBan;
+            }
     }
 
     window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
     location.reload();
 }
-
-
+// Cập nhật số lượng sản phẩm bằng cách nhập
+function InputChange(sanPham) {
+    var maSP = sanPham.getAttribute("data-id");
+    var quantity = sanPham.value;
+    for (var i = 0; i < gioHang.length; i++) {
+        if (gioHang[i].maSanPham == maSP) {
+            if (quantity.length === 0) {
+                QuantityError(gioHang[i].soLuongTon);
+                gioHang[i].soLuong = 1;
+            }
+            else if (quantity == 0) {
+                QuantityError(gioHang[i].soLuongTon);
+                quantity = 1;
+                gioHang[i].soLuong = 1;
+            }
+            else if (quantity > gioHang[i].soLuongTon) {
+                QuantityError(gioHang[i].soLuongTon);
+                gioHang[i].soLuong = gioHang[i].soLuongTon;
+            }
+            else {
+                gioHang[i].soLuong = quantity;
+            }
+        }
+    }
+    window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
+    location.reload();
+}
+// Kiểm tra nhập số
+function onlyNumberKey(evt, num) {
+    // Only ASCII character in that range allowed
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false;
+    return true;
+}
+// Thông báo nhập sai số lượng
+function QuantityError(max) {
+    Swal.fire({
+        icon: 'info',
+        title: 'Chỉ được nhập từ 1 đến ' + max,
+        showConfirmButton: false,
+        timer: 2000
+    })
+}
 
 
