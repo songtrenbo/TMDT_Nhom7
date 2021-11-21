@@ -14,7 +14,7 @@ namespace TMDT.Controllers
     {
         DBLaptopEntities database = new DBLaptopEntities();
         // GET: DangNhap
-        public ActionResult Index()
+        public ActionResult DangNhap()
         {
             return View();
         }
@@ -78,7 +78,7 @@ namespace TMDT.Controllers
             try
             {
                 nguoiDung.NgayChinhSua = DateTime.Now;
-                nguoiDung.ConfirmPass = nguoiDung.Password;
+                //nguoiDung.ConfirmPass = nguoiDung.Password;
                 database.Entry(nguoiDung).State = EntityState.Modified;
                 database.SaveChanges();
                 return RedirectToAction("ThongTinCaNhan", new { id = nguoiDung.MaNguoiDung });
@@ -116,7 +116,7 @@ namespace TMDT.Controllers
                     _user.Status = true;
                     database.NguoiDungs.Add(_user);
                     database.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("DangNhap");
                 }
                 else
                 {

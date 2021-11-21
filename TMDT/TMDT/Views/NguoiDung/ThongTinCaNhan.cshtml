@@ -1,6 +1,6 @@
 ﻿@model TMDT.Models.NguoiDung
 @{
-    ViewBag.Title = "ThongTinCaNhan";
+    ViewBag.Title = "Thông tin cá nhân";
     Layout = "~/Views/Shared/_LayoutCaNhan.cshtml";
 }
 
@@ -22,6 +22,9 @@
                     @Html.HiddenFor(model => model.MaQuyen)
                     @Html.HiddenFor(model => model.Status)
                     @Html.HiddenFor(model => model.NgayChinhSua)
+                    @{Model.ConfirmPass = Model.Password + "bairfnaew";}
+                    @Html.HiddenFor(model => model.ConfirmPass)
+
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.Ten)

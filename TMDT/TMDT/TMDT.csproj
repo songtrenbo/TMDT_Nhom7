@@ -198,6 +198,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\floating-labels.css" />
     <Content Include="Content\css\sidebar.css" />
     <Content Include="Content\css\GioHang.css" />
     <Content Include="Content\css\GioHangRong.css" />
@@ -263,7 +264,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_LayoutCaNhan.cshtml" />
-    <Content Include="Views\NguoiDung\Index.cshtml" />
+    <Content Include="Views\NguoiDung\DangNhap.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\NguoiDung\DangKy.cshtml" />
     <Content Include="Views\GioHang\HienThiGioHang.cshtml" />
@@ -271,6 +272,7 @@
     <Content Include="Views\NguoiDung\ThongTinCaNhan.cshtml" />
     <Content Include="Views\Shared\_Head.cshtml" />
     <Content Include="Views\Shared\_Foot.cshtml" />
+    <Content Include="Views\Shared\_Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
