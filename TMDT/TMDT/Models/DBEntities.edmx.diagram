@@ -4,31 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8639d9341def4b0c8b6092b8a49881da" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="7b206fa7039148f692d2a455c32c7c68" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="DBLaptopModel.CPU" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.CTHoaDon" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.DanhGia" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.DanhMuc" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.GPU" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.Hinh" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.HoaDon" Width="1.5" PointX="3" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.HoaDon" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.NguoiDung" Width="1.5" PointX="0.75" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.OCung" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.PhieuQuaTang" Width="1.5" PointX="0.75" PointY="34.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.Quyen" Width="1.5" PointX="1.5" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.PhieuQuaTang" Width="1.5" PointX="0.75" PointY="35.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Quyen" Width="1.5" PointX="1.5" PointY="32" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.SanPham" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.ThuongHieu" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
         <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaCPU__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK__CTHoaDon__MaHoaD__70DDC3D8" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK__CTHoaDon__MaSanP__6FE99F9F" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK__DanhGia__MaKhach__75A278F5" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK__DanhGia__MaSanPh__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__CTHoaDon__MaHoaD__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__CTHoaDon__MaSanP__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__DanhGia__MaKhach__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__DanhGia__MaSanPh__75A278F5" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaDanhM__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaGPU__571DF1D5" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK__Hinh__MaSanPham__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK__HoaDon__MaKhachH__6B24EA82" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK__HoaDon__MaNVDuye__6C190EBB" ManuallyRouted="false" />
-        <AssociationConnector Association="DBLaptopModel.FK__HoaDon__MaPhieuQ__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__HoaDon__MaKhachH__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__HoaDon__MaNVDuye__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="DBLaptopModel.FK__HoaDon__MaPhieuQ__6E01572D" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK__NguoiDung__MaQuy__2E1BDC42" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaOCung__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaThuon__5535A963" ManuallyRouted="false" />

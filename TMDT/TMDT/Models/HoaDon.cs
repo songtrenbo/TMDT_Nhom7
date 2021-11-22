@@ -23,6 +23,10 @@ namespace TMDT.Models
         public int MaHoaDon { get; set; }
         public System.DateTime NgayMua { get; set; }
         public int MaKhachHang { get; set; }
+        public string TenKhach { get; set; }
+        public string DiaChi { get; set; }
+        public string SDT { get; set; }
+        public Nullable<int> PhuongThucThanhToan { get; set; }
         public Nullable<int> MaNVDuyet { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<int> MaPhieuQuaTang { get; set; }

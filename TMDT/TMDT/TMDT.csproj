@@ -198,6 +198,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\floating-labels.css" />
+    <Content Include="Content\css\product-list.css" />
     <Content Include="Content\css\sidebar.css" />
     <Content Include="Content\css\GioHang.css" />
     <Content Include="Content\css\GioHangRong.css" />

@@ -86,6 +86,10 @@
           <Property Name="MaHoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NgayMua" Type="datetime" Nullable="false" />
           <Property Name="MaKhachHang" Type="int" Nullable="false" />
+          <Property Name="TenKhach" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="255" />
+          <Property Name="SDT" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PhuongThucThanhToan" Type="int" />
           <Property Name="MaNVDuyet" Type="int" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="MaPhieuQuaTang" Type="int" />
@@ -188,7 +192,7 @@
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="IsLockEdit" Type="bit" />
         </EntityType>
-        <Association Name="FK__CTHoaDon__MaHoaD__70DDC3D8">
+        <Association Name="FK__CTHoaDon__MaHoaD__71D1E811">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
           <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -200,7 +204,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTHoaDon__MaSanP__6FE99F9F">
+        <Association Name="FK__CTHoaDon__MaSanP__70DDC3D8">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -212,7 +216,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DanhGia__MaKhach__75A278F5">
+        <Association Name="FK__DanhGia__MaKhach__76969D2E">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -224,7 +228,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DanhGia__MaSanPh__74AE54BC">
+        <Association Name="FK__DanhGia__MaSanPh__75A278F5">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -248,7 +252,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__MaKhachH__6B24EA82">
+        <Association Name="FK__HoaDon__MaKhachH__6C190EBB">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -260,7 +264,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__MaNVDuye__6C190EBB">
+        <Association Name="FK__HoaDon__MaNVDuye__6D0D32F4">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -272,7 +276,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__MaPhieuQ__6D0D32F4">
+        <Association Name="FK__HoaDon__MaPhieuQ__6E01572D">
           <End Role="PhieuQuaTang" Type="Self.PhieuQuaTang" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -370,19 +374,19 @@
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThuongHieu" EntityType="Self.ThuongHieu" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CTHoaDon__MaHoaD__70DDC3D8" Association="Self.FK__CTHoaDon__MaHoaD__70DDC3D8">
+          <AssociationSet Name="FK__CTHoaDon__MaHoaD__71D1E811" Association="Self.FK__CTHoaDon__MaHoaD__71D1E811">
             <End Role="HoaDon" EntitySet="HoaDon" />
             <End Role="CTHoaDon" EntitySet="CTHoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTHoaDon__MaSanP__6FE99F9F" Association="Self.FK__CTHoaDon__MaSanP__6FE99F9F">
+          <AssociationSet Name="FK__CTHoaDon__MaSanP__70DDC3D8" Association="Self.FK__CTHoaDon__MaSanP__70DDC3D8">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="CTHoaDon" EntitySet="CTHoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__DanhGia__MaKhach__75A278F5" Association="Self.FK__DanhGia__MaKhach__75A278F5">
+          <AssociationSet Name="FK__DanhGia__MaKhach__76969D2E" Association="Self.FK__DanhGia__MaKhach__76969D2E">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
             <End Role="DanhGia" EntitySet="DanhGia" />
           </AssociationSet>
-          <AssociationSet Name="FK__DanhGia__MaSanPh__74AE54BC" Association="Self.FK__DanhGia__MaSanPh__74AE54BC">
+          <AssociationSet Name="FK__DanhGia__MaSanPh__75A278F5" Association="Self.FK__DanhGia__MaSanPh__75A278F5">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="DanhGia" EntitySet="DanhGia" />
           </AssociationSet>
@@ -390,15 +394,15 @@
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="Hinh" EntitySet="Hinh" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__MaKhachH__6B24EA82" Association="Self.FK__HoaDon__MaKhachH__6B24EA82">
+          <AssociationSet Name="FK__HoaDon__MaKhachH__6C190EBB" Association="Self.FK__HoaDon__MaKhachH__6C190EBB">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
             <End Role="HoaDon" EntitySet="HoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__MaNVDuye__6C190EBB" Association="Self.FK__HoaDon__MaNVDuye__6C190EBB">
+          <AssociationSet Name="FK__HoaDon__MaNVDuye__6D0D32F4" Association="Self.FK__HoaDon__MaNVDuye__6D0D32F4">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
             <End Role="HoaDon" EntitySet="HoaDon" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__MaPhieuQ__6D0D32F4" Association="Self.FK__HoaDon__MaPhieuQ__6D0D32F4">
+          <AssociationSet Name="FK__HoaDon__MaPhieuQ__6E01572D" Association="Self.FK__HoaDon__MaPhieuQ__6E01572D">
             <End Role="PhieuQuaTang" EntitySet="PhieuQuaTang" />
             <End Role="HoaDon" EntitySet="HoaDon" />
           </AssociationSet>
@@ -456,8 +460,8 @@
           <Property Name="DonGia" Type="Int32" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="ThanhTien" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="HoaDon" Relationship="Self.FK__CTHoaDon__MaHoaD__70DDC3D8" FromRole="CTHoaDon" ToRole="HoaDon" />
-          <NavigationProperty Name="SanPham" Relationship="Self.FK__CTHoaDon__MaSanP__6FE99F9F" FromRole="CTHoaDon" ToRole="SanPham" />
+          <NavigationProperty Name="HoaDon" Relationship="Self.FK__CTHoaDon__MaHoaD__71D1E811" FromRole="CTHoaDon" ToRole="HoaDon" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK__CTHoaDon__MaSanP__70DDC3D8" FromRole="CTHoaDon" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="DanhGia">
           <Key>
@@ -470,8 +474,8 @@
           <Property Name="NoiDung" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__DanhGia__MaKhach__75A278F5" FromRole="DanhGia" ToRole="NguoiDung" />
-          <NavigationProperty Name="SanPham" Relationship="Self.FK__DanhGia__MaSanPh__74AE54BC" FromRole="DanhGia" ToRole="SanPham" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__DanhGia__MaKhach__76969D2E" FromRole="DanhGia" ToRole="NguoiDung" />
+          <NavigationProperty Name="SanPham" Relationship="Self.FK__DanhGia__MaSanPh__75A278F5" FromRole="DanhGia" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="DanhMuc">
           <Key>
@@ -521,6 +525,10 @@
           <Property Name="MaHoaDon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NgayMua" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaKhachHang" Type="Int32" Nullable="false" />
+          <Property Name="TenKhach" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhuongThucThanhToan" Type="Int32" />
           <Property Name="MaNVDuyet" Type="Int32" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="MaPhieuQuaTang" Type="Int32" />
@@ -528,10 +536,10 @@
           <Property Name="PhiGiaoHang" Type="Int32" />
           <Property Name="TinhTrang" Type="Int32" />
           <Property Name="TongThanhToan" Type="Int32" />
-          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaHoaD__70DDC3D8" FromRole="HoaDon" ToRole="CTHoaDon" />
-          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__HoaDon__MaKhachH__6B24EA82" FromRole="HoaDon" ToRole="NguoiDung" />
-          <NavigationProperty Name="NguoiDung1" Relationship="Self.FK__HoaDon__MaNVDuye__6C190EBB" FromRole="HoaDon" ToRole="NguoiDung" />
-          <NavigationProperty Name="PhieuQuaTang" Relationship="Self.FK__HoaDon__MaPhieuQ__6D0D32F4" FromRole="HoaDon" ToRole="PhieuQuaTang" />
+          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaHoaD__71D1E811" FromRole="HoaDon" ToRole="CTHoaDon" />
+          <NavigationProperty Name="NguoiDung" Relationship="Self.FK__HoaDon__MaKhachH__6C190EBB" FromRole="HoaDon" ToRole="NguoiDung" />
+          <NavigationProperty Name="NguoiDung1" Relationship="Self.FK__HoaDon__MaNVDuye__6D0D32F4" FromRole="HoaDon" ToRole="NguoiDung" />
+          <NavigationProperty Name="PhieuQuaTang" Relationship="Self.FK__HoaDon__MaPhieuQ__6E01572D" FromRole="HoaDon" ToRole="PhieuQuaTang" />
         </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
@@ -549,9 +557,9 @@
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__MaKhach__75A278F5" FromRole="NguoiDung" ToRole="DanhGia" />
-          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaKhachH__6B24EA82" FromRole="NguoiDung" ToRole="HoaDon" />
-          <NavigationProperty Name="HoaDons1" Relationship="Self.FK__HoaDon__MaNVDuye__6C190EBB" FromRole="NguoiDung" ToRole="HoaDon" />
+          <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__MaKhach__76969D2E" FromRole="NguoiDung" ToRole="DanhGia" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaKhachH__6C190EBB" FromRole="NguoiDung" ToRole="HoaDon" />
+          <NavigationProperty Name="HoaDons1" Relationship="Self.FK__HoaDon__MaNVDuye__6D0D32F4" FromRole="NguoiDung" ToRole="HoaDon" />
           <NavigationProperty Name="Quyen" Relationship="Self.FK__NguoiDung__MaQuy__2E1BDC42" FromRole="NguoiDung" ToRole="Quyen" />
         </EntityType>
         <EntityType Name="OCung">
@@ -579,7 +587,7 @@
           <Property Name="NgayKetThuc" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="DiemThuongDoi" Type="Int32" />
-          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaPhieuQ__6D0D32F4" FromRole="PhieuQuaTang" ToRole="HoaDon" />
+          <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaPhieuQ__6E01572D" FromRole="PhieuQuaTang" ToRole="HoaDon" />
         </EntityType>
         <EntityType Name="Quyen">
           <Key>
@@ -621,8 +629,8 @@
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
           <Property Name="IsHide" Type="Boolean" />
           <NavigationProperty Name="CPU" Relationship="Self.FK__SanPham__MaCPU__5629CD9C" FromRole="SanPham" ToRole="CPU" />
-          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaSanP__6FE99F9F" FromRole="SanPham" ToRole="CTHoaDon" />
-          <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__MaSanPh__74AE54BC" FromRole="SanPham" ToRole="DanhGia" />
+          <NavigationProperty Name="CTHoaDons" Relationship="Self.FK__CTHoaDon__MaSanP__70DDC3D8" FromRole="SanPham" ToRole="CTHoaDon" />
+          <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__MaSanPh__75A278F5" FromRole="SanPham" ToRole="DanhGia" />
           <NavigationProperty Name="DanhMuc" Relationship="Self.FK__SanPham__MaDanhM__5441852A" FromRole="SanPham" ToRole="DanhMuc" />
           <NavigationProperty Name="GPU" Relationship="Self.FK__SanPham__MaGPU__571DF1D5" FromRole="SanPham" ToRole="GPU" />
           <NavigationProperty Name="Hinhs" Relationship="Self.FK__Hinh__MaSanPham__5CD6CB2B" FromRole="SanPham" ToRole="Hinh" />
@@ -655,7 +663,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTHoaDon__MaHoaD__70DDC3D8">
+        <Association Name="FK__CTHoaDon__MaHoaD__71D1E811">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
           <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -667,7 +675,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTHoaDon__MaSanP__6FE99F9F">
+        <Association Name="FK__CTHoaDon__MaSanP__70DDC3D8">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="CTHoaDon" Type="Self.CTHoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -679,7 +687,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DanhGia__MaKhach__75A278F5">
+        <Association Name="FK__DanhGia__MaKhach__76969D2E">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -691,7 +699,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DanhGia__MaSanPh__74AE54BC">
+        <Association Name="FK__DanhGia__MaSanPh__75A278F5">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
           <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -739,7 +747,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__MaKhachH__6B24EA82">
+        <Association Name="FK__HoaDon__MaKhachH__6C190EBB">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -751,7 +759,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__MaNVDuye__6C190EBB">
+        <Association Name="FK__HoaDon__MaNVDuye__6D0D32F4">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -763,7 +771,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HoaDon__MaPhieuQ__6D0D32F4">
+        <Association Name="FK__HoaDon__MaPhieuQ__6E01572D">
           <End Role="PhieuQuaTang" Type="Self.PhieuQuaTang" Multiplicity="0..1" />
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
           <ReferentialConstraint>
@@ -829,19 +837,19 @@
             <End Role="CPU" EntitySet="CPUs" />
             <End Role="SanPham" EntitySet="SanPhams" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTHoaDon__MaHoaD__70DDC3D8" Association="Self.FK__CTHoaDon__MaHoaD__70DDC3D8">
+          <AssociationSet Name="FK__CTHoaDon__MaHoaD__71D1E811" Association="Self.FK__CTHoaDon__MaHoaD__71D1E811">
             <End Role="HoaDon" EntitySet="HoaDons" />
             <End Role="CTHoaDon" EntitySet="CTHoaDons" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTHoaDon__MaSanP__6FE99F9F" Association="Self.FK__CTHoaDon__MaSanP__6FE99F9F">
+          <AssociationSet Name="FK__CTHoaDon__MaSanP__70DDC3D8" Association="Self.FK__CTHoaDon__MaSanP__70DDC3D8">
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="CTHoaDon" EntitySet="CTHoaDons" />
           </AssociationSet>
-          <AssociationSet Name="FK__DanhGia__MaKhach__75A278F5" Association="Self.FK__DanhGia__MaKhach__75A278F5">
+          <AssociationSet Name="FK__DanhGia__MaKhach__76969D2E" Association="Self.FK__DanhGia__MaKhach__76969D2E">
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
             <End Role="DanhGia" EntitySet="DanhGias" />
           </AssociationSet>
-          <AssociationSet Name="FK__DanhGia__MaSanPh__74AE54BC" Association="Self.FK__DanhGia__MaSanPh__74AE54BC">
+          <AssociationSet Name="FK__DanhGia__MaSanPh__75A278F5" Association="Self.FK__DanhGia__MaSanPh__75A278F5">
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="DanhGia" EntitySet="DanhGias" />
           </AssociationSet>
@@ -857,15 +865,15 @@
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="Hinh" EntitySet="Hinhs" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__MaKhachH__6B24EA82" Association="Self.FK__HoaDon__MaKhachH__6B24EA82">
+          <AssociationSet Name="FK__HoaDon__MaKhachH__6C190EBB" Association="Self.FK__HoaDon__MaKhachH__6C190EBB">
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
             <End Role="HoaDon" EntitySet="HoaDons" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__MaNVDuye__6C190EBB" Association="Self.FK__HoaDon__MaNVDuye__6C190EBB">
+          <AssociationSet Name="FK__HoaDon__MaNVDuye__6D0D32F4" Association="Self.FK__HoaDon__MaNVDuye__6D0D32F4">
             <End Role="NguoiDung" EntitySet="NguoiDungs" />
             <End Role="HoaDon" EntitySet="HoaDons" />
           </AssociationSet>
-          <AssociationSet Name="FK__HoaDon__MaPhieuQ__6D0D32F4" Association="Self.FK__HoaDon__MaPhieuQ__6D0D32F4">
+          <AssociationSet Name="FK__HoaDon__MaPhieuQ__6E01572D" Association="Self.FK__HoaDon__MaPhieuQ__6E01572D">
             <End Role="PhieuQuaTang" EntitySet="PhieuQuaTangs" />
             <End Role="HoaDon" EntitySet="HoaDons" />
           </AssociationSet>
@@ -974,6 +982,10 @@
                 <ScalarProperty Name="MaHoaDon" ColumnName="MaHoaDon" />
                 <ScalarProperty Name="NgayMua" ColumnName="NgayMua" />
                 <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="TenKhach" ColumnName="TenKhach" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="PhuongThucThanhToan" ColumnName="PhuongThucThanhToan" />
                 <ScalarProperty Name="MaNVDuyet" ColumnName="MaNVDuyet" />
                 <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
                 <ScalarProperty Name="MaPhieuQuaTang" ColumnName="MaPhieuQuaTang" />
