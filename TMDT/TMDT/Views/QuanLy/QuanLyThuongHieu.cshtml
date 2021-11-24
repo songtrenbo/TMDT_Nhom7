@@ -19,25 +19,26 @@
     <script src="~/Scripts/DeleteThuongHieu.js"></script>
 }
 
+<h4>Quản lý thương hiệu</h4>
 <p>
-    @Html.ActionLink("Create New", "ThuongHieuCreate", "", htmlAttributes: new { @class = "btn btn-danger" })
+    @Html.ActionLink("Tạo thương hiệu mới", "ThuongHieuCreate", "", htmlAttributes: new { @class = "btn btn-success" })
 </p>
 <table class="table table-striped">
     <tr>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.TenThuongHieu)
+            Tên thương hiệu
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.Hinh)
+            Hình
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.SoLuong)
+            Số lượng
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.NgayTao)
+           Ngày tạo
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model.NgayChinhSua)
+            Ngày chỉnh sửa
         </th>
         <th></th>
     </tr>

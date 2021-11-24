@@ -14,7 +14,7 @@
         <tbody>
             <tr>
                 <th scope="row">
-                    @Html.DisplayNameFor(model => model.TenThuongHieu)
+                    Tên thương hiệu
                 </th>
                 <td>
                     @Html.DisplayFor(model => model.TenThuongHieu)
@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <th scope="row">
-                    @Html.DisplayNameFor(model => model.SoLuong)
+                    Số lượng
                 </th>
                 <td>
                     @Html.DisplayFor(model => model.SoLuong)
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <th scope="row">
-                    @Html.DisplayNameFor(model => model.NgayTao)
+                    Ngày tạo
                 </th>
                 <td>
                     @Html.DisplayFor(model => model.NgayTao)
@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <th scope="row">
-                    @Html.DisplayNameFor(model => model.NgayChinhSua)
+                   Ngày chỉnh sửa
                 </th>
                 <td>
                     @Html.DisplayFor(model => model.NgayChinhSua)
@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <th scope="row">
-                    @Html.DisplayNameFor(model => model.Hinh)
+                   Hình
                 </th>
                 <td><img src="@Model.Hinh" /></td>
             </tr>
@@ -71,6 +71,5 @@
     </table>
 </div>
 <p>
-    <a href="@Url.Action("ThuongHieuEdit","QuanLy", new { id = Model.MaThuongHieu }))" class="btn btn-danger">Back to List</a>
-    <a href="@Url.Action("QuanLyThuongHieu","QuanLy")" class="btn btn-outline-danger">Back to List</a>
+    <a href="@Url.Action("QuanLyThuongHieu","QuanLy")" class="btn btn-outline-danger">Trở về</a>
 </p>
