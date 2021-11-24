@@ -1,0 +1,44 @@
+﻿@model TMDT.Models.ThuongHieu
+
+@{
+    ViewBag.Title = "ThuongHieuCreate";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+<h4>Tạo thương hiệu</h4>
+
+@using (Html.BeginForm("ThuongHieuCreate", "QuanLy", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenThuongHieu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenThuongHieu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Hinh, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <img src="@Url.Content(Model.Hinh)" id="previewImg" />
+            <input type="file" name="UploadImage" onchange="ChangeImage(this, document.getElementById('previewImg'))" />
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-danger" />
+                <a href="@Url.Action("QuanLyThuongHieu","QuanLy")" class="btn btn-outline-danger">Back to List</a>
+                <h5 class="text-danger">@ViewBag.IsExist</h5>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
