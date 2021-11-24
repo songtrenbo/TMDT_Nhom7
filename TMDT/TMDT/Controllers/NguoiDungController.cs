@@ -30,16 +30,6 @@ namespace TMDT.Controllers
 
             var checkUser = database.NguoiDungs.Where(s => s.Username.Equals(username) && s.Password.Equals(password)).FirstOrDefault();
             
-            //if (checkUser.Status == 2)
-            //{
-            //    ViewBag.ErrorInfo = "Tài khoản bị khóa";
-            //    return View("DangNhap");
-            //}
-            //if (checkUser.Status == 3)
-            //{
-            //    ViewBag.ErrorInfo = "Tài khoản đã bị xóa;
-            //    return View("DangNhap");
-            //}
             if (checkUser == null)
             {
                 ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";

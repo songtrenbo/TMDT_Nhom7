@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TMDT.Models;
 
 namespace TMDT.Controllers
 {
     public class QuanLyController : Controller
     {
+        DBLaptopEntities database = new DBLaptopEntities();
         // GET: QuanLy
         public ActionResult QuanLyThuongHieu()
         {
@@ -23,7 +25,8 @@ namespace TMDT.Controllers
         }
         public ActionResult QuanLyNhanVien()
         {
-            return View();
+            var nhanviens = database.NguoiDungs.Where(s => s.MaNguoiDung == 3).ToList();
+            return View(nhanviens);
         }
         public ActionResult QuanLyVoucher()
         {

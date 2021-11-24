@@ -129,6 +129,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
+    <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\QuanLyController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
@@ -206,6 +207,7 @@
     <Content Include="Content\images\banner_one.png" />
     <Content Include="Content\images\banner_three.png" />
     <Content Include="Content\images\banner_two.png" />
+    <Content Include="Content\images\ic.png" />
     <Content Include="Content\images\logodps.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -276,6 +278,10 @@
     <Content Include="Views\Shared\_Form.cshtml" />
     <Content Include="Views\Shared\_LayoutQuanLy.cshtml" />
     <Content Include="Views\QuanLy\QuanLyThuongHieu.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_LayoutNhanVien.cshtml" />
+    <Content Include="Views\NhanVien\Index.cshtml" />
+    <Content Include="Views\QuanLy\QuanLyNhanVien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
