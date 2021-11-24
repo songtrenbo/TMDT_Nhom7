@@ -11,6 +11,7 @@
     <link href="~/Content/css/sidebar.css" rel="stylesheet" />
 </head>
 <body>
+    @Html.Partial("_Header")
 
     <nav class="navbar navbar-expand-xl navbar-dark fixed-top" style="background-color: #EE0033;">
         <div class="container-fluid">
@@ -42,12 +43,6 @@
             </div>
         </div>
     </nav>
-
-
-
-
-
-
 
     <div class="container-fluid">
         <div class="row">
@@ -101,7 +96,9 @@
         </div>
     </div>
     @Html.Partial("_Foot")
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
     <style>
         .nav > .nav-item {
             width: 100%;
@@ -138,11 +135,11 @@
 
 
     @*<style>
-        .active-1 {
-            background-color: #CA2620;
-            box-shadow: inset 5px 5px 12px #AA1B1B;
-            transition: all 0.3s ease 0s;
-        }
-    </style>*@
+            .active-1 {
+                background-color: #CA2620;
+                box-shadow: inset 5px 5px 12px #AA1B1B;
+                transition: all 0.3s ease 0s;
+            }
+        </style>*@
 </body>
 </html>

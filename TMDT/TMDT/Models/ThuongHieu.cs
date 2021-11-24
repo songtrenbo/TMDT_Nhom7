@@ -11,15 +11,18 @@ namespace TMDT.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class ThuongHieu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ThuongHieu()
         {
             this.SanPhams = new HashSet<SanPham>();
+            Hinh = "/Content/images/";
         }
-    
+
         public int MaThuongHieu { get; set; }
         public string TenThuongHieu { get; set; }
         public string Hinh { get; set; }
@@ -28,8 +31,10 @@ namespace TMDT.Models
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<bool> IsLockEdit { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase UploadImage { get; set; }
     }
 }

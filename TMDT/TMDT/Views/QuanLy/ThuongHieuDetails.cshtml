@@ -1,0 +1,75 @@
+﻿@model TMDT.Models.ThuongHieu
+
+@{
+    ViewBag.Title = "ThuongHieuDetails";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+<div>
+    <h4>Chi tiết thương hiệu</h4>
+    <hr />
+
+    <table class="table table-borderless">
+
+        <tbody>
+            <tr>
+                <th scope="row">
+                    Tên thương hiệu
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.TenThuongHieu)
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    Số lượng
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.SoLuong)
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    Ngày tạo
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.NgayTao)
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                   Ngày chỉnh sửa
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.NgayChinhSua)
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.IsDeleted)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.IsDeleted)
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    @Html.DisplayNameFor(model => model.IsLockEdit)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.IsLockEdit)
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                   Hình
+                </th>
+                <td><img src="@Model.Hinh" /></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<p>
+    <a href="@Url.Action("QuanLyThuongHieu","QuanLy")" class="btn btn-outline-danger">Trở về</a>
+</p>

@@ -1,10 +1,8 @@
-﻿
+﻿@model IEnumerable<TMDT.Models.ThuongHieu>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
 }
-
-<h2>Index</h2>
 
 <style>
     .active-1 {
@@ -13,3 +11,61 @@
         transition: all 0.3s ease 0s;
     }
 </style>
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
+    <script src="~/Scripts/DeleteThuongHieu.js"></script>
+}
+
+<h4>Quản lý thương hiệu</h4>
+<p>
+    @Html.ActionLink("Tạo thương hiệu mới", "ThuongHieuCreate", "", htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table class="table table-striped">
+    <tr>
+        <th scope="col">
+            Tên thương hiệu
+        </th>
+        <th scope="col">
+            Hình
+        </th>
+        <th scope="col">
+            Số lượng
+        </th>
+        <th scope="col">
+           Ngày tạo
+        </th>
+        <th scope="col">
+            Ngày chỉnh sửa
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenThuongHieu)
+            </td>
+            <td>
+                <img src="@item.Hinh" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayChinhSua)
+            </td>
+            <td>
+                <a href="@Url.Action("ThuongHieuEdit", "QuanLy", new {id=item.MaThuongHieu})" style="color:black"><i class="bi bi-pencil-square"></i></a> |
+                <a href="@Url.Action("ThuongHieuDetails","QuanLy", new {id=item.MaThuongHieu})" style="color:black"><i class="bi bi-card-list"></i></a> |
+                <a href="#" onclick="ConfirmXoaThuongHieu(@item.MaThuongHieu)" style="color:black"><i class="bi bi-trash"></i></a>
+            </td>
+        </tr>
+    }
+</table>
