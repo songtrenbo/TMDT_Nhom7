@@ -1,0 +1,153 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @Html.Partial("_Head")
+    <link href="~/Content/css/sidebar.css" rel="stylesheet" />
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-xl navbar-dark fixed-top" style="background-color: #EE0033;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("Index", "TrangChu")"><img src="~/Content/images/logodps.png" height="35" alt="" loading="lazy" /></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse navbar-nav ml-auto" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item dropdown">
+                        @if (Session["Account"] == null)
+                        {
+                            <a class="nav-link text-white" style="cursor: pointer;" onclick="location.href='@Url.Action("DangNhap", "NguoiDung")'">
+                                <i class="bi bi-person-circle" style="font-size: 1.2em;color: white;"></i> Đăng nhập
+                            </a>
+                        }
+                        else
+                        {
+                            var acc = (TMDT.Models.NguoiDung)Session["Account"];
+                            <a class="nav-link text-white dropdown-toggle btn" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                <i class="bi bi-person-circle" style="font-size: 1.2em"></i> Hi @acc.Ten
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="@Url.Action("ThongTinCaNhan","NguoiDung",new {id= acc.MaNguoiDung})">Thông tin cá nhân</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("DangXuat","NguoiDung")">Đăng xuất</a>
+                            </div>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-3 col-sm-3 col-md-3 col-lg-2 d-md-block sidebar collapse left-nav" style="background-image: linear-gradient(#EE0032, #FFD500);">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item active-1">
+                            <a class="nav-link text-white" href="@Url.Action("ThongTinCaNhan","NguoiDung",new {id= Session["id"]})">
+                                <i class="bi bi-bookmark-star" style="font-size: 24px;"></i> Quản lý thương hiệu
+                            </a>
+                        </li>
+                        <li class="nav-item active-2">
+                            <a class="nav-link text-white " href="#">
+                                <i class="bi bi-box-seam" style="font-size: 24px;"></i> Quản lý sản phẩm
+                            </a>
+                        </li>
+                        <li class="nav-item active-3">
+                            <a class="nav-link text-white" href="#">
+                                <i class="bi bi-capslock" style="font-size: 24px;"></i> Quản lý nhập kho
+                            </a>
+                        </li>
+                        <li class="nav-item  active-4">
+                            <a class="nav-link text-white" href="#">
+                                <i class="bi bi-people" style="font-size: 24px;"></i> Quản lý nhân viên
+                            </a>
+                        </li>
+                        <li class="nav-item active-5">
+                            <a class="nav-link text-white" href="#">
+                                <i class="bi bi-tags" style="font-size: 24px;"></i> Quản lý vouher
+                            </a>
+                        </li>
+                        <li class="nav-item active-6">
+                            <a class="nav-link text-white" href="#">
+                                <i class="bi bi-calendar-check" style="font-size: 24px;"></i> Báo cáo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="@Url.Action("DangXuat","NguoiDung")">
+                                <i class="bi bi-box-arrow-left" style="font-size: 24px;"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+
+            <main role="main" class="col-9 col-sm-9 col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <h2 class="text-center">@RenderSection("Header", false)</h2>
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    @Html.Partial("_Foot")
+
+    <style>
+        .nav > .nav-item {
+            width: 100%;
+        }
+
+        .row {
+            height: 700px;
+        }
+
+        .nav > .nav-item:hover {
+            background-color: #CA2620;
+            box-shadow: inset 5px 5px 12px #AA1B1B;
+            transition: all 0.3s ease 0s;
+        }
+    </style>
+
+    <style>
+        nav > li > a, nav > li > a:focus, nav > li > a:focus:hover {
+            text-decoration: none;
+            background-color: transparent !important;
+            color: white;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+            .navbar-nav > .nav-item:hover {
+                border-radius: 10px;
+                background-color: #A10022;
+                transition: all 0.3s ease 0s;
+            }
+    </style>
+
+
+    @*<style>
+        .active-1 {
+            background-color: #CA2620;
+            box-shadow: inset 5px 5px 12px #AA1B1B;
+            transition: all 0.3s ease 0s;
+        }
+    </style>*@
+</body>
+</html>

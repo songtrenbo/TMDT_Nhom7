@@ -29,6 +29,7 @@ namespace TMDT.Controllers
             string password = Utils.Crypto(_user.Password);
 
             var checkUser = database.NguoiDungs.Where(s => s.Username.Equals(username) && s.Password.Equals(password)).FirstOrDefault();
+            
             //if (checkUser.Status == 2)
             //{
             //    ViewBag.ErrorInfo = "Tài khoản bị khóa";
@@ -121,7 +122,7 @@ namespace TMDT.Controllers
                     _user.DiemThuong = 0;
                     _user.MaQuyen = 4;
                     _user.NgayTao = DateTime.Now;
-                    _user.Status = true;
+                    _user.Status = 1;
                     database.NguoiDungs.Add(_user);
                     database.SaveChanges();
                     return RedirectToAction("DangNhap");

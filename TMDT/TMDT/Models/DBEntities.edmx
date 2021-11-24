@@ -113,7 +113,7 @@
           <Property Name="MaQuyen" Type="int" Nullable="false" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="NgayChinhSua" Type="datetime" />
-          <Property Name="Status" Type="bit" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="OCung">
           <Key>
@@ -556,7 +556,7 @@
           <Property Name="MaQuyen" Type="Int32" Nullable="false" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Boolean" />
+          <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__MaKhach__76969D2E" FromRole="NguoiDung" ToRole="DanhGia" />
           <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaKhachH__6C190EBB" FromRole="NguoiDung" ToRole="HoaDon" />
           <NavigationProperty Name="HoaDons1" Relationship="Self.FK__HoaDon__MaNVDuye__6D0D32F4" FromRole="NguoiDung" ToRole="HoaDon" />
