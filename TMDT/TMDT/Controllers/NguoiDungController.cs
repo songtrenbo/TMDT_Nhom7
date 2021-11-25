@@ -29,28 +29,36 @@ namespace TMDT.Controllers
             string password = Utils.Crypto(_user.Password);
 
             var checkUser = database.NguoiDungs.Where(s => s.Username.Equals(username) && s.Password.Equals(password)).FirstOrDefault();
-            
+
             if (checkUser == null)
             {
                 ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
                 return View("DangNhap");
             }
-            else
+            switch (checkUser.Status)
             {
-                database.Configuration.ValidateOnSaveEnabled = false;
-                Session["Account"] = checkUser;
-                //ViewBag.Ten = check.Ten;
-                switch (checkUser.MaQuyen)
-                {
-                    case 1:
-                        return RedirectToAction("Index", "Admin");
-                    case 2:
-                        return RedirectToAction("QuanLyThuongHieu", "QuanLy");
-                    case 3:
-                        return RedirectToAction("Index", "NhanVien");
-                    default:
-                        return RedirectToAction("Index", "TrangChu");
-                }
+                case 2:
+                    ViewBag.ErrorInfo = "Tài khoản bị khóa";
+                    return View("DangNhap");
+                case 3:
+                    ViewBag.ErrorInfo = "Tài khoản đã bị xóa";
+                    return View("DangNhap");
+                default:
+                    break;
+            }
+            database.Configuration.ValidateOnSaveEnabled = false;
+            Session["Account"] = checkUser;
+            //ViewBag.Ten = check.Ten;
+            switch (checkUser.MaQuyen)
+            {
+                case 1:
+                    return RedirectToAction("QLTaiKhoan", "Admin");
+                case 2:
+                    return RedirectToAction("QuanLyThuongHieu", "QuanLy");
+                case 3:
+                    return RedirectToAction("Index", "NhanVien");
+                default:
+                    return RedirectToAction("Index", "TrangChu");
             }
         }
         public ActionResult DangXuat()

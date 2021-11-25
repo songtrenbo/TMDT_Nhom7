@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TMDT.Models.Quyen>
+
+@{
+    ViewBag.Title = "QLQuyen";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>QLQuyen</h2>
+<style>
+    tr:hover {
+        background: red;
+        cursor: pointer;
+    }
+
+    [data-href] {
+        cursor: pointer;
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "QuyenCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaQuyen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenQuyen)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr onclick="window.location='@Url.Action("QuyenDetail", "Admin",new { id= item.MaQuyen})'">
+            <td>
+                @Html.DisplayFor(modelItem => item.MaQuyen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenQuyen)
+            </td>
+        </tr>
+    }
+
+</table>

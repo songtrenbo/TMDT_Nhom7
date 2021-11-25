@@ -37,11 +37,11 @@ namespace TMDT.Models
         [Display(Name = "Địa chỉ")]
         public string DiaChi { get; set; }
 
-        [Display(Name = "Nhập tài khoản")]
+        [Display(Name = "Tài khoản")]
         [Required(ErrorMessage = "Tài khoản không được bỏ trống")]
         public string Username { get; set; }
 
-        [Display(Name = "Nhập mật khẩu")]
+        [Display(Name = "Mật khẩu")]
         [Required(ErrorMessage = "Mật khẩu không được bỏ trống")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
