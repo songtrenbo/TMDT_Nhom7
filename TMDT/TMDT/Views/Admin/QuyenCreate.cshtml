@@ -12,7 +12,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Quyen</h4>
+        <br />
+        <h4>Thêm quyền mới</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -26,12 +27,20 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Tạo mới" class="btn btn-success" />
+                <a href="@Url.Action("QLQuyen","Admin")" class="btn btn-outline-danger">Trở về</a>
             </div>
         </div>
     </div>
 }
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "QLQuyen")
-</div>
+</div>*@
+<style>
+    .active-2 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

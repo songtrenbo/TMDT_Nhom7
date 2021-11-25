@@ -12,7 +12,8 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Quyen</h4>
+        <br />
+        <h4>Chi tiết quyền</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MaQuyen)
@@ -34,12 +35,18 @@
                 @if (Model.IsLockEdit == false)
                 {
                     @*@Html.ActionLink("Cập nhật","QuyenEdit", new {id=Model.MaQuyen, quyen=Model}, new {@class="text-decoration-none"})*@
-                    <input type="submit" class="btn btn-info" name="submitButton" value="Sửa" onclick="location.href='@Url.Action("QuyenDetail", "Admin")'" />
-                    <input type="submit" class="btn btn-info" name="submitButton" value="Xóa" onclick="location.href='@Url.Action("QuyenDetail", "Admin")'" />
+                    <input type="submit" class="btn btn-success" name="submitButton" value="Sửa" onclick="location.href='@Url.Action("QuyenDetail", "Admin")'" />
+                    <input type="submit" class="btn btn-danger" name="submitButton" value="Xóa" onclick="location.href='@Url.Action("QuyenDetail", "Admin")'" />
                     @*<button type="button" class="btn btn-default">Xóa</button>*@
                 }
-                <button type="button" class="btn btn-primary" onclick="window.location='@Url.Action("QLQuyen", "Admin")'">Quay về</button>
+                <button type="button" class="btn btn-outline-danger" onclick="window.location='@Url.Action("QLQuyen", "Admin")'">Quay về</button>
             </div>
         </div>
     </div>
-}
+}<style>
+    .active-2 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

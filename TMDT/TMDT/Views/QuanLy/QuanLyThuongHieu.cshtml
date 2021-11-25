@@ -18,7 +18,10 @@
     <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
     <script src="~/Scripts/DeleteThuongHieu.js"></script>
 }
-
+<br />
+<br />
+<br />
+<br />
 <h4>Quản lý thương hiệu</h4>
 <p>
     @Html.ActionLink("Tạo thương hiệu mới", "ThuongHieuCreate", "", htmlAttributes: new { @class = "btn btn-success" })
@@ -35,7 +38,7 @@
             Số lượng
         </th>
         <th scope="col">
-           Ngày tạo
+            Ngày tạo
         </th>
         <th scope="col">
             Ngày chỉnh sửa
@@ -63,8 +66,8 @@
             </td>
             <td>
                 <a href="@Url.Action("ThuongHieuEdit", "QuanLy", new {id=item.MaThuongHieu})" style="color:black"><i class="bi bi-pencil-square"></i></a> |
-                <a href="@Url.Action("ThuongHieuDetails","QuanLy", new {id=item.MaThuongHieu})" style="color:black"><i class="bi bi-card-list"></i></a> |
-                <a href="#" onclick="ConfirmXoaThuongHieu(@item.MaThuongHieu)" style="color:black"><i class="bi bi-trash"></i></a>
+                <a href="@Url.Action("ThuongHieuDetails","QuanLy", new {id=item.MaThuongHieu})" style="color:black"><i class="bi bi-card-list"></i></a> 
+               @* <a href="#" onclick="ConfirmXoaThuongHieu(@item.MaThuongHieu)" style="color:black"><i class="bi bi-trash"></i></a>*@
             </td>
         </tr>
     }

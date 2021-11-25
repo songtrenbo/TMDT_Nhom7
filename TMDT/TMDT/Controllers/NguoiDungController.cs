@@ -52,7 +52,7 @@ namespace TMDT.Controllers
             switch (checkUser.MaQuyen)
             {
                 case 1:
-                    return RedirectToAction("QLTaiKhoan", "Admin");
+                    return RedirectToAction("QLQuyen", "Admin");
                 case 2:
                     return RedirectToAction("QuanLyThuongHieu", "QuanLy");
                 case 3:

@@ -4,6 +4,10 @@
     ViewBag.Title = "ThuongHieuCreate";
     Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
 }
+<br />
+<br />
+<br />
+<br />
 <h4>Tạo thương hiệu</h4>
 
 @using (Html.BeginForm("ThuongHieuCreate", "QuanLy", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -15,7 +19,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @*@Html.LabelFor(model => model.TenThuongHieu, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <p class = "control-label col-md-2">Nhập tên thương hiệu</p>
+            <p class="control-label col-md-2">Nhập tên thương hiệu</p>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TenThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TenThuongHieu, "", new { @class = "text-danger" })
@@ -44,3 +48,11 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<style>
+    .active-1 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>
