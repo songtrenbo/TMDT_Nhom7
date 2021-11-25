@@ -288,6 +288,8 @@
     <Content Include="Views\QuanLy\ThuongHieuCreate.cshtml" />
     <Content Include="Views\QuanLy\ThuongHieuEdit.cshtml" />
     <Content Include="Views\QuanLy\ThuongHieuDetails.cshtml" />
+    <Content Include="Views\QuanLy\QuanLyBaoCao.cshtml" />
+    <Content Include="Views\QuanLy\BaoCaoDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

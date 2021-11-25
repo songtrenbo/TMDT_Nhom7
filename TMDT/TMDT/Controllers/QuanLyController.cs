@@ -132,9 +132,28 @@ namespace TMDT.Controllers
         {
             return View();
         }
-        public ActionResult QuanLyBaoCao()
+        public ActionResult QuanLyBaoCao(string searching)
         {
-            return View();
+            var dates = database.HoaDons.Where(s => (s.NgayMua.Year+"-"+s.NgayMua.Month+"-"+s.NgayMua.Day) == searching).ToList();
+
+            var ngaymua = dates.ToList();
+
+            int soluong = 0;
+            foreach(var item in ngaymua)
+            {
+                soluong += item.CTHoaDons.Count;
+                ViewBag.ngay = item.NgayMua;
+            }
+            ViewBag.sl = soluong;
+         
+            return View(dates);
+        }
+
+        public ActionResult BaoCaoDetail(int id)
+        {
+            var hoadon = database.HoaDons.Where(s => s.MaHoaDon == id).FirstOrDefault();
+            
+            return View(hoadon);
         }
     }
 }
