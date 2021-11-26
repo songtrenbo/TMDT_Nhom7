@@ -132,11 +132,12 @@ namespace TMDT.Controllers
         {
             return View();
         }
-        public ActionResult QuanLyBaoCao(string searching)
+        public ActionResult QuanLyBaoCao(string searching, string Year, string Month)
         {
             var dates = database.HoaDons.Where(s => (s.NgayMua.Year+"-"+s.NgayMua.Month+"-"+s.NgayMua.Day) == searching).ToList();
-
+         
             var ngaymua = dates.ToList();
+            
 
             int soluong = 0;
             foreach(var item in ngaymua)
@@ -145,9 +146,163 @@ namespace TMDT.Controllers
                 ViewBag.ngay = item.NgayMua;
             }
             ViewBag.sl = soluong;
-         
+
+            //List<int> thangs = new List<int>(12);
+            //List<int> gianhap = new List<int>();
+            //List<int> doanhthu = new List<int>();
+            //List<int> giagiam = new List<int>();
+            int[] doanhthuthangs = new int[15];
+            int[] giamgiathangs = new int[15];
+            int[] giavonthangs = new int[15];
+            int[] loinhuanthangs = new int[15];
+
+
+            if (Month!="" && Year != null)
+            {
+                var a = System.DateTime.DaysInMonth(2001, 1);
+            }
+            if(Month=="" && Year != null)
+            {
+                var hoadonNam = database.HoaDons.Where(s => s.NgayMua.Year.ToString() == Year).ToList();
+                foreach(var itemhd in hoadonNam)
+                {
+                    for(int i = 1; i <= 12; i++)
+                    {
+                        if (itemhd.NgayMua.Month == i)
+                        {
+                            int temp1 = itemhd.TongThanhToan ?? 0;
+                            int temp2 = itemhd.SoTienGiam ?? 0;
+                            doanhthuthangs[i] = doanhthuthangs[i] + temp1;
+                            giamgiathangs[i] = giamgiathangs[i] + temp2;
+                            
+                            foreach(var itemcthd in itemhd.CTHoaDons)
+                            {
+                                int temp3 = (itemcthd.SanPham.GiaNhap ?? 0) * itemcthd.SoLuong;
+                                giavonthangs[i] = giavonthangs[i]+temp3;
+                            }
+
+                            loinhuanthangs[i] = doanhthuthangs[i] - giavonthangs[i];
+                        }
+                    }
+                }
+            }
+
+
+            ViewBag.doanhthuthangs = doanhthuthangs;
+            ViewBag.giamgiathangs = giamgiathangs;
+            ViewBag.giavonthangs = giavonthangs;
+            ViewBag.loinhuanthangs = loinhuanthangs;
+
+            int tongdoanhthuthang =0,tonggiamgiathang=0, tonggiavongthang=0, tongloinhuanthang = 0;
+            foreach(var i in doanhthuthangs)
+            {
+                tongdoanhthuthang += i;
+            }
+            foreach (var i in giamgiathangs)
+            {
+                tonggiamgiathang += i;
+            }
+            foreach (var i in giavonthangs)
+            {
+                tonggiavongthang += i;
+            }
+            foreach (var i in loinhuanthangs)
+            {
+                tongloinhuanthang += i;
+            }
+            ViewBag.tongdoanhthuthang = tongdoanhthuthang;
+            ViewBag.tonggiamgiathang = tonggiamgiathang;
+            ViewBag.tonggiavongthang = tonggiavongthang;
+            ViewBag.tongloinhuanthang = tongloinhuanthang;
+
+            //ViewBag.ngay= System.DateTime.DaysInMonth(Int32.Parse(Year), Int32.Parse(Month));
+            ViewBag.thang = Month;
+            ViewBag.nam = Year;
+
+
             return View(dates);
         }
+        public ActionResult QuanLyBaoCaoXuatPDF(string Acc, string Year, string Month)
+        {
+
+            int[] doanhthuthangs = new int[15];
+            int[] giamgiathangs = new int[15];
+            int[] giavonthangs = new int[15];
+            int[] loinhuanthangs = new int[15];
+
+
+            if (Month != null && Year != null)
+            {
+                var a = System.DateTime.DaysInMonth(2001, 1);
+            }
+            if (Month == null && Year != null)
+            {
+                var hoadonNam = database.HoaDons.Where(s => s.NgayMua.Year.ToString() == Year).ToList();
+                foreach (var itemhd in hoadonNam)
+                {
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        if (itemhd.NgayMua.Month == i)
+                        {
+                            int temp1 = itemhd.TongThanhToan ?? 0;
+                            int temp2 = itemhd.SoTienGiam ?? 0;
+                            doanhthuthangs[i] = doanhthuthangs[i] + temp1;
+                            giamgiathangs[i] = giamgiathangs[i] + temp2;
+
+                            foreach (var itemcthd in itemhd.CTHoaDons)
+                            {
+                                int temp3 = (itemcthd.SanPham.GiaNhap ?? 0) * itemcthd.SoLuong;
+                                giavonthangs[i] = giavonthangs[i] + temp3;
+                            }
+
+                            loinhuanthangs[i] = doanhthuthangs[i] - giavonthangs[i];
+                        }
+                    }
+                }
+            }
+            ViewBag.doanhthuthangs = doanhthuthangs;
+            ViewBag.giamgiathangs = giamgiathangs;
+            ViewBag.giavonthangs = giavonthangs;
+            ViewBag.loinhuanthangs = loinhuanthangs;
+
+            int tongdoanhthuthang = 0, tonggiamgiathang = 0, tonggiavongthang = 0, tongloinhuanthang = 0;
+            foreach (var i in doanhthuthangs)
+            {
+                tongdoanhthuthang += i;
+            }
+            foreach (var i in giamgiathangs)
+            {
+                tonggiamgiathang += i;
+            }
+            foreach (var i in giavonthangs)
+            {
+                tonggiavongthang += i;
+            }
+            foreach (var i in loinhuanthangs)
+            {
+                tongloinhuanthang += i;
+            }
+            ViewBag.tongdoanhthuthang = tongdoanhthuthang;
+            ViewBag.tonggiamgiathang = tonggiamgiathang;
+            ViewBag.tonggiavongthang = tonggiavongthang;
+            ViewBag.tongloinhuanthang = tongloinhuanthang;
+
+            ViewBag.thang = Month;
+            ViewBag.nam = Year;
+
+
+            //var acc = (NguoiDung)Session["Account"];
+            ViewBag.ten = Acc;
+            return View();
+        }
+
+        public ActionResult GeneratePDF(string Year, string Month)
+        {
+            var acc = (NguoiDung)Session["Account"];
+            string Acc = acc.Ten;
+            return new Rotativa.ActionAsPdf("QuanLyBaoCaoXuatPDF", new { Acc, Year = Year, Month = Month });
+        }
+
 
         public ActionResult BaoCaoDetail(int id)
         {

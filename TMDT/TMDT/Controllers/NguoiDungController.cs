@@ -48,6 +48,7 @@ namespace TMDT.Controllers
             }
             database.Configuration.ValidateOnSaveEnabled = false;
             Session["Account"] = checkUser;
+            Session["TenAcc"] = checkUser.Ten;
             //ViewBag.Ten = check.Ten;
             switch (checkUser.MaQuyen)
             {

@@ -8,64 +8,177 @@
 
 
 
-<br /><br /><br /><br />
+<br />
+<br />
+<br />
+<br />
 
 @using (Html.BeginForm("QuanLyBaoCao", "QuanLy", FormMethod.Get))
 {
     <div class="container-fluid">
 
         <div class="row">
-            <p class="col-lg-2">Chọn ngày: </p>
-            <input type="date" name="searching" class="form-control col-lg-7" />
-            <input type="submit" value="Xác nhận" class="btn btn-danger col-lg-2" style="margin-left:10px;" />
+            <p class="col-lg-1">Lọc theo: </p>
+            @Html.DropDownList("Month", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString() }), "Chọn tháng", new { @class = "form-control col-lg-3" })
+
+
+            @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year, 10).Select(x => new SelectListItem { Text = x.ToString() }), "Chọn năm", new { @class = "form-control col-lg-3", style="margin-left:10px" })
+
+            <input type="submit" value="Xác nhận" class="btn btn-danger col-lg-1" style="margin-left:10px; margin-right:10px" />
+        <a href="@Url.Action("GeneratePDF", "QuanLy", new {Year=ViewBag.nam, Month=ViewBag.thang})" target="_blank" class="btn btn-success col-lg-1">Xuất PDF</a>
         </div>
     </div>
 }
 
 <br />
-@if (ViewBag.sl != 0)
+
+@if (ViewBag.nam != null)
 {
-    <h3 class="text-center">Báo cáo ngày @ViewBag.ngay.Day/@ViewBag.ngay.Month/@ViewBag.ngay.Year</h3>
+    <h3 class="text-center">Báo cáo từ tháng 1/@ViewBag.nam đến tháng 12/@ViewBag.nam</h3>
     <table class="table table-hover">
         <tr>
             <th class="text-center">
-                @Html.DisplayNameFor(model => model.MaHoaDon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenKhach)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoTienGiam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhiGiaoHang)
+                STT
             </th>
             <th class="text-center">
-                Nhân viên duyệt
+                Thời gian
             </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.SoTienGiam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhiGiaoHang)
-        </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.TinhTrang)
+            <th class="text-center">
+                Giá giảm
             </th>
-            <th>
-                Tổng tiền
+            <th class="text-center">
+                Doanh thu
             </th>
-            <
-            <th></th>
+            <th class="text-center">
+                Giá vốn
+            </th>
+            <th class="text-center">
+                Lợi nhuận
+            </th>
+        </tr>
+        <tr>
+            <th class="text-center">
+                [1]
+            </th>
+            <th class="text-center">
+                [2]
+            </th>
+            <th class="text-center">
+                [3]
+            </th>
+            <th class="text-center">
+                [4]
+            </th>
+            <th class="text-center">
+                [5]
+            </th>
+            <th class="text-center">
+                [6]=[4]-[3]-[5]
+            </th>
         </tr>
 
         @{
-            int count = 0;
-            foreach (var item in Model)
+
+            for (int i = 1; i <= 12; i++)
             {
                 <tr>
                     <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.MaHoaDon)
+                        @i
+                    </td>
+                    <td class="text-center">
+                        @i/@ViewBag.nam
+                    </td>
+                    <td class="text-center">
+                        @ViewBag.giamgiathangs[i] VNĐ
+                    </td>
+                    <td class="text-center">
+                        @ViewBag.doanhthuthangs[i] VNĐ
+                    </td>
+                    <td class="text-center">
+                        @ViewBag.giavonthangs[i] VNĐ
+                    </td>
+                    <td class="text-center">
+                        @ViewBag.loinhuanthangs[i] VNĐ
+                    </td>
+                </tr>
+                }
+
+            }
+    <tr>
+        <th class="text-center">
+            Tổng
+        </th>
+        <th class="text-center">
+            12 tháng
+        </th>
+        <th class="text-center">
+            @ViewBag.tonggiamgiathang VNĐ
+        </th>
+        <th class="text-center">
+            @ViewBag.tongdoanhthuthang VNĐ
+        </th>
+        <th class="text-center">
+            @ViewBag.tonggiavongthang VNĐ
+        </th>
+        <th class="text-center">
+            @ViewBag.tongloinhuanthang VNĐ
+        </th>
+    </tr>
+    </table>
+}
+
+
+@*@if (ViewBag.doanhthutungthang == null)
+{
+    <h3 class="text-center">Báo cáo từ ngày 1/@ViewBag.thang/@ViewBag.nam đến ngày @ViewBag.ngay/@ViewBag.thang/@ViewBag.nam</h3>
+    <table class="table table-hover">
+        <tr>
+            <th class="text-center">
+                STT
+            </th>
+            <th>
+                Thời gian
+            </th>
+            <th>
+                Giá giảm
+            </th>
+            <th>
+                Doanh thu
+            </th>
+            <th class="text-center">
+                Giá vốn
+            </th>
+            <th>
+                Lợi nhuận
+            </th>
+        </tr>
+        <tr>
+            <th class="text-center">
+                [1]
+            </th>
+            <th>
+                [2]
+            </th>
+            <th>
+                [3]
+            </th>
+            <th>
+                [4]
+            </th>
+            <th class="text-center">
+                [5]
+            </th>
+            <th>
+                [6]
+            </th>
+        </tr>
+
+        @{
+            for (int i = 0; i < 12; i++)
+            {
+                <tr>
+                    <td class="text-center">
+                        @i
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TenKhach)
@@ -79,126 +192,27 @@
                     <td class="text-center">
                         @Html.DisplayFor(modelItem => item.NguoiDung1.Ten)
                     </td>
-                    @*<td>
-            @Html.DisplayFor(modelItem => item.SoTienGiam) VNĐ
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhiGiaoHang) VNĐ
-        </td>*@
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.TinhTrang)*@
-                        @{
-                            if (item.TinhTrang == 1)
-                            {
-                                <p>Chờ xác nhận</p>
-                            }
-                            else if (item.TinhTrang == 2)
-                            {
-                                <p>Chờ lấy hàng</p>
-                            }
-                            else if (item.TinhTrang == 3)
-                            {
-                                <p>Đang giao</p>
-                            }
-                            else if (item.TinhTrang == 4)
-                            {
-                                <p>Đã giao</p>
-                            }
-                            else if (item.TinhTrang == 5)
-                            {
-                                <p>Đã hủy</p>
-                            }
-                            else
-                            {
-                                <p>Trả hàng</p>
-                            }
-                        }
-                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TongThanhToan) VNĐ
                     </td>
                     <td>
-                        <a href="@Url.Action("BaoCaoDetail", "QuanLy", new {id=item.MaHoaDon})">chi tiết</a>
+                        <a href="@Url.Action("BaoCaoDetail", "QuanLy", new { id = item.MaHoaDon })">chi tiết</a>
                     </td>
                 </tr>
-                count++;
             }
-            @*<tr>
-                <th></th>
-                <th>
-                </th>
-                <th class="text-right">
-                    Tổng số lượng vận đơn giao trong ngày:<br />Tổng phí vận chuyển trong ngày: <br />Tổng thu nhập trong ngày:
-                </th>
-                <th>
-                    @ViewBag.sl<br />
-                    @ViewBag.phivc VNĐ<br />
-                    @ViewBag.tien VNĐ
-                </th>
-                <th class="text-center">
-                </th>
-                <th>
-                </th>
-                <th></th>
-
-            </tr>*@
-
         }
 
     </table>
-    @*<br />
-        <h3 class="text-center">Danh sách Shipper giao hàng trong ngày</h3>
-        <table class="table table-hover">
-            <tr>
-                <th class="text-center">
-                    Tên user
-                </th>
-                <th class="text-center">
-                    Số lượng vận đơn đã giao
-                </th>
-            </tr>
+}*@
 
-            @foreach (var item in ViewBag.dsShipper)
-            {
-                <tr>
-                    @{
-                        int countshipper = 0;
-                        foreach (var i in Model)
-                        {
-                            if (item.MaUser == i.MaShipper && countshipper == 0)
-                            {
-                                <td class="text-center">
-                                    @item.TenUser
-                                </td>
-                                countshipper++;
-                            }
-                            else if (item.MaUser == i.MaShipper)
-                            {
-                                countshipper++;
-                            }
-                        }
-                        if (countshipper != 0)
-                        {
-                            <td class="text-center">
-                                @countshipper
-                            </td>
-                        }
-                    }
-                </tr>
-            }
 
-        </table>*@
-}
-else
-{
-    <h3 class="text-center">Không có báo cáo ngày</h3>
-    <h5 class="text-center">Vui lòng chọn ngày khác</h5>
-}
+
+
 
 <style>
-        .active-6 {
-            background-color: #CA2620;
-            box-shadow: inset 5px 5px 12px #AA1B1B;
-            transition: all 0.3s ease 0s;
-        }
-    </style>
+    .active-6 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>
