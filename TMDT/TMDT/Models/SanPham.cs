@@ -27,20 +27,24 @@ namespace TMDT.Models
         public int MaDanhMuc { get; set; }
         public string SeoTitle { get; set; }
         public int MaThuongHieu { get; set; }
-        public Nullable<int> SoLuong { get; set; }
-        public Nullable<int> GiaNhap { get; set; }
+        public Nullable<int> SoLuongTon { get; set; }
+        public Nullable<int> SoLuongBan { get; set; }
         public Nullable<int> GiaBan { get; set; }
         public Nullable<int> GiaGiam { get; set; }
         public Nullable<int> DiemRate { get; set; }
         public Nullable<int> SoLuotRate { get; set; }
         public Nullable<int> LuotXem { get; set; }
         public int BaoHanh { get; set; }
-        public int MaCPU { get; set; }
+        public int MaLoaiCPU { get; set; }
+        public string CPUInfo { get; set; }
         public string RAM { get; set; }
-        public int MaGPU { get; set; }
+        public int MaLoaiGPU { get; set; }
+        public string GPUInfo { get; set; }
+        public int SizeManHinh { get; set; }
         public string ManHinh { get; set; }
         public string Pin { get; set; }
-        public int MaOCung { get; set; }
+        public string LuuTru { get; set; }
+        public Nullable<double> KhoiLuong { get; set; }
         public string Hinh { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
@@ -52,10 +56,10 @@ namespace TMDT.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }
         public virtual DanhMuc DanhMuc { get; set; }
-        public virtual GPU GPU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hinh> Hinhs { get; set; }
-        public virtual OCung OCung { get; set; }
+        public virtual LoaiGPU LoaiGPU { get; set; }
         public virtual ThuongHieu ThuongHieu { get; set; }
+        public virtual SizeManHinh SizeManHinh1 { get; set; }
     }
 }

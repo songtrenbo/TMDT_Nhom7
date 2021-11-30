@@ -9,9 +9,7 @@
 <br />
 <h2 style="color:black;">Danh sách Nhân viên</h2>
 <div class="container-fluid" style="margin-top:10px">
-    <button class="btn btn-success" onclick="">
-        Thêm Nhân viên
-    </button>
+    <p>@Html.ActionLink("Thêm nhân viên", "NhanVienCreate", "", htmlAttributes: new { @class = "btn btn-success" })</p>
 </div>
 <br />
 <table class="table table-hover">
@@ -59,9 +57,10 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Lock", "NhanVienLock", new { id = item.MaNguoiDung }) |
+                @Html.ActionLink("ResetPassword", "ResetPassword", new { id = item.MaNguoiDung }) |
+                @Html.ActionLink("Edit", "NhanVienEdit", new { id = item.MaNguoiDung }) |
+                @Html.ActionLink("Delete", "NhanVienDelete", new { id = item.MaNguoiDung })
             </td>
         </tr>
     }
@@ -69,9 +68,9 @@
 </table>
 
 <style>
-        .active-1 {
-            background-color: #CA2620;
-            box-shadow: inset 5px 5px 12px #AA1B1B;
-            transition: all 0.3s ease 0s;
-        }
-    </style>
+    .active-1 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

@@ -63,7 +63,7 @@
                     @foreach (var item in ViewBag.thuonghieu)
                     {
                         <div class="item @if( item.MaThuongHieu == 1) {<text>active</text>} item-thuonghieu">
-                            <a href="#"><img src="@item.Hinh" class="img-fluid mx-auto d-block"></a>
+                            <a href="@Url.Action("Index", "Search",new { a = item.MaThuongHieu})"><img src="@item.Hinh" class="img-fluid mx-auto d-block"></a>
                         </div>
                     }
                 </div>
@@ -83,61 +83,69 @@
 <div class="container">
     <div class="row" style="margin:10px">
         @{
-            int count = 0;
-            foreach (var item in Model)
+            for (int i = 0; i < ViewBag.result.Count; i++)
             {
-                if (count > 12)
+                if (ViewBag.result[i].Count > 0)
                 {
-                    break;
-                }
+                    <h3 class="col-12">@((ViewBag.danhmuc)[i].TenDanhMuc)</h3>
+                    int count = 0;
+                    foreach (var item in ViewBag.result[i])
+                    {
+                        if (count > 4)
+                        {
+                            break;
+                        }
 
-                <div class="col-12 col-xs-4 col-md-4 col-lg-3">
-                    <div class="card card-hover" style=" margin-top:20px">
-                        <div class="card" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">
-                            <div class="image-container">
-                                @if (item.NgayTao < DateTime.Now.AddDays(-14))
-                                {
-                                    <div class="first">
-                                        <div class="d-flex justify-content-between align-items-center"> <span class="discount">New</span> </div>
-                                    </div>
-                                }
-                                else if (item.LuotXem > 50)
-                                {
-                                    <div class="first">
-                                        <div class="d-flex justify-content-between align-items-center"> <span class="discount">Hot</span> </div>
-                                    </div>
-                                }
+                        <div class="col-12 col-xs-4 col-md-4 col-lg-3">
+                            <div class="card card-hover" style=" margin-top:20px">
+                                <div class="card" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">
+                                    <div class="image-container">
+                                        @if (item.NgayTao < DateTime.Now.AddDays(-14))
+                                        {
+                                            <div class="first">
+                                                <div class="d-flex justify-content-between align-items-center"> <span class="discount">New</span> </div>
+                                            </div>
+                                        }
+                                        else if (item.LuotXem > 50)
+                                        {
+                                            <div class="first">
+                                                <div class="d-flex justify-content-between align-items-center"> <span class="discount">Hot</span> </div>
+                                            </div>
+                                        }
 
-                                <img src="@item.Hinh" class="img-fluid rounded thumbnail-image">
-                            </div>
-                            <div class="product-detail-container p-2">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h5 class="dress-name">@item.TenSanPham</h5>
-                                    <div class="d-flex flex-column mb-2">
-                                        @if (item.GiaGiam > 0)
-                                        {<span class="new-price">@item.GiaGiam</span>
-                                        <p class="old-price text-right"><del>@item.GiaBan</del></p>}
-                                    else
-                                    {<span class="new-price">@item.GiaBan</span>}
+                                        <img src="@item.Hinh" class="img-fluid rounded thumbnail-image">
+                                    </div>
+                                    <div class="product-detail-container p-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="dress-name">@item.TenSanPham</h5>
+                                            <div class="d-flex flex-column mb-2">
+                                                @if (item.GiaGiam > 0)
+                                                {<span class="new-price">@item.GiaGiam</span>
+                                                <p class="old-price text-right"><del>@item.GiaBan</del></p>}
+                                            else
+                                            {<span class="new-price">@item.GiaBan</span>}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center pt-1">
+                                            <div>
+                                                <i class="bi bi-star-fill" style="color:#f0f489"></i>
+                                                @if (item.SoLuotRate > 0)
+                                                {<span class="rating-number">item.DiemRate/item.SoLuotRate</span>}
+                                                <span class="rating-number">Chưa có đánh giá</span>
+                                            </div> <span class="buy" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">Mua ngay</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center pt-1">
-                                    <div>
-                                        <i class="bi bi-star-fill" style="color:#f0f489"></i>
-                                        @if (item.SoLuotRate > 0)
-                                        {<span class="rating-number">item.DiemRate/item.SoLuotRate</span>}
-                                        <span class="rating-number">Chưa có đánh giá</span>
-                                    </div> <span class="buy" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">Mua ngay</span>
-                                </div>
+
                             </div>
                         </div>
 
-                    </div>
-                </div>
 
-
-                count++;
+                        count++;
+                    }
+                }
             }
+
         }
     </div>
 </div>

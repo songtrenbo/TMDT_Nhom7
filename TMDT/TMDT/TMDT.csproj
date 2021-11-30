@@ -134,6 +134,7 @@
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\QuanLyController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountStatus.cs" />
     <Compile Include="Models\CPU.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -172,28 +174,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\GPU.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Hinh.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HoaDon.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NguoiDung.cs">
+    <Compile Include="Models\LoaiGPU.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OCung.cs">
+    <Compile Include="Models\NguoiDung.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhieuQuaTang.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Quyen.cs">
+    <Compile Include="Models\SanPham.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SanPham.cs">
+    <Compile Include="Models\SanPhamNhapKho.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SizeManHinh.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThuongHieu.cs">
@@ -245,13 +247,6 @@
     <Content Include="Scripts\Alert\sweetalert2.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DBEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DBEntities.edmx.diagram">
-      <DependentUpon>DBEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="DBLaptopDataSet.xsc">
       <DependentUpon>DBLaptopDataSet.xsd</DependentUpon>
     </Content>
@@ -263,6 +258,13 @@
     </None>
     <Content Include="DBLaptopDataSet.xss">
       <DependentUpon>DBLaptopDataSet.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DBEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DBEntities.edmx.diagram">
+      <DependentUpon>DBEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
@@ -322,6 +324,9 @@
     <Content Include="Views\Admin\QuyenDetail.cshtml" />
     <Content Include="Views\Admin\QLQuyen.cshtml" />
     <Content Include="Views\QuanLy\QuanLyBaoCaoXuatPDF.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\QuanLy\NhanVienCreate.cshtml" />
+    <Content Include="Views\QuanLy\NhanVienEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

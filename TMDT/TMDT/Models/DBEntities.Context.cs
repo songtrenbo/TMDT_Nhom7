@@ -29,14 +29,14 @@ namespace TMDT.Models
         public virtual DbSet<CTHoaDon> CTHoaDons { get; set; }
         public virtual DbSet<DanhGia> DanhGias { get; set; }
         public virtual DbSet<DanhMuc> DanhMucs { get; set; }
-        public virtual DbSet<GPU> GPUs { get; set; }
         public virtual DbSet<Hinh> Hinhs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
+        public virtual DbSet<LoaiGPU> LoaiGPUs { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
-        public virtual DbSet<OCung> OCungs { get; set; }
         public virtual DbSet<PhieuQuaTang> PhieuQuaTangs { get; set; }
-        public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
+        public virtual DbSet<SanPhamNhapKho> SanPhamNhapKhoes { get; set; }
+        public virtual DbSet<SizeManHinh> SizeManHinhs { get; set; }
         public virtual DbSet<ThuongHieu> ThuongHieux { get; set; }
     }
 }

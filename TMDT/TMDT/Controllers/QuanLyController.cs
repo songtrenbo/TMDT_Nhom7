@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TMDT.Models;
+using TMDT.Utility;
 
 namespace TMDT.Controllers
 {
@@ -28,13 +30,11 @@ namespace TMDT.Controllers
         public ActionResult ThuongHieuCreate(ThuongHieu thuongHieu)
         {
             var check = database.ThuongHieux.Where(s => s.TenThuongHieu == thuongHieu.TenThuongHieu).FirstOrDefault();
-            if(check == null)
+            if (check == null)
             {
-                thuongHieu.SoLuong = 0;
                 thuongHieu.NgayTao = DateTime.Now;
                 thuongHieu.NgayChinhSua = null;
                 thuongHieu.IsDeleted = false;
-                thuongHieu.IsLockEdit = false;
 
                 try
                 {
@@ -59,7 +59,7 @@ namespace TMDT.Controllers
             else
             {
                 ViewBag.IsExist = "Thương hiệu đã tồn tại!";
-                
+
                 return View(thuongHieu);
             }
         }
@@ -116,31 +116,143 @@ namespace TMDT.Controllers
         #endregion
         public ActionResult QuanLySanPham()
         {
-            
+
             return View();
         }
         public ActionResult QuanLyNhapKho()
         {
             return View();
         }
+
+
+        #region QLNhanVien
         public ActionResult QuanLyNhanVien()
         {
-            var nhanviens = database.NguoiDungs.Where(s => s.MaNguoiDung == 3).ToList();
+            var nhanviens = database.NguoiDungs.Where(s => s.MaQuyen == 3).ToList().OrderBy(s => s.MaQuyen);
             return View(nhanviens);
         }
+        public ActionResult NhanVienCreate()
+        {
+            return View(new NguoiDung());
+        }
+        [HttpPost]
+        public ActionResult NhanVienCreate(NguoiDung nguoiDung)
+        {
+            var check = database.NguoiDungs.Where(s => s.Username == nguoiDung.Username).FirstOrDefault();
+            if (check == null)
+            {
+                nguoiDung.NgayTao = DateTime.Now;
+                var password = Utils.Crypto(nguoiDung.Username);
+                nguoiDung.Password = password;
+                nguoiDung.ConfirmPass = password;
+                nguoiDung.Status = 1;
+                nguoiDung.DiemThuong = 0;
+                nguoiDung.MaQuyen = 3;
+
+                try
+                {
+                    database.NguoiDungs.Add(nguoiDung);
+                    database.SaveChanges();
+                    return RedirectToAction("QuanLyNhanVien");
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.IsExist = "Username đã tồn tại!";
+
+                return View(nguoiDung);
+            }
+        }
+        [HttpPost]
+        public ActionResult NhanVienLock(int id)
+        {
+            var nguoiDung = database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault();
+            nguoiDung.NgayChinhSua = DateTime.Now;
+            nguoiDung.Status = 2;
+            try
+            {
+                database.Entry(nguoiDung).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("QuanLyNhanVien");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(int id)
+        {
+            var nguoiDung = database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault();
+            nguoiDung.NgayChinhSua = DateTime.Now;
+            var password = Utils.Crypto(nguoiDung.Username);
+            nguoiDung.Password = password;
+            nguoiDung.ConfirmPass = password;
+            try
+            {
+                database.Entry(nguoiDung).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("QuanLyNhanVien");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult NhanVienEdit(int id)
+        {
+            return View(database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault());
+        }
+        [HttpPost]
+        public ActionResult NhanVienEdit(int id, NguoiDung nguoiDung)
+        {
+            nguoiDung.NgayChinhSua = DateTime.Now;
+            try
+            {
+                database.Entry(nguoiDung).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("QuanLyNhanVien");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult NhanVienDelete(int id)
+        {
+            try
+            {
+                var nguoiDung = database.NguoiDungs.Find(id);
+                nguoiDung.Status = 3;
+                database.Entry(nguoiDung).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("QuanLyNhanVien");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        #endregion
+
         public ActionResult QuanLyVoucher()
         {
             return View();
         }
         public ActionResult QuanLyBaoCao(string searching, string Year, string Month)
         {
-            var dates = database.HoaDons.Where(s => (s.NgayMua.Year+"-"+s.NgayMua.Month+"-"+s.NgayMua.Day) == searching).ToList();
-         
+            var dates = database.HoaDons.Where(s => (s.NgayMua.Year + "-" + s.NgayMua.Month + "-" + s.NgayMua.Day) == searching).ToList();
+
             var ngaymua = dates.ToList();
-            
+
 
             int soluong = 0;
-            foreach(var item in ngaymua)
+            foreach (var item in ngaymua)
             {
                 soluong += item.CTHoaDons.Count;
                 ViewBag.ngay = item.NgayMua;
@@ -157,16 +269,16 @@ namespace TMDT.Controllers
             int[] loinhuanthangs = new int[15];
 
 
-            if (Month!="" && Year != null)
+            if (Month != "" && Year != null)
             {
                 var a = System.DateTime.DaysInMonth(2001, 1);
             }
-            if(Month=="" && Year != null)
+            if (Month == "" && Year != null)
             {
                 var hoadonNam = database.HoaDons.Where(s => s.NgayMua.Year.ToString() == Year).ToList();
-                foreach(var itemhd in hoadonNam)
+                foreach (var itemhd in hoadonNam)
                 {
-                    for(int i = 1; i <= 12; i++)
+                    for (int i = 1; i <= 12; i++)
                     {
                         if (itemhd.NgayMua.Month == i)
                         {
@@ -174,11 +286,11 @@ namespace TMDT.Controllers
                             int temp2 = itemhd.SoTienGiam ?? 0;
                             doanhthuthangs[i] = doanhthuthangs[i] + temp1;
                             giamgiathangs[i] = giamgiathangs[i] + temp2;
-                            
-                            foreach(var itemcthd in itemhd.CTHoaDons)
+
+                            foreach (var itemcthd in itemhd.CTHoaDons)
                             {
-                                int temp3 = (itemcthd.SanPham.GiaNhap ?? 0) * itemcthd.SoLuong;
-                                giavonthangs[i] = giavonthangs[i]+temp3;
+                                int temp3 = (itemcthd.SanPham.GiaBan ?? 0) * itemcthd.SoLuong;
+                                giavonthangs[i] = giavonthangs[i] + temp3;
                             }
 
                             loinhuanthangs[i] = doanhthuthangs[i] - giavonthangs[i];
@@ -193,8 +305,8 @@ namespace TMDT.Controllers
             ViewBag.giavonthangs = giavonthangs;
             ViewBag.loinhuanthangs = loinhuanthangs;
 
-            int tongdoanhthuthang =0,tonggiamgiathang=0, tonggiavongthang=0, tongloinhuanthang = 0;
-            foreach(var i in doanhthuthangs)
+            int tongdoanhthuthang = 0, tonggiamgiathang = 0, tonggiavongthang = 0, tongloinhuanthang = 0;
+            foreach (var i in doanhthuthangs)
             {
                 tongdoanhthuthang += i;
             }
@@ -251,7 +363,7 @@ namespace TMDT.Controllers
 
                             foreach (var itemcthd in itemhd.CTHoaDons)
                             {
-                                int temp3 = (itemcthd.SanPham.GiaNhap ?? 0) * itemcthd.SoLuong;
+                                int temp3 = (itemcthd.SanPham.GiaBan ?? 0) * itemcthd.SoLuong;
                                 giavonthangs[i] = giavonthangs[i] + temp3;
                             }
 
@@ -307,7 +419,7 @@ namespace TMDT.Controllers
         public ActionResult BaoCaoDetail(int id)
         {
             var hoadon = database.HoaDons.Where(s => s.MaHoaDon == id).FirstOrDefault();
-            
+
             return View(hoadon);
         }
     }

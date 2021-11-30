@@ -12,18 +12,16 @@ namespace TMDT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GPU
+    public partial class LoaiGPU
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GPU()
+        public LoaiGPU()
         {
             this.SanPhams = new HashSet<SanPham>();
         }
     
-        public int MaGPU { get; set; }
-        public string TenGPU { get; set; }
-        public string LoaiGPU { get; set; }
-        public Nullable<int> SoLuong { get; set; }
+        public int MaLoaiGPU { get; set; }
+        public string TenLoaiGPU { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsDeleted { get; set; }

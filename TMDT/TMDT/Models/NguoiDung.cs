@@ -23,8 +23,7 @@ namespace TMDT.Models
             this.HoaDons = new HashSet<HoaDon>();
             this.HoaDons1 = new HashSet<HoaDon>();
         }
-
-
+    
         public int MaNguoiDung { get; set; }
         [Display(Name = "Tên người dùng")]
         [Required(ErrorMessage = "Tên người dùng không được bỏ trống")]
@@ -57,8 +56,6 @@ namespace TMDT.Models
         public string Email { get; set; }
         public Nullable<int> DiemThuong { get; set; }
         public int MaQuyen { get; set; }
-
-      
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<int> Status { get; set; }
@@ -69,6 +66,5 @@ namespace TMDT.Models
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons1 { get; set; }
-        public virtual Quyen Quyen { get; set; }
     }
 }

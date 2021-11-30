@@ -22,16 +22,14 @@ namespace TMDT.Models
             this.SanPhams = new HashSet<SanPham>();
             Hinh = "/Content/images/";
         }
-
+    
         public int MaThuongHieu { get; set; }
         public string TenThuongHieu { get; set; }
         public string Hinh { get; set; }
-        public Nullable<int> SoLuong { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<bool> IsLockEdit { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
         [NotMapped]

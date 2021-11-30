@@ -26,7 +26,8 @@ namespace TMDT.Models
         public string TenKhach { get; set; }
         public string DiaChi { get; set; }
         public string SDT { get; set; }
-        public Nullable<int> PhuongThucThanhToan { get; set; }
+        public Nullable<int> HinhThucThanhToan { get; set; }
+        public Nullable<int> HinhThucGiaoHang { get; set; }
         public Nullable<int> MaNVDuyet { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<int> MaPhieuQuaTang { get; set; }

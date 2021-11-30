@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TMDT.Models.Quyen>
+﻿@*@model IEnumerable<TMDT.Models.Quyen>*@
 
 @{
     ViewBag.Title = "QLQuyen";
@@ -22,7 +22,7 @@
     @Html.ActionLink("Tạo quyền mới", "QuyenCreate", "", htmlAttributes: new { @class = "btn btn-success" })
 
 </p>
-<table class="table table-hover">
+@*<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.MaQuyen)
@@ -44,7 +44,7 @@
         </tr>
     }
 
-</table>
+</table>*@
 <style>
         .active-2 {
             background-color: #CA2620;
