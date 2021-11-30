@@ -12,22 +12,20 @@ namespace TMDT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ThuongHieu
+    public partial class TinTuc
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ThuongHieu()
-        {
-            this.SanPhams = new HashSet<SanPham>();
-        }
-    
-        public int MaThuongHieu { get; set; }
-        public string TenThuongHieu { get; set; }
-        public string Hinh { get; set; }
+        public int MaTinTuc { get; set; }
+        public string TieuDe { get; set; }
+        public string Thumbnail { get; set; }
+        public string NoiDung { get; set; }
+        public Nullable<int> MaSanPham { get; set; }
+        public int MaNguoiTao { get; set; }
+        public Nullable<int> MaNguoiSua { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
+        public Nullable<bool> IsHide { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SanPham> SanPhams { get; set; }
+        public virtual SanPham SanPham { get; set; }
     }
 }

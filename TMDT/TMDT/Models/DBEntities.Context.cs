@@ -25,6 +25,7 @@ namespace TMDT.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<CPU> CPUs { get; set; }
         public virtual DbSet<CTHoaDon> CTHoaDons { get; set; }
         public virtual DbSet<DanhGia> DanhGias { get; set; }
@@ -34,9 +35,11 @@ namespace TMDT.Models
         public virtual DbSet<LoaiGPU> LoaiGPUs { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<PhieuQuaTang> PhieuQuaTangs { get; set; }
+        public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<SanPhamNhapKho> SanPhamNhapKhoes { get; set; }
         public virtual DbSet<SizeManHinh> SizeManHinhs { get; set; }
         public virtual DbSet<ThuongHieu> ThuongHieux { get; set; }
+        public virtual DbSet<TinTuc> TinTucs { get; set; }
     }
 }

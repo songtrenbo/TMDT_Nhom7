@@ -7,7 +7,11 @@ CREATE DATABASE DBLaptop
 go
 USE DBLaptop
 go
-
+CREATE TABLE Quyen
+(
+    MaQuyen INT IDENTITY PRIMARY KEY,
+    TenQuyen NVARCHAR(50) NOT NULL
+);
 CREATE TABLE NguoiDung
 (
     MaNguoiDung INT IDENTITY PRIMARY KEY,
@@ -22,6 +26,7 @@ CREATE TABLE NguoiDung
     NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     Status INT DEFAULT 1,--1: active, 2: locked, 3: deleted
+    FOREIGN KEY (MaQuyen) REFERENCES dbo.Quyen(MaQuyen)
 );
 
 CREATE TABLE DanhMuc
@@ -117,6 +122,7 @@ CREATE TABLE SanPhamNhapKho
     SoLuong INT DEFAULT 0,
     GiaNhap INT DEFAULT 0,
     NgayTao DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
 );
 
 CREATE TABLE Hinh
@@ -131,6 +137,22 @@ CREATE TABLE Hinh
     FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
 );
 
+CREATE TABLE TinTuc
+(
+    MaTinTuc INT IDENTITY PRIMARY KEY,
+    TieuDe NVARCHAR(255) NOT NULL,
+    Thumbnail NVARCHAR(255) NOT NULL,
+    NoiDung NVARCHAR(255) NOT NULL,
+    MaSanPham INT,
+    MaNguoiTao INT NOT NULL,
+    MaNguoiSua INT,
+    NgayTao DATETIME DEFAULT GETDATE(),
+    NgayChinhSua DATETIME,
+    IsHide BIT DEFAULT 0,
+    IsDeleted BIT DEFAULT 0,
+    FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
+);
+
 CREATE TABLE PhieuQuaTang
 (
     MaPhieuQuaTang INT IDENTITY PRIMARY KEY,
@@ -140,8 +162,7 @@ CREATE TABLE PhieuQuaTang
     NgayTao DATETIME DEFAULT GETDATE(),
     NgayKichHoat DATETIME NOT NULL,
     NgayKetThuc DATETIME NOT NULL,
-    IsActive BIT DEFAULT 0,
-    DiemThuongDoi INT DEFAULT 0,
+    IsActive BIT DEFAULT 0
 );
 
 CREATE TABLE HoaDon
@@ -190,10 +211,28 @@ CREATE TABLE DanhGia
     FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
     FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
 );
-
+CREATE TABLE Banner
+(
+    MaBanner INT IDENTITY PRIMARY KEY,
+    TenBanner NVARCHAR(255) NOT NULL,
+    [Path] NVARCHAR(255) NOT NULL,
+    MaSanPham INT  NOT NULL,
+    IsHide BIT DEFAULT 0,
+    IsDeleted BIT DEFAULT 0,
+    NgayTao DATETIME DEFAULT GETDATE(),
+    NgaySua DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
+);
 GO
 
-
+--Quyền
+INSERT INTO Quyen
+    (TenQuyen)
+VALUES(N'admin'),
+    (N'quản lý'),
+    (N'nhân viên'),
+    (N'khách hàng')
+GO
 
 --Danh mục
 INSERT INTO DanhMuc

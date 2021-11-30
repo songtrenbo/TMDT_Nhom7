@@ -12,13 +12,16 @@ namespace TMDT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SanPhamNhapKho
+    public partial class Banner
     {
-        public int MaSanPhamNhapKho { get; set; }
+        public int MaBanner { get; set; }
+        public string TenBanner { get; set; }
+        public string Path { get; set; }
         public int MaSanPham { get; set; }
-        public Nullable<int> SoLuong { get; set; }
-        public Nullable<int> GiaNhap { get; set; }
+        public Nullable<bool> IsHide { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
+        public Nullable<System.DateTime> NgaySua { get; set; }
     
         public virtual SanPham SanPham { get; set; }
     }

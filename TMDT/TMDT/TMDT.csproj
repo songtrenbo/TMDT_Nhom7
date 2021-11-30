@@ -147,6 +147,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountStatus.cs" />
+    <Compile Include="Models\Banner.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CPU.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -189,6 +192,9 @@
     <Compile Include="Models\PhieuQuaTang.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Quyen.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SanPham.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -199,6 +205,9 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThuongHieu.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TinTuc.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

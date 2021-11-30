@@ -17,9 +17,12 @@ namespace TMDT.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
         {
+            this.Banners = new HashSet<Banner>();
             this.CTHoaDons = new HashSet<CTHoaDon>();
             this.DanhGias = new HashSet<DanhGia>();
             this.Hinhs = new HashSet<Hinh>();
+            this.SanPhamNhapKhoes = new HashSet<SanPhamNhapKho>();
+            this.TinTucs = new HashSet<TinTuc>();
         }
     
         public int MaSanPham { get; set; }
@@ -50,6 +53,8 @@ namespace TMDT.Models
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsHide { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Banner> Banners { get; set; }
         public virtual CPU CPU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHoaDon> CTHoaDons { get; set; }
@@ -61,5 +66,9 @@ namespace TMDT.Models
         public virtual LoaiGPU LoaiGPU { get; set; }
         public virtual ThuongHieu ThuongHieu { get; set; }
         public virtual SizeManHinh SizeManHinh1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SanPhamNhapKho> SanPhamNhapKhoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TinTuc> TinTucs { get; set; }
     }
 }
