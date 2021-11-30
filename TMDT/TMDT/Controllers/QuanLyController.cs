@@ -128,7 +128,7 @@ namespace TMDT.Controllers
         #region QLNhanVien
         public ActionResult QuanLyNhanVien()
         {
-            var nhanviens = database.NguoiDungs.Where(s => s.MaQuyen == 3).ToList().OrderBy(s => s.MaQuyen);
+            var nhanviens = database.NguoiDungs.Where(s => s.MaQuyen == 3 && s.Status != 3).ToList().OrderBy(s => s.MaQuyen);
             return View(nhanviens);
         }
         public ActionResult NhanVienCreate()
@@ -167,22 +167,16 @@ namespace TMDT.Controllers
                 return View(nguoiDung);
             }
         }
-        [HttpPost]
+      
         public ActionResult NhanVienLock(int id)
         {
             var nguoiDung = database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault();
+            nguoiDung.ConfirmPass = nguoiDung.Password;
             nguoiDung.NgayChinhSua = DateTime.Now;
             nguoiDung.Status = 2;
-            try
-            {
-                database.Entry(nguoiDung).State = EntityState.Modified;
-                database.SaveChanges();
-                return RedirectToAction("QuanLyNhanVien");
-            }
-            catch
-            {
-                return View();
-            }
+            database.Entry(nguoiDung).State = EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("QuanLyNhanVien","QuanLy");
         }
         [HttpPost]
         public ActionResult ResetPassword(int id)
