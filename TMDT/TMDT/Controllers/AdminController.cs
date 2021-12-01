@@ -18,6 +18,71 @@ namespace TMDT.Controllers
         {
             return View();
         }
+        #region TakKhoan
+        public ActionResult QLTaiKhoan(string searchString, int Quyen = 0)
+        {
+            List<Quyen> quyen = database.Quyens.ToList();
+
+            ViewBag.Quyen = new SelectList(quyen, "MaQuyen", "TenQuyen");
+
+            var taiKhoan = database.NguoiDungs.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                taiKhoan = taiKhoan.Where(s => s.Username.ToLower().Contains(searchString.ToLower())).ToList();
+            }
+            if (Quyen != 0)
+            {
+                taiKhoan = taiKhoan.Where(x => x.MaQuyen == Quyen).ToList();
+            }
+            return View(taiKhoan);
+        }
+        public ActionResult TaiKhoanCreate()
+        {
+            List<Quyen> quyen = database.Quyens.ToList();
+
+            ViewBag.Quyen = new SelectList(quyen, "MaQuyen", "TenQuyen");
+            NguoiDung nguoiDung = new NguoiDung();
+
+            return View(nguoiDung);
+        }
+        [HttpPost]
+        public ActionResult TaiKhoanCreate(NguoiDung nguoiDung)
+        {
+            var check_ID = database.NguoiDungs.Where(s => s.Username == nguoiDung.Username).FirstOrDefault();
+
+            if (check_ID == null)
+            {
+                database.Configuration.ValidateOnSaveEnabled = false;
+                nguoiDung.Password = Utils.Crypto("123");
+                nguoiDung.ConfirmPass = Utils.Crypto("123"); ;
+                nguoiDung.DiemThuong = 0;
+                nguoiDung.NgayTao = DateTime.Now;
+                nguoiDung.Status = 1;
+                database.NguoiDungs.Add(nguoiDung);
+                database.SaveChanges();
+                return RedirectToAction("QLTaiKhoan");
+            }
+            else
+            {
+                ViewBag.Error = "Tài khoản đã tồn tại";
+                return View();
+            }
+        }
+        public ActionResult TaiKhoanDetail(int id)
+        {
+            return View(database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault());
+        }
+        [HttpPost]
+        public void ResetPassword(string username)
+        {
+            var account = database.NguoiDungs.Where(s => s.Username == username).FirstOrDefault();
+            account.Password = Utils.Crypto("123");
+            account.ConfirmPass = Utils.Crypto("123"); ;
+            database.Entry(account).State = System.Data.Entity.EntityState.Modified;
+            database.SaveChanges();
+        }
+        #endregion
+
         #region TaiKhoan
         public ActionResult QLQuyen()
         {

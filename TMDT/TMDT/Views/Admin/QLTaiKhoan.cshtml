@@ -1,0 +1,106 @@
+﻿@model IEnumerable<TMDT.Models.NguoiDung>
+
+@{
+    ViewBag.Title = "QLTaiKhoan";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
+    <script src="~/Scripts/ResetPassword.js"></script>
+}
+<p>
+    @Html.ActionLink("Tạo tài khoản mới", "TaiKhoanCreate", "", htmlAttributes: new { @class = "btn btn-success" })
+</p>
+
+@using (Html.BeginForm("QLTaiKhoan", "Admin", FormMethod.Get))
+{
+    <div class="form-row">
+        <div class="form-group row" style="height:100%">
+            <label for="search" class="col-sm-5 col-form-label">Nhập username: </label>
+            <div class="col-sm-6">
+                @Html.TextBox("SearchString", "", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row" style="height:100%">
+            <label for="Quyen" class="col-sm-3 col-form-label">Quyền: </label>
+            <div class="col-sm-8">
+                @Html.DropDownList("Quyen", (IEnumerable<SelectListItem>)ViewBag.Quyen, "All", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row" style="height:100%">
+            <div class="col-sm-4">
+                <input type="submit" value="Tìm kiếm" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table table-striped">
+    <tr>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Ten)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.NgayChinhSua)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Quyen.TenQuyen)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayChinhSua)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quyen.TenQuyen)
+            </td>
+            <td>
+                <a href="@Url.Action("TaiKhoanDetail","Admin", new {id=item.MaNguoiDung})" style="color:black"><i class="bi bi-card-list"></i></a> |
+                <a href="#" onclick="ConfirmResetPassword('@item.Username','Admin', 'ResetPassword')" style="color:black"><i class="bi bi-arrow-clockwise"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+

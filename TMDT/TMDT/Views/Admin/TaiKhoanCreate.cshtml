@@ -1,0 +1,55 @@
+﻿@model TMDT.Models.NguoiDung
+
+@{
+    ViewBag.Title = "TaiKhoanCreate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>TaiKhoanCreate</h2>
+
+
+@using (Html.BeginForm("TaiKhoanCreate", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>NguoiDung</h4>
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaQuyen, "MaQuyen", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.MaQuyen, (SelectList)ViewBag.Quyen, "Chọn quyền", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MaQuyen, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Tạo mới" class="btn btn-success" />
+            <a href="@Url.Action("QLTaiKhoan","Admin")" class="btn btn-outline-danger">Trở về</a>
+            <h5 class="text-danger">@ViewBag.IsExist</h5>
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -101,7 +101,9 @@
         </div>
     </div>
     @Html.Partial("_Foot")
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
     <style>
         .nav > .nav-item {
             width: 100%;
