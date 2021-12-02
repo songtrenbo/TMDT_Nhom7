@@ -41,7 +41,7 @@
 
                 <div class="col-md-6 col-sm-12"><button class=" btn-buy">Mua ngay</button></div>
                 <br /><br /><br />
-                <div class="col-md-6 col-sm-12"><button class="btn-addtocart" onclick="ThemGioHang(@Model.MaSanPham, '@Model.TenSanPham',@Model.GiaBan,@Model.SoLuong,'@Model.Hinh')">Thêm vào giỏ hàng</button></div>
+                <div class="col-md-6 col-sm-12"><button class="btn-addtocart" onclick="ThemGioHang(@Model.MaSanPham, '@Model.TenSanPham',@Model.GiaBan,@Model.SoLuongTon,'@Model.Hinh')">Thêm vào giỏ hàng</button></div>
 
             </div>
         </div>
@@ -67,7 +67,7 @@
             </tr>
             <tr>
                 <th>Card đồ họa</th>
-                <td>@Model.GPU.LoaiGPU @Model.GPU.TenGPU</td>
+                <td>@Model.LoaiGPU.MaLoaiGPU @Model.LoaiGPU.TenLoaiGPU</td>
             </tr>
             <tr>
                 <th>Màn hình:</th>

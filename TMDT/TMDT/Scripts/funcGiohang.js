@@ -30,7 +30,7 @@ function ThemGioHang(maSP, tenSP, gia, soLuongTon, hinh) {
             exist = true;
             AddSuccess();
         }
-    if (!exist) {
+    if (!exist && soLuongTon > 0) {
         var sanPham = {
             buyCheck: true,
             maSanPham: maSP,
@@ -44,6 +44,16 @@ function ThemGioHang(maSP, tenSP, gia, soLuongTon, hinh) {
         soSP++;
         //tongTien += sanPham.giaBan;
         AddSuccess();
+    }
+    else if (soLuongTon <= 0) {
+        Swal.fire({
+            title: '<strong>Hết hàng</strong>',
+            icon: 'info',
+            html: 'Không còn sản phầm nào trong kho mời bạn chọn sản phẩm khác!!! ',
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+        })
     }
     window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
 }
@@ -210,5 +220,4 @@ function QuantityError(max) {
         timer: 2000
     })
 }
-
 
