@@ -21,7 +21,7 @@ namespace TMDT.Controllers
         #region TakKhoan
         public ActionResult QLTaiKhoan(string searchString, int Quyen = 0)
         {
-            List<Quyen> quyen = database.Quyens.ToList();
+            List<Quyen> quyen = database.Quyens.Where(s => s.MaQuyen != 1).ToList();
 
             ViewBag.Quyen = new SelectList(quyen, "MaQuyen", "TenQuyen");
 
@@ -38,7 +38,7 @@ namespace TMDT.Controllers
         }
         public ActionResult TaiKhoanCreate()
         {
-            List<Quyen> quyen = database.Quyens.ToList();
+            List<Quyen> quyen = database.Quyens.Where(s => s.MaQuyen != 1).ToList();
 
             ViewBag.Quyen = new SelectList(quyen, "MaQuyen", "TenQuyen");
             NguoiDung nguoiDung = new NguoiDung();

@@ -1,0 +1,162 @@
+﻿@model TMDT.Models.HoaDon
+
+@{
+    ViewBag.Title = "MuaHang";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+<link href="~/Content/css/Checkout.css" rel="stylesheet" />
+<link href="~/Scripts/Alert/sweetalert2.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
+    <script src="~/Scripts/Checkout.js"></script>
+}
+
+
+<style>
+    .card {
+        margin: 20px 0 20px 0;
+    }
+
+    .labl {
+        display: block;
+    }
+
+        .labl > input {
+            visibility: hidden;
+            position: absolute;
+        }
+
+            .labl > input + div {
+                cursor: pointer;
+                border: 2px solid transparent;
+            }
+
+            .labl > input:checked + div {
+                border: 1px solid #0026ff;
+            }
+</style>
+<h2>Thông tin đặt hàng</h2>
+@using (Html.BeginForm("Checkout", "GioHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Thông tin đặt hàng</h5>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.TenKhach, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                            <div class="col-sm-10">
+                                @Html.EditorFor(model => model.TenKhach, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên của bạn" } })
+                                @Html.ValidationMessageFor(model => model.TenKhach, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                            <div class="col-sm-10">
+                                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên của bạn" } })
+                                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger", @type = "number" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                            <div class="col-sm-10">
+                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập địa chỉ của bạn" } })
+                                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="padding:20px 20px 0 20px;">
+                    <h5 class="card-title">Phương thức giao hàng</h5>
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <label>@Html.RadioButtonFor(model => model.HinhThucGiaoHang, 1, new { @checked = "checked" }) Nhận hàng tại cửa hàng</label>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <label>@Html.RadioButtonFor(model => model.HinhThucGiaoHang, 2) Giao hàng đến địa chỉ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="padding:20px 20px 0 20px;">
+                    <h5 class="card-title">Phương thức thanh toán</h5>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="card labl">
+                                @Html.RadioButtonFor(model => model.HinhThucThanhToan, 1, new { @checked = "checked" })
+                                <div class="card-body">
+                                    <h5 class="card-title">Thanh toán trực tuyến</h5>
+                                    <p class="card-text">Thanh toán qua Internet Banking, Visa, VNPAY-QR</p>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="card labl">
+                                @Html.RadioButtonFor(model => model.HinhThucThanhToan, 2)
+                                <div class="card-body">
+                                    <h5 class="card-title">Thanh toán khi nhận hàng</h5>
+                                    <p class="card-text">Thanh toán bằng tiền mặt khi nhận hàng tại nhà hoặc showroom</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body" id="Checkout-Product">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="card-title">Thông tin đơn hàng</h6>
+                            </div>
+                            <div class="col" style="text-align:right">
+                                <a href="@Url.Action("HienThiDonHang","GioHang")" style="color:#0026ff">Chỉnh sửa</a>
+                            </div>
+                        </div>
+                        <table class="table table-borderless" id="table-shopping-checkout">
+                            <tbody>
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card" style="padding:20px">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Tạm tính</th>
+                                <td id="TotalPrice" class="text-right ml-3">0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Phí vận chuyển</th>
+                                <td id="ShipFee" class="text-right text-dark ml-3">0</td>
+                                @Html.HiddenFor(model => model.PhiGiaoHang, new { htmlAttributes = new { @id = "ShipFee-model" } })
+                            </tr>
+                            <tr>
+                                <th scope="row">Giảm giá</th>
+                                <td id="Discount" class="text-right text-dark b ml-3">0</td>
+                                @Html.HiddenFor(model => model.SoTienGiam, new { htmlAttributes = new { @id = "Discount-model" } })
+                            </tr>
+                            <tr>
+                                <th scope="row">Thành tiền</th>
+                                <td id="Total" class="text-right text-danger b ml-3">0</td>
+                                @Html.HiddenFor(model => model.TongThanhToan)
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <input type="submit" id="cart-checkout" class="btn btn-primary" onclick="CheckoutSanPham()" data-abc="true" value="Mua hàng" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

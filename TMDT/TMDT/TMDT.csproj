@@ -151,6 +151,7 @@
     <Compile Include="Models\Banner.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CPU.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -279,6 +280,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\Checkout.js" />
     <Content Include="Scripts\Delete.js" />
     <Content Include="Scripts\funcGiohang.js" />
     <Content Include="Scripts\InitialGioHang.js" />
@@ -340,6 +342,7 @@
     <Content Include="Views\Admin\QLTaiKhoan.cshtml" />
     <Content Include="Views\Admin\TaiKhoanDetail.cshtml" />
     <Content Include="Views\Admin\TaiKhoanCreate.cshtml" />
+    <Content Include="Views\GioHang\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

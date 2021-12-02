@@ -15,13 +15,14 @@ namespace TMDT.Controllers
     {
         DBLaptopEntities database = new DBLaptopEntities();
         // GET: DangNhap
-        public ActionResult DangNhap()
+        public ActionResult DangNhap(string returnUrl)
         {
+            ViewData["returnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public ActionResult DangNhap(NguoiDung _user)
+        public ActionResult DangNhap(NguoiDung _user, string returnUrl)
         {
             if (String.IsNullOrEmpty(_user.Username) || String.IsNullOrEmpty(_user.Password))
                 return View("DangNhap");
@@ -50,16 +51,23 @@ namespace TMDT.Controllers
             Session["Account"] = checkUser;
             Session["TenAcc"] = checkUser.Ten;
             //ViewBag.Ten = check.Ten;
-            switch (checkUser.MaQuyen)
+            if (returnUrl == null)
             {
-                case 1:
-                    return RedirectToAction("QLQuyen", "Admin");
-                case 2:
-                    return RedirectToAction("QuanLyThuongHieu", "QuanLy");
-                case 3:
-                    return RedirectToAction("Index", "NhanVien");
-                default:
-                    return RedirectToAction("Index", "TrangChu");
+                switch (checkUser.MaQuyen)
+                {
+                    case 1:
+                        return RedirectToAction("QLQuyen", "Admin");
+                    case 2:
+                        return RedirectToAction("QuanLyThuongHieu", "QuanLy");
+                    case 3:
+                        return RedirectToAction("Index", "NhanVien");
+                    default:
+                        return RedirectToAction("Index", "TrangChu");
+                }
+            }
+            else
+            {
+                return Redirect(returnUrl);
             }
         }
         public ActionResult DangXuat()

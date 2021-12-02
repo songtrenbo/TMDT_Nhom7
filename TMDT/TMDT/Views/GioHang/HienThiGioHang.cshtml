@@ -1,7 +1,20 @@
-﻿
+﻿@using TMDT.Models;
+
 @{
     ViewBag.Title = "Giỏ hàng";
     Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+@{
+    NguoiDung currentUser = new NguoiDung();
+    if (Session["Account"] != null)
+    {
+        currentUser = (NguoiDung)Session["Account"];
+    }
+    else
+    {
+        currentUser = null;
+    }
 }
 
 <link href="~/Scripts/Alert/sweetalert2.css" rel="stylesheet" />
@@ -67,7 +80,17 @@
                         <dt>Tổng tiền:</dt>
                         <dd id="Total" class="text-right text-dark b ml-3"><strong>0</strong></dd>
                     </dl>
-                    <hr> <a href="#" class="btn btn-muahang" data-abc="true"> Mua hàng </a>
+                    <hr>
+                    @*<a id="cart-checkout" href="#" class="btn btn-muahang" onclick="Checkout()" data-abc="true"> Mua hàng </a>*@
+
+                    @if (Session["Account"] != null)
+                    {
+                        <a id="cart-checkout" href="@Url.Action("Checkout","GioHang")" class="btn btn-muahang" data-abc="true"> Mua hàng </a>
+                    }
+                    else
+                    {
+                        <a id="cart-checkout" href="@Url.Action("DangNhap","NguoiDung",new {@returnUrl=Context.Request.Url })" class="btn btn-muahang" data-abc="true"> Mua hàng </a>
+                    }
                 </div>
             </div>
             <div class="card mb-3">
@@ -111,7 +134,7 @@
         background-color: white;
         border: none;
         color: #EE0033;
-        font-weight:bold;
+        font-weight: bold;
         box-shadow: 0px 2px 15px #F24060;
         transition: all 0.3s ease 0s;
     }

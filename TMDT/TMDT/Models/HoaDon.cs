@@ -11,7 +11,8 @@ namespace TMDT.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HoaDon
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,8 +24,11 @@ namespace TMDT.Models
         public int MaHoaDon { get; set; }
         public System.DateTime NgayMua { get; set; }
         public int MaKhachHang { get; set; }
+        [Required]
         public string TenKhach { get; set; }
+        [Required]
         public string DiaChi { get; set; }
+        [Required]
         public string SDT { get; set; }
         public Nullable<int> HinhThucThanhToan { get; set; }
         public Nullable<int> HinhThucGiaoHang { get; set; }

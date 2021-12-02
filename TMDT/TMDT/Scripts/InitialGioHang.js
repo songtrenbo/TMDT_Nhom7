@@ -66,9 +66,20 @@
         }
         location.reload();
     }
+
+    if (tongTien == 0) {
+        $("#cart-checkout").css("pointer-events", "none");
+        $("#cart-checkout").css("cursor", "default");
+        $("#cart-checkout").css("background-color", "#696969");
+        $("#cart-checkout").css("color", "#ffffff");
+
+    }
+
     //Load thông tin summary
     $(".cart").append('<div class="back-to-shop"><a href="/Home/Index">&leftarrow;</a><span class="text-muted">Back to shop</span></div>');
     $("#TotalPrice").text(tongTien);
     $("#TamTinh").text(tongTien);
     $("#Total").text(tongTien);
+
+
 };
