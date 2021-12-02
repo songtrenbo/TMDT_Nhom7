@@ -54,7 +54,7 @@ function CheckoutSanPham() {
     var sdt = $("#SDT").val();
     var diaChi = $("#DiaChi").val();
 
-    if (tenKhach != "" || sdt != "" || diaChi != "") {
+    if (tenKhach != "" && sdt != "" && diaChi != "") {
         var tmp = gioHang;
         window.localStorage.removeItem("gioHang");
         for (var i = 0; i < tmp.length; i++) {
@@ -64,5 +64,12 @@ function CheckoutSanPham() {
         }
         gioHang = tmp;
         window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Đặt hàng thành công',
+            showConfirmButton: false,
+            timer: 4000
+        })
     }
 }
