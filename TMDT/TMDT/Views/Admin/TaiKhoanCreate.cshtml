@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>TaiKhoanCreate</h2>
+<h2>Tạo tài khoản</h2>
 
 
 @using (Html.BeginForm("TaiKhoanCreate", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -13,7 +13,6 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>NguoiDung</h4>
     <hr />
 
     <div class="form-group">
@@ -53,3 +52,10 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<style>
+    .active-1 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

@@ -5,13 +5,16 @@
     Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+
+<br />
+<br />
+<br />
+<br />
 
 
 
-<br />
-<br />
-<br />
-<br />
+
 
 @using (Html.BeginForm("QuanLyBaoCao", "QuanLy", FormMethod.Get))
 {
@@ -22,19 +25,25 @@
             @Html.DropDownList("Month", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString() }), "Chọn tháng", new { @class = "form-control col-lg-3" })
 
 
-            @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year, 10).Select(x => new SelectListItem { Text = x.ToString() }), "Chọn năm", new { @class = "form-control col-lg-3", style="margin-left:10px" })
+            @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year, 10).Select(x => new SelectListItem { Text = x.ToString() }), "Chọn năm", new { @class = "form-control col-lg-3", style = "margin-left:10px" })
 
             <input type="submit" value="Xác nhận" class="btn btn-danger col-lg-1" style="margin-left:10px; margin-right:10px" />
-        <a href="@Url.Action("GeneratePDF", "QuanLy", new {Year=ViewBag.nam, Month=ViewBag.thang})" target="_blank" class="btn btn-success col-lg-1">Xuất PDF</a>
+            <a href="@Url.Action("GeneratePDF", "QuanLy", new {Year=ViewBag.nam, Month=ViewBag.thang})" target="_blank" class="btn btn-success col-lg-1">Xuất PDF</a>
         </div>
     </div>
 }
 
 <br />
 
-@if (ViewBag.nam != null)
+@if (ViewBag.nam != null && ViewBag.thang == "")
 {
     <h3 class="text-center">Báo cáo từ tháng 1/@ViewBag.nam đến tháng 12/@ViewBag.nam</h3>
+    <br />
+    <div id="chart_container container">
+        <canvas id="bar_chart" height="100">
+        </canvas>
+    </div>
+    <br />
     <table class="table table-hover">
         <tr>
             <th class="text-center">
@@ -92,7 +101,7 @@
                         @ViewBag.giamgiathangs[i] VNĐ
                     </td>
                     <td class="text-center">
-                        @ViewBag.doanhthuthangs[i] VNĐ
+                        @ViewBag.doanhthuthangs[i - 1] VNĐ
                     </td>
                     <td class="text-center">
                         @ViewBag.giavonthangs[i] VNĐ
@@ -101,54 +110,90 @@
                         @ViewBag.loinhuanthangs[i] VNĐ
                     </td>
                 </tr>
-                }
-
             }
-    <tr>
-        <th class="text-center">
-            Tổng
-        </th>
-        <th class="text-center">
-            12 tháng
-        </th>
-        <th class="text-center">
-            @ViewBag.tonggiamgiathang VNĐ
-        </th>
-        <th class="text-center">
-            @ViewBag.tongdoanhthuthang VNĐ
-        </th>
-        <th class="text-center">
-            @ViewBag.tonggiavongthang VNĐ
-        </th>
-        <th class="text-center">
-            @ViewBag.tongloinhuanthang VNĐ
-        </th>
-    </tr>
+
+        }
+        <tr>
+            <th class="text-center">
+                Tổng
+            </th>
+            <th class="text-center">
+                12 tháng
+            </th>
+            <th class="text-center">
+                @ViewBag.tonggiamgiathang VNĐ
+            </th>
+            <th class="text-center">
+                @ViewBag.tongdoanhthuthang VNĐ
+            </th>
+            <th class="text-center">
+                @ViewBag.tonggiavongthang VNĐ
+            </th>
+            <th class="text-center">
+                @ViewBag.tongloinhuanthang VNĐ
+            </th>
+        </tr>
     </table>
+
+    <script>
+    var doanhthuthang = @Html.Raw(Json.Encode(ViewBag.doanhthuthangs));
+
+        var ctx = $("#bar_chart");
+    var barChart = new Chart(ctx, {
+
+        type: 'bar',
+        data: {
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+            datasets: [{
+                label: "Doanh Thu",
+                data: doanhthuthang,
+                backgroundColor: ["rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)"],
+                borderColor: ["rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)"],
+                borderWidth:1
+            }]
+        },
+
+        options: {
+
+            maintainAspectRatio: 100,
+            scales: { xAxes: [{ ticks: { beginAtZero: true } }] },
+            legned: {display:false}
+        },
+
+    });
+
+    </script>
 }
 
 
-@*@if (ViewBag.doanhthutungthang == null)
+@if (ViewBag.nam != null && ViewBag.thang != "")
 {
     <h3 class="text-center">Báo cáo từ ngày 1/@ViewBag.thang/@ViewBag.nam đến ngày @ViewBag.ngay/@ViewBag.thang/@ViewBag.nam</h3>
+
+    <br />
+    <div id="chart_container container">
+        <canvas id="bar_chart" height="100">
+        </canvas>
+    </div>
+    <br />
     <table class="table table-hover">
         <tr>
             <th class="text-center">
                 STT
             </th>
-            <th>
+            <th class="text-center">
                 Thời gian
             </th>
-            <th>
+            <th class="text-center">
                 Giá giảm
             </th>
-            <th>
+            <th class="text-center">
                 Doanh thu
             </th>
             <th class="text-center">
                 Giá vốn
             </th>
-            <th>
+            <th class="text-center">
                 Lợi nhuận
             </th>
         </tr>
@@ -156,54 +201,136 @@
             <th class="text-center">
                 [1]
             </th>
-            <th>
+            <th class="text-center">
                 [2]
             </th>
-            <th>
+            <th class="text-center">
                 [3]
             </th>
-            <th>
+            <th class="text-center">
                 [4]
             </th>
             <th class="text-center">
                 [5]
             </th>
-            <th>
-                [6]
+            <th class="text-center">
+                [6]=[4]-[3]-[5]
             </th>
         </tr>
 
         @{
-            for (int i = 0; i < 12; i++)
-            {
-                <tr>
-                    <td class="text-center">
-                        @i
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TenKhach)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SoTienGiam)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhiGiaoHang)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.NguoiDung1.Ten)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TongThanhToan) VNĐ
-                    </td>
-                    <td>
-                        <a href="@Url.Action("BaoCaoDetail", "QuanLy", new { id = item.MaHoaDon })">chi tiết</a>
-                    </td>
-                </tr>
-            }
-        }
 
+            int ngaytrongtuan1 = 1;
+            int ngaytrongtuan2 = 7;
+            for (int i = 0; i < 5; i++)
+            {
+
+
+                if (ViewBag.ngay >= ngaytrongtuan2)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @(i+1)
+                        </td>
+                        <td class="text-center">
+                            @ngaytrongtuan1/@ViewBag.thang/@ViewBag.nam - @ngaytrongtuan2/@ViewBag.thang/@ViewBag.nam
+                        </td>
+                        <td class="text-center">
+                            @ViewBag.giamgiatuans[i] VNĐ
+                        </td>
+                        <td class="text-center">
+                            @ViewBag.doanhthutuans[i] VNĐ
+                        </td>
+                        <td class="text-center">
+                            @ViewBag.giavontuans[i] VNĐ
+                        </td>
+                        <td class="text-center">
+                            @ViewBag.loinhuantuans[i] VNĐ
+                        </td>
+                    </tr>
+                    
+                        ngaytrongtuan1 += 7;
+                        ngaytrongtuan2 += 7;
+                }
+                else
+                {
+                    if (ngaytrongtuan1 <= ViewBag.ngay)
+                    {<tr>
+                        <td class="text-center">
+                            @(i+1)
+                        </td>
+                        <td class="text-center">
+                            @ngaytrongtuan1/@ViewBag.thang/@ViewBag.nam - @ViewBag.ngay/@ViewBag.thang/@ViewBag.nam
+                        </td> <td class="text-center">
+                            @ViewBag.giamgiatuans[i] VNĐ
+                        </td>
+                        <td class="text-center">
+                            @ViewBag.doanhthutuans[i] VNĐ
+                        </td>
+                        <td class="text-center">
+                            @ViewBag.giavontuans[i] VNĐ
+                        </td>
+                        <td class="text-center">
+                            @ViewBag.loinhuantuans[i] VNĐ
+                        </td>
+                    </tr>
+                    }
+                }
+
+
+            }
+
+        }
+        <tr>
+            <th class="text-center">
+                Tổng
+            </th>
+            <th class="text-center">
+                @ViewBag.ngay ngày
+            </th class="text-center">
+            <th class="text-center">
+                @ViewBag.tonggiamgiatuan VNĐ
+            </th>
+            <th class="text-center">
+                @ViewBag.tongdoanhthutuan VNĐ
+            </th>
+            <th class="text-center">
+                @ViewBag.tonggiavongtuan VNĐ
+            </th>
+            <th class="text-center">
+                @ViewBag.tongloinhuantuan VNĐ
+            </th>
+        </tr>
     </table>
-}*@
+    <script>
+    var doanhthutuan = @Html.Raw(Json.Encode(ViewBag.doanhthutuans));
+
+        var ctx = $("#bar_chart");
+    var barChart = new Chart(ctx, {
+
+        type: 'bar',
+        data: {
+            labels: ["Tuần 1","Tuần 2", "Tuần 3", "Tuần 4", "Tuần 5"],
+            datasets: [{
+                label: "Doanh Thu",
+                data: doanhthutuan,
+                backgroundColor: ["rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)", "rgb(248,132,18)"],
+                borderColor: ["rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)", "rgb(202,38,32)"],
+                borderWidth:1
+            }]
+        },
+
+        options: {
+
+            maintainAspectRatio: 100,
+            scales: { xAxes: [{ ticks: { beginAtZero: true } }] },
+            legned: {display:false}
+        },
+
+    });
+
+    </script>
+}
 
 
 
