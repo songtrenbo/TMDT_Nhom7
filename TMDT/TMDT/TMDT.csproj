@@ -56,6 +56,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
     </Reference>
@@ -216,6 +219,7 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\PaypalConfiguration.cs" />
     <Compile Include="Utility\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +353,10 @@
     <Content Include="Views\QuanLy\QuanLyVoucher.cshtml" />
     <Content Include="Views\QuanLy\VoucherCreate.cshtml" />
     <Content Include="Views\QuanLy\EditVoucher.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\GioHang\CheckoutFail.cshtml" />
+    <Content Include="Views\GioHang\CheckoutSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

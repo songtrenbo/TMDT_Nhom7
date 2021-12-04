@@ -7,3 +7,11 @@ tmdtlaptop123
 devtauhai123456
 
 http://tmdtlaptop123-001-site1.btempurl.com/  web
+
+--paypal
+username: devtauhai@gmail.com
+password: Devtauhai@123
+
+https://www.paypal.com/mep/dashboard
+https://www.sandbox.paypal.com/signin?returnUri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmep%2F
+https://developer.paypal.com/developer/accounts

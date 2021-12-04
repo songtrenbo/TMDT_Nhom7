@@ -9,6 +9,7 @@ namespace TMDT.Utility
 {
     public static class Utils
     {
+        public static double EXCHANGE_RATE = 23300;
         public static string Crypto(string password)
         {
             MD5 md5 = new MD5CryptoServiceProvider();

@@ -165,6 +165,7 @@ CREATE TABLE PhieuQuaTang
     NgayKichHoat DATETIME NOT NULL,
     NgayKetThuc DATETIME NOT NULL,
     Status INT DEFAULT 1,--1: inactive, 2: active, 3: end
+);
 
 CREATE TABLE NguoiDung_PhieuQuaTang
 (
@@ -328,3 +329,4 @@ select *from NguoiDung
 select *from SanPham
 
 SELECT * FROM CTHoaDon
+SELECT * FROM HoaDon

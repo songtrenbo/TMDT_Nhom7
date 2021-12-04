@@ -41,7 +41,7 @@
 @using (Html.BeginForm("Checkout", "GioHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
+    var acc = (TMDT.Models.NguoiDung)Session["Account"];
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -53,21 +53,21 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.TenKhach, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                             <div class="col-sm-10">
-                                @Html.EditorFor(model => model.TenKhach, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên của bạn" } })
+                                @Html.EditorFor(model => model.TenKhach, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên của bạn", @Value =  acc.Ten} })
                                 @Html.ValidationMessageFor(model => model.TenKhach, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                             <div class="col-sm-10">
-                                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập sdt của bạn", @type = "number" } })
+                                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập sdt của bạn", @type = "number", @Value = acc.SDT } })
                                 @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                             <div class="col-sm-10">
-                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập địa chỉ của bạn" } })
+                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập địa chỉ của bạn", @Value = acc.DiaChi } })
                                 @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -93,8 +93,8 @@
                             <label class="card labl">
                                 @Html.RadioButtonFor(model => model.HinhThucThanhToan, 1, new { @checked = "checked" })
                                 <div class="card-body">
-                                    <h5 class="card-title">Thanh toán trực tuyến</h5>
-                                    <p class="card-text">Thanh toán qua Internet Banking, Visa, VNPAY-QR</p>
+                                    <h5 class="card-title">Thanh toán khi nhận hàng</h5>
+                                    <p class="card-text">Thanh toán bằng tiền mặt khi nhận hàng tại nhà hoặc showroom</p>
                                 </div>
                             </label>
                         </div>
@@ -102,8 +102,8 @@
                             <label class="card labl">
                                 @Html.RadioButtonFor(model => model.HinhThucThanhToan, 2)
                                 <div class="card-body">
-                                    <h5 class="card-title">Thanh toán khi nhận hàng</h5>
-                                    <p class="card-text">Thanh toán bằng tiền mặt khi nhận hàng tại nhà hoặc showroom</p>
+                                    <h5 class="card-title">Thanh toán trực tuyến</h5>
+                                    <p class="card-text">Thanh toán qua Internet Banking, Visa, VNPAY-QR</p>
                                 </div>
                             </label>
                         </div>

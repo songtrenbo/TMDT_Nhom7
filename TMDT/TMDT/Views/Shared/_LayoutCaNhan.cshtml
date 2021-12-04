@@ -18,7 +18,7 @@
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="@Url.Action("ThongTinCaNhan","NguoiDung",new {id= Session["id"]})">
+                            <a class="nav-link text-white" href="@Url.Action("ThongTinCaNhan","NguoiDung",new {id= ((TMDT.Models.NguoiDung)Session["Account"]).MaNguoiDung})">
                                 <i class="bi bi-person" style="font-size: 24px;"></i> Thông tin cá nhân
                             </a>
                         </li>
