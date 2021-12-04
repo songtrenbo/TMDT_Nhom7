@@ -5,37 +5,37 @@
     Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
 }
 <br /><br /><br />
-<h2>QuanLyVoucher</h2>
+<h2>Quản lý voucher</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Tạo voucher mới", "VoucherCreate", "", htmlAttributes: new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.MaPhieuQuaTang)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.TenPhieuQuaTang)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MaGiamGia)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.LoaiPhamVi)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.GiaTri)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.GiaTriDonHangToiThieu)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.SoLuong)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.NgayTao)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.NgayKichHoat)
         </th>
@@ -49,46 +49,68 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
+<tr>
+    @*<td>
             @Html.DisplayFor(modelItem => item.MaPhieuQuaTang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenPhieuQuaTang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaGiamGia)
-        </td>
-        <td>
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.TenPhieuQuaTang)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MaGiamGia)
+    </td>
+    @*<td>
             @Html.DisplayFor(modelItem => item.LoaiPhamVi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaTri)
-        </td>
-        <td>
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.GiaTri) VNĐ
+    </td>
+    @*<td>
             @Html.DisplayFor(modelItem => item.GiaTriDonHangToiThieu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuong)
-        </td>
-        <td>
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.SoLuong)
+    </td>
+    @*<td>
             @Html.DisplayFor(modelItem => item.NgayTao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayKichHoat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayKetThuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        </td>*@
+    <td>
+        @*@Html.DisplayFor(modelItem => item.NgayKichHoat)*@
+        @item.NgayKichHoat.Day/@item.NgayKichHoat.Month/@item.NgayKichHoat.Year
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.NgayKetThuc)*@
+        @item.NgayKetThuc.Day/@item.NgayKetThuc.Month/@item.NgayKetThuc.Year
+    </td>
+    <td>
+        @switch (item.Status)
+        {
+            case 1:
+                <p> Không kích hoạt</p>
+                break;
+            case 2:
+                <p>Kích hoạt</p>
+                break;
+            case 3:
+                <p>Kết thúc</p>
+                break;
+        }
 
+    </td>
+    @if (item.Status == 3)
+    {
+        <td>
+            @Html.ActionLink("Sửa", "EditVoucher", new { id = item.MaPhieuQuaTang }) | Thay đổi trạng thái
+        </td>
+    }
+    else
+    {
+        <td>
+            @Html.ActionLink("Sửa", "EditVoucher", new { id = item.MaPhieuQuaTang }) |
+            @Html.ActionLink("Thay đổi trạng thái", "ThayDoiTrangThai", new { id = item.MaPhieuQuaTang })
+        </td>
+    }
+
+</tr>
+}
 </table>

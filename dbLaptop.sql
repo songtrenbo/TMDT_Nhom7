@@ -164,8 +164,7 @@ CREATE TABLE PhieuQuaTang
     NgayTao DATETIME DEFAULT GETDATE(),
     NgayKichHoat DATETIME NOT NULL,
     NgayKetThuc DATETIME NOT NULL,
-    Status INT DEFAULT 1,--1: inactive, 2: active, 3: end, 4: deleted
-);
+    Status INT DEFAULT 1,--1: inactive, 2: active, 3: end
 
 CREATE TABLE NguoiDung_PhieuQuaTang
 (

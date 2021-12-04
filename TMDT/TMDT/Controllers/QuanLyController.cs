@@ -238,7 +238,92 @@ namespace TMDT.Controllers
             var voucher = database.PhieuQuaTangs.ToList();
             return View(voucher);
         }
-        #region QLBaoCao
+        public ActionResult VoucherCreate()
+        {
+            List<ThuongHieu> thuonghieu = database.ThuongHieux.ToList();
+            ViewBag.ThuongHieu = new SelectList(thuonghieu, "MaThuongHieu", "TenThuongHieu");
+            PhieuQuaTang phieuquatang = new PhieuQuaTang();
+            return View(phieuquatang);
+        }
+        [HttpPost]
+        public ActionResult VoucherCreate(PhieuQuaTang phieuquatang, string ngayBatDau, string ngayKetThuc)
+        {
+            var check_ID = database.PhieuQuaTangs.Where(s => s.MaPhieuQuaTang == phieuquatang.MaPhieuQuaTang).FirstOrDefault();
+
+            if (check_ID == null)
+            {
+                if (phieuquatang.NgayKichHoat > phieuquatang.NgayKetThuc)
+                {
+                    return View();
+                }
+                database.Configuration.ValidateOnSaveEnabled = false;
+                phieuquatang.NgayTao = DateTime.Now;
+                phieuquatang.Status = 2;
+                phieuquatang.NgayKichHoat = DateTime.Parse(ngayBatDau);
+                phieuquatang.NgayKetThuc = DateTime.Parse(ngayKetThuc);
+                database.PhieuQuaTangs.Add(phieuquatang);
+                database.SaveChanges();
+                return RedirectToAction("QuanLyVoucher");
+            }
+            else
+            {
+                ViewBag.Error = "voucher đã tồn tại";
+                return View();
+            }
+        }
+        public ActionResult EditVoucher(int id)
+        {
+            List<ThuongHieu> thuonghieu = database.ThuongHieux.ToList();
+            ViewBag.ThuongHieu = new SelectList(thuonghieu, "MaThuongHieu", "TenThuongHieu");
+            var voucher = database.PhieuQuaTangs.Where(s => s.MaPhieuQuaTang == id).FirstOrDefault();
+            return View(voucher);
+        }
+        [HttpPost]
+        public ActionResult EditVoucher(int id, PhieuQuaTang phieuquatang, string ngayBatDau, string ngayKetThuc)
+        {
+         
+            List<ThuongHieu> thuonghieu = database.ThuongHieux.ToList();
+            ViewBag.ThuongHieu = new SelectList(thuonghieu, "MaThuongHieu", "TenThuongHieu");           
+            try
+            {
+                if(phieuquatang.Status==3 && phieuquatang.SoLuong > 0)
+                {
+                    phieuquatang.Status = 2;
+                }
+                else if(phieuquatang.Status!=3 && phieuquatang.SoLuong == 0)
+                {
+                    phieuquatang.Status = 3;
+                }
+                phieuquatang.NgayKichHoat = DateTime.Parse(ngayBatDau);
+                phieuquatang.NgayKetThuc = DateTime.Parse(ngayKetThuc);
+                database.Entry(phieuquatang).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("QuanLyVoucher");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult ThayDoiTrangThai(int id)
+        {
+            var phieuquatang = database.PhieuQuaTangs.Where(s => s.MaPhieuQuaTang == id).FirstOrDefault();
+            switch (phieuquatang.Status)
+            {
+                case 1:
+                    phieuquatang.Status = 2;
+                   
+                    break;
+                case 2:
+                    phieuquatang.Status = 1;
+                    break;
+            }
+            database.Entry(phieuquatang).State = EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("QuanLyVoucher");
+        }
+
+            #region QLBaoCao
         public ActionResult QuanLyBaoCao(string searching, string Year, string Month)
         {
             var dates = database.HoaDons.Where(s => (s.NgayMua.Year + "-" + s.NgayMua.Month + "-" + s.NgayMua.Day) == searching).ToList();
