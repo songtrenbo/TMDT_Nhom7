@@ -239,6 +239,7 @@
     <Content Include="Content\images\banner_two.png" />
     <Content Include="Content\images\ic.png" />
     <Content Include="Content\images\logodps.png" />
+    <Content Include="Content\images\voucher_logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -357,6 +358,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\GioHang\CheckoutFail.cshtml" />
     <Content Include="Views\GioHang\CheckoutSuccess.cshtml" />
+    <Content Include="Views\KhachHang\Voucher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
