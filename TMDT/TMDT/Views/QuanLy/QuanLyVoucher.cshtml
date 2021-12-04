@@ -1,0 +1,94 @@
+﻿@model IEnumerable<TMDT.Models.PhieuQuaTang>
+
+@{
+    ViewBag.Title = "QuanLyVoucher";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+<br /><br /><br />
+<h2>QuanLyVoucher</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaPhieuQuaTang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenPhieuQuaTang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaGiamGia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiPhamVi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTri)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTriDonHangToiThieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKichHoat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaPhieuQuaTang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenPhieuQuaTang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaGiamGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiPhamVi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTri)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaTriDonHangToiThieu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayTao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayKichHoat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayKetThuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

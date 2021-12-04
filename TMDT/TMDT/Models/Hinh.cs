@@ -14,8 +14,8 @@ namespace TMDT.Models
     
     public partial class Hinh
     {
-        public int MaHinh { get; set; }
-        public int MaSanPham { get; set; }
+        public long MaHinh { get; set; }
+        public long MaSanPham { get; set; }
         public string TenHinh { get; set; }
         public string Path { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }

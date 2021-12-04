@@ -25,15 +25,15 @@ namespace TMDT.Models
             this.TinTucs = new HashSet<TinTuc>();
         }
     
-        public int MaSanPham { get; set; }
+        public long MaSanPham { get; set; }
         public string TenSanPham { get; set; }
         public int MaDanhMuc { get; set; }
         public string SeoTitle { get; set; }
         public int MaThuongHieu { get; set; }
         public Nullable<int> SoLuongTon { get; set; }
         public Nullable<int> SoLuongBan { get; set; }
-        public Nullable<int> GiaBan { get; set; }
-        public Nullable<int> GiaGiam { get; set; }
+        public Nullable<double> GiaBan { get; set; }
+        public Nullable<double> GiaGiam { get; set; }
         public Nullable<int> DiemRate { get; set; }
         public Nullable<int> SoLuotRate { get; set; }
         public Nullable<int> LuotXem { get; set; }

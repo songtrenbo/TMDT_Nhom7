@@ -126,7 +126,6 @@ namespace TMDT.Controllers
                     database.Configuration.ValidateOnSaveEnabled = false;
                     _user.Password = Utils.Crypto(_user.Password);
                     _user.ConfirmPass = _user.Password;
-                    _user.DiemThuong = 0;
                     _user.MaQuyen = 4;
                     _user.NgayTao = DateTime.Now;
                     _user.Status = 1;

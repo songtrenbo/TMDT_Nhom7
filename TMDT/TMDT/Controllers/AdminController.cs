@@ -54,8 +54,7 @@ namespace TMDT.Controllers
             {
                 database.Configuration.ValidateOnSaveEnabled = false;
                 nguoiDung.Password = Utils.Crypto("123");
-                nguoiDung.ConfirmPass = Utils.Crypto("123"); ;
-                nguoiDung.DiemThuong = 0;
+                nguoiDung.ConfirmPass = Utils.Crypto("123"); 
                 nguoiDung.NgayTao = DateTime.Now;
                 nguoiDung.Status = 1;
                 database.NguoiDungs.Add(nguoiDung);

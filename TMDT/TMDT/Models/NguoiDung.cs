@@ -22,8 +22,11 @@ namespace TMDT.Models
             this.DanhGias = new HashSet<DanhGia>();
             this.HoaDons = new HashSet<HoaDon>();
             this.HoaDons1 = new HashSet<HoaDon>();
+            this.NguoiDung_PhieuQuaTang = new HashSet<NguoiDung_PhieuQuaTang>();
         }
-        public int MaNguoiDung { get; set; }
+    
+        public long MaNguoiDung { get; set; }
+
         [Display(Name = "Tên người dùng")]
         [Required(ErrorMessage = "Tên người dùng không được bỏ trống")]
         [StringLength(100, MinimumLength = 5)]
@@ -53,18 +56,20 @@ namespace TMDT.Models
 
         [Display(Name = "Email")]
         public string Email { get; set; }
-        public Nullable<int> DiemThuong { get; set; }
         public int MaQuyen { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<int> Status { get; set; }
     
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NguoiDung_PhieuQuaTang> NguoiDung_PhieuQuaTang { get; set; }
         public virtual Quyen Quyen { get; set; }
     }
 }

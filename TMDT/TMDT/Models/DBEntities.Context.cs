@@ -34,6 +34,7 @@ namespace TMDT.Models
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<LoaiGPU> LoaiGPUs { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
+        public virtual DbSet<NguoiDung_PhieuQuaTang> NguoiDung_PhieuQuaTang { get; set; }
         public virtual DbSet<PhieuQuaTang> PhieuQuaTangs { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }

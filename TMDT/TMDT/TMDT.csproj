@@ -191,6 +191,9 @@
     <Compile Include="Models\NguoiDung.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NguoiDung_PhieuQuaTang.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PhieuQuaTang.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -343,6 +346,7 @@
     <Content Include="Views\Admin\TaiKhoanDetail.cshtml" />
     <Content Include="Views\Admin\TaiKhoanCreate.cshtml" />
     <Content Include="Views\GioHang\Checkout.cshtml" />
+    <Content Include="Views\QuanLy\QuanLyVoucher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

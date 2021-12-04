@@ -146,7 +146,6 @@ namespace TMDT.Controllers
                 nguoiDung.Password = password;
                 nguoiDung.ConfirmPass = password;
                 nguoiDung.Status = 1;
-                nguoiDung.DiemThuong = 0;
                 nguoiDung.MaQuyen = 3;
 
                 try
@@ -236,8 +235,10 @@ namespace TMDT.Controllers
 
         public ActionResult QuanLyVoucher()
         {
-            return View();
+            var voucher = database.PhieuQuaTangs.ToList();
+            return View(voucher);
         }
+        #region QLBaoCao
         public ActionResult QuanLyBaoCao(string searching, string Year, string Month)
         {
             var dates = database.HoaDons.Where(s => (s.NgayMua.Year + "-" + s.NgayMua.Month + "-" + s.NgayMua.Day) == searching).ToList();
@@ -263,10 +264,10 @@ namespace TMDT.Controllers
             if (Month != "" && Year != null)
             {
                 int ngaytrongthang = System.DateTime.DaysInMonth(int.Parse(Year), int.Parse(Month));
-                int[] doanhthutuans = new int[5];
-                int[] giamgiatuans = new int[5];
-                int[] giavontuans = new int[5];
-                int[] loinhuantuans = new int[5];
+                double[] doanhthutuans = new double[5];
+                double[] giamgiatuans = new double[5];
+                double[] giavontuans = new double[5];
+                double[] loinhuantuans = new double[5];
                 int ngaytrongtuan1 = 1; 
                 int ngaytrongtuan2 = 7;
                 for (int i = 0; i < 5;i++)
@@ -278,14 +279,14 @@ namespace TMDT.Controllers
                         ngaytrongtuan2 += 7;
                         foreach(var item in hoadonNgay)
                         {
-                            int temp1 = item.TongThanhToan ?? 0;
-                            int temp2 = item.SoTienGiam ?? 0;
+                            double temp1 = item.TongThanhToan ?? 0;
+                            double temp2 = item.SoTienGiam ?? 0;
                             doanhthutuans[i] = doanhthutuans[i] + temp1;
                             giamgiatuans[i] = giamgiatuans[i] + temp2;
                             foreach (var itemcthd in item.CTHoaDons)
                             {
                                 var giavon = database.SanPhamNhapKhoes.Where(s => s.MaSanPham == itemcthd.MaSanPham).FirstOrDefault();
-                                int temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
+                                double temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
                                 giavontuans[i] = giavontuans[i] + temp3;
                             }
                         }
@@ -297,14 +298,14 @@ namespace TMDT.Controllers
                         
                         foreach (var item in hoadonNgay)
                         {
-                            int temp1 = item.TongThanhToan ?? 0;
-                            int temp2 = item.SoTienGiam ?? 0;
+                            double temp1 = item.TongThanhToan ?? 0;
+                            double temp2 = item.SoTienGiam ?? 0;
                             doanhthutuans[i] = doanhthutuans[i] + temp1;
                             giamgiatuans[i] = giamgiatuans[i] + temp2;
                             foreach (var itemcthd in item.CTHoaDons)
                             {
                                 var giavon = database.SanPhamNhapKhoes.Where(s => s.MaSanPham == itemcthd.MaSanPham).FirstOrDefault();
-                                int temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
+                                double temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
                                 giavontuans[i] = giavontuans[i] + temp3;
                             }
                         }
@@ -316,7 +317,7 @@ namespace TMDT.Controllers
                 ViewBag.giavontuans = giavontuans;
                 ViewBag.loinhuantuans = loinhuantuans;
 
-                int tongdoanhthutuan = 0, tonggiamgiatuan = 0, tonggiavongtuan = 0, tongloinhuantuan = 0;
+                double tongdoanhthutuan = 0, tonggiamgiatuan = 0, tonggiavongtuan = 0, tongloinhuantuan = 0;
 
 
 
@@ -347,10 +348,10 @@ namespace TMDT.Controllers
             if (Month == "" && Year != null)
             {
 
-                int[] doanhthuthangs = new int[15];
-                int[] giamgiathangs = new int[15];
-                int[] giavonthangs = new int[15];
-                int[] loinhuanthangs = new int[15];
+                double[] doanhthuthangs = new double[15];
+                double[] giamgiathangs = new double[15];
+                double[] giavonthangs = new double[15];
+                double[] loinhuanthangs = new double[15];
                 var hoadonNam = database.HoaDons.Where(s => s.NgayMua.Year.ToString() == Year).ToList();
                 foreach (var itemhd in hoadonNam)
                 {
@@ -358,15 +359,15 @@ namespace TMDT.Controllers
                     {
                         if (itemhd.NgayMua.Month == i)
                         {
-                            int temp1 = itemhd.TongThanhToan ?? 0;
-                            int temp2 = itemhd.SoTienGiam ?? 0;
+                            double temp1 = itemhd.TongThanhToan ?? 0;
+                            double temp2 = itemhd.SoTienGiam ?? 0;
                             doanhthuthangs[i] = doanhthuthangs[i] + temp1;
                             giamgiathangs[i] = giamgiathangs[i] + temp2;
 
                             foreach (var itemcthd in itemhd.CTHoaDons)
                             {
                                 var giavon = database.SanPhamNhapKhoes.Where(s => s.MaSanPham == itemcthd.MaSanPham).FirstOrDefault();
-                                int temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
+                                double temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
                                 giavonthangs[i] = giavonthangs[i] + temp3;
                             }
 
@@ -379,7 +380,7 @@ namespace TMDT.Controllers
                 ViewBag.giavonthangs = giavonthangs;
                 ViewBag.loinhuanthangs = loinhuanthangs;
 
-                int tongdoanhthuthang = 0, tonggiamgiathang = 0, tonggiavongthang = 0, tongloinhuanthang = 0;
+                double tongdoanhthuthang = 0, tonggiamgiathang = 0, tonggiavongthang = 0, tongloinhuanthang = 0;
 
 
 
@@ -418,19 +419,19 @@ namespace TMDT.Controllers
         public ActionResult QuanLyBaoCaoXuatPDF(string Acc, string Year, string Month)
         {
 
-            int[] doanhthuthangs = new int[15];
-            int[] giamgiathangs = new int[15];
-            int[] giavonthangs = new int[15];
-            int[] loinhuanthangs = new int[15];
+            double[] doanhthuthangs = new double[15];
+            double[] giamgiathangs = new double[15];
+            double[] giavonthangs = new double[15];
+            double[] loinhuanthangs = new double[15];
 
 
             if (Month != null && Year != null)
             {
                 int ngaytrongthang = System.DateTime.DaysInMonth(int.Parse(Year), int.Parse(Month));
-                int[] doanhthutuans = new int[5];
-                int[] giamgiatuans = new int[5];
-                int[] giavontuans = new int[5];
-                int[] loinhuantuans = new int[5];
+                double[] doanhthutuans = new double[5];
+                double[] giamgiatuans = new double[5];
+                double[] giavontuans = new double[5];
+                double[] loinhuantuans = new double[5];
                 int ngaytrongtuan1 = 1;
                 int ngaytrongtuan2 = 7;
                 for (int i = 0; i < 5; i++)
@@ -442,14 +443,14 @@ namespace TMDT.Controllers
                         ngaytrongtuan2 += 7;
                         foreach (var item in hoadonNgay)
                         {
-                            int temp1 = item.TongThanhToan ?? 0;
-                            int temp2 = item.SoTienGiam ?? 0;
+                            double temp1 = item.TongThanhToan ?? 0;
+                            double temp2 = item.SoTienGiam ?? 0;
                             doanhthutuans[i] = doanhthutuans[i] + temp1;
                             giamgiatuans[i] = giamgiatuans[i] + temp2;
                             foreach (var itemcthd in item.CTHoaDons)
                             {
                                 var giavon = database.SanPhamNhapKhoes.Where(s => s.MaSanPham == itemcthd.MaSanPham).FirstOrDefault();
-                                int temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
+                                double temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
                                 giavontuans[i] = giavontuans[i] + temp3;
                             }
                         }
@@ -461,14 +462,14 @@ namespace TMDT.Controllers
 
                         foreach (var item in hoadonNgay)
                         {
-                            int temp1 = item.TongThanhToan ?? 0;
-                            int temp2 = item.SoTienGiam ?? 0;
+                            double temp1 = item.TongThanhToan ?? 0;
+                            double temp2 = item.SoTienGiam ?? 0;
                             doanhthutuans[i] = doanhthutuans[i] + temp1;
                             giamgiatuans[i] = giamgiatuans[i] + temp2;
                             foreach (var itemcthd in item.CTHoaDons)
                             {
                                 var giavon = database.SanPhamNhapKhoes.Where(s => s.MaSanPham == itemcthd.MaSanPham).FirstOrDefault();
-                                int temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
+                                double temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
                                 giavontuans[i] = giavontuans[i] + temp3;
                             }
                         }
@@ -480,7 +481,7 @@ namespace TMDT.Controllers
                 ViewBag.giavontuans = giavontuans;
                 ViewBag.loinhuantuans = loinhuantuans;
 
-                int tongdoanhthutuan = 0, tonggiamgiatuan = 0, tonggiavongtuan = 0, tongloinhuantuan = 0;
+                double tongdoanhthutuan = 0, tonggiamgiatuan = 0, tonggiavongtuan = 0, tongloinhuantuan = 0;
 
 
 
@@ -517,15 +518,15 @@ namespace TMDT.Controllers
                     {
                         if (itemhd.NgayMua.Month == i)
                         {
-                            int temp1 = itemhd.TongThanhToan ?? 0;
-                            int temp2 = itemhd.SoTienGiam ?? 0;
+                            double temp1 = itemhd.TongThanhToan ?? 0;
+                            double temp2 = itemhd.SoTienGiam ?? 0;
                             doanhthuthangs[i] = doanhthuthangs[i] + temp1;
                             giamgiathangs[i] = giamgiathangs[i] + temp2;
 
                             foreach (var itemcthd in itemhd.CTHoaDons)
                             {
                                 var giavon = database.SanPhamNhapKhoes.Where(s => s.MaSanPham == itemcthd.MaSanPham).FirstOrDefault();
-                                int temp3 = (giavon.GiaNhap??0) * itemcthd.SoLuong;
+                                double temp3 = (giavon.GiaNhap??0) * itemcthd.SoLuong;
                                 giavonthangs[i] = giavonthangs[i] + temp3;
                             }
 
@@ -539,7 +540,7 @@ namespace TMDT.Controllers
             ViewBag.giavonthangs = giavonthangs;
             ViewBag.loinhuanthangs = loinhuanthangs;
 
-            int tongdoanhthuthang = 0, tonggiamgiathang = 0, tonggiavongthang = 0, tongloinhuanthang = 0;
+            double tongdoanhthuthang = 0, tonggiamgiathang = 0, tonggiavongthang = 0, tongloinhuanthang = 0;
             foreach (var i in doanhthuthangs)
             {
                 tongdoanhthuthang += i;
@@ -584,5 +585,6 @@ namespace TMDT.Controllers
 
             return View(hoadon);
         }
+        #endregion
     }
 }

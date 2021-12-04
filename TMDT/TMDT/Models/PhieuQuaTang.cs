@@ -18,18 +18,24 @@ namespace TMDT.Models
         public PhieuQuaTang()
         {
             this.HoaDons = new HashSet<HoaDon>();
+            this.NguoiDung_PhieuQuaTang = new HashSet<NguoiDung_PhieuQuaTang>();
         }
     
-        public int MaPhieuQuaTang { get; set; }
-        public Nullable<int> GiaTri { get; set; }
-        public Nullable<int> TongSoLuong { get; set; }
-        public Nullable<int> SoLuongConLai { get; set; }
+        public long MaPhieuQuaTang { get; set; }
+        public string TenPhieuQuaTang { get; set; }
+        public string MaGiamGia { get; set; }
+        public int LoaiPhamVi { get; set; }
+        public Nullable<double> GiaTri { get; set; }
+        public Nullable<double> GiaTriDonHangToiThieu { get; set; }
+        public Nullable<int> SoLuong { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public System.DateTime NgayKichHoat { get; set; }
         public System.DateTime NgayKetThuc { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NguoiDung_PhieuQuaTang> NguoiDung_PhieuQuaTang { get; set; }
     }
 }

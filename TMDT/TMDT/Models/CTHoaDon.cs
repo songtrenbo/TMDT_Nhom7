@@ -14,10 +14,10 @@ namespace TMDT.Models
     
     public partial class CTHoaDon
     {
-        public int MaCTHoaDon { get; set; }
+        public long MaCTHoaDon { get; set; }
         public int MaHoaDon { get; set; }
-        public int MaSanPham { get; set; }
-        public int DonGia { get; set; }
+        public long MaSanPham { get; set; }
+        public double DonGia { get; set; }
         public int SoLuong { get; set; }
         public int ThanhTien { get; set; }
     
