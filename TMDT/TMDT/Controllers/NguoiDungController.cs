@@ -29,46 +29,50 @@ namespace TMDT.Controllers
             string username = _user.Username;
             string password = Utils.Crypto(_user.Password);
 
-            var checkUser = database.NguoiDungs.Where(s => s.Username.Equals(username) && s.Password.Equals(password)).FirstOrDefault();
+            var checkUser = database.NguoiDungs.Where(s => s.Username.Equals(username)).FirstOrDefault();
 
             if (checkUser == null)
             {
                 ViewBag.ErrorInfo = "Sai tên tài khoản hoặc mật khẩu";
                 return View("DangNhap");
             }
-            switch (checkUser.Status)
+            if (checkUser.Password.Equals(password))
             {
-                case 2:
-                    ViewBag.ErrorInfo = "Tài khoản bị khóa";
-                    return View("DangNhap");
-                case 3:
-                    ViewBag.ErrorInfo = "Tài khoản đã bị xóa";
-                    return View("DangNhap");
-                default:
-                    break;
-            }
-            database.Configuration.ValidateOnSaveEnabled = false;
-            Session["Account"] = checkUser;
-            Session["TenAcc"] = checkUser.Ten;
-            //ViewBag.Ten = check.Ten;
-            if (returnUrl == null)
-            {
-                switch (checkUser.MaQuyen)
+                switch (checkUser.Status)
                 {
-                    case 1:
-                        return RedirectToAction("QLQuyen", "Admin");
                     case 2:
-                        return RedirectToAction("QuanLyThuongHieu", "QuanLy");
+                        ViewBag.ErrorInfo = "Tài khoản bị khóa";
+                        return View("DangNhap");
                     case 3:
-                        return RedirectToAction("Index", "NhanVien");
+                        ViewBag.ErrorInfo = "Tài khoản đã bị xóa";
+                        return View("DangNhap");
                     default:
-                        return RedirectToAction("Index", "TrangChu");
+                        break;
                 }
+                database.Configuration.ValidateOnSaveEnabled = false;
+                Session["Account"] = checkUser;
+                Session["TenAcc"] = checkUser.Ten;
+                //ViewBag.Ten = check.Ten;
+                if (returnUrl == null)
+                {
+                    switch (checkUser.MaQuyen)
+                    {
+                        case 1:
+                            return RedirectToAction("QLQuyen", "Admin");
+                        case 2:
+                            return RedirectToAction("QuanLyThuongHieu", "QuanLy");
+                        case 3:
+                            return RedirectToAction("Index", "NhanVien");
+                        default:
+                            return RedirectToAction("Index", "TrangChu");
+                    }
+                }
+                else
+                    return Redirect(returnUrl);
             }
-            else
-            {
-                return Redirect(returnUrl);
-            }
+            return View("DangNhap");
+
+
         }
         public ActionResult DangXuat()
         {

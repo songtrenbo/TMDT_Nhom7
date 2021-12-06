@@ -14,12 +14,10 @@ namespace TMDT.Controllers
         public ActionResult Index()
         {
             ViewBag.thuonghieu = database.ThuongHieux.ToList();
-            var sanpham = database.SanPhams.ToList();
-
 
             var danhmuc = database.DanhMucs.Where(x => x.IsShowHome == true).ToList().ToArray();
             ViewBag.danhmuc = danhmuc;
-            var sp = database.SanPhams.ToList();
+            var sp = database.SanPhams.OrderByDescending(x => x.NgayTao).ToList();
             List<List<SanPham>> result = new List<List<SanPham>>();
             for (int i = 0; i < danhmuc.Length; i++)
             {

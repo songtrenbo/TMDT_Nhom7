@@ -1,0 +1,82 @@
+﻿@model TMDT.Models.NguoiDung
+
+@{
+    ViewBag.Title = "PhanQuyenDetail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>PhanQuyenDetail</h2>
+
+<div>
+    <h4>NguoiDung</h4>
+    <hr />
+    @using (Html.BeginForm("PhanQuyenUpdate", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.MaNguoiDung)
+                        @Html.HiddenFor(model => model.Status)
+                        @Html.HiddenFor(model => model.NgayTao)
+                        @Html.HiddenFor(model => model.Password)
+                        @{Model.ConfirmPass = Model.Password;}
+                        @Html.HiddenFor(model => model.ConfirmPass)
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Ten)
+                                @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputSdt">Số điện thoại</label>
+                                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputUsername">Tên đăng nhập</label>
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail">Email</label>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="inputDiaChi">Địa chỉ</label>
+                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-10">
+                                <label for="inputDiaChi">Quyền</label>
+                                @Html.DropDownListFor(model => model.MaQuyen, ViewBag.DsQuyen as SelectList, "-- chọn quyền --", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.MaQuyen, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-12">
+                                <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

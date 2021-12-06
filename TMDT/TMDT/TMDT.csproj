@@ -340,9 +340,8 @@
     <Content Include="Views\QuanLy\ThuongHieuDetails.cshtml" />
     <Content Include="Views\QuanLy\QuanLyBaoCao.cshtml" />
     <Content Include="Views\QuanLy\BaoCaoDetail.cshtml" />
-    <Content Include="Views\Admin\QuyenCreate.cshtml" />
-    <Content Include="Views\Admin\QuyenDetail.cshtml" />
-    <Content Include="Views\Admin\QLQuyen.cshtml" />
+    <Content Include="Views\Admin\PhanQuyenDetail.cshtml" />
+    <Content Include="Views\Admin\QLPhanQuyen.cshtml" />
     <Content Include="Views\QuanLy\QuanLyBaoCaoXuatPDF.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\QuanLy\NhanVienCreate.cshtml" />

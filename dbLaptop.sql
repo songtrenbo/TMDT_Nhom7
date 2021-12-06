@@ -236,6 +236,17 @@ CREATE TABLE Banner
 );
 GO
 
+ CREATE TRIGGER UTG_UpdateSLTonSP ON SanPhamNhapKho
+ AFTER INSERT
+ AS
+ BEGIN
+     UPDATE SanPham
+     SET SoLuongTon = SoLuongTon + (SELECT SoLuong FROM INSERTED WHERE MaSanPham = SanPham.MaSanPham)
+     FROM SanPham, INSERTED
+	 WHERE SanPham.MaSanPham = INSERTED.MaSanPham
+ END
+GO
+
 --Quyền
 INSERT INTO Quyen
     (TenQuyen)
@@ -299,19 +310,22 @@ VALUES(15.6, N'2021-11-05'),--1
 (16, N'2021-11-05')--5
 
 --Sản phẩm
-INSERT INTO SanPham(TenSanPham, MaDanhMuc, SeoTitle, MaThuongHieu, SoLuongTon, GiaBan, GiaGiam, BaoHanh,  MaLoaiCPU, CPUInfo, RAM, MaLoaiGPU, GPUInfo, SizeManHinh, ManHinh, Pin, LuuTru, KhoiLuong, Hinh, NgayTao)
-VALUES(N'Laptop Gaming Acer Aspire 7 A715 42G R1SB', 1, 'laptop-gaming-acer-aspire-7-a715-42g-r1sb', 3, 15, 19990000, 0, 12, 5, N'5500U', 8, 3, N'1650 4GB GDDR6', 1, N'FHD (1920 x 1080) IPS, Anti-Glare, 144Hz', N'4 Cell 48Whr', N'256GB PCIe® NVMe™ M.2 SSD', 2.1, N'https://product.hstatic.net/1000026716/product/laptop_gaming_acer_aspire_7_a715_42g_r1sb_9520016e22274791bb4e1697764c57c4.jpg', N'2021-11-05'),
-(N'Laptop Apple MacBook Pro M1 2020 8GB/256GB (MYD82SA/A)', 4, 'apple-macbook-pro-2020-m1-myd82saa', 1, 5, 33490000, 0, 12, 7, null, 8, 1, null, 4, null, N'Khoảng 10 tiếng', N'256 GB SSD', 1.4, N'https://lh3.googleusercontent.com/6iW6tc0lHp4paCYznq-gC5mEXEGMSBmrSq2I4MaXdPne5XWQI4l8m-bGRVCRFH94d4PEqtUIdH3FERr-VNDWaT2k9qcZ5Ey_PQ=w1000-rw', N'2021-11-05'),
-(N'Laptop gaming Lenovo Legion 5 Pro 16ACH6H 82JQ005YVN', 1, 'laptop-gaming-lenovo-legion-5-pro-16ach6h-82jq005yvn', 6, 2, 49990000, 40000000, 24, 6, N'5800H 3.2GHz upto 4.4GHz, 8 cores 16 threads', 16, 4, N'3070 8GB GDDR6', 5, N'WQXGA (2560x1600) IPS 500nits Anti-glare, 165Hz, 100% sRGB, Dolby Vision, HDR 400, Free-Sync, G-Sync, DC dimmer', N'4 Cell 80 WHr', N'1TB SSD M.2 2280 PCIe 3.0x4 NVMe', 2.45, N'https://product.hstatic.net/1000026716/product/laptop_gaming_lenovo_legion_5_pro_16ach6h_82jq005yvn_fea32779d7ae4bfd8c9536fd44358354.jpg', N'2021-11-05')
+INSERT INTO SanPham(TenSanPham, MaDanhMuc, SeoTitle, MaThuongHieu, GiaBan, GiaGiam, BaoHanh,  MaLoaiCPU, CPUInfo, RAM, MaLoaiGPU, GPUInfo, SizeManHinh, ManHinh, Pin, LuuTru, KhoiLuong, Hinh, NgayTao)
+VALUES(N'Laptop Gaming Acer Aspire 7 A715 42G R1SB', 1, 'laptop-gaming-acer-aspire-7-a715-42g-r1sb', 3, 19990000, 0, 12, 5, N'5500U', 8, 3, N'1650 4GB GDDR6', 1, N'FHD (1920 x 1080) IPS, Anti-Glare, 144Hz', N'4 Cell 48Whr', N'256GB PCIe® NVMe™ M.2 SSD', 2.1, N'https://product.hstatic.net/1000026716/product/laptop_gaming_acer_aspire_7_a715_42g_r1sb_9520016e22274791bb4e1697764c57c4.jpg', N'2021-11-05 05:35:21'),
+(N'Laptop Apple MacBook Pro M1 2020 8GB/256GB (MYD82SA/A)', 4, 'apple-macbook-pro-2020-m1-myd82saa', 1, 33490000, 0, 12, 7, null, 8, 1, null, 4, null, N'Khoảng 10 tiếng', N'256 GB SSD', 1.4, N'https://lh3.googleusercontent.com/6iW6tc0lHp4paCYznq-gC5mEXEGMSBmrSq2I4MaXdPne5XWQI4l8m-bGRVCRFH94d4PEqtUIdH3FERr-VNDWaT2k9qcZ5Ey_PQ=w1000-rw', N'2021-11-05 06:35:21'),
+(N'Laptop gaming Lenovo Legion 5 Pro 16ACH6H 82JQ005YVN', 1, 'laptop-gaming-lenovo-legion-5-pro-16ach6h-82jq005yvn', 6, 49990000, 40000000, 24, 6, N'5800H 3.2GHz upto 4.4GHz, 8 cores 16 threads', 16, 4, N'3070 8GB GDDR6', 5, N'WQXGA (2560x1600) IPS 500nits Anti-glare, 165Hz, 100% sRGB, Dolby Vision, HDR 400, Free-Sync, G-Sync, DC dimmer', N'4 Cell 80 WHr', N'1TB SSD M.2 2280 PCIe 3.0x4 NVMe', 2.45, N'https://product.hstatic.net/1000026716/product/laptop_gaming_lenovo_legion_5_pro_16ach6h_82jq005yvn_fea32779d7ae4bfd8c9536fd44358354.jpg', N'2021-11-05 15:35:21')
 GO
 
 
 --Sản phẩm nhập kho
 INSERT INTO SanPhamNhapKho(MaSanPham, SoLuong, GiaNhap, NgayTao)
-VALUES(1,10, 18500000,N'2021-11-05 05:35:21'),
-(1,5, 18000000,N'2021-11-05 05:35:25'),
-(2,5, 29000000,N'2021-11-05 05:35:50'),
-(3,2, 39000000,N'2021-11-05 05:35:51')
+VALUES(1,10, 18500000,N'2021-11-05 05:35:21')
+INSERT INTO SanPhamNhapKho(MaSanPham, SoLuong, GiaNhap, NgayTao)
+VALUES(1,5, 18000000,N'2021-11-05 05:35:25')
+INSERT INTO SanPhamNhapKho(MaSanPham, SoLuong, GiaNhap, NgayTao)
+VALUES(2,5, 29000000,N'2021-11-05 05:35:50')
+INSERT INTO SanPhamNhapKho(MaSanPham, SoLuong, GiaNhap, NgayTao)
+VALUES(3,2, 39000000,N'2021-11-05 05:35:51')
 GO
 
 
@@ -326,6 +340,7 @@ VALUES(N'admin',N'admin',N'202cb962ac59075b964b07152d234b70',1,N'2021-11-05 05:3
 GO
 
 select *from NguoiDung
+select *from Quyen
 select *from SanPham
 
 SELECT * FROM CTHoaDon
