@@ -85,10 +85,10 @@ namespace TMDT.Controllers
                     }
                 }
 
-                if (hoaDon.HinhThucThanhToan == 2)
-                {
-                    PaymentWithPaypal();
-                }
+                //if (hoaDon.HinhThucThanhToan == 2)
+                //{
+                //    PaymentWithPaypal();
+                //}
                 database.SaveChanges();
                 cart.ClearCart();
                 return RedirectToAction("Index", "TrangChu");

@@ -16,7 +16,7 @@ namespace TMDT.Controllers
         {
             return View();
         }
-
+        #region Voucher
         public ActionResult Voucher()
         {
             //Kiểm tra ngày hết hạng
@@ -33,18 +33,8 @@ namespace TMDT.Controllers
 
             var acc = (NguoiDung)Session["Account"];
             var voucher = database.PhieuQuaTangs.Where(s => s.Status == 2).ToList();
-            List<object> thuonghieus = new List<object>();
-            foreach(var item in voucher)
-            {
-                //lấy thương hiệu trùng với loại phạm vi của voucher
-                var thuonghieu = database.ThuongHieux.Where(s => s.MaThuongHieu == item.LoaiPhamVi).FirstOrDefault();
-                if (thuonghieu != null)
-                {
-                    thuonghieus.Add(thuonghieu);
-                }
-            }
-            ViewBag.ThuongHieu = thuonghieus.ToList();
-
+  
+            ViewBag.ThuongHieu = database.ThuongHieux.ToList();
 
             //kiểm tra account đã có kích hoạt voucher chưa
             var checkVoucher = database.NguoiDung_PhieuQuaTang.Where(s => s.MaNguoiDung == acc.MaNguoiDung).ToList();
@@ -67,6 +57,59 @@ namespace TMDT.Controllers
 
             database.SaveChanges();
             return RedirectToAction("Voucher");
+        }
+
+        public ActionResult VoucherCuaToi()
+        {
+            var acc = (NguoiDung)Session["Account"];
+            //Kiểm tra ngày hết hạng
+            var phieuQT = database.NguoiDung_PhieuQuaTang.Where(s => s.MaNguoiDung == acc.MaNguoiDung && s.PhieuQuaTang.Status==2).ToList();
+            foreach (var item in phieuQT)
+            {
+                if (item.PhieuQuaTang.NgayKetThuc < DateTime.Now)
+                {
+                    item.PhieuQuaTang.Status = 3;
+                    database.Entry(item).State = EntityState.Modified;
+                    database.SaveChanges();
+                }
+            }
+
+           
+
+            ViewBag.ThuongHieu = database.ThuongHieux.ToList();
+            //kiểm tra account đã có kích hoạt voucher chưa
+            var checkVoucher = database.NguoiDung_PhieuQuaTang.Where(s => s.MaNguoiDung == acc.MaNguoiDung).ToList();
+            ViewBag.checkVoucher = checkVoucher;
+            return View(phieuQT);
+        }
+        public ActionResult VoucherHetHan()
+        {
+            var acc = (NguoiDung)Session["Account"];
+            //Kiểm tra ngày hết hạng
+            var phieuQT = database.NguoiDung_PhieuQuaTang.Where(s => s.MaNguoiDung == acc.MaNguoiDung && s.PhieuQuaTang.Status == 3).ToList();
+            foreach (var item in phieuQT)
+            {
+                if (item.PhieuQuaTang.NgayKetThuc < DateTime.Now)
+                {
+                    item.PhieuQuaTang.Status = 3;
+                    database.Entry(item).State = EntityState.Modified;
+                    database.SaveChanges();
+                }
+            }
+
+
+            ViewBag.ThuongHieu = database.ThuongHieux.ToList();
+
+            //kiểm tra account đã có kích hoạt voucher chưa
+            var checkVoucher = database.NguoiDung_PhieuQuaTang.Where(s => s.MaNguoiDung == acc.MaNguoiDung).ToList();
+            ViewBag.checkVoucher = checkVoucher;
+            return View(phieuQT);
+        }
+        #endregion
+
+        public ActionResult DonMua()
+        {
+            return View();
         }
     }
 }

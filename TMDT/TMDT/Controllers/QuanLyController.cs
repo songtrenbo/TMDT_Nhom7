@@ -259,7 +259,7 @@ namespace TMDT.Controllers
                 database.Configuration.ValidateOnSaveEnabled = false;
                 phieuquatang.NgayTao = DateTime.Now;
                 phieuquatang.Status = 2;
-                phieuquatang.NgayKichHoat = DateTime.Parse(ngayBatDau);
+                phieuquatang.NgayKichHoat = DateTime.Now;
                 phieuquatang.NgayKetThuc = DateTime.Parse(ngayKetThuc);
                 database.PhieuQuaTangs.Add(phieuquatang);
                 database.SaveChanges();
@@ -279,7 +279,7 @@ namespace TMDT.Controllers
             return View(voucher);
         }
         [HttpPost]
-        public ActionResult EditVoucher(int id, PhieuQuaTang phieuquatang, string ngayBatDau, string ngayKetThuc)
+        public ActionResult EditVoucher(int id, PhieuQuaTang phieuquatang, string ngayKetThuc)
         {
          
             List<ThuongHieu> thuonghieu = database.ThuongHieux.ToList();
@@ -294,7 +294,6 @@ namespace TMDT.Controllers
                 {
                     phieuquatang.Status = 3;
                 }
-                phieuquatang.NgayKichHoat = DateTime.Parse(ngayBatDau);
                 phieuquatang.NgayKetThuc = DateTime.Parse(ngayKetThuc);
                 database.Entry(phieuquatang).State = EntityState.Modified;
                 database.SaveChanges();

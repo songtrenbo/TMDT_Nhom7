@@ -14,27 +14,34 @@
         @{
             foreach (var item in Model)
             {
-                <div class="col col-md-1">
-
-                </div>
-                <div class="col col-md-5">
+                @*<div class="col col-md-1">
+                </div>*@                
+                <div class="col col-md-6">
                     <div class="card">
                         <div class="main">
                             <div class="co-img">
-                                @foreach (var i in ViewBag.ThuongHieu)
+                                @if (ViewBag.ThuongHieu.Count == 0)
                                 {
-                                    if (item.LoaiPhamVi == i.MaThuongHieu)
+                                    <img src="~/Content/images/voucher_logo.png"
+                                         alt="" />
+                                }
+                                @{
+                                    int count = 0;
+                                    foreach (var i in ViewBag.ThuongHieu)
                                     {
+                                        if (item.LoaiPhamVi == i.MaThuongHieu)
+                                        {
 
-                                        <img src="@i.Hinh"
-                                             alt="" />
-                                        break;
+                                            <img src="@i.Hinh"
+                                                 alt="" />
+                                            count++;
+                                            break;
+                                        }
                                     }
-                                    else
+                                    if (count == 0)
                                     {
                                         <img src="~/Content/images/voucher_logo.png"
                                              alt="" />
-                                        break;
                                     }
                                 }
                             </div>
@@ -49,17 +56,19 @@
                         <div class="copy-button">
                             @if (ViewBag.checkVoucher.Count != 0)
                             {
-                                int count = 0;
+                                int check = 0;
                                 foreach (var i in ViewBag.checkVoucher)
                                 {
                                     if (item.MaPhieuQuaTang == i.MaPhieuQuaTang)
                                     {
-                                        <p>Mã voucher:  @item.MaGiamGia</p>
-                                        <button onclick="copyIt()" class="btn btn-danger" disabled>Đã kích hoạt</button>
-                                        count++;
+                                        <h7> Mã Voucher: </h7> <input type="text" id="@item.MaPhieuQuaTang" name="lname" value="@item.MaGiamGia" readonly style="cursor:default">
+
+                                        <button onclick="copyToClipboard('@item.MaPhieuQuaTang')" class="btn btn-danger">Sao chép</button>
+                                        check++;
+                                        break;
                                     }
                                 }
-                                if (count == 0)
+                                if (check == 0)
                                 {
                                     <p>Mã voucher:  **********</p>
                                     <a href="@Url.Action("KichHoatVoucher","KhachHang", new { id = item.MaPhieuQuaTang })" class="btn btn-danger">Kích hoạt</a>
@@ -79,8 +88,21 @@
 </div>
 
 
+<script type="text/javascript">
 
+    //function btn_click() {
+    //    myInp.select();
+    //    document.execCommand("Copy");
+    //    window.getSelection().removeAllRanges();
+    //}
 
+    function copyToClipboard(target) {
+        var element = document.getElementById(target);
+        element.select();
+        document.execCommand("Copy");
+        window.getSelection().removeAllRanges();
+    }
+</script>
 
 
 <style>
@@ -93,9 +115,6 @@
         font-family: "Poppins", sans-serif;
     }
 
-    .col {
-        background-color: lightgray
-    }
     .card {
         margin-top: 20px;
         width: 470px;
@@ -109,7 +128,7 @@
     }
 
         .card:hover {
-            cursor: pointer;
+            cursor:default;
             box-shadow: 0 7px 15px 0 gray;
         }
 
@@ -120,7 +139,7 @@
         padding: 0 10px;
         align-items: center;
     }
-
+/*
     .card::before {
         position: absolute;
         content: "";
@@ -131,7 +150,7 @@
         top: 100px;
         background-color: lightgray;
         width: 40px;
-    }
+    }*/
 
     .co-img img {
         width: 150px;
@@ -169,8 +188,7 @@
     }
 
     .copy-button input {
-        width: 100%;
-        height: 100%;
+        width: 50%;
         border: none;
         outline: none;
         font-size: 15px;
@@ -178,9 +196,9 @@
 </style>
 
 <style>
-        .active-3 {
-            background-color: #CA2620;
-            box-shadow: inset 5px 5px 12px #AA1B1B;
-            transition: all 0.3s ease 0s;
-        }
-    </style>
+    .active-3 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

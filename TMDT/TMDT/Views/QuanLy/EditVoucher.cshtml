@@ -64,14 +64,14 @@
     </div>
 
 
-    <div class="form-group">
+    @*<div class="form-group">
         @Html.LabelFor(model => model.NgayKichHoat, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @*@Html.EditorFor(model => model.NgayKichHoat, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayKichHoat, "", new { @class = "text-danger" })*@
+            @Html.EditorFor(model => model.NgayKichHoat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NgayKichHoat, "", new { @class = "text-danger" })
             <input type="date" name="ngayBatDau" class="form-control" />
         </div>
-    </div>
+    </div>*@
 
     <div class="form-group">
         @Html.LabelFor(model => model.NgayKetThuc, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -83,6 +83,7 @@
     </div>
     @Html.HiddenFor(model => model.Status)
     @Html.HiddenFor(model => model.MaPhieuQuaTang)
+    @Html.HiddenFor(model=>model.NgayKichHoat)
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Lưu" class="btn btn-success" />
@@ -92,3 +93,10 @@
 </div>
 }
 <br /><br />
+      <style>
+          .active-5 {
+              background-color: #CA2620;
+              box-shadow: inset 5px 5px 12px #AA1B1B;
+              transition: all 0.3s ease 0s;
+          }
+      </style>

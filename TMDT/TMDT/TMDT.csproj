@@ -358,6 +358,9 @@
     <Content Include="Views\GioHang\CheckoutFail.cshtml" />
     <Content Include="Views\GioHang\CheckoutSuccess.cshtml" />
     <Content Include="Views\KhachHang\Voucher.cshtml" />
+    <Content Include="Views\KhachHang\DonMua.cshtml" />
+    <Content Include="Views\KhachHang\VoucherCuaToi.cshtml" />
+    <Content Include="Views\KhachHang\VoucherHetHan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
