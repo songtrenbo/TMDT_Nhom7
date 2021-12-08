@@ -9,7 +9,7 @@
 
 
 
-<div class="container-cards container-fluid">
+<div class="container-fluid">
     <div class="row" style="height:500px">
         @{
             foreach (var item in Model)
@@ -28,11 +28,13 @@
 
                                         <img src="@i.Hinh"
                                              alt="" />
+                                        break;
                                     }
                                     else
                                     {
                                         <img src="~/Content/images/voucher_logo.png"
                                              alt="" />
+                                        break;
                                     }
                                 }
                             </div>
@@ -47,22 +49,23 @@
                         <div class="copy-button">
                             @if (ViewBag.checkVoucher.Count != 0)
                             {
+                                int count = 0;
                                 foreach (var i in ViewBag.checkVoucher)
                                 {
                                     if (item.MaPhieuQuaTang == i.MaPhieuQuaTang)
                                     {
                                         <p>Mã voucher:  @item.MaGiamGia</p>
                                         <button onclick="copyIt()" class="btn btn-danger" disabled>Đã kích hoạt</button>
-                                    }
-                                    else
-                                    {
-                                        <p>Mã voucher:  **********</p>
-                                        <a href="@Url.Action("KichHoatVoucher","KhachHang", new { id = item.MaPhieuQuaTang })" class="btn btn-danger">Kích hoạt</a>
+                                        count++;
                                     }
                                 }
-
+                                if (count == 0)
+                                {
+                                    <p>Mã voucher:  **********</p>
+                                    <a href="@Url.Action("KichHoatVoucher","KhachHang", new { id = item.MaPhieuQuaTang })" class="btn btn-danger">Kích hoạt</a>
+                                }
                             }
-                            @if (ViewBag.checkVoucher.Count == 0)
+                            else
                             {
                                 <p>Mã voucher:  **********</p>
                                 <a href="@Url.Action("KichHoatVoucher","KhachHang", new { id = item.MaPhieuQuaTang })" class="btn btn-danger">Kích hoạt</a>
@@ -90,12 +93,9 @@
         font-family: "Poppins", sans-serif;
     }
 
-    .container-cards {
-        justify-content: center;
-        display: flex;
-        background-color: lightgray;
+    .col {
+        background-color: lightgray
     }
-
     .card {
         margin-top: 20px;
         width: 470px;

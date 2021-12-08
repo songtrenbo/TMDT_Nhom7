@@ -32,7 +32,7 @@ namespace TMDT.Controllers
             }
 
             var acc = (NguoiDung)Session["Account"];
-            var voucher = database.PhieuQuaTangs.Where(s => s.Status == 2 && s.GiaTriDonHangToiThieu <= acc.HoaDons.Count).ToList();
+            var voucher = database.PhieuQuaTangs.Where(s => s.Status == 2).ToList();
             List<object> thuonghieus = new List<object>();
             foreach(var item in voucher)
             {
