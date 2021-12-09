@@ -74,11 +74,11 @@
                     </dl>
                     <dl class="dlist-align">
                         <dt>Giảm giá:</dt>
-                        <dd id="Discount" class="text-right text-danger ml-3">0</dd>
+                        <dd id="Discount" class="text-right text-dark ml-3">0</dd>
                     </dl>
                     <dl class="dlist-align">
                         <dt>Tổng tiền:</dt>
-                        <dd id="Total" class="text-right text-dark b ml-3"><strong>0</strong></dd>
+                        <dd id="Total" class="text-right text-danger b ml-3"><strong>0</strong></dd>
                     </dl>
                     <hr>
                     @*<a id="cart-checkout" href="#" class="btn btn-muahang" onclick="Checkout()" data-abc="true"> Mua hàng </a>*@
@@ -93,16 +93,19 @@
                     }
                 </div>
             </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <label>Bạn có phiếu giảm giá?</label>
-                            <div class="input-group"> <input type="text" class="form-control coupon" name="" placeholder="Mã phiếu giảm giá"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon">Áp dụng</button> </span> </div>
+            @*<div class="card mb-3">
+                    <div class="card-body">
+                        <label>Bạn có phiếu giảm giá?</label>
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control coupon" id="VoucherInput" name="" placeholder="Mã phiếu giảm giá">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-apply coupon" type="button" id="ApplyButton" onclick="ApplyVoucher()" style="font-size:12px">Áp dụng</button>
+                            </div>
                         </div>
-                    </form>
-                </div>
-            </div>
+
+                    </div>
+                </div>*@
         </aside>
     </div>
     <hr />

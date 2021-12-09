@@ -1,6 +1,7 @@
 ﻿using PayPal.Api;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -45,7 +46,12 @@ namespace TMDT.Controllers
             var _pro = database.SanPhams.SingleOrDefault(s => s.MaSanPham == id);
             if (_pro != null)
             {
-                GetCart().Add_Product_Cart(_pro, quantity);
+                Cart cart = GetCart();
+                var check = cart.Items.Where(s => s._sanPham.MaSanPham == id).FirstOrDefault();
+                if (check == null)
+                {
+                    cart.Add_Product_Cart(_pro, quantity);
+                }
             }
         }
         public ActionResult Checkout()
@@ -67,8 +73,6 @@ namespace TMDT.Controllers
 
                 database.HoaDons.Add(hoaDon);
 
-
-
                 foreach (var item in cart.Items)
                 {
                     CTHoaDon cTHoaDon = new CTHoaDon();
@@ -83,6 +87,16 @@ namespace TMDT.Controllers
                         sp.SoLuongTon -= item._quantity;
                         sp.SoLuongBan += item._quantity;
                     }
+                }
+
+                PhieuQuaTang phieuQuaTang = database.PhieuQuaTangs.Where(s => s.MaPhieuQuaTang == hoaDon.MaPhieuQuaTang).FirstOrDefault();
+                if (phieuQuaTang != null)
+                {
+                    phieuQuaTang.SoLuong--;
+                    database.Entry(phieuQuaTang).State = EntityState.Modified;
+
+                    NguoiDung_PhieuQuaTang ngVoucher = database.NguoiDung_PhieuQuaTang.Where(s => s.MaNguoiDung == hoaDon.MaKhachHang && s.MaPhieuQuaTang == hoaDon.MaPhieuQuaTang).FirstOrDefault();
+                    database.NguoiDung_PhieuQuaTang.Remove(ngVoucher);
                 }
 
                 //if (hoaDon.HinhThucThanhToan == 2)
@@ -234,6 +248,42 @@ namespace TMDT.Controllers
         public ActionResult CheckoutSuccess()
         {
             return View();
+        }
+        public JsonResult ApplyVoucher(string maVoucher)
+        {
+            NguoiDung nguoiDung = (NguoiDung)Session["Account"];
+            var voucher = (from t in database.PhieuQuaTangs.ToList()
+                           where t.MaGiamGia == maVoucher
+                           select new PhieuQuaTang
+                           {
+                               MaPhieuQuaTang = t.MaPhieuQuaTang,
+                               MaGiamGia = t.MaGiamGia,
+                               SoLuong = t.SoLuong,
+                               GiaTri = t.GiaTri,
+                               GiaTriDonHangToiThieu = t.GiaTriDonHangToiThieu,
+                               TenPhieuQuaTang = t.TenPhieuQuaTang,
+                               LoaiPhamVi = t.LoaiPhamVi,
+                               NgayKetThuc = t.NgayKetThuc,
+                               NgayKichHoat = t.NgayKichHoat,
+                               NgayTao = t.NgayTao,
+                               Status = t.Status,
+                           }).FirstOrDefault();
+
+            return Json(voucher, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CheckVoucher(string maVoucher)
+        {
+            NguoiDung nguoiDung = (NguoiDung)Session["Account"];
+            var tmp = database.PhieuQuaTangs.Where(s => s.MaGiamGia == maVoucher).FirstOrDefault();
+            var ngdungvuocher = database.NguoiDung_PhieuQuaTang.Where(s => s.MaPhieuQuaTang == tmp.MaPhieuQuaTang).ToList();
+            if (ngdungvuocher.Count > 0)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

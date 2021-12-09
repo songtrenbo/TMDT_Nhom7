@@ -62,7 +62,7 @@ namespace TMDT.Controllers
                         case 2:
                             return RedirectToAction("QuanLyThuongHieu", "QuanLy");
                         case 3:
-                            return RedirectToAction("Index", "NhanVien");
+                            return RedirectToAction("QuanLyDonHang", "NhanVien");
                         default:
                             return RedirectToAction("Index", "TrangChu");
                     }

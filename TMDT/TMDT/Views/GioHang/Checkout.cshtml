@@ -53,7 +53,7 @@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.TenKhach, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                             <div class="col-sm-10">
-                                @Html.EditorFor(model => model.TenKhach, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên của bạn", @Value =  acc.Ten} })
+                                @Html.EditorFor(model => model.TenKhach, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên của bạn", @Value = acc.Ten } })
                                 @Html.ValidationMessageFor(model => model.TenKhach, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -129,6 +129,31 @@
                         </table>
                     </div>
                 </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <label>Bạn có phiếu giảm giá?</label>
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control coupon" id="VoucherInput" name="" placeholder="Mã phiếu giảm giá">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-apply coupon" type="button" id="ApplyButton" onclick="ApplyVoucher()" style="font-size:12px">Áp dụng</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @*<div class="card">
+                        <div class="card-body" id="Checkout-Product">
+                            <div class="card-body" style="padding:0">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Bạn có phiếu giảm giá?</label>
+                                        <div class="input-group"> <input type="text" class="form-control coupon" id="VoucherInput" name="" placeholder="Mã phiếu giảm giá"> <span class="input-group-append"> <a class="btn btn-primary btn-apply coupon" onclick="ApplyVoucher()">Áp dụng</a> </span> </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>*@
                 <div class="card" style="padding:20px">
                     <table class="table table-borderless">
                         <tbody>
@@ -145,6 +170,7 @@
                                 <th scope="row">Giảm giá</th>
                                 <td id="Discount" class="text-right text-dark b ml-3">0</td>
                                 @Html.HiddenFor(model => model.SoTienGiam, new { htmlAttributes = new { @id = "Discount-model" } })
+                                @Html.HiddenFor(model => model.MaPhieuQuaTang, new { htmlAttributes = new { @id = "DiscountId-model" } })
                             </tr>
                             <tr>
                                 <th scope="row">Thành tiền</th>

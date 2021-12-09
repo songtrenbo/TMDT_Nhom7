@@ -2,8 +2,21 @@
 var gioHang = [];
 var soSP = 0;
 var tongTien = 0;
-if (window.localStorage)
+var tienGiam = 0;
+var maGiamGia = "";
+var maPhieuQuaTang = "";
+var thanhToan = 0;
+if (window.localStorage) {
     gioHang = JSON.parse(window.localStorage.getItem("gioHang"));
+    if (sessionStorage.length > 0) {
+        tienGiam = sessionStorage.getItem("tienGiam");
+        maGiamGia = sessionStorage.getItem("maGiamGia");
+        maPhieuQuaTang = sessionStorage.getItem("maPhieuQuaTang");
+    } else {
+        tienGiam = 0;
+        maGiamGia = "";
+    }
+}
 if (!gioHang)
     gioHang = [];
 if (gioHang.length > 0)
@@ -11,6 +24,7 @@ if (gioHang.length > 0)
         soSP += gioHang[i].soLuong;
         if (gioHang[i].buyCheck) {
             tongTien += gioHang[i].giaBan * gioHang[i].soLuong;
+            thanhToan = tongTien - tienGiam;
         }
     }
 window.onload = function () {
@@ -18,7 +32,7 @@ window.onload = function () {
     $(".MainGioHang").append(' Giỏ hàng (' + soSP + ')');
 }
 // Thêm giỏ hàng
-function ThemGioHang(maSP, tenSP, gia, soLuongTon, hinh) {
+function ThemGioHang(maSP, tenSP, brand, gia, soLuongTon, hinh) {
     var exist = false;
     for (i in gioHang)
         if (gioHang[i].maSanPham == maSP) {
@@ -35,6 +49,7 @@ function ThemGioHang(maSP, tenSP, gia, soLuongTon, hinh) {
             buyCheck: true,
             maSanPham: maSP,
             tenSanPham: tenSP,
+            brand: brand,
             hinh: hinh,
             giaBan: gia,
             soLuong: 1,
@@ -138,6 +153,7 @@ function XoaToanBoGioHang() {
     gioHang = [];
     soSP = 0;
     tongTien = 0;
+    thanhToan = 0;
     location.pathname = "/GioHang/GioHangRong";
 }
 //Tăng số lượng 1 sản phẩm trong giỏ hàng
@@ -221,3 +237,128 @@ function QuantityError(max) {
     })
 }
 
+
+function ApplyVoucher() {
+    if (maGiamGia == 0) {
+        var voucher = $("#VoucherInput").val();
+        $.ajax({
+            type: 'POST',
+            url: '/GioHang/ApplyVoucher',
+            dataType: 'json',
+            data: { maVoucher: voucher },
+            success: function (data) {
+                var voucherObj = JSON.stringify(data);
+                //var arrObj = JSON.parse(voucherObj);
+                //var obj = arrObj[0];
+                var obj = JSON.parse(voucherObj);
+                if (obj.Status == 2) {
+                    if (obj.NgayKetThuc.substring(6, 19) > Date.now()) {
+                        if (obj.SoLuong > 0) {
+                            if (obj.LoaiPhamVi == 0) {
+                                if (tongTien >= obj.GiaTriDonHangToiThieu) {
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/GioHang/CheckVoucher',
+                                        dataType: 'json',
+                                        data: { maVoucher: voucher },
+                                        success: function (data) {
+                                            if (data == true) {
+                                                tienGiam = obj.GiaTri;
+                                                maGiamGia = obj.MaGiamGia;
+                                                maPhieuQuaTang = obj.MaPhieuQuaTang;
+                                                sessionStorage.setItem("tienGiam", tienGiam);
+                                                sessionStorage.setItem("maGiamGia", maGiamGia);
+                                                sessionStorage.setItem("maPhieuQuaTang", maPhieuQuaTang);
+                                                location.reload();
+                                            }
+                                            else {
+                                                tienGiam = 0;
+                                                VoucherIssue("Tài khoản chưa có voucher");
+                                            }
+                                        }
+                                    })
+                                }
+                                else {
+                                    tienGiam = 0;
+                                    VoucherIssue("Đơn hàng chưa đạt giá trị tối thiểu!");
+                                }
+                            }
+                            else {
+                                var stt = false;
+                                for (var i = 0; i < gioHang.length; i++) {
+                                    if (obj.LoaiPhamVi == gioHang[i].brand && gioHang[i].buyCheck) {
+                                        stt = true;
+                                        if ((gioHang[i].soLuong * gioHang[i].giaBan) >= obj.GiaTriDonHangToiThieu) {
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: '/GioHang/CheckVoucher',
+                                                dataType: 'json',
+                                                data: { maVoucher: voucher },
+                                                success: function (data) {
+                                                    if (data == true) {
+                                                        tienGiam = obj.GiaTri;
+                                                        maGiamGia = obj.MaGiamGia;
+                                                        maPhieuQuaTang = obj.MaPhieuQuaTang;
+                                                        sessionStorage.setItem("tienGiam", tienGiam);
+                                                        sessionStorage.setItem("maGiamGia", maGiamGia);
+                                                        sessionStorage.setItem("maPhieuQuaTang", maPhieuQuaTang);
+                                                        location.reload();
+                                                    }
+                                                    else {
+                                                        tienGiam = 0;
+                                                        VoucherIssue("Tài khoản chưa có voucher");
+                                                    }
+                                                }
+                                            })
+                                        }
+                                        else {
+                                            tienGiam = 0;
+                                            VoucherIssue("Đơn hàng chưa đạt giá trị tối thiểu!");
+                                        }
+                                    }
+                                }
+                                if (stt == false) {
+                                    tienGiam = 0;
+                                    VoucherIssue("Không có sản phẩm phù hợp");
+                                }
+                            }
+                        }
+                        else {
+                            tienGiam = 0;
+                            VoucherIssue("Voucher đã hết");
+                        }
+                    }
+                    else {
+                        tienGiam = 0;
+                        VoucherIssue("Voucher không còn hiệu lực hoặc không tồn tại");
+                    }
+                }
+                else {
+                    tienGiam = 0;
+                    VoucherIssue("Voucher không còn hiệu lực hoặc không tồn tại");
+                }
+            },
+            error: function (ex) {
+
+            }
+        });
+    }
+    else {
+        tienGiam = 0;
+        maGiamGia = "";
+        maPhieuQuaTang = "";
+        sessionStorage.setItem("tienGiam", tienGiam);
+        sessionStorage.setItem("maGiamGia", maGiamGia);
+        sessionStorage.setItem("maPhieuQuaTang", maPhieuQuaTang);
+        location.reload();
+    }
+}
+
+function VoucherIssue(title) {
+    Swal.fire({
+        icon: 'info',
+        title: title,
+        showConfirmButton: false,
+        timer: 1000
+    })
+}

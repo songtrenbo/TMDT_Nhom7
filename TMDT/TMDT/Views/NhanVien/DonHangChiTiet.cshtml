@@ -1,0 +1,106 @@
+﻿@model IEnumerable<TMDT.Models.CTHoaDon>
+@using TMDT.Models
+
+@{
+    ViewBag.Title = "DonHangChiTiet";
+    Layout = "~/Views/Shared/_LayoutNhanVien.cshtml";
+}
+
+@{
+    HoaDon DonHang = (HoaDon)ViewData["DonHang"];
+}
+
+<div class="card-body">
+    <div class="row" style="height:auto">
+        <div class="col">
+            <a href="@Url.Action("QuanLyDonHang","NhanVien")">Quản lý đơn hàng</a>
+        </div>
+        <div class="col" style="text-align:right;">
+            @switch (DonHang.TinhTrang)
+            {
+                case 1:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Chờ xác nhận</span>break;
+            case 2:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đang giao</span>break;
+        case 3:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đã giao</span>break;
+    case 4:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đã hủy</span>break;
+case 5:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</span>break;
+}
+
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin khách hàng</h4>
+        <div class="row" style="height:auto">
+            <div class="col card-body">
+                <p class="card-text" style="font-size:18px;">Tên khách hàng: <span style="font-weight:500">@DonHang.TenKhach</span></p>
+                <p class="card-text text-muted small" style="font-size:16px;">Số điện thoại: <span style="font-weight:500">@DonHang.SDT</span> </p>
+                <p class="card-text text-muted small" style="font-size:16px;">Địa chỉ: <span style="font-weight:500">@DonHang.DiaChi</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.GiaBan)
+        </th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@item.SanPham.Hinh" class="img-sm" width="80px" height="80px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.GiaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhTien)
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="4" style="text-align:right">Tổng tiền: </td>
+        <td>@ViewBag.TongTien</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:right">Phí vận chuyển: </td>
+        <td>@DonHang.PhiGiaoHang</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:right">Giảm giá: </td>
+        <td>@DonHang.SoTienGiam</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align: right; vertical-align: middle">Tổng tiền: </td>
+        <td class="text-danger" style="font-size:25px;font-weight:500; vertical-align:middle">@DonHang.TongThanhToan</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:right">Phương thức thanh toán: </td>
+        @if (DonHang.HinhThucThanhToan == 1)
+        {
+            <td>Thanh toán khi nhận hàng</td>
+        }
+        else
+        {
+            <td>Thanh toán trực tuyến</td>
+        }
+
+    </tr>
+</table>

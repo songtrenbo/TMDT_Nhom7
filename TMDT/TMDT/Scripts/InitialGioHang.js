@@ -78,8 +78,18 @@
     //Load thông tin summary
     $(".cart").append('<div class="back-to-shop"><a href="/Home/Index">&leftarrow;</a><span class="text-muted">Back to shop</span></div>');
     $("#TotalPrice").text(tongTien);
+    if (maGiamGia != 0) {
+        $("#Discount").text(tienGiam);
+        $("#VoucherInput").val(maGiamGia);
+        $("#ApplyButton").text("Hủy áp dụng");
+        $("#VoucherInput").attr("readonly", true);
+    }
+    else {
+        $("#Discount").text(tienGiam);
+        $("#VoucherInput").val(maGiamGia);
+        $("#ApplyButton").text("Áp dụng");
+        $("#VoucherInput").removeAttr("readonly");
+    }
     $("#TamTinh").text(tongTien);
-    $("#Total").text(tongTien);
-
-
+    $("#Total").text(thanhToan);
 };

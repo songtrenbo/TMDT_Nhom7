@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TMDT.Models.HoaDon>
+
+@{
+    ViewBag.Title = "QuanLyDonHang";
+    Layout = "~/Views/Shared/_LayoutNhanVien.cshtml";
+}
+
+
+<h2>Quản lý đơn hàng</h2>
+
+<table class="table">
+    <tr>
+        <th scope="col">Đơn hàng</th>
+        <th scope="col">Ngày đặt</th>
+        <th scope="col">Khách hàng</th>
+        <th scope="col">Tình trạng</th>
+        <th scope="col">Tổng tiền</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("DonHangChiTiet","NhanVien",new {@maDonHang=item.MaHoaDon})">#@item.MaHoaDon</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayMua)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrang)
+            </td>
+            <td>
+                <span class="text-danger" style="font-size:18px;font-weight:500">@Html.DisplayFor(modelItem => item.TongThanhToan)</span>
+
+
+            </td>
+            <td>
+                @if (item.TinhTrang == 1)
+                {
+                    <input type="button" onclick="location.href='@Url.Action("XacNhanDonHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-danger" style="text-align:right" value="Xác nhận">
+                    <input type="button" onclick="location.href='@Url.Action("HuyDonHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-outline-danger" value="Hủy đơn hàng">
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+    .active-1 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>
+

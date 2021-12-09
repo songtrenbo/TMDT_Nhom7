@@ -363,6 +363,8 @@
     <Content Include="Views\KhachHang\VoucherCuaToi.cshtml" />
     <Content Include="Views\KhachHang\VoucherHetHan.cshtml" />
     <Content Include="Views\NguoiDung\DonMua.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyDonHang.cshtml" />
+    <Content Include="Views\NhanVien\DonHangChiTiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

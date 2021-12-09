@@ -42,11 +42,21 @@
     //Load thông tin summary
     $(".cart").append('<div class="back-to-shop"><a href="/Home/Index">&leftarrow;</a><span class="text-muted">Back to shop</span></div>');
     $("#TotalPrice").text(tongTien);
+    if (maGiamGia != 0) {
+        $("#ApplyButton").text("Hủy áp dụng");
+        $("#VoucherInput").attr("readonly", true);
+    }
+    else {
+        $("#ApplyButton").text("Áp dụng");
+        $("#VoucherInput").removeAttr("readonly");
+    }
     $("#PhiGiaoHang").val(0);
-    $("#Discount").text(0);
-    $("#SoTienGiam").val(0);
-    $("#Total").text(tongTien);
-    $("#TongThanhToan").val(tongTien);
+    $("#Discount").text(tienGiam);
+    $("#VoucherInput").val(maGiamGia);
+    $("#SoTienGiam").val(tienGiam);
+    $("#MaPhieuQuaTang").val(maPhieuQuaTang);
+    $("#Total").text(thanhToan);
+    $("#TongThanhToan").val(thanhToan);
 };
 
 function CheckoutSanPham() {
@@ -55,16 +65,25 @@ function CheckoutSanPham() {
     var diaChi = $("#DiaChi").val();
 
     if (tenKhach != "" && sdt != "" && diaChi != "") {
-        var tmp = gioHang;
+        var tmp = null;
         window.localStorage.removeItem("gioHang");
-        for (var i = 0; i < tmp.length; i++) {
-            if (tmp[i].buyCheck) {
-                tmp.splice(i, 1);
+        for (var i = 0; i < gioHang.length; i++) {
+            let j = 0;
+            if (!gioHang[i].buyCheck) {
+                tmp[j] = gioHang[i];
+                j++;
             }
         }
-        gioHang = tmp;
-        window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
-
+        if (tmp != null) {
+            gioHang = tmp;
+            window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
+        }
+        else {
+            window.localStorage.removeItem("gioHang")
+        }
+        sessionStorage.removeItem("maGiamGia");
+        sessionStorage.removeItem("maPhieuQuaTang");
+        sessionStorage.removeItem("tienGiam");
         Swal.fire({
             icon: 'success',
             title: 'Đặt hàng thành công',

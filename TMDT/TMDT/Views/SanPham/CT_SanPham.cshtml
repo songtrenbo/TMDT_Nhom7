@@ -26,7 +26,7 @@
                     <ul>
                         <li><span><strong>Nhà sản xuất: </strong>@Model.ThuongHieu.TenThuongHieu</span></li>
                         <li><span><strong>Bảo hành: </strong>@Model.BaoHanh tháng</span></li>
-                        @if (Model.GiaGiam.Value>0)
+                        @if (Model.GiaGiam.Value > 0)
                         {
                             <li><span><strong>Giá cũ: </strong><del>@Model.GiaBan</del></span></li>
                             <li><span><strong>Giá KM: </strong>@Model.GiaGiam</span></li>
@@ -41,7 +41,7 @@
 
                 <div class="col-md-6 col-sm-12"><button class=" btn-buy">Mua ngay</button></div>
                 <br /><br /><br />
-                <div class="col-md-6 col-sm-12"><button class="btn-addtocart" onclick="ThemGioHang(@Model.MaSanPham, '@Model.TenSanPham',@Model.GiaBan,@Model.SoLuongTon,'@Model.Hinh')">Thêm vào giỏ hàng</button></div>
+                <div class="col-md-6 col-sm-12"><button class="btn-addtocart" onclick="ThemGioHang(@Model.MaSanPham, '@Model.TenSanPham',@Model.MaThuongHieu,@Model.GiaBan,@Model.SoLuongTon,'@Model.Hinh')">Thêm vào giỏ hàng</button></div>
 
             </div>
         </div>
