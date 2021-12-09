@@ -13,7 +13,7 @@
 <body>
     @Html.Partial("_Header")
     <div class="container-fluid">
-        <div class="row">
+        <div class="row row-tab">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse left-nav" style="background-image: linear-gradient(#EE0032, #FFD500);">
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
@@ -23,8 +23,8 @@
                             </a>
                         </li>
                         <li class="nav-item active-2">
-                            <a class="nav-link text-white" href="#">
-                                <i class="bi bi-journal-text" style="font-size: 24px;"></i> Đơn mua
+                            <a class="nav-link text-white" href="@Url.Action("DonMua","NguoiDung")">
+                                <i class="bi bi-journal-text" style="font-size: 24px;"></i> Lịch sử mua hàng
                             </a>
                         </li>
                         <li class="nav-item active-3">
@@ -66,7 +66,7 @@
             width: 100%;
         }
 
-        .row {
+        .row-tab {
             height: 700px;
         }
 

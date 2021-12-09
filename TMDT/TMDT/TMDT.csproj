@@ -238,6 +238,7 @@
     <Content Include="Content\images\banner_three.png" />
     <Content Include="Content\images\banner_two.png" />
     <Content Include="Content\images\ic.png" />
+    <Content Include="Content\images\ic_bag.png" />
     <Content Include="Content\images\logodps.png" />
     <Content Include="Content\images\voucher_logo.png" />
     <Content Include="favicon.ico" />
