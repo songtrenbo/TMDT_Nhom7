@@ -150,6 +150,9 @@ namespace TMDT.Controllers
             }
             return View();
         }
-
+        public ActionResult DonMua(int maTinhTrang = 1)
+        {
+            return View(database.HoaDons.Where(x => x.TinhTrang == maTinhTrang).ToList());
+        }
     }
 }

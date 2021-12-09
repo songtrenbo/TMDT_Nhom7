@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TMDT.Models.HoaDon>
+
+@{
+    ViewBag.Title = "DonMua";
+    Layout = "~/Views/Shared/_LayoutCaNhan.cshtml";
+}
+
+<h2>DonMua</h2>
+<nav>
+    <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+        <a class="nav-link active" id="nav-cho-xac-nhan-tab" data-toggle="tab" href="#nav-cho-xac-nhan" role="tab" aria-controls="nav-cho-xac-nhan" aria-selected="true">Chờ xác nhận</a>
+        <a class="nav-link" id="nav-cho-lay-hang-tab" data-toggle="tab" href="#nav-cho-lay-hang" role="tab" aria-controls="nav-cho-lay-hang" aria-selected="false">Chờ lấy hàng</a>
+        <a class="nav-link" id="nav-dang-giao-tab" data-toggle="tab" href="#nav-dang-giao" role="tab" aria-controls="nav-dang-giao" aria-selected="false">Đang giao</a>
+        <a class="nav-link" id="nav-da-giao-tab" data-toggle="tab" href="#nav-da-giao" role="tab" aria-controls="nav-da-giao" aria-selected="false">Đã giao</a>
+        <a class="nav-link" id="nav-da-huy-tab" data-toggle="tab" href="#nav-da-huy" role="tab" aria-controls="nav-da-huy" aria-selected="false">Đã hủy</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-cho-xac-nhan" role="tabpanel" aria-labelledby="nav-cho-xac-nhan-tab">showListDonHang(1)</div>
+    <div class="tab-pane fade" id="nav-cho-lay-hang" role="tabpanel" aria-labelledby="nav-cho-lay-hang-tab">showListDonHang(2)</div>
+    <div class="tab-pane fade" id="nav-dang-giao" role="tabpanel" aria-labelledby="nav-dang-giao-tab">showListDonHang(3)</div>
+    <div class="tab-pane fade" id="nav-da-giao" role="tabpanel" aria-labelledby="nav-da-giao-tab">showListDonHang(4)</div>
+    <div class="tab-pane fade" id="nav-da-huy" role="tabpanel" aria-labelledby="nav-da-huy-tab">showListDonHang(5)</div>
+</div>
+
+@helper showListDonHang(int num)
+{
+    foreach (var item in Model)
+    {
+        if (item.TinhTrang == num)
+        {
+            <div class="col-6 col-md-4 col-lg-3">
+                <div href="" class="card card-hover" style="height:330px; margin-top:20px" onclick="location.href='@Url.Action("CTDonHang", "NguoiDung", new { maHoaDon = item.MaHoaDon})'">
+                    <div class="card-body" style="width: 100%">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-6"></div>
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaHoaDon)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MaHoaDon)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NgayMua)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NgayMua)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TenKhach)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TenKhach)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TongThanhToan)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TongThanhToan)
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="col-sm-4">
+                                    @Html.ActionLink("Xem chi tiết đơn hàng", "CTDonHang", new { /* id=item.PrimaryKey */ }) |
+                                    @if (item.NgayMua.Day < 30)
+                                    {
+                                        @Html.ActionLink("Hủy đơn hàng", "HuyDonHang", new { /* id=item.PrimaryKey */ })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
