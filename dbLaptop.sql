@@ -172,6 +172,7 @@ CREATE TABLE NguoiDung_PhieuQuaTang
     MaNguoiDung_PhieuQuaTang BIGINT IDENTITY PRIMARY KEY,
     MaPhieuQuaTang BIGINT,
     MaNguoiDung BIGINT,
+    Status INT,--1: Đã sử dụng, 2: Chưa sử dụng, 3: Đã hết hạn
     FOREIGN KEY (MaPhieuQuaTang) REFERENCES dbo.PhieuQuaTang(MaPhieuQuaTang),
     FOREIGN KEY (MaNguoiDung) REFERENCES dbo.NguoiDung(MaNguoiDung),
 );
@@ -345,3 +346,7 @@ select *from SanPham
 
 SELECT * FROM CTHoaDon
 SELECT * FROM HoaDon
+
+UPDATE HoaDon
+     SET TinhTrang = 2
+	 WHERE MaHoaDon = 2

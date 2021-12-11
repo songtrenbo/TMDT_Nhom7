@@ -7,11 +7,11 @@
 
 <nav>
     <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
-        <a class="nav-link active" id="nav-cho-xac-nhan-tab" data-toggle="tab" href="#nav-cho-xac-nhan" role="tab" aria-controls="nav-cho-xac-nhan" aria-selected="true">Chờ xác nhận</a>
-        <a class="nav-link" id="nav-cho-lay-hang-tab" data-toggle="tab" href="#nav-cho-lay-hang" role="tab" aria-controls="nav-cho-lay-hang" aria-selected="false">Chờ lấy hàng</a>
-        <a class="nav-link" id="nav-dang-giao-tab" data-toggle="tab" href="#nav-dang-giao" role="tab" aria-controls="nav-dang-giao" aria-selected="false">Đang giao</a>
-        <a class="nav-link" id="nav-da-giao-tab" data-toggle="tab" href="#nav-da-giao" role="tab" aria-controls="nav-da-giao" aria-selected="false">Đã giao</a>
-        <a class="nav-link" id="nav-da-huy-tab" data-toggle="tab" href="#nav-da-huy" role="tab" aria-controls="nav-da-huy" aria-selected="false">Đã hủy</a>
+        <a class="nav-link active" id="nav-cho-xac-nhan-tab" data-toggle="tab" href="#nav-cho-xac-nhan" role="tab" aria-controls="nav-cho-xac-nhan">Chờ xác nhận</a>
+        <a class="nav-link" id="nav-cho-lay-hang-tab" data-toggle="tab" href="#nav-cho-lay-hang" role="tab" aria-controls="nav-cho-lay-hang">Chờ lấy hàng</a>
+        <a class="nav-link" id="nav-dang-giao-tab" data-toggle="tab" href="#nav-dang-giao" role="tab" aria-controls="nav-dang-giao">Đang giao</a>
+        <a class="nav-link" id="nav-da-giao-tab" data-toggle="tab" href="#nav-da-giao" role="tab" aria-controls="nav-da-giao">Đã giao</a>
+        <a class="nav-link" id="nav-da-huy-tab" data-toggle="tab" href="#nav-da-huy" role="tab" aria-controls="nav-da-huy">Đã hủy</a>
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -34,58 +34,23 @@
                         <div class="container" style="height:200px">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <img src="~/Content/images/ic_bag.png" class="img-thumbnail" style="border:none"/>
+                                    <img src="~/Content/images/ic_bag.png" class="img-thumbnail" style="border:none" />
                                 </div>
                                 <div class="col-md-6">
                                     <p><b>Ngày mua:  </b> &emsp;&emsp;&emsp;&emsp;@item.NgayMua</p>
                                     <p><b>Ngày nhận hàng:</b>&emsp;&emsp;chưa nhận hàng</p>
                                     <p><b>Tổng tiền:</b> &emsp;&emsp;&emsp;&emsp;&emsp;@item.TongThanhToan</p>
                                 </div>
-                                @*<table class="table">
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.MaHoaDon)
-                                        </th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.MaHoaDon)
-                                        </td>
-                                    </tr>
+                                <div class="col-md-4">
+                                    @* @Html.ActionLink("Xem chi tiết đơn hàng", "CTDonHang", new { /* id=item.PrimaryKey */ }) |*@
 
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.NgayMua)
-                                        </th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.NgayMua)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.TenKhach)
-                                        </th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TenKhach)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.TongThanhToan)
-                                        </th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TongThanhToan)
-                                        </td>
-                                    </tr>
-                                </table>*@
-                            <div class="col-md-4">
-                               @* @Html.ActionLink("Xem chi tiết đơn hàng", "CTDonHang", new { /* id=item.PrimaryKey */ }) |*@
-
-                                <a href="@Url.Action("CTDonHang", "NguoiDung", new { /* id=item.PrimaryKey */ })" class="btn btn-success">Xem chi tiết đơn hàng</a>
-                                @if (item.NgayMua.Day < 30)
-                                {
-                                    @*@Html.ActionLink("Hủy đơn hàng", "HuyDonHang", new { /* id=item.PrimaryKey */ })*@
-                                    <a href="@Url.Action("HuyDonHang", "NguoiDung", new { /* id=item.PrimaryKey */ })" class="btn btn-danger">Hủy đơn hàng</a>
-                                }
-                            </div>
+                                    <a href="@Url.Action("CTDonHang", "NguoiDung", new { /* id=item.PrimaryKey */ })" class="btn btn-success">Xem chi tiết đơn hàng</a>
+                                    @if (@num == 1)
+                                    {
+                                        @*@Html.ActionLink("Hủy đơn hàng", "HuyDonHang", new { /* id=item.PrimaryKey */ })*@
+                                        <a href="@Url.Action("HuyDonHang", "NguoiDung", new { /* id=item.PrimaryKey */ })" class="btn btn-danger">Hủy đơn hàng</a>
+                                    }
+                                </div>
                             </div>
                         </div>
 
@@ -102,10 +67,11 @@
         transition: all 0.3s ease 0s;
     }
 
-    .row{
-        height:200px;
+    .row {
+        height: 200px;
     }
-    .col-6:hover{
-        cursor:pointer;
+
+    .col-6:hover {
+        cursor: pointer;
     }
 </style>
