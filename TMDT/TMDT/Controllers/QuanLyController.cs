@@ -670,5 +670,25 @@ namespace TMDT.Controllers
             return View(hoadon);
         }
         #endregion
+
+
+
+        public ActionResult NhapKho()
+        {
+            SanPhamNhapKho sp = new SanPhamNhapKho();
+            return View(sp);
+        }
+        [HttpPost]
+        public ActionResult NhapKho(SanPhamNhapKho sanphamkho)
+        {
+            var check_ID = database.SanPhamNhapKhoes.Where(s => s.MaSanPhamNhapKho == sanphamkho.MaSanPhamNhapKho).FirstOrDefault();
+            if (check_ID != null)
+            {
+                database.SanPhamNhapKhoes.Add(sanphamkho);
+                database.SaveChanges();
+                return RedirectToAction("QuanLyVoucher");
+            }
+            return View();
+        }
     }
 }
