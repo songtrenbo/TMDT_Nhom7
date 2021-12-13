@@ -26,7 +26,6 @@ namespace TMDT.Models
         }
     
         public long MaNguoiDung { get; set; }
-
         [Display(Name = "Tên người dùng")]
         [Required(ErrorMessage = "Tên người dùng không được bỏ trống")]
         [StringLength(100, MinimumLength = 5)]
@@ -61,7 +60,6 @@ namespace TMDT.Models
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<int> Status { get; set; }
     
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

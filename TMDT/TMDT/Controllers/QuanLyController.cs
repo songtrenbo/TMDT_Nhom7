@@ -114,11 +114,161 @@ namespace TMDT.Controllers
             return RedirectToAction("QuanLyThuongHieu");
         }
         #endregion
+        #region QLSanPham
         public ActionResult QuanLySanPham()
         {
-
-            return View();
+            var result = database.SanPhams.OrderByDescending(x => x.IsHide).ToList();
+            result = result.OrderByDescending(x => x.NgayTao).ToList();
+            return View(database.SanPhams.ToList());
         }
+
+        public ActionResult SanPhamCreate()
+        {
+            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
+            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc");
+            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
+            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu");
+            List<CPU> cPUs = database.CPUs.ToList();
+            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU");
+            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
+            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU");
+            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
+            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size");
+            return View(new SanPham());
+        }
+        [HttpPost]
+        public ActionResult SanPhamCreate(SanPham sanPham)
+        {
+            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
+            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc");
+            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
+            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu");
+            List<CPU> cPUs = database.CPUs.ToList();
+            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU");
+            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
+            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU");
+            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
+            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size");
+            var check = database.SanPhams.Where(s => s.TenSanPham == sanPham.TenSanPham).FirstOrDefault();
+            if (check == null)
+            {
+                sanPham.SoLuongTon = 0;
+                sanPham.SoLuongBan = 0;
+                sanPham.DiemRate = 0;
+                sanPham.SoLuotRate = 0;
+                sanPham.LuotXem = 0;
+                sanPham.NgayTao = DateTime.Now;
+                sanPham.IsHide = false;
+
+                try
+                {
+                    if (sanPham.UploadImage != null)
+                    {
+                        string filename = Path.GetFileNameWithoutExtension(sanPham.UploadImage.FileName);
+                        string extent = Path.GetExtension(sanPham.UploadImage.FileName);
+                        filename = filename + extent;
+                        sanPham.Hinh = "/Content/SanPhamImages/" + filename;
+                        sanPham.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/SanPhamImages/"), filename));
+                    }
+
+                    database.SanPhams.Add(sanPham);
+                    database.SaveChanges();
+                    return RedirectToAction("QuanLySanPham");
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.IsExist = "Sản phẩm đã tồn tại!";
+
+                return View(sanPham);
+            }
+        }
+        public ActionResult SanPhamDetails(int id)
+        {
+            return View(database.SanPhams.Where(s => s.MaSanPham == id).FirstOrDefault());
+        }
+        public ActionResult SanPhamEdit(int id)
+        {
+            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
+            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc");
+            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
+            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu");
+            List<CPU> cPUs = database.CPUs.ToList();
+            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU");
+            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
+            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU");
+            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
+            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size");
+            return View(database.SanPhams.Where(s => s.MaSanPham == id).FirstOrDefault());
+        }
+        [HttpPost]
+        public ActionResult SanPhamEdit(int id, SanPham sanPham)
+        {
+            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
+            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc");
+            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
+            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu");
+            List<CPU> cPUs = database.CPUs.ToList();
+            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU");
+            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
+            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU");
+            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
+            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size");
+            sanPham.NgayChinhSua = DateTime.Now;
+
+            var check = database.SanPhams.Where(s => s.TenSanPham == sanPham.TenSanPham).FirstOrDefault();
+            if (check != null)
+            {
+                ViewBag.IsExist = "Sản phẩm đã tồn tại!";
+                return View();
+            }
+            try
+            {
+                sanPham.NgayChinhSua = DateTime.Now;
+                if (sanPham.UploadImage != null)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(sanPham.UploadImage.FileName);
+                    string extent = Path.GetExtension(sanPham.UploadImage.FileName);
+                    filename = filename + extent;
+                    sanPham.Hinh = "/Content/SanPhamImages/" + filename;
+                    sanPham.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/SanPhamImages/"), filename));
+                }
+                else
+                {
+                    string img = database.ThuongHieux.Where(s => s.MaThuongHieu == id).Select(s => s.Hinh).FirstOrDefault();
+                    sanPham.Hinh = img;
+                }
+                database.Entry(sanPham).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("QuanLySanPham");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult SanPhamHide(int id)
+        {
+            var sanPham = database.SanPhams.Where(x => x.MaSanPham == id).FirstOrDefault();
+            sanPham.NgayChinhSua = DateTime.Now;
+            sanPham.IsHide = !sanPham.IsHide;
+            try
+            {
+                database.Entry(sanPham).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("QuanLySanPham");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        #endregion
+
         public ActionResult QuanLyNhapKho()
         {
             return View();
@@ -166,7 +316,7 @@ namespace TMDT.Controllers
                 return View(nguoiDung);
             }
         }
-      
+
         public ActionResult NhanVienLock(int id)
         {
             var nguoiDung = database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault();
@@ -175,9 +325,8 @@ namespace TMDT.Controllers
             nguoiDung.Status = 2;
             database.Entry(nguoiDung).State = EntityState.Modified;
             database.SaveChanges();
-            return RedirectToAction("QuanLyNhanVien","QuanLy");
+            return RedirectToAction("QuanLyNhanVien", "QuanLy");
         }
-        [HttpPost]
         public ActionResult ResetPassword(int id)
         {
             var nguoiDung = database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault();
@@ -215,7 +364,6 @@ namespace TMDT.Controllers
                 return View();
             }
         }
-        [HttpPost]
         public ActionResult NhanVienDelete(int id)
         {
             try
@@ -281,16 +429,16 @@ namespace TMDT.Controllers
         [HttpPost]
         public ActionResult EditVoucher(int id, PhieuQuaTang phieuquatang, string ngayKetThuc)
         {
-         
+
             List<ThuongHieu> thuonghieu = database.ThuongHieux.ToList();
-            ViewBag.ThuongHieu = new SelectList(thuonghieu, "MaThuongHieu", "TenThuongHieu");           
+            ViewBag.ThuongHieu = new SelectList(thuonghieu, "MaThuongHieu", "TenThuongHieu");
             try
             {
-                if(phieuquatang.Status==3 && phieuquatang.SoLuong > 0)
+                if (phieuquatang.Status == 3 && phieuquatang.SoLuong > 0)
                 {
                     phieuquatang.Status = 2;
                 }
-                else if(phieuquatang.Status!=3 && phieuquatang.SoLuong == 0)
+                else if (phieuquatang.Status != 3 && phieuquatang.SoLuong == 0)
                 {
                     phieuquatang.Status = 3;
                 }
@@ -311,7 +459,7 @@ namespace TMDT.Controllers
             {
                 case 1:
                     phieuquatang.Status = 2;
-                   
+
                     break;
                 case 2:
                     phieuquatang.Status = 1;
@@ -322,7 +470,7 @@ namespace TMDT.Controllers
             return RedirectToAction("QuanLyVoucher");
         }
 
-            #region QLBaoCao
+        #region QLBaoCao
         public ActionResult QuanLyBaoCao(string searching, string Year, string Month)
         {
             var dates = database.HoaDons.Where(s => (s.NgayMua.Year + "-" + s.NgayMua.Month + "-" + s.NgayMua.Day) == searching).ToList();
@@ -342,7 +490,7 @@ namespace TMDT.Controllers
             //List<int> gianhap = new List<int>();
             //List<int> doanhthu = new List<int>();
             //List<int> giagiam = new List<int>();
-            
+
 
 
             if (Month != "" && Year != null)
@@ -352,16 +500,16 @@ namespace TMDT.Controllers
                 double[] giamgiatuans = new double[5];
                 double[] giavontuans = new double[5];
                 double[] loinhuantuans = new double[5];
-                int ngaytrongtuan1 = 1; 
+                int ngaytrongtuan1 = 1;
                 int ngaytrongtuan2 = 7;
-                for (int i = 0; i < 5;i++)
+                for (int i = 0; i < 5; i++)
                 {
                     if (ngaytrongthang >= ngaytrongtuan2)
                     {
-                        var hoadonNgay = database.HoaDons.Where(s => s.NgayMua.Year.ToString() == Year && s.NgayMua.Month.ToString() == Month && s.NgayMua.Day <= ngaytrongtuan2 && s.NgayMua.Day>=ngaytrongtuan1).ToList();
+                        var hoadonNgay = database.HoaDons.Where(s => s.NgayMua.Year.ToString() == Year && s.NgayMua.Month.ToString() == Month && s.NgayMua.Day <= ngaytrongtuan2 && s.NgayMua.Day >= ngaytrongtuan1).ToList();
                         ngaytrongtuan1 += 7;
                         ngaytrongtuan2 += 7;
-                        foreach(var item in hoadonNgay)
+                        foreach (var item in hoadonNgay)
                         {
                             double temp1 = item.TongThanhToan ?? 0;
                             double temp2 = item.SoTienGiam ?? 0;
@@ -379,7 +527,7 @@ namespace TMDT.Controllers
                     else
                     {
                         var hoadonNgay = database.HoaDons.Where(s => s.NgayMua.Year.ToString() == Year && s.NgayMua.Month.ToString() == Month && s.NgayMua.Day <= ngaytrongthang && s.NgayMua.Day >= ngaytrongtuan1).ToList();
-                        
+
                         foreach (var item in hoadonNgay)
                         {
                             double temp1 = item.TongThanhToan ?? 0;
@@ -610,7 +758,7 @@ namespace TMDT.Controllers
                             foreach (var itemcthd in itemhd.CTHoaDons)
                             {
                                 var giavon = database.SanPhamNhapKhoes.Where(s => s.MaSanPham == itemcthd.MaSanPham).FirstOrDefault();
-                                double temp3 = (giavon.GiaNhap??0) * itemcthd.SoLuong;
+                                double temp3 = (giavon.GiaNhap ?? 0) * itemcthd.SoLuong;
                                 giavonthangs[i] = giavonthangs[i] + temp3;
                             }
 
@@ -670,5 +818,25 @@ namespace TMDT.Controllers
             return View(hoadon);
         }
         #endregion
+
+
+
+        public ActionResult NhapKho()
+        {
+            SanPhamNhapKho sp = new SanPhamNhapKho();
+            return View(sp);
+        }
+        [HttpPost]
+        public ActionResult NhapKho(SanPhamNhapKho sanphamkho)
+        {
+            var check_ID = database.SanPhamNhapKhoes.Where(s => s.MaSanPhamNhapKho == sanphamkho.MaSanPhamNhapKho).FirstOrDefault();
+            if (check_ID != null)
+            {
+                database.SanPhamNhapKhoes.Add(sanphamkho);
+                database.SaveChanges();
+                return RedirectToAction("QuanLyVoucher");
+            }
+            return View();
+        }
     }
 }

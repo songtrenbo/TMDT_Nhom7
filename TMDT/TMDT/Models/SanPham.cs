@@ -11,7 +11,9 @@ namespace TMDT.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class SanPham
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,8 +25,9 @@ namespace TMDT.Models
             this.Hinhs = new HashSet<Hinh>();
             this.SanPhamNhapKhoes = new HashSet<SanPhamNhapKho>();
             this.TinTucs = new HashSet<TinTuc>();
+            Hinh = "/Content/images/";
         }
-    
+
         public long MaSanPham { get; set; }
         public string TenSanPham { get; set; }
         public int MaDanhMuc { get; set; }
@@ -70,5 +73,7 @@ namespace TMDT.Models
         public virtual ICollection<SanPhamNhapKho> SanPhamNhapKhoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TinTuc> TinTucs { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase UploadImage { get; set; }
     }
 }

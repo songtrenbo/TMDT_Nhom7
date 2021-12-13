@@ -17,7 +17,7 @@ namespace TMDT.Controllers
 
             var danhmuc = database.DanhMucs.Where(x => x.IsShowHome == true).ToList().ToArray();
             ViewBag.danhmuc = danhmuc;
-            var sp = database.SanPhams.OrderByDescending(x => x.NgayTao).ToList();
+            var sp = database.SanPhams.Where(x=>x.IsHide==false).OrderByDescending(x => x.NgayTao).ToList();
             List<List<SanPham>> result = new List<List<SanPham>>();
             for (int i = 0; i < danhmuc.Length; i++)
             {

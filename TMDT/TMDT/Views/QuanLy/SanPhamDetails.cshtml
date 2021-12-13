@@ -1,0 +1,159 @@
+﻿@model TMDT.Models.SanPham
+
+@{
+    ViewBag.Title = "SanPhamDetails";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+<style>
+    .active-1 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>
+<div>
+    <h4>Chi tiết sản phẩm</h4>
+    <hr/>
+
+    <div class="container">
+        <h5 class="text-danger">@ViewBag.IsExist</h5>
+
+        <table class="table table-borderless" style="width: 80%">
+            <colgroup>
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 55%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        Tên sản phẩm
+                    </th>
+                    <td colspan="2">
+                        @Model.TenSanPham
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Danh mục
+                    </th>
+                    <td colspan="2">
+                        @Model.DanhMuc.TenDanhMuc
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Link sản phẩm
+                    </th>
+                    <td colspan="2">
+                        @Model.SeoTitle
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Thương hiệu
+                    </th>
+                    <td colspan="2">
+                        @Model.ThuongHieu.TenThuongHieu
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Giá bán
+                    </th>
+                    <td colspan="2">
+                        @Model.GiaBan
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Giá giảm
+                    </th>
+                    <td colspan="2">
+                        @Model.GiaGiam
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Bảo hành
+                    </th>
+                    <td colspan="2">
+                        @Model.BaoHanh
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        CPU
+                    </th>
+                    <td colspan="2">
+                        @Model.CPU.TenCPU @Model.CPUInfo
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Ram
+                    </th>
+                    <td colspan="2">
+                        @Model.RAM
+
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        GPU
+                    </th>
+                    <td colspan="2">
+                        @Model.LoaiGPU.TenLoaiGPU @Model.GPUInfo
+                    </td>
+                </tr>v
+                <tr>
+                    <th scope="row">
+                        Màn hình
+                    </th>
+                    <td colspan="2">
+                        @Model.SizeManHinh1.Size @Model.ManHinh
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Pin
+                    </th>
+                    <td colspan="2">
+                        @Model.Pin
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Ổ cứng
+                    </th>
+                    <td colspan="2">
+                        @Model.LuuTru
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Khối lượng
+                    </th>
+                    <td colspan="2">
+                        @Model.KhoiLuong
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Hình sản phẩm
+                    </th>
+                    <td colspan="2">
+                        <img src="@Url.Content(Model.Hinh)" id="previewImg" style="width:300px" />
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Edit", "SanPhamEdit", new { id = Model.MaSanPham }) |
+                <a href="@Url.Action("QuanLySanPham","QuanLy")" class="btn btn-outline-danger">Trở về</a>
+            </div>
+        </div>
+    </div>
+</div>

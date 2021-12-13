@@ -1,0 +1,199 @@
+﻿@model TMDT.Models.SanPham
+
+@{
+    ViewBag.Title = "SanPhamCreate";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+
+
+<h4>Thêm sản phẩm</h4>
+
+@using (Html.BeginForm("SanPhamCreate", "QuanLy", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container">
+        <h5 class="text-danger">@ViewBag.IsExist</h5>
+
+        <table class="table table-borderless" style="width: 80%">
+            <colgroup>
+                <col span="1" style="width: 20%;">
+                <col span="1" style="width: 10%;">
+                <col span="1" style="width: 50%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        Tên sản phẩm
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.TenSanPham, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenSanPham, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Danh mục
+                    </th>
+                    <td colspan="2">
+                        @Html.DropDownListFor(model => model.MaDanhMuc, ViewBag.DanhMuc as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MaDanhMuc, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Link sản phẩm
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.SeoTitle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SeoTitle, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Thương hiệu
+                    </th>
+                    <td colspan="2">
+                        @Html.DropDownListFor(model => model.MaThuongHieu, ViewBag.ThuongHieu as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MaThuongHieu, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Giá bán
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Giá giảm
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.GiaGiam, new { htmlAttributes = new { @class = "form-control", @Value = 0 } })
+                        @Html.ValidationMessageFor(model => model.GiaGiam, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Bảo hành
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.BaoHanh, new { htmlAttributes = new { @class = "form-control", @Value = 12 } })
+                        @Html.ValidationMessageFor(model => model.BaoHanh, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        CPU
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.MaLoaiCPU, ViewBag.CPU as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.CPUInfo, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Ram
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.RAM, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RAM, "", new { @class = "text-danger" })
+
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        GPU
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.MaLoaiGPU, ViewBag.LoaiGPU as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.GPUInfo, new { htmlAttributes = new { @class = "form-control", @placeholder = "1050ti" } })
+
+                    </td>
+                </tr>v
+                <tr>
+                    <th scope="row">
+                        Màn hình
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.SizeManHinh, ViewBag.SizeManHinh as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.ManHinh, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Pin
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.Pin, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Pin, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Ổ cứng
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.LuuTru, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LuuTru, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Khối lượng
+                    </th>
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.KhoiLuong, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Hình sản phẩm
+                    </th>
+                    <td colspan="2">
+                        <img src="@Url.Content(Model.Hinh)" id="previewImg" style="width:300px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td colspan="2">
+                        <input type="file" name="UploadImage" onchange="ChangeImage(this, document.getElementById('previewImg'))" />
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Tạo mới" class="btn btn-success" />
+                <a href="@Url.Action("QuanLySanPham","QuanLy")" class="btn btn-outline-danger">Trở về</a>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<style>
+    .active-1 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

@@ -17,6 +17,7 @@ namespace TMDT.Models
         public long MaNguoiDung_PhieuQuaTang { get; set; }
         public Nullable<long> MaPhieuQuaTang { get; set; }
         public Nullable<long> MaNguoiDung { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual NguoiDung NguoiDung { get; set; }
         public virtual PhieuQuaTang PhieuQuaTang { get; set; }

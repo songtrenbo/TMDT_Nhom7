@@ -365,9 +365,15 @@
     <Content Include="Views\NguoiDung\DonMua.cshtml" />
     <Content Include="Views\NhanVien\QuanLyDonHang.cshtml" />
     <Content Include="Views\NhanVien\DonHangChiTiet.cshtml" />
+    <Content Include="Views\QuanLy\NhapKho.cshtml" />
+    <Content Include="Views\QuanLy\QuanLySanPham.cshtml" />
+    <Content Include="Views\QuanLy\SanPhamCreate.cshtml" />
+    <Content Include="Views\QuanLy\SanPhamDetails.cshtml" />
+    <Content Include="Views\QuanLy\SanPhamEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\SanPhamImages\" />
     <Folder Include="Content\ThuongHieuImages\" />
   </ItemGroup>
   <ItemGroup>
