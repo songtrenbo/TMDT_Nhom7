@@ -10,11 +10,17 @@ namespace TMDT.Controllers
     public class SearchController : Controller
     {
         // GET: Search
-        DBLaptopEntities db = new DBLaptopEntities();
-        public ActionResult Index(int a)
+        DBLaptopEntities database = new DBLaptopEntities();
+        public ActionResult Index(string name)
         {
-            ViewBag.abc = db.ThuongHieux.Where(x=>x.MaThuongHieu == a).FirstOrDefault().TenThuongHieu;
-            return View();
+            //ViewBag.abc = database.ThuongHieux.Where(x=>x.MaThuongHieu == a).FirstOrDefault().TenThuongHieu;
+            //return View();
+            var result = database.SanPhams.Where(x => x.IsHide == false);
+            if (!String.IsNullOrEmpty(name))
+            {
+            result = result.Where(x => x.TenSanPham.Contains(name));
+            }
+            return View(result.ToList());
         }
     }
 }

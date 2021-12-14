@@ -16,6 +16,10 @@
                 background-color: #A10022;
                 transition: all 0.3s ease 0s;
             }
+        .search {
+            border-radius: 90px;
+            width: 400px;
+        }
     </style>
 
 
@@ -26,7 +30,9 @@
             <a class="navbar-brand" href="@Url.Action("Index", "TrangChu")"><img src="~/Content/images/logodps.png" height="35" alt="" loading="lazy" /></a>
             <div class="form-group has-search mb-3 w-auto my-auto d-none d-sm-flex">
                 <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control" placeholder="Search" style="border-radius: 90px; width: 400px;">
+                @*<input type="text" class="form-control" placeholder="Search" style="border-radius: 90px; width: 400px;">*@
+                @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                {@Html.TextBox("name", null, new { id = "SearchBox", @class = "form-control search", @placeholder= "Search" })}
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
