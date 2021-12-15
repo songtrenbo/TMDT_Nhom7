@@ -81,8 +81,11 @@
                                     <div>
                                         <i class="bi bi-star-fill" style="color:#f0f489"></i>
                                         @if (item.SoLuotRate > 0)
-                                        {<span class="rating-number">item.DiemRate/item.SoLuotRate</span>}
-                                        <span class="rating-number">Chưa có đánh giá</span>
+                                        {
+                                            var diemRate = item.DiemRate??0*1.0;var soLuotRate = item.SoLuotRate??1;
+                                            <span class="rating-number">@(Math.Round(diemRate/ soLuotRate,1))</span>}
+                                        else
+                                        {<span class="rating-number">Chưa có đánh giá</span>}
                                     </div> <span class="buy" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">Mua ngay</span>
                                 </div>
                             </div>

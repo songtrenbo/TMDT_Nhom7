@@ -368,10 +368,8 @@
     <Content Include="Views\GioHang\CheckoutFail.cshtml" />
     <Content Include="Views\GioHang\CheckoutSuccess.cshtml" />
     <Content Include="Views\KhachHang\Voucher.cshtml" />
-    <Content Include="Views\KhachHang\DonMua.cshtml" />
     <Content Include="Views\KhachHang\VoucherCuaToi.cshtml" />
     <Content Include="Views\KhachHang\VoucherHetHan.cshtml" />
-    <Content Include="Views\NguoiDung\DonMua.cshtml" />
     <Content Include="Views\NhanVien\QuanLyDonHang.cshtml" />
     <Content Include="Views\NhanVien\DonHangChiTiet.cshtml" />
     <Content Include="Views\QuanLy\NhapKho.cshtml" />
@@ -381,11 +379,6 @@
     <Content Include="Views\QuanLy\SanPhamEdit.cshtml" />
     <Content Include="Views\KhachHang\DonHangChiTiet.cshtml" />
     <Content Include="Views\NhanVien\Bill.cshtml" />
-    <Content Include="Views\NhanVien\QuanLyDaGiao.cshtml" />
-    <Content Include="Views\NhanVien\QuanLyDaHuy.cshtml" />
-    <Content Include="Views\NhanVien\QuanLyDangGiao.cshtml" />
-    <Content Include="Views\NhanVien\QuanLyGiaoHang.cshtml" />
-    <Content Include="Views\NhanVien\QuanLyHoanTra.cshtml" />
     <Content Include="Views\QuanLy\QuanLyFeedback.cshtml" />
     <Content Include="Views\SanPham\AllRating.cshtml" />
     <Content Include="Views\SanPham\Rating_1.cshtml" />
@@ -393,6 +386,8 @@
     <Content Include="Views\SanPham\Rating_3.cshtml" />
     <Content Include="Views\SanPham\Rating_4.cshtml" />
     <Content Include="Views\SanPham\Rating_5.cshtml" />
+    <Content Include="Views\KhachHang\DonMua.cshtml" />
+    <Content Include="Views\KhachHang\QuanLyDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

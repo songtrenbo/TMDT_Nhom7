@@ -99,6 +99,7 @@ namespace TMDT.Controllers
                 //nguoiDung.ConfirmPass = nguoiDung.Password;
                 database.Entry(nguoiDung).State = EntityState.Modified;
                 database.SaveChanges();
+                Session["Account"] = nguoiDung;
                 return RedirectToAction("ThongTinCaNhan", new { id = nguoiDung.MaNguoiDung });
             }
             catch (DbEntityValidationException e)
@@ -149,12 +150,6 @@ namespace TMDT.Controllers
                 return View();
             }
             return View();
-        }
-        public ActionResult DonMua()
-        {
-            var result = database.HoaDons.ToList();
-            result = result.Where(x => x.NguoiDung.Username == ((NguoiDung)Session["Account"]).Username).ToList();
-            return View(result);
         }
     }
 }

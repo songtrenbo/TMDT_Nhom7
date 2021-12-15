@@ -16,39 +16,9 @@ namespace TMDT.Controllers
         {
             return View();
         }
-        public PartialViewResult QuanLyDonHang()
+        public PartialViewResult QuanLyDonHang(int tinhTrang = 1)
         {
-            var donHang = database.HoaDons.Where(s => s.TinhTrang == 1).ToList();
-            donHang = donHang.OrderByDescending(s => s.NgayMua).ToList();
-            return PartialView(donHang);
-        }
-        public PartialViewResult QuanLyGiaoHang()
-        {
-            var donHang = database.HoaDons.Where(s => s.TinhTrang == 2).ToList();
-            donHang = donHang.OrderByDescending(s => s.NgayMua).ToList();
-            return PartialView(donHang);
-        }
-        public PartialViewResult QuanLyDangGiao()
-        {
-            var donHang = database.HoaDons.Where(s => s.TinhTrang == 3).ToList();
-            donHang = donHang.OrderByDescending(s => s.NgayMua).ToList();
-            return PartialView(donHang);
-        }
-        public PartialViewResult QuanLyDaGiao()
-        {
-            var donHang = database.HoaDons.Where(s => s.TinhTrang == 4).ToList();
-            donHang = donHang.OrderByDescending(s => s.NgayMua).ToList();
-            return PartialView(donHang);
-        }
-        public PartialViewResult QuanLyDaHuy()
-        {
-            var donHang = database.HoaDons.Where(s => s.TinhTrang == 5).ToList();
-            donHang = donHang.OrderByDescending(s => s.NgayMua).ToList();
-            return PartialView(donHang);
-        }
-        public PartialViewResult QuanLyHoanTra()
-        {
-            var donHang = database.HoaDons.Where(s => s.TinhTrang == 6).ToList();
+            var donHang = database.HoaDons.Where(s => s.TinhTrang == tinhTrang).ToList();
             donHang = donHang.OrderByDescending(s => s.NgayMua).ToList();
             return PartialView(donHang);
         }

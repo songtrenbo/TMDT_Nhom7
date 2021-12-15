@@ -50,34 +50,32 @@
 <br />
 <br />
 <!-- banner-->
+@*<h4 style="margin-top:2%">Thương hiệu</h4>
 
-<h4 style="margin-top:2%">Thương hiệu</h4>
-
-<!-- Top content -->
-
-<div class="container-fluid" style="padding:10px">
-    <div class="top-content">
-        <div class="container-fluid">
-            <div id="MultiCarousel" class="MultiCarousel" data-items="1,3,5,6" data-slide="1" data-interval="false">
-                <div class="MultiCarousel-inner">
-                    @foreach (var item in ViewBag.thuonghieu)
-                    {
-                        <div class="item @if( item.MaThuongHieu == 1) {<text>active</text>} item-thuonghieu">
-                            <a href="@Url.Action("Index", "Search",new { a = item.MaThuongHieu})"><img src="@item.Hinh" class="img-fluid mx-auto d-block"></a>
+    <!-- Top content -->
+     <div class="container-fluid" style="padding:10px">
+            <div class="top-content">
+                <div class="container-fluid">
+                    <div id="MultiCarousel" class="MultiCarousel" data-items="1,3,5,6" data-slide="1" data-interval="false">
+                        <div class="MultiCarousel-inner">
+                            @foreach (var item in ViewBag.thuonghieu)
+                            {
+                                <div class="item @if( item.MaThuongHieu == 1) {<text>active</text>} item-thuonghieu">
+                                    <a href="@Url.Action("Index", "Search",new { a = item.MaThuongHieu})"><img src="@item.Hinh" class="img-fluid mx-auto d-block"></a>
+                                </div>
+                            }
                         </div>
-                    }
+                        <button class="btn btn-primary leftLst"><i class="bi bi-caret-left-fill"></i></button>
+                        <button class="btn btn-primary rightLst"><i class="bi bi-caret-right-fill"></i></button>
+                    </div>
                 </div>
-                <button class="btn btn-primary leftLst"><i class="bi bi-caret-left-fill"></i></button>
-                <button class="btn btn-primary rightLst"><i class="bi bi-caret-right-fill"></i></button>
             </div>
-        </div>
-    </div>
-</div>
+        </div> *@
 
 
 
 <br />
-<h4 style="margin-top:2%">Danh sách laptop</h4>
+@*<h4 style="margin-top:2%">Danh sách laptop</h4>*@
 
 
 <div class="container">
@@ -111,9 +109,9 @@
                                                 <div class="d-flex justify-content-between align-items-center"> <span class="discount">Hot</span> </div>
                                             </div>
                                         }
-                                    <div style=" text-align: center">
-                                        <img src="@item.Hinh" class="img-fluid rounded thumbnail-image" style=" height: 200px; object-fit: contain ">
-                                    </div>
+                                        <div style=" text-align: center">
+                                            <img src="@item.Hinh" class="img-fluid rounded thumbnail-image" style=" height: 200px; object-fit: contain ">
+                                        </div>
                                     </div>
                                     <div class="product-detail-container p-2">
                                         <div class="d-flex justify-content-between align-items-center">
@@ -130,8 +128,9 @@
                                             <div>
                                                 <i class="bi bi-star-fill" style="color:#f0f489"></i>
                                                 @if (item.SoLuotRate > 0)
-                                                {<span class="rating-number">item.DiemRate/item.SoLuotRate</span>}
-                                                <span class="rating-number">Chưa có đánh giá</span>
+                                                {<span class="rating-number">@(Math.Round(@item.DiemRate * 1.0 / @item.SoLuotRate,1))</span>}
+                                                else
+                                                {<span class="rating-number">Chưa có đánh giá</span>}
                                             </div> <span class="buy" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">Mua ngay</span>
                                         </div>
                                     </div>

@@ -24,8 +24,8 @@
 <div class="card-body">
     <div class="row" style="height:auto">
         @*<div class="col">
-            <a href="@Url.Action("QuanLyDonHang","NhanVien")">Quản lý đơn hàng</a>
-        </div>*@
+                <a href="@Url.Action("QuanLyDonHang","NhanVien")">Quản lý đơn hàng</a>
+            </div>*@
         <div class="col" style="text-align:right;">
             @switch (DonHang.TinhTrang)
             {
@@ -59,23 +59,6 @@ case 6:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</sp
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title">Thông tin nhận hàng</h6>
-                    <div class="row" style="height:auto">
-                        <div class="col-sm-6">
-                            <p class="card-text">Tên khách hàng: <span style="font-weight:500">@nguoiDung.Ten</span></p>
-                            <p class="card-text">Số điện thoại: <span style="font-weight:500">@nguoiDung.SDT</span> </p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="card-text">Địa chỉ: <span style="font-weight:500">@nguoiDung.DiaChi</span></p>
-                            @*<p class="card-text">Mã người dùng: <span style="font-weight:500">@nguoiDung.MaNguoiDung</span> </p>*@
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <table class="table">
@@ -96,41 +79,41 @@ case 6:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</sp
     @foreach (var item in Model)
     {
         i = 0;
-<tr>
-    <td>
-        <img src="@item.SanPham.Hinh" class="img-sm" width="80px" height="80px" />
-    </td>
-    <td>
-        <a href="@Url.Action("CT_SanPham","SanPham",new {@MaSanPham=item.MaSanPham})">@Html.DisplayFor(modelItem => item.SanPham.TenSanPham)</a>
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SanPham.GiaBan)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SoLuong)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ThanhTien)
-    </td>
-    @foreach (var fb in ViewBag.DanhGia)
-    {
-        if (item.MaSanPham == fb.MaSanPham)
-        {
-            i++;
-        }
-    }
-    @if (i == 0&&DonHang.TinhTrang==4)
-    {
-        <td>
-            <button type="button" class="btn btn-success modal-Feedback" data-id="@item.MaSanPham" data-toggle="modal" data-target="#exampleModalCenter">Đánh giá</button>
-        </td>
-    }
-    else
-    {
-        <td></td>
-    }
+        <tr>
+            <td>
+                <img src="@item.SanPham.Hinh" class="img-sm" width="80px" height="80px" />
+            </td>
+            <td>
+                <a href="@Url.Action("CT_SanPham","SanPham",new {@MaSanPham=item.MaSanPham})">@Html.DisplayFor(modelItem => item.SanPham.TenSanPham)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.GiaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhTien)
+            </td>
+            @foreach (var fb in ViewBag.DanhGia)
+            {
+                if (item.MaSanPham == fb.MaSanPham)
+                {
+                    i++;
+                }
+            }
+            @if (i == 0 && DonHang.TinhTrang == 4)
+            {
+                <td>
+                    <button type="button" class="btn btn-success modal-Feedback" data-id="@item.MaSanPham" data-toggle="modal" data-target="#exampleModalCenter">Đánh giá</button>
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
 
-</tr>
+        </tr>
     }
     <tr>
         <td colspan="4" style="text-align:right">Tổng tiền: </td>

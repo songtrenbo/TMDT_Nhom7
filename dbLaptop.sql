@@ -253,6 +253,18 @@ GO
  END
 GO
 
+ CREATE TRIGGER UTG_UpdateRateSP ON DanhGia
+ AFTER INSERT
+ AS
+ BEGIN
+     UPDATE SanPham
+     SET DiemRate = DiemRate + (SELECT Diem FROM INSERTED WHERE MaSanPham = SanPham.MaSanPham),
+     SoLuotRate = SoLuotRate + 1
+     FROM SanPham, INSERTED
+	 WHERE SanPham.MaSanPham = INSERTED.MaSanPham
+ END
+GO
+
 --Quyền
 INSERT INTO Quyen
     (TenQuyen)
@@ -423,9 +435,10 @@ select *from SanPham
 
 SELECT * FROM CTHoaDon
 SELECT * FROM HoaDon
+SELECT * FROM DanhGia
 
 UPDATE HoaDon
-     SET TinhTrang = 2
+     SET TinhTrang = 4
 	 WHERE MaHoaDon = 2
 
    

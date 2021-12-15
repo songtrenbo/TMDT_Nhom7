@@ -1,8 +1,9 @@
-﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutNhanVien.cshtml";
-}
+﻿@model TMDT.Models.HoaDon
 
+@{
+    ViewBag.Title = "Đơn mua";
+    Layout = "~/Views/Shared/_LayoutCaNhan.cshtml";
+}
 
 
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="flex-wrap:unset">
@@ -22,16 +23,16 @@
         <a class="nav-link" id="pills-cancel-tab" data-toggle="pill" href="#pills-cancel" role="tab" aria-controls="pills-cancel" aria-selected="false" style="text-align:center">Đã hủy</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="pills-refund-tab" data-toggle="pill" href="#pills-refund" role="tab" aria-controls="pills-refund" aria-selected="false" style="text-align:center">Hoàn trả</a>
+        <a class="nav-link" id="pills-refund-tab" data-toggle="pill" href="#pills-refund" role="tab" aria-controls="pills-refund" aria-selected="false" style="text-align:center">Trả hàng</a>
     </li>
 </ul>
 <div class="tab-content" id="pills-tcancelontent">
-    <div class="tab-pane fade show active" id="pills-apply" role="tabpanel" aria-labelledby="pills-apply-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien",new { tinhTrang = 1});}</div>
-    <div class="tab-pane fade" id="pills-ready" role="tabpanel" aria-labelledby="pills-ready-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 2 });}</div>
-    <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-delivery-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 3 });}</div>
-    <div class="tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 4 });}</div>
-    <div class="tab-pane fade" id="pills-cancel" role="tabpanel" aria-labelledby="pills-cancel-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 5 });}</div>
-    <div class="tab-pane fade" id="pills-refund" role="tabpanel" aria-labelledby="pills-refund-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 6 });}</div>
+    <div class="tab-pane fade show active" id="pills-apply" role="tabpanel" aria-labelledby="pills-apply-tab">@{Html.RenderAction("DonMua", "KhachHang", new { tinhTrang = 1 });}</div>
+    <div class="tab-pane fade" id="pills-ready" role="tabpanel" aria-labelledby="pills-ready-tab">@{Html.RenderAction("DonMua", "KhachHang", new { tinhTrang = 2 });}</div>
+    <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-delivery-tab">@{Html.RenderAction("DonMua", "KhachHang", new { tinhTrang = 3 });}</div>
+    <div class="tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">@{Html.RenderAction("DonMua", "KhachHang", new { tinhTrang = 4 });}</div>
+    <div class="tab-pane fade" id="pills-cancel" role="tabpanel" aria-labelledby="pills-cancel-tab">@{Html.RenderAction("DonMua", "KhachHang", new { tinhTrang = 5 });}</div>
+    <div class="tab-pane fade" id="pills-refund" role="tabpanel" aria-labelledby="pills-refund-tab">@{Html.RenderAction("DonMua", "KhachHang", new { tinhTrang = 6 });}</div>
 </div>
 
 <style>

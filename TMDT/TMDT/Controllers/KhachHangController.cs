@@ -106,10 +106,26 @@ namespace TMDT.Controllers
             return View(phieuQT);
         }
         #endregion
-
-        public ActionResult DonMua()
+        public ActionResult QuanLyDonHang()
         {
             return View();
+        }
+        public PartialViewResult DonMua(int tinhTrang = 1)
+        {
+            ViewBag.TinhTrang = tinhTrang;
+            var result = database.HoaDons.ToList();
+            result = result.Where(x => x.NguoiDung.Username == ((NguoiDung)Session["Account"]).Username).ToList();
+            result = result.Where(s => s.TinhTrang == tinhTrang).ToList();
+            result = result.OrderByDescending(s => s.NgayMua).ToList();
+            return PartialView(result);
+        }
+        public ActionResult HuyDonHang(int maDonHang)
+        {
+            var donHang = database.HoaDons.Where(s => s.MaHoaDon == maDonHang).FirstOrDefault();
+            donHang.TinhTrang = 5;
+            database.Entry(donHang).State = EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("QuanLyDonHang", "KhachHang");
         }
         public ActionResult DonHangChiTiet(int maDonHang)
         {
