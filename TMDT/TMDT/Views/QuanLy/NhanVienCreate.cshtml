@@ -6,14 +6,13 @@
 }
 
 
-<br />
-<br />
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <br />
+
     <div class="form-horizontal">
-        <h4>Thêm nhân viên</h4>
+        <h2>Thêm nhân viên</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
