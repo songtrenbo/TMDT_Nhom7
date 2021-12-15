@@ -42,7 +42,10 @@
                     <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
                     i++;
                 }
-                <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+                if (i != 5)
+                {
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+                }
             }
             <p class="card-text">@item.NoiDung</p>
             <a href="@Url.Action("ApproveFB","QuanLy",new {@maDanhGia=item.MaDanhGia})" class="btn btn-primary">Duyệt</a>
