@@ -169,6 +169,7 @@ namespace TMDT.Controllers
             SetViewBagCPU(sanPham.MaLoaiCPU);
             SetViewBagLoaiGPU(sanPham.MaLoaiGPU);
             SetViewBagSizeManHinh(sanPham.SizeManHinh);
+            sanPham.SeoTitle = Utils.ToUnsignString(sanPham.TenSanPham);
             var check = database.SanPhams.Where(s => s.TenSanPham == sanPham.TenSanPham).FirstOrDefault();
             if (check == null)
             {
@@ -229,7 +230,7 @@ namespace TMDT.Controllers
             SetViewBagLoaiGPU(sanPham.MaLoaiGPU);
             SetViewBagSizeManHinh(sanPham.SizeManHinh);
             sanPham.NgayChinhSua = DateTime.Now;
-
+            sanPham.SeoTitle = Utils.ToUnsignString(sanPham.TenSanPham);
             var check = database.SanPhams.Where(s => s.TenSanPham == sanPham.TenSanPham).FirstOrDefault();
             if (check != null)
             {

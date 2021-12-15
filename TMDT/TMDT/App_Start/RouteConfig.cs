@@ -14,6 +14,13 @@ namespace TMDT
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+              name: "Product Detail",
+              url: "san-pham/{seotitle}-{MaSanPham}",
+              defaults: new { controller = "SanPham", action = "CT_SanPham", id = UrlParameter.Optional },
+              namespaces: new[] { "TMDT.Controllers" }
+          );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "TrangChu", action = "Index", id = UrlParameter.Optional }

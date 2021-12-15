@@ -69,7 +69,8 @@
                         }
                         <div class="col-12 col-xs-4 col-md-4 col-lg-3">
                             <div class="card card-hover" style=" margin-top:20px">
-                                <div class="card" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">
+                                @{ var url = "/san-pham/" + item.SeoTitle + "-" + item.MaSanPham;}
+                                <div class="card" onclick="location.href='@url'">
                                     <div class="image-container">
                                         @if (item.NgayTao > DateTime.Now.AddDays(-14))
                                         {
@@ -105,7 +106,7 @@
                                                 {<span class="rating-number">@(Math.Round(@item.DiemRate * 1.0 / @item.SoLuotRate,1))</span>}
                                                 else
                                                 {<span class="rating-number">Chưa có đánh giá</span>}
-                                            </div> <span class="buy" onclick="location.href='@Url.Action("CT_SanPham", "SanPham",new { MaSanPham = item.MaSanPham})'">Mua ngay</span>
+                                            </div> <span class="buy" onclick="location.href='@url'">Mua ngay</span>
                                         </div>
                                     </div>
                                 </div>

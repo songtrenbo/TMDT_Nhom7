@@ -68,10 +68,6 @@
                 <td>@Model.RAM GB</td>
             </tr>
             <tr>
-                <th>Ổ cứng</th>
-                <td></td>
-            </tr>
-            <tr>
                 <th>Card đồ họa</th>
                 <td>@Model.LoaiGPU.MaLoaiGPU @Model.LoaiGPU.TenLoaiGPU</td>
             </tr>
@@ -80,8 +76,16 @@
                 <td>@Model.SizeManHinh1.Size" @Model.ManHinh</td>
             </tr>
             <tr>
+                <th>Ổ cứng</th>
+                <td>@Model.LuuTru</td>
+            </tr>
+            <tr>
                 <th>Pin:</th>
-                <td></td>
+                <td>@Model.Pin</td>
+            </tr>
+            <tr>
+                <th>Khối lượng:</th>
+                <td>@Model.KhoiLuong</td>
             </tr>
         </tbody>
     </table>

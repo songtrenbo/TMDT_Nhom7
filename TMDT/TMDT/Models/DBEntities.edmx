@@ -186,7 +186,7 @@
           <Property Name="ManHinh" Type="nvarchar" MaxLength="255" />
           <Property Name="Pin" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="LuuTru" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="KhoiLuong" Type="float" Nullable="false" />
+          <Property Name="KhoiLuong" Type="float" />
           <Property Name="Hinh" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="NgayChinhSua" Type="datetime" />
@@ -789,7 +789,7 @@
           <Property Name="ManHinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Pin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LuuTru" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="KhoiLuong" Type="Double" Nullable="false" />
+          <Property Name="KhoiLuong" Type="Double" />
           <Property Name="Hinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="NgayChinhSua" Type="DateTime" Precision="3" />

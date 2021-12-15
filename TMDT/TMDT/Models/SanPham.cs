@@ -50,7 +50,7 @@ namespace TMDT.Models
         public string ManHinh { get; set; }
         public string Pin { get; set; }
         public string LuuTru { get; set; }
-        public double KhoiLuong { get; set; }
+        public Nullable<double> KhoiLuong { get; set; }
         public string Hinh { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }

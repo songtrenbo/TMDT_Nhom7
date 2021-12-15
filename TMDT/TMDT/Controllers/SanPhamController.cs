@@ -15,7 +15,7 @@ namespace TMDT.Controllers
         {
             return View();
         }
-        public ActionResult CT_SanPham(long MaSanPham)
+        public ActionResult CT_SanPham(int MaSanPham)
         {
             var sanpham = database.SanPhams.Where(s => s.MaSanPham == MaSanPham).FirstOrDefault();
             return View(sanpham);
