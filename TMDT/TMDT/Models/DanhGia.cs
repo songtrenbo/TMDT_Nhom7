@@ -14,9 +14,9 @@ namespace TMDT.Models
     
     public partial class DanhGia
     {
-        public long MaDanhGia { get; set; }
-        public long MaSanPham { get; set; }
-        public long MaKhachHang { get; set; }
+        public int MaDanhGia { get; set; }
+        public int MaSanPham { get; set; }
+        public int MaKhachHang { get; set; }
         public int MaHoaDon { get; set; }
         public int Diem { get; set; }
         public string NoiDung { get; set; }

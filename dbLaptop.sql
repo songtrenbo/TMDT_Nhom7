@@ -14,7 +14,7 @@ CREATE TABLE Quyen
 );
 CREATE TABLE NguoiDung
 (
-    MaNguoiDung BIGINT IDENTITY PRIMARY KEY,
+    MaNguoiDung INT IDENTITY PRIMARY KEY,
     Ten NVARCHAR(50) NOT NULL,
     SDT VARCHAR(15) NULL,
     DiaChi NVARCHAR(100) NULL,
@@ -80,7 +80,7 @@ CREATE TABLE SizeManHinh
 
 CREATE TABLE SanPham
 (
-    MaSanPham BIGINT IDENTITY PRIMARY KEY,
+    MaSanPham INT IDENTITY PRIMARY KEY,
     TenSanPham NVARCHAR(255) NOT NULL,
     MaDanhMuc INT NOT NULL,
     SeoTitle NVARCHAR(255),
@@ -102,7 +102,7 @@ CREATE TABLE SanPham
     ManHinh NVARCHAR(255),
     Pin NVARCHAR(255) NOT NULL,
     LuuTru NVARCHAR(255) NOT NULL,
-    KhoiLuong FLOAT,
+    KhoiLuong NVARCHAR(255) NOT NULL,
     Hinh NVARCHAR(255) NOT NULL,
     NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
@@ -116,8 +116,8 @@ CREATE TABLE SanPham
 
 CREATE TABLE SanPhamNhapKho
 (
-    MaSanPhamNhapKho BIGINT IDENTITY PRIMARY KEY,
-    MaSanPham BIGINT  NOT NULL,
+    MaSanPhamNhapKho INT IDENTITY PRIMARY KEY,
+    MaSanPham INT  NOT NULL,
     SoLuong INT DEFAULT 0,
     GiaNhap FLOAT DEFAULT 0,
     NgayTao DATETIME DEFAULT GETDATE(),
@@ -126,8 +126,8 @@ CREATE TABLE SanPhamNhapKho
 
 CREATE TABLE Hinh
 (
-    MaHinh BIGINT IDENTITY PRIMARY KEY,
-    MaSanPham BIGINT NOT NULL,
+    MaHinh INT IDENTITY PRIMARY KEY,
+    MaSanPham INT NOT NULL,
     TenHinh NVARCHAR(255) NOT NULL,
     [Path] NVARCHAR(255) NOT NULL,
     NgayTao DATETIME DEFAULT GETDATE(),
@@ -142,9 +142,9 @@ CREATE TABLE TinTuc
     TieuDe NVARCHAR(255) NOT NULL,
     Thumbnail NVARCHAR(255) NOT NULL,
     NoiDung NVARCHAR(255) NOT NULL,
-    MaSanPham BIGINT,
-    MaNguoiTao BIGINT NOT NULL,
-    MaNguoiSua BIGINT,
+    MaSanPham INT,
+    MaNguoiTao INT NOT NULL,
+    MaNguoiSua INT,
     NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME,
     IsHide BIT DEFAULT 0,
@@ -154,7 +154,7 @@ CREATE TABLE TinTuc
 
 CREATE TABLE PhieuQuaTang
 (
-    MaPhieuQuaTang BIGINT IDENTITY PRIMARY KEY,
+    MaPhieuQuaTang INT IDENTITY PRIMARY KEY,
     TenPhieuQuaTang NVARCHAR(255) NOT NULL,
     MaGiamGia VARCHAR(20),
     LoaiPhamVi INT NOT NULL,--1: all, theo thương hiệu
@@ -169,9 +169,9 @@ CREATE TABLE PhieuQuaTang
 
 CREATE TABLE NguoiDung_PhieuQuaTang
 (
-    MaNguoiDung_PhieuQuaTang BIGINT IDENTITY PRIMARY KEY,
-    MaPhieuQuaTang BIGINT,
-    MaNguoiDung BIGINT,
+    MaNguoiDung_PhieuQuaTang INT IDENTITY PRIMARY KEY,
+    MaPhieuQuaTang INT,
+    MaNguoiDung INT,
     Status INT,--1: Đã sử dụng, 2: Chưa sử dụng, 3: Đã hết hạn
     FOREIGN KEY (MaPhieuQuaTang) REFERENCES dbo.PhieuQuaTang(MaPhieuQuaTang),
     FOREIGN KEY (MaNguoiDung) REFERENCES dbo.NguoiDung(MaNguoiDung),
@@ -181,20 +181,21 @@ CREATE TABLE HoaDon
 (
     MaHoaDon INT IDENTITY PRIMARY KEY,
     NgayMua DATETIME NOT NULL,
-    MaKhachHang BIGINT NOT NULL,
+    MaKhachHang INT NOT NULL,
     TenKhach NVARCHAR(255) NOT NULL, 
     DiaChi NVARCHAR(255), 
     SDT VARCHAR(15) NOT NULL, 
     HinhThucThanhToan INT DEFAULT 1,--1: COD, 2: paypal 
     HinhThucGiaoHang INT DEFAULT 1,--1: tại quầy, 2: tại địa chỉ 
-    MaNVDuyet BIGINT,
+    MaNVDuyet INT,
     NgayTao DATETIME DEFAULT GETDATE(),
-    MaPhieuQuaTang BIGINT,
+    MaPhieuQuaTang INT,
     SoTienGiam FLOAT DEFAULT 0,
     PhiGiaoHang INT,
     TinhTrang INT DEFAULT 1,--1: Chờ xác nhận, 2: Chờ lấy hàng, 3: Đang giao, 4: Đã giao, 5: Đã hủy, 6: Trả hàng
     TongThanhToan INT DEFAULT 0,
     TinhTrangThanhToan BIT DEFAULT 0,--0: Chưa thanh toán, 1: Đã thanh toán
+    NgayNhan DATETIME,
     FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
     FOREIGN KEY (MaNVDuyet) REFERENCES dbo.NguoiDung(MaNguoiDung),
     FOREIGN KEY (MaPhieuQuaTang) REFERENCES dbo.PhieuQuaTang(MaPhieuQuaTang),
@@ -202,9 +203,9 @@ CREATE TABLE HoaDon
 
 CREATE TABLE CTHoaDon
 (
-    MaCTHoaDon BIGINT IDENTITY PRIMARY KEY,
+    MaCTHoaDon INT IDENTITY PRIMARY KEY,
     MaHoaDon INT NOT NULL,
-    MaSanPham BIGINT NOT NULL,
+    MaSanPham INT NOT NULL,
     DonGia FLOAT NOT NULL,
     SoLuong INT NOT NULL,
     ThanhTien INT NOT NULL,
@@ -214,9 +215,9 @@ CREATE TABLE CTHoaDon
 
 CREATE TABLE DanhGia
 (
-    MaDanhGia BIGINT IDENTITY PRIMARY KEY,
-    MaSanPham BIGINT NOT NULL,
-    MaKhachHang BIGINT NOT NULL,
+    MaDanhGia INT IDENTITY PRIMARY KEY,
+    MaSanPham INT NOT NULL,
+    MaKhachHang INT NOT NULL,
     MaHoaDon INT NOT NULL,
     Diem INT NOT NULL,
     NoiDung NVARCHAR(255),
@@ -233,7 +234,7 @@ CREATE TABLE Banner
     MaBanner INT IDENTITY PRIMARY KEY,
     TenBanner NVARCHAR(255) NOT NULL,
     [Path] NVARCHAR(255) NOT NULL,
-    MaSanPham BIGINT  NOT NULL,
+    MaSanPham INT  NOT NULL,
     IsHide BIT DEFAULT 0,
     IsDeleted BIT DEFAULT 0,
     NgayTao DATETIME DEFAULT GETDATE(),

@@ -6,13 +6,12 @@
         <div class="card-body">
             <div style="font-weight:500">@item.NguoiDung.Ten</div>
 
-            @for (int i = 0; i < 5; i++)
+            @for (int i = 0; i < item.Diem; i++)
             {
-                for (int j = i; j < item.Diem; j++)
-                {
-                    <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
-                    i++;
-                }
+                <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            }
+            @for (int i = 5 - item.Diem; i > 0; i--)
+            {
                 <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
             }
             <p class="card-text">@item.NoiDung</p>

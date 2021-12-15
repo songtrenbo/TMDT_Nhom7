@@ -11,15 +11,12 @@ namespace TMDT.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class CTHoaDon
     {
-        [NotMapped]
-        public int STT { get; set; }
-        public long MaCTHoaDon { get; set; }
+        public int MaCTHoaDon { get; set; }
         public int MaHoaDon { get; set; }
-        public long MaSanPham { get; set; }
+        public int MaSanPham { get; set; }
         public double DonGia { get; set; }
         public int SoLuong { get; set; }
         public int ThanhTien { get; set; }

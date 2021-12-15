@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="83a5e47e028a4c95b69a70d4c4de580b" Name="Diagram1">
-        <EntityTypeShape EntityType="DBLaptopModel.Banner" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.CPU" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.CTHoaDon" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.DanhGia" Width="1.5" PointX="8.25" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.DanhMuc" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+      <Diagram DiagramId="07787701ce63432498797c814e6ec17b" Name="Diagram1">
+        <EntityTypeShape EntityType="DBLaptopModel.Banner" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.CPU" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.CTHoaDon" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.DanhGia" Width="1.5" PointX="8.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.DanhMuc" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.Hinh" Width="1.5" PointX="5.25" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBLaptopModel.HoaDon" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.LoaiGPU" Width="1.5" PointX="0.75" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.NguoiDung" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.NguoiDung_PhieuQuaTang" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.PhieuQuaTang" Width="1.5" PointX="0.75" PointY="29" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.Quyen" Width="1.5" PointX="1.5" PointY="26.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.SanPham" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.SanPhamNhapKho" Width="1.5" PointX="5.25" PointY="22.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.SizeManHinh" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.ThuongHieu" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBLaptopModel.TinTuc" Width="1.5" PointX="5.25" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.LoaiGPU" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.NguoiDung" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.NguoiDung_PhieuQuaTang" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.PhieuQuaTang" Width="1.5" PointX="0.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.Quyen" Width="1.5" PointX="1.5" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.SanPham" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.SanPhamNhapKho" Width="1.5" PointX="5.25" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.SizeManHinh" Width="1.5" PointX="0.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.ThuongHieu" Width="1.5" PointX="0.75" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBLaptopModel.TinTuc" Width="1.5" PointX="5.25" PointY="25.125" IsExpanded="true" />
         <AssociationConnector Association="DBLaptopModel.FK__Banner__MaSanPha__05D8E0BE" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK__SanPham__MaLoaiC__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="DBLaptopModel.FK__CTHoaDon__MaHoaD__778AC167" ManuallyRouted="false" />

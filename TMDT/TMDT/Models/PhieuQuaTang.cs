@@ -21,7 +21,7 @@ namespace TMDT.Models
             this.NguoiDung_PhieuQuaTang = new HashSet<NguoiDung_PhieuQuaTang>();
         }
     
-        public long MaPhieuQuaTang { get; set; }
+        public int MaPhieuQuaTang { get; set; }
         public string TenPhieuQuaTang { get; set; }
         public string MaGiamGia { get; set; }
         public int LoaiPhamVi { get; set; }

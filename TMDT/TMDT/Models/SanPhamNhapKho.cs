@@ -14,8 +14,8 @@ namespace TMDT.Models
     
     public partial class SanPhamNhapKho
     {
-        public long MaSanPhamNhapKho { get; set; }
-        public long MaSanPham { get; set; }
+        public int MaSanPhamNhapKho { get; set; }
+        public int MaSanPham { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<double> GiaNhap { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }

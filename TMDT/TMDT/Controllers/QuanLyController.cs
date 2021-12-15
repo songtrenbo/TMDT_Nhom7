@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -114,6 +115,35 @@ namespace TMDT.Controllers
             return RedirectToAction("QuanLyThuongHieu");
         }
         #endregion
+
+        #region ViewBag
+        public void SetViewBagDanhMuc(int? selectedID = null)
+        {
+            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
+            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc", selectedID);
+        }
+        public void SetViewBagThuongHieu(int? selectedID = null)
+        {
+            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
+            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu", selectedID);
+        }
+        public void SetViewBagCPU(int? selectedID = null)
+        {
+            List<CPU> cPUs = database.CPUs.ToList();
+            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU", selectedID);
+        }
+        public void SetViewBagLoaiGPU(int? selectedID = null)
+        {
+            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
+            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU", selectedID);
+        }
+        public void SetViewBagSizeManHinh(int? selectedID = null)
+        {
+            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
+            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size", selectedID);
+        }
+        #endregion
+
         #region QLSanPham
         public ActionResult QuanLySanPham()
         {
@@ -124,31 +154,21 @@ namespace TMDT.Controllers
 
         public ActionResult SanPhamCreate()
         {
-            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
-            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc");
-            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
-            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu");
-            List<CPU> cPUs = database.CPUs.ToList();
-            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU");
-            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
-            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU");
-            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
-            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size");
+            SetViewBagDanhMuc();
+            SetViewBagThuongHieu();
+            SetViewBagCPU();
+            SetViewBagLoaiGPU();
+            SetViewBagSizeManHinh();
             return View(new SanPham());
         }
         [HttpPost]
         public ActionResult SanPhamCreate(SanPham sanPham)
         {
-            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
-            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc");
-            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
-            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu");
-            List<CPU> cPUs = database.CPUs.ToList();
-            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU");
-            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
-            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU");
-            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
-            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size");
+            SetViewBagDanhMuc(sanPham.MaDanhMuc);
+            SetViewBagThuongHieu(sanPham.MaThuongHieu);
+            SetViewBagCPU(sanPham.MaLoaiCPU);
+            SetViewBagLoaiGPU(sanPham.MaLoaiGPU);
+            SetViewBagSizeManHinh(sanPham.SizeManHinh);
             var check = database.SanPhams.Where(s => s.TenSanPham == sanPham.TenSanPham).FirstOrDefault();
             if (check == null)
             {
@@ -193,31 +213,21 @@ namespace TMDT.Controllers
         }
         public ActionResult SanPhamEdit(int id)
         {
-            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
-            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc");
-            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
-            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu");
-            List<CPU> cPUs = database.CPUs.ToList();
-            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU");
-            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
-            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU");
-            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
-            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size");
+            SetViewBagDanhMuc();
+            SetViewBagThuongHieu();
+            SetViewBagCPU();
+            SetViewBagLoaiGPU();
+            SetViewBagSizeManHinh();
             return View(database.SanPhams.Where(s => s.MaSanPham == id).FirstOrDefault());
         }
         [HttpPost]
         public ActionResult SanPhamEdit(int id, SanPham sanPham)
         {
-            List<DanhMuc> danhMucs = database.DanhMucs.ToList();
-            ViewBag.DanhMuc = new SelectList(danhMucs, "MaDanhMuc", "TenDanhMuc");
-            List<ThuongHieu> thuongHieus = database.ThuongHieux.ToList();
-            ViewBag.ThuongHieu = new SelectList(thuongHieus, "MaThuongHieu", "TenThuongHieu");
-            List<CPU> cPUs = database.CPUs.ToList();
-            ViewBag.CPU = new SelectList(cPUs, "MaCPU", "TenCPU");
-            List<LoaiGPU> loaiGPUs = database.LoaiGPUs.ToList();
-            ViewBag.LoaiGPU = new SelectList(loaiGPUs, "MaLoaiGPU", "TenLoaiGPU");
-            List<SizeManHinh> sizeManHinhs = database.SizeManHinhs.ToList();
-            ViewBag.SizeManHinh = new SelectList(sizeManHinhs, "MaSizeManHinh", "Size");
+            SetViewBagDanhMuc(sanPham.MaDanhMuc);
+            SetViewBagThuongHieu(sanPham.MaThuongHieu);
+            SetViewBagCPU(sanPham.MaLoaiCPU);
+            SetViewBagLoaiGPU(sanPham.MaLoaiGPU);
+            SetViewBagSizeManHinh(sanPham.SizeManHinh);
             sanPham.NgayChinhSua = DateTime.Now;
 
             var check = database.SanPhams.Where(s => s.TenSanPham == sanPham.TenSanPham).FirstOrDefault();
@@ -239,16 +249,28 @@ namespace TMDT.Controllers
                 }
                 else
                 {
-                    string img = database.ThuongHieux.Where(s => s.MaThuongHieu == id).Select(s => s.Hinh).FirstOrDefault();
+                    string img = database.SanPhams.Where(s => s.MaSanPham == id).Select(s => s.Hinh).FirstOrDefault();
                     sanPham.Hinh = img;
                 }
                 database.Entry(sanPham).State = EntityState.Modified;
                 database.SaveChanges();
                 return RedirectToAction("QuanLySanPham");
             }
-            catch
+            catch (DbEntityValidationException e)
             {
-                return View();
+                string a = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    a += ("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State) + "\n";
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        a += ("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage) + "\n";
+                    }
+                }
+                //throw;
+                return Content(a);
             }
         }
         public ActionResult SanPhamHide(int id)

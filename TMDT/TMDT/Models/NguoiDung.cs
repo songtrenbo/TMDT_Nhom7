@@ -25,7 +25,7 @@ namespace TMDT.Models
             this.NguoiDung_PhieuQuaTang = new HashSet<NguoiDung_PhieuQuaTang>();
         }
     
-        public long MaNguoiDung { get; set; }
+        public int MaNguoiDung { get; set; }
         [Display(Name = "Tên người dùng")]
         [Required(ErrorMessage = "Tên người dùng không được bỏ trống")]
         [StringLength(100, MinimumLength = 5)]

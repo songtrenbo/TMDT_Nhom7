@@ -18,9 +18,9 @@ namespace TMDT.Models
         public string TieuDe { get; set; }
         public string Thumbnail { get; set; }
         public string NoiDung { get; set; }
-        public Nullable<long> MaSanPham { get; set; }
-        public long MaNguoiTao { get; set; }
-        public Nullable<long> MaNguoiSua { get; set; }
+        public Nullable<int> MaSanPham { get; set; }
+        public int MaNguoiTao { get; set; }
+        public Nullable<int> MaNguoiSua { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayChinhSua { get; set; }
         public Nullable<bool> IsHide { get; set; }

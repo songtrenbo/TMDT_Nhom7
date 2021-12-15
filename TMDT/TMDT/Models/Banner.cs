@@ -17,7 +17,7 @@ namespace TMDT.Models
         public int MaBanner { get; set; }
         public string TenBanner { get; set; }
         public string Path { get; set; }
-        public long MaSanPham { get; set; }
+        public int MaSanPham { get; set; }
         public Nullable<bool> IsHide { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }

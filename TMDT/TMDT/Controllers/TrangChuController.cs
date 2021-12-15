@@ -13,8 +13,6 @@ namespace TMDT.Controllers
         DBLaptopEntities database = new DBLaptopEntities();
         public ActionResult Index()
         {
-            ViewBag.thuonghieu = database.ThuongHieux.ToList();
-
             var danhmuc = database.DanhMucs.Where(x => x.IsShowHome == true).ToList().ToArray();
             ViewBag.danhmuc = danhmuc;
             var sp = database.SanPhams.Where(x=>x.IsHide==false).OrderByDescending(x => x.NgayTao).ToList();

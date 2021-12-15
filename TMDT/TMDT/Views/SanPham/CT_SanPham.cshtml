@@ -138,22 +138,18 @@
     </li>
 </ul>
 <div class="tab-content" id="pills-t4ratingontent">
-    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">@{Html.RenderAction("AllRating", "SanPham", new {@maSP=Model.MaSanPham});}</div>
-    <div class="tab-pane fade" id="pills-1rating" role="tabpanel" aria-labelledby="pills-1rating-tab">@{Html.RenderAction("Rating_1", "SanPham", new { @maSP = Model.MaSanPham });}</div>
-    <div class="tab-pane fade" id="pills-2rating" role="tabpanel" aria-labelledby="pills-2rating-tab">@{Html.RenderAction("Rating_2", "SanPham", new { @maSP = Model.MaSanPham });}</div>
-    <div class="tab-pane fade" id="pills-3rating" role="tabpanel" aria-labelledby="pills-3rating-tab">@{Html.RenderAction("Rating_3", "SanPham", new { @maSP = Model.MaSanPham });}</div>
-    <div class="tab-pane fade" id="pills-4rating" role="tabpanel" aria-labelledby="pills-4rating-tab">@{Html.RenderAction("Rating_4", "SanPham", new { @maSP = Model.MaSanPham });}</div>
-    <div class="tab-pane fade" id="pills-5rating" role="tabpanel" aria-labelledby="pills-5rating-tab">@{Html.RenderAction("Rating_5", "SanPham", new { @maSP = Model.MaSanPham });}</div>
+    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">@{Html.RenderAction("Rating", "SanPham", new { @maSP = Model.MaSanPham });}</div>
+    <div class="tab-pane fade" id="pills-1rating" role="tabpanel" aria-labelledby="pills-1rating-tab">@{Html.RenderAction("Rating", "SanPham", new { @maSP = Model.MaSanPham, @diem = 1 });}</div>
+    <div class="tab-pane fade" id="pills-2rating" role="tabpanel" aria-labelledby="pills-2rating-tab">@{Html.RenderAction("Rating", "SanPham", new { @maSP = Model.MaSanPham, @diem = 2 });}</div>
+    <div class="tab-pane fade" id="pills-3rating" role="tabpanel" aria-labelledby="pills-3rating-tab">@{Html.RenderAction("Rating", "SanPham", new { @maSP = Model.MaSanPham, @diem = 3 });}</div>
+    <div class="tab-pane fade" id="pills-4rating" role="tabpanel" aria-labelledby="pills-4rating-tab">@{Html.RenderAction("Rating", "SanPham", new { @maSP = Model.MaSanPham, @diem = 4 });}</div>
+    <div class="tab-pane fade" id="pills-5rating" role="tabpanel" aria-labelledby="pills-5rating-tab">@{Html.RenderAction("Rating", "SanPham", new { @maSP = Model.MaSanPham, @diem = 5 });}</div>
 </div>
 
 <br />
 <br />
 <br />
 
-@*<p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@
 <style>
     .btn-buy {
         /*width: 30%;*/
