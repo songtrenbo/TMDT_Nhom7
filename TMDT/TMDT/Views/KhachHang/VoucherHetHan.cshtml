@@ -5,140 +5,73 @@
     Layout = "~/Views/Shared/_LayoutCaNhan.cshtml";
 }
 
-<div class="container-fluid">
-    <div class="row" style="height:500px">
-        @{
-            foreach (var item in Model)
-            {
-                <div class="col col-md-6">
-                    <div class="card">
-                        <div class="main">
-                                    <div class="co-img">
-                                        @if (ViewBag.ThuongHieu.Count == 0)
-                                        {
-                                            <img src="~/Content/images/voucher_logo.png"
-                                                 alt="" />
-                                        }
-                                        @{
-                                            int count = 0;
-                                            foreach (var i in ViewBag.ThuongHieu)
-                                            {
-                                                if (item.PhieuQuaTang.LoaiPhamVi == i.MaThuongHieu)
-                                                {
 
-                                                    <img src="@i.Hinh"
-                                                         alt="" />
-                                                    count++;
-                                                    break;
-                                                }
-                                            }
-                                            if (count == 0)
-                                            {
-                                                <img src="~/Content/images/voucher_logo.png"
-                                                     alt="" />
-                                            }
-                                        }
-                                    </div>
-                            <div class="vertical"></div>
-                            <div class="content">
-                                <h2>@item.PhieuQuaTang.TenPhieuQuaTang</h2>
-                                <h1>@item.PhieuQuaTang.GiaTri <span>VNĐ</span></h1>
-                                <p>Đã hết hạn</p>
-                                <br />
-                            </div>
-                        </div>
+<section class="container-fluid">
+    <h1>Voucher hết hạn</h1>
+    @{ foreach (var item in Model)
+        {
+            <div class="row">
+                <article class="card fl-left">
+                    <section class="date">
+                        @if (ViewBag.ThuongHieu.Count == 0)
+                        {
+                            <img src="~/Content/images/voucher_logo.png"
+                                 alt="" style="height: 144px" />
+                        }
+                        @{
+                            int count = 0;
+                            foreach (var i in ViewBag.ThuongHieu)
+                            {
+                                if (item.PhieuQuaTang.LoaiPhamVi == i.MaThuongHieu)
+                                {
+
+                                    <img src="@i.Hinh"
+                                         alt="" style="height:80px" />
+                                    count++;
+                                    break;
+                                }
+                            }
+                            if (count == 0)
+                            {
+                                <img src="~/Content/images/voucher_logo.png"
+                                     alt="" style="height: 144px" />
+                            }
+                        }
+                    </section>
+                    <section class="card-cont">
+                        <h2>@item.PhieuQuaTang.TenPhieuQuaTang</h2>
+                        <h2>@item.PhieuQuaTang.GiaTri <span>VNĐ</span></h2>
+                        <p>Ngày hết hạn: Đã hết hạn</p>
                         <div class="copy-button">
-                            <p>Mã voucher:  **********</p>
-                            @*<button onclick="copyToClipboard('@item.MaPhieuQuaTang')" class="btn btn-danger">Sao chép</button>*@
-
+                       
+                                    <p>Mã voucher:  **********</p>
+                                   
+                  
                         </div>
-                    </div>
-                </div>
-            }
+                    </section>
+                </article>
+            </div>
         }
-    </div>
-</div>
+    }
 
+</section>
 
 @*<script type="text/javascript">
 
-    function copyToClipboard(target) {
-        var element = document.getElementById(target);
-        element.select();
-        document.execCommand("Copy");
-        window.getSelection().removeAllRanges();
-    }
-</script>*@
+        function copyToClipboard(target) {
+            var element = document.getElementById(target);
+            element.select();
+            document.execCommand("Copy");
+            window.getSelection().removeAllRanges();
+        }
+    </script>*@
+
 
 
 <style>
-    @@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
+    @@import url('https://fonts.googleapis.com/css?family=Oswald');
 
-    .card {
-        margin-top: 20px;
-        width: 470px;
-        height: 230px; /*180*/
-        border-radius: 5px;
-        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
-        background-color: #fff;
-        padding: 15px 15px;
-        position: relative;
-        transition: all 0.3s ease 0s;
-    }
-
-        .card:hover {
-            cursor: default;
-            box-shadow: 0 7px 15px 0 gray;
-        }
-
-    .main,
-    .copy-button {
-        display: flex;
-        justify-content: space-between;
-        padding: 0 10px;
-        align-items: center;
-    }
-    /*
-    .card::before {
-        position: absolute;
-        content: "";
-        height: 40px;
-        left: -20px;
-        border-radius: 40px;
-        z-index: 1;
-        top: 100px;
-        background-color: lightgray;
-        width: 40px;
-    }*/
-
-    .co-img img {
-        width: 150px;
-        height: 100px;
-    }
-
-    .vertical {
-        border-left: 5px dotted black;
-        height: 100px;
-        position: absolute;
-        left: 40%;
-    }
-
-    .content h1 {
-        font-size: 35px;
-        margin-left: -20px;
-        color: #565656;
-    }
-
-        .content h1 span {
-            font-size: 18px;
-        }
 
     .content h2 {
         font-size: 18px;
@@ -159,8 +92,105 @@
         outline: none;
         font-size: 15px;
     }
-</style>
 
+    body {
+        background-color: #dadde6;
+        font-family: arial
+    }
+
+
+    h1 {
+        text-transform: uppercase;
+        font-weight: 900;
+        border-left: 10px solid #fec500;
+        padding-left: 10px;
+        margin-bottom: 30px
+    }
+
+
+    .card {
+        display: table-row;
+        width: 100%;
+        background-color: #fff;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        position: relative
+    }
+
+        .card + .card {
+            margin-left: 2%
+        }
+
+    .date {
+        display: table-cell;
+        width: 25%;
+        position: relative;
+        text-align: center;
+        border-right: 2px dashed #dadde6;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+        .date:before,
+        .date:after {
+            content: "";
+            display: block;
+            width: 30px;
+            height: 30px;
+            background-color: #DADDE6;
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            z-index: 1;
+            border-radius: 50%
+        }
+
+        .date:after {
+            top: auto;
+            bottom: -15px
+        }
+
+
+
+    .card-cont {
+        display: table-cell;
+        width: 75%;
+        padding: 10px 10px 30px 50px
+    }
+
+
+        .card-cont > div {
+            display: table-row
+        }
+
+        .card-cont a {
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            line-height: 30px;
+            position: absolute;
+            right: 10px;
+            bottom: 10px
+        }
+
+    @@media screen and (max-width: 860px) {
+        .card {
+            display: block;
+            float: none;
+            width: 100%;
+            margin-bottom: 10px
+        }
+
+            .card + .card {
+                margin-left: 0
+            }
+
+        .card-cont .even-date,
+        .card-cont .even-info {
+            font-size: 75%
+        }
+    }
+</style>
 <style>
     .active-5 {
         background-color: #CA2620;

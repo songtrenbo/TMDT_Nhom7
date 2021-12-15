@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "DonHangChiTiet";
-    Layout = "~/Views/Shared/_LayoutNhanVien.cshtml";
+    Layout = "~/Views/Shared/_LayoutCaNhan.cshtml";
 }
 
 @{
@@ -23,9 +23,9 @@
 
 <div class="card-body">
     <div class="row" style="height:auto">
-        <div class="col">
+        @*<div class="col">
             <a href="@Url.Action("QuanLyDonHang","NhanVien")">Quản lý đơn hàng</a>
-        </div>
+        </div>*@
         <div class="col" style="text-align:right;">
             @switch (DonHang.TinhTrang)
             {
@@ -46,23 +46,6 @@ case 6:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</sp
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Thông tin nhận hàng</h6>
-                    <div class="row" style="height:auto">
-                        <div class="col-sm-6">
-                            <p class="card-text">Tên khách hàng: <span style="font-weight:500">@nguoiDung.Ten</span></p>
-                            <p class="card-text">Số điện thoại: <span style="font-weight:500">@nguoiDung.SDT</span> </p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="card-text">Địa chỉ: <span style="font-weight:500">@nguoiDung.DiaChi</span></p>
-                            <p class="card-text">Mã người dùng: <span style="font-weight:500">@nguoiDung.MaNguoiDung</span> </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
                     <h6 class="card-title">Thông tin khách hàng</h6>
                     <div class="row" style="height:auto">
                         <div class="col-sm-6">
@@ -71,6 +54,23 @@ case 6:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</sp
                         </div>
                         <div class="col-sm-6">
                             <p class="card-text">Địa chỉ: <span style="font-weight:500">@DonHang.DiaChi</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Thông tin nhận hàng</h6>
+                    <div class="row" style="height:auto">
+                        <div class="col-sm-6">
+                            <p class="card-text">Tên khách hàng: <span style="font-weight:500">@nguoiDung.Ten</span></p>
+                            <p class="card-text">Số điện thoại: <span style="font-weight:500">@nguoiDung.SDT</span> </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="card-text">Địa chỉ: <span style="font-weight:500">@nguoiDung.DiaChi</span></p>
+                            @*<p class="card-text">Mã người dùng: <span style="font-weight:500">@nguoiDung.MaNguoiDung</span> </p>*@
                         </div>
                     </div>
                 </div>
