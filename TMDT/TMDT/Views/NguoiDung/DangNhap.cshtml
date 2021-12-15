@@ -5,8 +5,12 @@
     Layout = "~/Views/Shared/_Form.cshtml";
 }
 
+@{
+    string returnUrl = (string)ViewData["returnUrl"];
+}
+
 <link href="~/Content/css/floating-labels.css" rel="stylesheet" />
-@using (Html.BeginForm("DangNhap", "NguoiDung"))
+@using (Html.BeginForm("DangNhap", "NguoiDung", new { @returnUrl = returnUrl }))
 {
     @Html.AntiForgeryToken()
     <section class="container-fluid bg">
@@ -41,7 +45,7 @@
                         </div>
 
                     </div>
-                    
+
                     <hr>
                     <div class="form-group">
                         <p style="float: left;">Bạn chưa có tài khoản? <a href="@Url.Action("DangKy", "NguoiDung")" class="card-link">Đăng ký ngay</a></p>

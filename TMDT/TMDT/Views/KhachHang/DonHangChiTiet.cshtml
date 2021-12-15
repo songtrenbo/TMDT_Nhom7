@@ -1,0 +1,209 @@
+﻿@model IEnumerable<TMDT.Models.CTHoaDon>
+@using TMDT.Models
+
+@{
+    ViewBag.Title = "DonHangChiTiet";
+    Layout = "~/Views/Shared/_LayoutNhanVien.cshtml";
+}
+
+@{
+    HoaDon DonHang = (HoaDon)ViewData["DonHang"];
+    NguoiDung nguoiDung = (NguoiDung)ViewData["NguoiDung"];
+    int i = 0;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link href="~/Content/css/Feedback.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
+    <script src="~/Scripts/Feedback.js"></script>
+}
+
+
+<div class="card-body">
+    <div class="row" style="height:auto">
+        <div class="col">
+            <a href="@Url.Action("QuanLyDonHang","NhanVien")">Quản lý đơn hàng</a>
+        </div>
+        <div class="col" style="text-align:right;">
+            @switch (DonHang.TinhTrang)
+            {
+                case 1:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Chờ xác nhận</span>break;
+            case 2:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Chờ lấy hàng</span>break;
+        case 3:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đang giao</span>break;
+    case 4:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đã giao</span>break;
+case 5:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đã hủy</span>break;
+case 6:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</span>break;
+}
+
+        </div>
+    </div>
+</div>
+
+<div class="card" style="padding: 15px 15px 15px 15px; ">
+    <div class="row" style="height:auto">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Thông tin nhận hàng</h6>
+                    <div class="row" style="height:auto">
+                        <div class="col-sm-6">
+                            <p class="card-text">Tên khách hàng: <span style="font-weight:500">@nguoiDung.Ten</span></p>
+                            <p class="card-text">Số điện thoại: <span style="font-weight:500">@nguoiDung.SDT</span> </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="card-text">Địa chỉ: <span style="font-weight:500">@nguoiDung.DiaChi</span></p>
+                            <p class="card-text">Mã người dùng: <span style="font-weight:500">@nguoiDung.MaNguoiDung</span> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Thông tin khách hàng</h6>
+                    <div class="row" style="height:auto">
+                        <div class="col-sm-6">
+                            <p class="card-text">Tên khách hàng: <span style="font-weight:500">@DonHang.TenKhach</span></p>
+                            <p class="card-text">Số điện thoại: <span style="font-weight:500">@DonHang.SDT</span> </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="card-text">Địa chỉ: <span style="font-weight:500">@DonHang.DiaChi</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.GiaBan)
+        </th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        i = 0;
+<tr>
+    <td>
+        <img src="@item.SanPham.Hinh" class="img-sm" width="80px" height="80px" />
+    </td>
+    <td>
+        <a href="@Url.Action("CT_SanPham","SanPham",new {@MaSanPham=item.MaSanPham})">@Html.DisplayFor(modelItem => item.SanPham.TenSanPham)</a>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SanPham.GiaBan)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SoLuong)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ThanhTien)
+    </td>
+    @foreach (var fb in ViewBag.DanhGia)
+    {
+        if (item.MaSanPham == fb.MaSanPham)
+        {
+            i++;
+        }
+    }
+    @if (i == 0&&DonHang.TinhTrang==4)
+    {
+        <td>
+            <button type="button" class="btn btn-success modal-Feedback" data-id="@item.MaSanPham" data-toggle="modal" data-target="#exampleModalCenter">Đánh giá</button>
+        </td>
+    }
+    else
+    {
+        <td></td>
+    }
+
+</tr>
+    }
+    <tr>
+        <td colspan="4" style="text-align:right">Tổng tiền: </td>
+        <td colspan="2">@ViewBag.TongTien</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:right">Phí vận chuyển: </td>
+        <td colspan="2">@DonHang.PhiGiaoHang</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:right">Giảm giá: </td>
+        <td colspan="2">@DonHang.SoTienGiam</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align: right; vertical-align: middle">Thành tiền: </td>
+        <td colspan="2" class="text-danger" style="font-size:25px;font-weight:500; vertical-align:middle">@DonHang.TongThanhToan</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:right">Phương thức thanh toán: </td>
+        @if (DonHang.HinhThucThanhToan == 1)
+        {
+            <td colspan="2">Thanh toán khi nhận hàng</td>
+        }
+        else
+        {
+            <td colspan="2">Thanh toán trực tuyến</td>
+        }
+    </tr>
+</table>
+
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade bd-example-modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <input type="hidden" id="hidFeedback" value="0" />
+                <h5 class="modal-title" id="exampleModalLongTitle">Đánh giá sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row" style="height:auto; justify-content:center">
+                        <div id="rating">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label class="full" for="star5" title="Awesome - 5 stars"></label>
+
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label class="full" for="star3" title="Meh - 3 stars"></label>
+
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" id="FeedbackContent" rows="3" placeholder="Hãy chia sẻ những ý kiến của bạn về sản phẩm"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="modalFeedback" class="btn btn-primary" onclick="Feedback(@DonHang.MaHoaDon)">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

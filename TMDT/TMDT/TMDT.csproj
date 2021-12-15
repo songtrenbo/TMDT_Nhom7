@@ -229,6 +229,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chart.css" />
     <Content Include="Content\Chart.min.css" />
+    <Content Include="Content\css\Feedback.css" />
     <Content Include="Content\css\floating-labels.css" />
     <Content Include="Content\css\product-list.css" />
     <Content Include="Content\css\sidebar.css" />
@@ -291,6 +292,7 @@
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\Checkout.js" />
     <Content Include="Scripts\Delete.js" />
+    <Content Include="Scripts\Feedback.js" />
     <Content Include="Scripts\funcGiohang.js" />
     <Content Include="Scripts\InitialGioHang.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -370,6 +372,20 @@
     <Content Include="Views\QuanLy\SanPhamCreate.cshtml" />
     <Content Include="Views\QuanLy\SanPhamDetails.cshtml" />
     <Content Include="Views\QuanLy\SanPhamEdit.cshtml" />
+    <Content Include="Views\KhachHang\DonHangChiTiet.cshtml" />
+    <Content Include="Views\NhanVien\Bill.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyDaGiao.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyDaHuy.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyDangGiao.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyGiaoHang.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyHoanTra.cshtml" />
+    <Content Include="Views\QuanLy\QuanLyFeedback.cshtml" />
+    <Content Include="Views\SanPham\AllRating.cshtml" />
+    <Content Include="Views\SanPham\Rating_1.cshtml" />
+    <Content Include="Views\SanPham\Rating_2.cshtml" />
+    <Content Include="Views\SanPham\Rating_3.cshtml" />
+    <Content Include="Views\SanPham\Rating_4.cshtml" />
+    <Content Include="Views\SanPham\Rating_5.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

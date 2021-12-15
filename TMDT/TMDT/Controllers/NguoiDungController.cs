@@ -53,7 +53,7 @@ namespace TMDT.Controllers
                 Session["Account"] = checkUser;
                 Session["TenAcc"] = checkUser.Ten;
                 //ViewBag.Ten = check.Ten;
-                if (returnUrl == null)
+                if (returnUrl == null&&checkUser.MaQuyen==4||checkUser.MaQuyen==1|| checkUser.MaQuyen == 2 || checkUser.MaQuyen == 3)
                 {
                     switch (checkUser.MaQuyen)
                     {
@@ -62,7 +62,7 @@ namespace TMDT.Controllers
                         case 2:
                             return RedirectToAction("QuanLyThuongHieu", "QuanLy");
                         case 3:
-                            return RedirectToAction("QuanLyDonHang", "NhanVien");
+                            return RedirectToAction("Index", "NhanVien");
                         default:
                             return RedirectToAction("Index", "TrangChu");
                     }

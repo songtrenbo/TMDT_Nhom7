@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
 }
 <link href="~/Scripts/Alert/sweetalert2.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
 @section scripts{
     <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
 }
-
-
 
 <div class="container">
     <div class="row">
@@ -41,8 +41,14 @@
 
                 <div class="col-md-6 col-sm-12"><button class=" btn-buy">Mua ngay</button></div>
                 <br /><br /><br />
-                <div class="col-md-6 col-sm-12"><button class="btn-addtocart" onclick="ThemGioHang(@Model.MaSanPham, '@Model.TenSanPham',@Model.MaThuongHieu,@Model.GiaBan,@Model.SoLuongTon,'@Model.Hinh')">Thêm vào giỏ hàng</button></div>
-
+                @if (Model.GiaGiam != 0)
+                {
+                    <div class="col-md-6 col-sm-12"><button class="btn-addtocart" onclick="ThemGioHang(@Model.MaSanPham, '@Model.TenSanPham',@Model.MaThuongHieu,@Model.GiaGiam,@Model.SoLuongTon,'@Model.Hinh')">Thêm vào giỏ hàng</button></div>
+                }
+                else
+                {
+                    <div class="col-md-6 col-sm-12"><button class="btn-addtocart" onclick="ThemGioHang(@Model.MaSanPham, '@Model.TenSanPham',@Model.MaThuongHieu,@Model.GiaBan,@Model.SoLuongTon,'@Model.Hinh')">Thêm vào giỏ hàng</button></div>
+                }
             </div>
         </div>
     </div>
@@ -80,7 +86,65 @@
         </tbody>
     </table>
 </div>
-
+<h4>Đánh giá sản phẩm</h4>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="flex-wrap:unset">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true" style="text-align:center">Tất cả</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-1rating-tab" data-toggle="pill" href="#pills-1rating" role="tab" aria-controls="pills-1rating" aria-selected="false" style="text-align:center">
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-2rating-tab" data-toggle="pill" href="#pills-2rating" role="tab" aria-controls="pills-2rating" aria-selected="false" style="text-align:center">
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-3rating-tab" data-toggle="pill" href="#pills-3rating" role="tab" aria-controls="pills-3rating" aria-selected="false" style="text-align:center">
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-4rating-tab" data-toggle="pill" href="#pills-4rating" role="tab" aria-controls="pills-4rating" aria-selected="false" style="text-align:center">
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-5rating-tab" data-toggle="pill" href="#pills-5rating" role="tab" aria-controls="pills-5rating" aria-selected="false" style="text-align:center">
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+        </a>
+    </li>
+</ul>
+<div class="tab-content" id="pills-t4ratingontent">
+    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">@{Html.RenderAction("AllRating", "SanPham", new {@maSP=Model.MaSanPham});}</div>
+    <div class="tab-pane fade" id="pills-1rating" role="tabpanel" aria-labelledby="pills-1rating-tab">@{Html.RenderAction("Rating_1", "SanPham", new { @maSP = Model.MaSanPham });}</div>
+    <div class="tab-pane fade" id="pills-2rating" role="tabpanel" aria-labelledby="pills-2rating-tab">@{Html.RenderAction("Rating_2", "SanPham", new { @maSP = Model.MaSanPham });}</div>
+    <div class="tab-pane fade" id="pills-3rating" role="tabpanel" aria-labelledby="pills-3rating-tab">@{Html.RenderAction("Rating_3", "SanPham", new { @maSP = Model.MaSanPham });}</div>
+    <div class="tab-pane fade" id="pills-4rating" role="tabpanel" aria-labelledby="pills-4rating-tab">@{Html.RenderAction("Rating_4", "SanPham", new { @maSP = Model.MaSanPham });}</div>
+    <div class="tab-pane fade" id="pills-5rating" role="tabpanel" aria-labelledby="pills-5rating-tab">@{Html.RenderAction("Rating_5", "SanPham", new { @maSP = Model.MaSanPham });}</div>
+</div>
 
 <br />
 <br />

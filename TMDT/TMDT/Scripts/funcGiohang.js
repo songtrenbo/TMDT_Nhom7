@@ -19,6 +19,10 @@ if (window.localStorage) {
 }
 if (!gioHang)
     gioHang = [];
+if (gioHang.length > 0) {
+    UpdateCart();
+    gioHang = JSON.parse(window.localStorage.getItem("gioHang"));
+}
 if (gioHang.length > 0)
     for (var i = 0; i < gioHang.length; i++) {
         soSP += gioHang[i].soLuong;
@@ -31,6 +35,24 @@ window.onload = function () {
     $(".MainGioHang").html('<i class="bi bi-cart4" style="font-size: 1.2em;color: white;"></i>');
     $(".MainGioHang").append(' Giỏ hàng (' + soSP + ')');
 }
+//Update gio hang
+function UpdateCart() {
+    $.ajax({
+        type: "POST",
+        url: "/SanPham/UpdateCart",
+        success: function (data) {
+            for (var i = 0; i < gioHang.length; i++) {
+                $.each(data, function (j, val) {
+                    if (gioHang[i].maSanPham == val.MaSanPham) {
+                        gioHang[i].giaBan = val.GiaGiam == 0 ? val.GiaBan : val.GiaGiam;
+                    }
+                });
+            }
+            window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
+        }
+    })
+}
+
 // Thêm giỏ hàng
 function ThemGioHang(maSP, tenSP, brand, gia, soLuongTon, hinh) {
     var exist = false;

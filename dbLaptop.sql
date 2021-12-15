@@ -217,12 +217,16 @@ CREATE TABLE DanhGia
     MaDanhGia BIGINT IDENTITY PRIMARY KEY,
     MaSanPham BIGINT NOT NULL,
     MaKhachHang BIGINT NOT NULL,
+    MaHoaDon INT NOT NULL,
     Diem INT NOT NULL,
     NoiDung NVARCHAR(255),
     NgayTao DATETIME DEFAULT GETDATE(),
     NgayChinhSua DATETIME NOT NULL,
+    IsApproved BIT DEFAULT 0,
+    IsDeleted BIT DEFAULT 0,
     FOREIGN KEY (MaSanPham) REFERENCES dbo.SanPham(MaSanPham),
     FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
+    FOREIGN KEY (MaHoaDon) REFERENCES dbo.HoaDon(MaHoaDon),
 );
 CREATE TABLE Banner
 (

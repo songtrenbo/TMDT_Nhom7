@@ -17,11 +17,15 @@ namespace TMDT.Models
         public long MaDanhGia { get; set; }
         public long MaSanPham { get; set; }
         public long MaKhachHang { get; set; }
+        public int MaHoaDon { get; set; }
         public int Diem { get; set; }
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public System.DateTime NgayChinhSua { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
+        public virtual HoaDon HoaDon { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }
         public virtual SanPham SanPham { get; set; }
     }

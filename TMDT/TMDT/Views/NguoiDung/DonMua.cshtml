@@ -44,7 +44,7 @@
                                 <div class="col-md-4">
                                     @* @Html.ActionLink("Xem chi tiết đơn hàng", "CTDonHang", new { /* id=item.PrimaryKey */ }) |*@
 
-                                    <a href="@Url.Action("CTDonHang", "NguoiDung", new { /* id=item.PrimaryKey */ })" class="btn btn-success">Xem chi tiết đơn hàng</a>
+                                    <a href="@Url.Action("DonHangChiTiet","KhachHang",new {@maDonHang=item.MaHoaDon})" class="btn btn-success">Xem chi tiết đơn hàng</a>
                                     @if (@num == 1)
                                     {
                                         @*@Html.ActionLink("Hủy đơn hàng", "HuyDonHang", new { /* id=item.PrimaryKey */ })*@

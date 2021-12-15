@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TMDT.Models.DanhGia>
+
+@{
+    ViewBag.Title = "QuanLyFeedback";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+<h1 style="margin-top:80px"></h1>
+<h5 style="margin-bottom:10px">Quản lý đánh giá</h5>
+
+@foreach (var item in Model)
+{
+    <div class="card" style="margin-bottom:10px">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>
+                        Tên người đánh giá: <span style="font-weight:500">@item.NguoiDung.Ten</span>
+                    </div>
+                    <div>
+                        Sản phẩm: <a href="@Url.Action("CT_SanPham","SanPham",new {@MaSanPham=item.MaSanPham})" style="font-weight:500">#@item.MaSanPham</a> - <span style="font-weight:500">@item.SanPham.TenSanPham</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div style="text-align:right">
+                        Mã hóa đơn: <a href="@Url.Action("DonHangChiTiet","KhachHang",new {@maDonHang=item.MaHoaDon})" style="font-weight:500">#@item.MaHoaDon</a>
+                    </div>
+                    <div style="text-align:right">
+                        Ngày đánh giá: <span style="font-weight:500">@item.NgayTao</span>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < 5; i++)
+            {
+                for (int j = i; j < item.Diem; j++)
+                {
+                    <i class="fa fa-star" aria-hidden="true" style="color:#FFD700"></i>
+                    i++;
+                }
+                <i class="fa fa-star-o" aria-hidden="true" style="color:#FFD700"></i>
+            }
+            <p class="card-text">@item.NoiDung</p>
+            <a href="@Url.Action("ApproveFB","QuanLy",new {@maDanhGia=item.MaDanhGia})" class="btn btn-primary">Duyệt</a>
+            <a href="@Url.Action("DeletedFB","QuanLy",new {@maDanhGia=item.MaDanhGia})" class="btn btn-secondary">Từ chối</a>
+        </div>
+    </div>
+}
+
+<style>
+    .active-6 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

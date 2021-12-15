@@ -65,16 +65,15 @@ function CheckoutSanPham() {
     var diaChi = $("#DiaChi").val();
 
     if (tenKhach != "" && sdt != "" && diaChi != "") {
-        var tmp = null;
-        window.localStorage.removeItem("gioHang");
+        var tmp = [];
         for (var i = 0; i < gioHang.length; i++) {
             let j = 0;
-            if (!gioHang[i].buyCheck) {
+            if (gioHang[i].buyCheck == false) {
                 tmp[j] = gioHang[i];
                 j++;
             }
         }
-        if (tmp != null) {
+        if (tmp.length > 0) {
             gioHang = tmp;
             window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
         }
