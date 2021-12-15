@@ -1,140 +1,62 @@
-﻿@model TMDT.Models.HoaDon
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutNhanVien.cshtml";
 }
 
-<h2>Index</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>HoaDon</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaHoaDon, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaHoaDon, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaHoaDon, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayMua, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayMua, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayMua, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaKhachHang, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaKhachHang, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaKhachHang, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TenKhach, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TenKhach, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenKhach, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhuongThucThanhToan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhuongThucThanhToan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhuongThucThanhToan, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaNVDuyet, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaNVDuyet, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaNVDuyet, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayTao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayTao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayTao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaPhieuQuaTang, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaPhieuQuaTang, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaPhieuQuaTang, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SoTienGiam, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SoTienGiam, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SoTienGiam, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhiGiaoHang, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhiGiaoHang, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhiGiaoHang, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TinhTrang, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TinhTrang, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TinhTrang, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TongThanhToan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TongThanhToan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TongThanhToan, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="flex-wrap:unset">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-apply-tab" data-toggle="pill" href="#pills-apply" role="tab" aria-controls="pills-apply" aria-selected="true" style="text-align:center">Chờ xác nhận</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-ready-tab" data-toggle="pill" href="#pills-ready" role="tab" aria-controls="pills-ready" aria-selected="false" style="text-align:center">Chờ lấy hàng</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-delivery-tab" data-toggle="pill" href="#pills-delivery" role="tab" aria-controls="pills-delivery" aria-selected="false" style="text-align:center">Đang giao</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-delivered-tab" data-toggle="pill" href="#pills-delivered" role="tab" aria-controls="pills-delivered" aria-selected="false" style="text-align:center">Đã giao</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-cancel-tab" data-toggle="pill" href="#pills-cancel" role="tab" aria-controls="pills-cancel" aria-selected="false" style="text-align:center">Đã hủy</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-refund-tab" data-toggle="pill" href="#pills-refund" role="tab" aria-controls="pills-refund" aria-selected="false" style="text-align:center">Hoàn trả</a>
+    </li>
+</ul>
+<div class="tab-content" id="pills-tcancelontent">
+    <div class="tab-pane fade show active" id="pills-apply" role="tabpanel" aria-labelledby="pills-apply-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien");}</div>
+    <div class="tab-pane fade" id="pills-ready" role="tabpanel" aria-labelledby="pills-ready-tab">@{Html.RenderAction("QuanLyGiaoHang", "NhanVien");}</div>
+    <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-delivery-tab">@{Html.RenderAction("QuanLyDangGiao", "NhanVien");}</div>
+    <div class="tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">@{Html.RenderAction("QuanLyDaGiao", "NhanVien");}</div>
+    <div class="tab-pane fade" id="pills-cancel" role="tabpanel" aria-labelledby="pills-cancel-tab">@{Html.RenderAction("QuanLyDaHuy", "NhanVien");}</div>
+    <div class="tab-pane fade" id="pills-refund" role="tabpanel" aria-labelledby="pills-refund-tab">@{Html.RenderAction("QuanLyHoanTra", "NhanVien");}</div>
 </div>
+
+<style>
+    .nav-link.hover {
+        background: #FF0707;
+        opacity: 30%;
+        color: white;
+    }
+
+    .nav-link.active {
+        background: #FF0707;
+        opacity: 30%;
+        color: white;
+    }
+    /*    .active-2 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+
+    .row {
+        height: 200px;
+    }
+
+    .col-6:hover {
+        cursor: pointer;
+    }*/
+</style>

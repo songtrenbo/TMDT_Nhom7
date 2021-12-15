@@ -41,10 +41,10 @@
 
             </td>
             <td>
-                @if (item.TinhTrang == 1)
+                @if (item.TinhTrang == 2)
                 {
-                    <input type="button" onclick="location.href='@Url.Action("XacNhanDonHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-danger" style="text-align:right" value="Xác nhận">
-                    <input type="button" onclick="location.href='@Url.Action("HuyDonHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-outline-danger" value="Hủy đơn hàng">
+                    @*<input type="button" onclick="location.href='@Url.Action("XacNhanGiaoHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-danger" style="text-align:right" value="Xác nhận">
+                    <input type="button" onclick="location.href='@Url.Action("HuyDonHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-outline-danger" value="Hủy đơn hàng">*@
                 }
             </td>
         </tr>

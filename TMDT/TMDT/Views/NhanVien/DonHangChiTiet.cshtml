@@ -8,6 +8,13 @@
 
 @{
     HoaDon DonHang = (HoaDon)ViewData["DonHang"];
+    NguoiDung nguoiDung = (NguoiDung)ViewData["NguoiDung"];
+    int i = 1;
+    foreach (var item in Model)
+    {
+        item.STT = i;
+        i++;
+    }
 }
 
 <div class="card-body">
@@ -19,23 +26,66 @@
             @switch (DonHang.TinhTrang)
             {
                 case 1:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Chờ xác nhận</span>break;
-            case 2:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đang giao</span>break;
-        case 3:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đã giao</span>break;
-    case 4:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đã hủy</span>break;
-case 5:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</span>break;
+            case 2:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Chờ lấy hàng</span>break;
+        case 3:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đang giao</span>break;
+    case 4:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đã giao</span>break;
+case 5:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Đã hủy</span>break;
+case 6:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</span>break;
 }
 
         </div>
     </div>
 </div>
-<div class="card">
+@if (DonHang.TinhTrang == 1)
+{
+<div class="card" style="margin:10px 0 10px 0">
     <div class="card-body">
-        <h4 class="card-title">Thông tin khách hàng</h4>
         <div class="row" style="height:auto">
-            <div class="col card-body">
-                <p class="card-text" style="font-size:18px;">Tên khách hàng: <span style="font-weight:500">@DonHang.TenKhach</span></p>
-                <p class="card-text text-muted small" style="font-size:16px;">Số điện thoại: <span style="font-weight:500">@DonHang.SDT</span> </p>
-                <p class="card-text text-muted small" style="font-size:16px;">Địa chỉ: <span style="font-weight:500">@DonHang.DiaChi</span></p>
+            <div class="col">
+            </div>
+            <div class="col" style="text-align:right;">
+                <button type="button" class="btn btn-success" onclick="printDiv()">In đơn hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+}
+
+
+<div class="card" style="padding: 15px 15px 15px 15px; ">
+    <div class="row" style="height:auto">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Thông tin nhận hàng</h6>
+                    <div class="row" style="height:auto">
+                        <div class="col-sm-6">
+                            <p class="card-text">Tên khách hàng: <span style="font-weight:500">@nguoiDung.Ten</span></p>
+                            <p class="card-text">Số điện thoại: <span style="font-weight:500">@nguoiDung.SDT</span> </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="card-text">Địa chỉ: <span style="font-weight:500">@nguoiDung.DiaChi</span></p>
+                            <p class="card-text">Mã người dùng: <span style="font-weight:500">@nguoiDung.MaNguoiDung</span> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Thông tin khách hàng</h6>
+                    <div class="row" style="height:auto">
+                        <div class="col-sm-6">
+                            <p class="card-text">Tên khách hàng: <span style="font-weight:500">@DonHang.TenKhach</span></p>
+                            <p class="card-text">Số điện thoại: <span style="font-weight:500">@DonHang.SDT</span> </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="card-text">Địa chỉ: <span style="font-weight:500">@DonHang.DiaChi</span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -62,7 +112,7 @@ case 5:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</sp
                 <img src="@item.SanPham.Hinh" class="img-sm" width="80px" height="80px" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+                <a href="@Url.Action("CT_SanPham","SanPham",new {@MaSanPham=item.MaSanPham})">@Html.DisplayFor(modelItem => item.SanPham.TenSanPham)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SanPham.GiaBan)
@@ -101,6 +151,14 @@ case 5:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</sp
         {
             <td>Thanh toán trực tuyến</td>
         }
-
     </tr>
 </table>
+
+
+<script>
+    function printDiv() {
+        //var divContents = document.getElementById("GFG").innerHTML;
+        var a = window.open('/NhanVien/Test?maDonHang=@DonHang.MaHoaDon', '', "width=500");
+        a.print();
+    }
+</script>

@@ -111,5 +111,37 @@ namespace TMDT.Controllers
         {
             return View();
         }
+        public ActionResult DonHangChiTiet(int maDonHang)
+        {
+            var donHangCT = database.CTHoaDons.Where(s => s.MaHoaDon == maDonHang).ToList();
+            var donHang = database.HoaDons.Where(s => s.MaHoaDon == maDonHang).FirstOrDefault();
+            ViewData["DonHang"] = donHang;
+            ViewData["NguoiDung"] = database.NguoiDungs.Where(s => s.MaNguoiDung == donHang.MaKhachHang).FirstOrDefault();
+            ViewBag.DanhGia = database.DanhGias.Where(s => s.MaHoaDon == donHang.MaHoaDon).ToList();
+            double tongTien = 0;
+            foreach (var item in donHangCT)
+            {
+                tongTien += item.DonGia * item.SoLuong;
+            }
+            ViewBag.TongTien = tongTien;
+            return View(donHangCT);
+        }
+        public void Feedback(int maSP, int maHoaDon, int rating, string content)
+        {
+            NguoiDung nguoiDung = (NguoiDung)Session["Account"];
+            DanhGia danhGia = new DanhGia();
+            danhGia.MaKhachHang = nguoiDung.MaNguoiDung;
+            danhGia.Diem = rating;
+            danhGia.NoiDung = content;
+            danhGia.MaSanPham = maSP;
+            danhGia.MaHoaDon = maHoaDon;
+            danhGia.NgayTao = DateTime.Now;
+            danhGia.NgayChinhSua = DateTime.Now;
+            danhGia.IsApproved = false;
+            danhGia.IsDeleted = false;
+
+            database.DanhGias.Add(danhGia);
+            database.SaveChanges();
+        }
     }
 }

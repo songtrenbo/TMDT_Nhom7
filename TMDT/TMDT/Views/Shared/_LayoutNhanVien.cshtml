@@ -55,7 +55,7 @@
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item active-1">
-                            <a class="nav-link text-white" href="@Url.Action("QuanLyDonHang","NhanVien")">
+                            <a class="nav-link text-white" href="@Url.Action("Index","NhanVien")">
                                 <i class="bi bi-bookmark-star" style="font-size: 24px;"></i> Quản lý đơn hàng
                             </a>
                         </li>
@@ -94,8 +94,13 @@
                 </div>
             </nav>
 
+<<<<<<< HEAD
             <main role="main" class="col-9 col-sm-9 col-md-9 ml-sm-auto col-lg-10 px-md-4" style="margin-top:80px">
                 <h2 class="text-center">@RenderSection("Header", false)</h2>
+=======
+            <main role="main" class="col-9 col-sm-9 col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <h2 class="text-center" style="margin-bottom:80px">@RenderSection("Header", false)</h2>
+>>>>>>> efe2f6d5a2a5dd8ca9cff0b1212d88084ed9fb42
                 @RenderBody()
             </main>
         </div>

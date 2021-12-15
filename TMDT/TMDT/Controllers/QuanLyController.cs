@@ -838,5 +838,28 @@ namespace TMDT.Controllers
             }
             return View();
         }
+        public ActionResult QuanLyFeedback()
+        {
+            var feedback = database.DanhGias.Where(s => s.IsApproved == false && s.IsDeleted == false).ToList();
+            return View(feedback);
+        }
+        public ActionResult ApproveFB(int maDanhGia)
+        {
+            var feedback = database.DanhGias.Where(s => s.MaDanhGia == maDanhGia).FirstOrDefault();
+            feedback.IsApproved = true;
+
+            database.Entry(feedback).State = EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("QuanLyFeedBack");
+        }
+        public ActionResult DeletedFB(int maDanhGia)
+        {
+            var feedback = database.DanhGias.Where(s => s.MaDanhGia == maDanhGia).FirstOrDefault();
+            feedback.IsDeleted = true;
+
+            database.Entry(feedback).State = EntityState.Modified;
+            database.SaveChanges();
+            return RedirectToAction("QuanLyFeedBack");
+        }
     }
 }
