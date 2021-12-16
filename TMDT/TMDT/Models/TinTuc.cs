@@ -11,12 +11,21 @@ namespace TMDT.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+    using System.Web.Mvc;
+
     public partial class TinTuc
     {
+        public TinTuc()
+        {
+            Thumbnail = "/Content/images/";
+        }
         public int MaTinTuc { get; set; }
         public string TieuDe { get; set; }
         public string Thumbnail { get; set; }
+
+        [AllowHtml]
         public string NoiDung { get; set; }
         public Nullable<int> MaSanPham { get; set; }
         public int MaNguoiTao { get; set; }
@@ -27,5 +36,7 @@ namespace TMDT.Models
         public Nullable<bool> IsDeleted { get; set; }
     
         public virtual SanPham SanPham { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase UploadImage { get; set; }
     }
 }

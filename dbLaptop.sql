@@ -141,7 +141,7 @@ CREATE TABLE TinTuc
     MaTinTuc INT IDENTITY PRIMARY KEY,
     TieuDe NVARCHAR(255) NOT NULL,
     Thumbnail NVARCHAR(255) NOT NULL,
-    NoiDung NVARCHAR(255) NOT NULL,
+    NoiDung NTEXT NOT NULL,
     MaSanPham INT,
     MaNguoiTao INT NOT NULL,
     MaNguoiSua INT,
@@ -428,8 +428,10 @@ VALUES
 (N'Lenovo sản phẩm HOT','LENOVOHOT156',6,1600000,17000000,31,N'2021-12-15 05:35:51',N'2021-12-01 05:35:51',N'2022-01-13 05:35:51',2),
 (N'Asus 7 ngày ưu đãi','ASUS7D4521',2,1000000,10000000,5,N'2021-12-15 05:35:51',N'2021-12-15 05:35:51',N'2021-12-22 05:35:51',2)
 
-
 GO
+--Tin tức
+
+
 select *from NguoiDung
 select *from Quyen
 select *from SanPham

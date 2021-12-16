@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -111,7 +112,79 @@ namespace TMDT.Controllers
                 return View();
             }
         }
-        
+
+        #endregion
+        #region TinTuc
+        public ActionResult QLTinTuc()
+        {
+            var tintuc = database.TinTucs.ToList();
+            return View(tintuc);
+        }
+        public ActionResult TinTucCreate()
+        {
+            List<SanPham> sanphams = database.SanPhams.ToList();
+            ViewBag.SanPham = new SelectList(sanphams, "MaSanPham", "TenSanPham");
+            TinTuc tintuc = new TinTuc();
+            return View(tintuc);
+        }
+        [HttpPost]
+        public ActionResult TinTucCreate(TinTuc tintuc)
+        {
+            var acc = (NguoiDung)Session["Account"];
+            var check_ID = database.TinTucs.Where(s => s.MaTinTuc == tintuc.MaTinTuc).FirstOrDefault();
+            try
+            {
+                if (tintuc.UploadImage != null)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(tintuc.UploadImage.FileName);
+                    string extent = Path.GetExtension(tintuc.UploadImage.FileName);
+                    filename = filename + extent;
+                    tintuc.Thumbnail = "/Content/images/" + filename;
+                    tintuc.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/images/"), filename));
+                }
+                tintuc.NgayTao = DateTime.Now;
+                tintuc.NgayChinhSua = DateTime.Now;
+                tintuc.MaNguoiSua = acc.MaNguoiDung;
+                tintuc.MaNguoiTao = acc.MaNguoiDung;
+                tintuc.IsDeleted = false;
+                tintuc.IsHide = false;
+                database.Configuration.ValidateOnSaveEnabled = false;
+                database.TinTucs.Add(tintuc);
+                database.SaveChanges();
+                return RedirectToAction("QLTaiKhoan");
+            }
+            catch (DbEntityValidationException e)
+            {
+                string a = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    a += ("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State) + "\n";
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        a += ("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage) + "\n";
+                    }
+                }
+                //throw;
+                return Content(a);
+            }
+            //if (check_ID == null)
+            //{
+              
+            //}
+            //else
+            //{
+            //    ViewBag.Error = "Tài khoản đã tồn tại";
+            //    return View();
+            //}
+        }
+
+        public ActionResult TinTucDetail(int id)
+        {
+            var tintuc = database.TinTucs.Where(s => s.MaTinTuc == id).FirstOrDefault();
+            return View(tintuc);
+        }
         #endregion
     }
 }

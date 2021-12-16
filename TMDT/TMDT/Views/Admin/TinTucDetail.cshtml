@@ -1,0 +1,104 @@
+﻿@model TMDT.Models.TinTuc
+
+@{
+    ViewBag.Title = "TinTucDetail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi tiết tin tức</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaTinTuc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaTinTuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TieuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thumbnail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.NoiDung)
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNguoiTao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaNguoiTao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNguoiSua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaNguoiSua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayTao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayChinhSua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayChinhSua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsHide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsHide)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

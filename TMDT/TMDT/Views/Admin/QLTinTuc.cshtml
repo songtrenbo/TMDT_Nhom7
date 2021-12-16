@@ -1,0 +1,102 @@
+﻿@model IEnumerable<TMDT.Models.TinTuc>
+
+@{
+    ViewBag.Title = "QLTinTuc";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Quản lý tin tức</h2>
+
+<p>
+    @Html.ActionLink("Thêm tin tức mới", "TinTucCreate", "", htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaTinTuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.MaSanPham)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.MaNguoiTao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaNguoiSua)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayChinhSua)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsHide)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaTinTuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TieuDe)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Thumbnail)*@
+            <img src="@item.Thumbnail" width="100" />
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.NoiDung)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.MaSanPham)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.MaNguoiTao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaNguoiSua)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayTao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayChinhSua)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.IsHide)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "TinTucDetail", new {  id=item.MaTinTuc  }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
+<style>
+    .active-3 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

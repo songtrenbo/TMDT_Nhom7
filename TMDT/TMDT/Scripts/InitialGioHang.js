@@ -13,7 +13,7 @@
         tableBody.append('<tr><td style="text-align: center;vertical-align: middle;">' +
             '<input type="checkbox" class="div1 show" data-id="' + gioHang[i].maSanPham + '" checked></td><td>' +
             '<figure class="itemside align-items-center">' +
-            '<div class="aside"><img src="' + gioHang[i].hinh + '" class="img-sm"></div>' +
+            '<div class="aside"><img src="' + gioHang[i].hinh + '" width="80"></div>' +
             '<figcaption class="info">' +
             '<a href="#" class="title text-dark" data-abc="true">' + gioHang[i].tenSanPham + '</a>' +
             '<p class="text-muted small">Brand:' + gioHang[i].maSanPham + '</p>' +

@@ -159,5 +159,17 @@ namespace TMDT.Controllers
             database.DanhGias.Add(danhGia);
             database.SaveChanges();
         }
+
+
+        public ActionResult TinTuc()
+        {
+            var tintuc = database.TinTucs.ToList();
+            return View(tintuc);
+        }
+        public ActionResult TinTucDetail(int id)
+        {
+            var tintuc = database.TinTucs.Where(s=>s.MaTinTuc==id).FirstOrDefault();
+            return View(tintuc);
+        }
     }
 }

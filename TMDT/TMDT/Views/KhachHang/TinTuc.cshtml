@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TMDT.Models.TinTuc>
+
+@{
+    ViewBag.Title = "TinTuc";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+@*<h2>TinTuc</h2>*@
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@{
+    foreach (var item in Model)
+    {
+        <div class="container" style="margin:20px;">
+            <div class="row item" style="padding:10px; border:1px solid gray" onclick="location.href='@Url.Action("TinTucDetail", "KhachHang", new { id = item.MaTinTuc })'">
+                <img src="@item.Thumbnail" class="col-md-3"/>
+                <div class="col-md-9">
+                    <h4>@item.TieuDe</h4>
+                    @Html.Raw(!String.IsNullOrEmpty(item.NoiDung) ? new string(item.NoiDung.Take(340).ToArray()) : item.NoiDung) ...
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<style>
+    .item:hover {
+        box-shadow:3px 5px 5px gray;
+        cursor:pointer;
+    }
+</style>

@@ -65,7 +65,7 @@
                             </a>
                         </li>
                         <li class="nav-item  active-3">
-                            <a class="nav-link text-white" href="#">
+                            <a class="nav-link text-white" href="@Url.Action("QLTinTuc","Admin")">
                                 <i class="bi bi-newspaper" style="font-size: 24px;"></i> Quản lý tin tức
                             </a>
                         </li>
@@ -88,7 +88,9 @@
     @Html.Partial("_Foot")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/ckeditor")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/UploadImage.js"></script>
     <style>
         .nav > .nav-item {
             width: 100%;
