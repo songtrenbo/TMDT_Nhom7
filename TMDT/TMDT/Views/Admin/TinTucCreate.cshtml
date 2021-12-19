@@ -8,7 +8,7 @@
 <h2>Tạo tin tức mới</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("TinTucCreate", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

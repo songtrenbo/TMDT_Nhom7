@@ -81,6 +81,7 @@ namespace TMDT.Controllers
         {
             var donHang = database.HoaDons.Where(s => s.MaHoaDon == maDonHang).FirstOrDefault();
             donHang.TinhTrang = 4;
+            donHang.NgayNhan = DateTime.Now;
             database.Entry(donHang).State = EntityState.Modified;
             database.SaveChanges();
             return RedirectToAction("Index", "NhanVien");

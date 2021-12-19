@@ -5,7 +5,7 @@
 @foreach (var item in Model)
 {
         <div class="col-6 col-md-4 col-lg-12">
-            <div class="card" style="height:200px; margin-top:20px" onclick="location.href='@Url.Action("DonHangChiTiet", "KhachHang", new { maHoaDon = item.MaHoaDon})'">
+            <div class="card" style="height:200px; margin-top:20px" onclick="location.href='@Url.Action("DonHangChiTiet", "KhachHang", new { maHoaDon = item.MaHoaDon })'">
                 <div class="card-body" style="width: 100%">
                     <div class="container" style="height:200px">
                         <div class="row">
@@ -14,8 +14,11 @@
                             </div>
                             <div class="col-md-6">
                                 <p><b>Ngày mua:  </b> &emsp;&emsp;&emsp;&emsp;@item.NgayMua</p>
-                                <p><b>Ngày nhận hàng:</b>&emsp;&emsp;@item.NgayNhan?? chưa nhận hàng</p>
-                                <p><b>Tổng tiền:</b> &emsp;&emsp;&emsp;&emsp;&emsp;@item.TongThanhToan</p>
+                                @{ var temp = "chưa nhận hàng";
+                                    var result = item.NgayNhan == null ? temp : item.NgayNhan.ToString();}
+                                <p><b>Ngày nhận hàng:</b>&emsp;&emsp;@result</p>
+
+ <p><b>Tổng tiền:</b> &emsp;&emsp;&emsp;&emsp;&emsp;@item.TongThanhToan</p>
                             </div>
                             <div class="col-md-4">
 

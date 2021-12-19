@@ -188,8 +188,8 @@ namespace TMDT.Controllers
                         string filename = Path.GetFileNameWithoutExtension(sanPham.UploadImage.FileName);
                         string extent = Path.GetExtension(sanPham.UploadImage.FileName);
                         filename = filename + extent;
-                        sanPham.Hinh = "/Content/SanPhamImages/" + filename;
-                        sanPham.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/SanPhamImages/"), filename));
+                        sanPham.Hinh = "/Content/images/" + filename;
+                        sanPham.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/images/"), filename));
                     }
 
                     database.SanPhams.Add(sanPham);
@@ -245,8 +245,8 @@ namespace TMDT.Controllers
                     string filename = Path.GetFileNameWithoutExtension(sanPham.UploadImage.FileName);
                     string extent = Path.GetExtension(sanPham.UploadImage.FileName);
                     filename = filename + extent;
-                    sanPham.Hinh = "/Content/SanPhamImages/" + filename;
-                    sanPham.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/SanPhamImages/"), filename));
+                    sanPham.Hinh = "/Content/images/" + filename;
+                    sanPham.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/images/"), filename));
                 }
                 else
                 {

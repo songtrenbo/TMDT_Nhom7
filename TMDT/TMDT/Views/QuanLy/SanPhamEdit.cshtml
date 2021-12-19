@@ -78,7 +78,7 @@
                     Giá giảm
                 </th>
                 <td colspan="2">
-                    @Html.EditorFor(model => model.GiaGiam, new { htmlAttributes = new { @class = "form-control", @Value = 0 } })
+                    @Html.EditorFor(model => model.GiaGiam, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.GiaGiam, "", new { @class = "text-danger" })
                 </td>
             </tr>
@@ -87,7 +87,7 @@
                     Bảo hành
                 </th>
                 <td colspan="2">
-                    @Html.EditorFor(model => model.BaoHanh, new { htmlAttributes = new { @class = "form-control", @Value = 12 } })
+                    @Html.EditorFor(model => model.BaoHanh, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.BaoHanh, "", new { @class = "text-danger" })
                 </td>
             </tr>

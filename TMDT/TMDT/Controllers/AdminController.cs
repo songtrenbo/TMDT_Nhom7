@@ -151,7 +151,7 @@ namespace TMDT.Controllers
                 database.Configuration.ValidateOnSaveEnabled = false;
                 database.TinTucs.Add(tintuc);
                 database.SaveChanges();
-                return RedirectToAction("QLTaiKhoan");
+                return RedirectToAction("QLTinTuc"); 
             }
             catch (DbEntityValidationException e)
             {
@@ -166,18 +166,8 @@ namespace TMDT.Controllers
                             ve.PropertyName, ve.ErrorMessage) + "\n";
                     }
                 }
-                //throw;
                 return Content(a);
             }
-            //if (check_ID == null)
-            //{
-              
-            //}
-            //else
-            //{
-            //    ViewBag.Error = "Tài khoản đã tồn tại";
-            //    return View();
-            //}
         }
 
         public ActionResult TinTucDetail(int id)
