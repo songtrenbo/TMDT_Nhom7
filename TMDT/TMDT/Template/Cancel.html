@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Cancel</title>
+
+    <style>
+        .link {
+            background-color: red;
+            background-image: linear-gradient(to right, red, yellow);
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 20px;
+            outline: none;
+            text-decoration: none;
+            text-decoration-line: none;
+            font-size: 15px
+        }
+
+            .link:hover {
+                text-decoration: none;
+                text-decoration-line: none;
+                color: #fafafa;
+                cursor: pointer;
+                box-shadow: 0.3vw 0.3vw 0.3vw #203562;
+            }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <img src="../Content/images/logo.jpg" width="200"/>
+    </div>
+    <p>Xin chào <span>{{Name}}</span></p>
+    <p>Đơn hàng của bạn đã bị hủy.</p>
+    <p>Lý do: <span>{{Reason}}</span></p>
+    <div style="text-align: center;">
+        <a href='{{Link}}' class="link">XEM CHI TIẾT ĐƠN HÀNG</a>
+    </div>
+
+    <h4>THÔNG TIN ĐƠN HÀNG - DÀNH CHO NGƯỜI MUA</h4>
+    <div>
+        Mã đơn hàng: <span>#{{MaHoaDon}}</span>
+    </div>
+    <div>
+        Ngày đặt hàng: <span>{{NgayMua}}</span>
+    </div>
+
+
+    <table class="table table-borderless">
+        <thead>
+            <tr id="append">
+                <th>
+                </th>
+                <th>Tên sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {{Tbody}}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align:right">Tổng tiền: </td>
+                <td colspan="2">{{TongTien}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:right">Phí vận chuyển: </td>
+                <td colspan="2">{{PhiVanChuyen}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:right">Giảm giá: </td>
+                <td colspan="2">{{GiamGia}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: right; vertical-align: middle">Thành tiền: </td>
+                <td colspan="2" class="text-danger" style="font-size:25px;font-weight:500; vertical-align:middle">{{ThanhTien}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align:right">Phương thức thanh toán: </td>
+                <td colspan="2">{{GiaoHang}}</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
+

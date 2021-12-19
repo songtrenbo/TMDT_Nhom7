@@ -10,7 +10,18 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/Alert/sweetalert2.all.min.js"></script>
     <script src="~/Scripts/ResetPassword.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#AccTable').DataTable();
+        });
+        $.extend($.fn.dataTable.defaults, {
+            searching: false,
+            lengthChange: false
+        });
+    </script>
 }
+
 <p>
     @Html.ActionLink("Tạo tài khoản mới", "TaiKhoanCreate", "", htmlAttributes: new { @class = "btn btn-success" })
 </p>
@@ -38,50 +49,55 @@
     </div>
 }
 
-<table class="table table-striped">
-    <tr>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Ten)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Quyen.TenQuyen)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="AccTable" class="table table-striped">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quyen.TenQuyen)
-            </td>
-            <td>
-                <a href="@Url.Action("TaiKhoanDetail","Admin", new {id=item.MaNguoiDung})" style="color:black"><i class="bi bi-card-list"></i></a> |
-                <a href="#" onclick="ConfirmResetPassword('@item.Username','Admin', 'ResetPassword')" style="color:black"><i class="bi bi-arrow-clockwise"></i></a>
-            </td>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Quyen.TenQuyen)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quyen.TenQuyen)
+                </td>
+                <td>
+                    <a href="@Url.Action("TaiKhoanDetail","Admin", new {id=item.MaNguoiDung})" style="color:black"><i class="bi bi-card-list"></i></a> |
+                    <a href="#" onclick="ConfirmResetPassword('@item.Username','Admin', 'ResetPassword')" style="color:black"><i class="bi bi-arrow-clockwise"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
 
 </table>
 

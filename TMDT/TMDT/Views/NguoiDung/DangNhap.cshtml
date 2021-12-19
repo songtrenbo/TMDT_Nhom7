@@ -28,12 +28,14 @@
                         @Html.LabelFor(model => model.Password)
                         @Html.ValidationMessageFor(model => model.Password)
                     </div>
+                    <div class="form-label-group" style="text-align:right">
+                        <a href="@Url.Action("ForgetPassword","NguoiDung")">Quên mật khẩu</a>
+                    </div>
                     @if (ViewBag.ErrorInfo != null)
                     {
                         <div class="alert alert-danger" role="alert">
                             <p>@ViewBag.ErrorInfo</p>
                         </div>
-
                     }
                     <div class="row">
                         <div class="col-6">

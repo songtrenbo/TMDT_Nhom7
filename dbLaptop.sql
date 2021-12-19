@@ -196,8 +196,13 @@ CREATE TABLE HoaDon
     TongThanhToan INT DEFAULT 0,
     TinhTrangThanhToan BIT DEFAULT 0,--0: Chưa thanh toán, 1: Đã thanh toán
     NgayNhan DATETIME,
+    NguoiHuyDon INT,
+	LyDoHuy nvarchar(255),
+	LyDoTra nvarchar(255),
+	NgayHuyDon DATETIME,
     FOREIGN KEY (MaKhachHang) REFERENCES dbo.NguoiDung(MaNguoiDung),
     FOREIGN KEY (MaNVDuyet) REFERENCES dbo.NguoiDung(MaNguoiDung),
+	FOREIGN KEY (NguoiHuyDon) REFERENCES dbo.NguoiDung(MaNguoiDung),
     FOREIGN KEY (MaPhieuQuaTang) REFERENCES dbo.PhieuQuaTang(MaPhieuQuaTang),
 );
 

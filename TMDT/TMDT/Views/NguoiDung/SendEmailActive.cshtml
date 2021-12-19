@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Forgot Password";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+<div id="time-out">
+    <h1>Bạn đã đăng ký tài khoản thành công</h1>
+    <h4>Vui lòng <a href="https://mail.google.com" style="color:#0000CD">Kiểm tra Email</a> và nhấp vào link để kích hoạt tài khoản</h4>
+    <div id="count-area">
+
+    </div>   
+</div>
+<script>
+    var timeout = setTimeout(function () {
+        var counter = 10;
+        $(document).ready(function () {
+            $('#count-area').append('<p>You will be redirected to homepage in: <span id="count"></span></p>');
+        });
+        setInterval(function () {
+            document.getElementById("count").innerHTML = counter + "s";
+            counter--;
+            if (counter === 0) {
+                document.location.href = "../NguoiDung/DangNhap";
+            }
+        }, 1000);
+    }, 1000);
+</script>

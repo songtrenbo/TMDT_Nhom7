@@ -22,6 +22,7 @@ namespace TMDT.Models
             this.DanhGias = new HashSet<DanhGia>();
             this.HoaDons = new HashSet<HoaDon>();
             this.HoaDons1 = new HashSet<HoaDon>();
+            this.HoaDons2 = new HashSet<HoaDon>();
             this.NguoiDung_PhieuQuaTang = new HashSet<NguoiDung_PhieuQuaTang>();
         }
     
@@ -66,6 +67,8 @@ namespace TMDT.Models
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoaDon> HoaDons2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NguoiDung_PhieuQuaTang> NguoiDung_PhieuQuaTang { get; set; }
         public virtual Quyen Quyen { get; set; }

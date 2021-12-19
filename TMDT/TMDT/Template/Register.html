@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Register</title>
+
+    <style>
+        .link {
+            background-color: red;
+            background-image: linear-gradient(to right, red, yellow);
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 20px;
+            outline: none;
+            text-decoration: none;
+            text-decoration-line: none;
+            font-size: 15px
+        }
+
+            .link:hover {
+                text-decoration: none;
+                text-decoration-line: none;
+                color: #fafafa;
+                cursor: pointer;
+                box-shadow: 0.3vw 0.3vw 0.3vw #203562;
+            }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <img src="../Content/images/logo.jpg" width="200" />
+    </div>
+    <p>Xin chào <span>{{Name}}</span></p>
+    <p>Kích hoạt tài khoản thành viên</p>
+    <p>Cảm ơn bạn đã đăng ký thành viên tại <a href="">A+DPS</a></p>
+    <p>Để sử dụng tài khoản, vui lòng nhấp vào đường link bên dưới để kích hoạt tài khoản</p>
+    <div style="text-align: center;">
+        <a href='{{Link}}' class="link">KÍCH HOẠT TÀI KHOẢN</a>
+    </div>
+    <p style="font-weight:bold">A+DPS - Xin chân thành cảm ơn!</p>
+</body>
+</html>
+

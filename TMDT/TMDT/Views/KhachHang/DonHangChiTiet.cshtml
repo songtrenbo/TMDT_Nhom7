@@ -24,8 +24,8 @@
 <div class="card-body">
     <div class="row" style="height:auto">
         <div class="col">
-                <a href="@Url.Action("DonMua","NguoiDung")">Quản lý đơn hàng</a>
-            </div>
+            <a href="@Url.Action("DonMua","NguoiDung")">Quản lý đơn hàng</a>
+        </div>
         <div class="col" style="text-align:right;">
             @switch (DonHang.TinhTrang)
             {
@@ -184,8 +184,8 @@ case 6:<span>Mã đơn hàng: @DonHang.MaHoaDon | Tình trạng: Trả hàng</sp
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="modalFeedback" class="btn btn-primary" onclick="Feedback(@DonHang.MaHoaDon)">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" id="modalFeedback" class="btn btn-primary" onclick="Feedback(@DonHang.MaHoaDon)">Đánh giá</button>
             </div>
         </div>
     </div>

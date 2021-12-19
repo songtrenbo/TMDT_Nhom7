@@ -110,6 +110,11 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <style>
+        body:not(.modal-open) {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+
         .nav > .nav-item {
             width: 100%;
         }
@@ -126,6 +131,8 @@
     </style>
 
     <style>
+
+
         nav > li > a, nav > li > a:focus, nav > li > a:focus:hover {
             text-decoration: none;
             background-color: transparent !important;

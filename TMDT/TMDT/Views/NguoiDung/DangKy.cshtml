@@ -6,7 +6,7 @@
 }
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("DangKy", "NguoiDung", new { @urlstr = Request.Url.Authority.ToString() }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <section class="container-fluid bg">

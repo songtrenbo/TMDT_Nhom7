@@ -121,7 +121,7 @@ namespace TMDT.Controllers
             //return RedirectToAction("ThongTinCaNhan", new { id = nguoiDung.MaNguoiDung });
         }
         [HttpPost]
-        public ActionResult DangKy(NguoiDung _user)
+        public ActionResult DangKy(NguoiDung _user, string urlstr)
         {
             var check_ID = database.NguoiDungs.Where(s => s.Username == _user.Username).FirstOrDefault();
             if (ModelState.IsValid)
@@ -133,10 +133,11 @@ namespace TMDT.Controllers
                     _user.ConfirmPass = _user.Password;
                     _user.MaQuyen = 4;
                     _user.NgayTao = DateTime.Now;
-                    _user.Status = 1;
+                    _user.Status = 2;
                     database.NguoiDungs.Add(_user);
                     database.SaveChanges();
-                    return RedirectToAction("DangNhap");
+                    SendEmail(_user.MaNguoiDung, urlstr, 0);
+                    return RedirectToAction("SendEmailActive");
                 }
                 else
                 {
@@ -150,6 +151,87 @@ namespace TMDT.Controllers
                 return View();
             }
             return View();
+        }
+        public ActionResult ActiveAcc(int maNguoiDung)
+        {
+            var check_ID = database.NguoiDungs.Where(s => s.MaNguoiDung == maNguoiDung).FirstOrDefault();
+            check_ID.ConfirmPass = check_ID.Password;
+            if (check_ID != null)
+            {
+                check_ID.Status = 1;
+                database.Entry(check_ID).State = EntityState.Modified;
+                database.SaveChanges();
+
+                return View();
+            }
+            return View();
+        }
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ForgetPassword(string email, string urlstr)
+        {
+            NguoiDung check = database.NguoiDungs.Where(s => s.Email == email).FirstOrDefault();
+
+            if (check != null)
+            {
+                SendEmail(check.MaNguoiDung, urlstr, 1);
+                return View("SendEmailDone");
+            }
+            else
+            {
+                ViewBag.Email = "Email không tồn tại!";
+                return View();
+            }
+        }
+        public ActionResult ResetPassword(int maNguoiDung)
+        {
+            var check = database.NguoiDungs.AsNoTracking().Where(u => u.MaNguoiDung == maNguoiDung).FirstOrDefault();
+            ViewBag.maNguoiDung = maNguoiDung;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(int maNguoiDung, string password)
+        {
+            var user = database.NguoiDungs.Where(s => s.MaNguoiDung == maNguoiDung).FirstOrDefault();
+            user.Password = Utils.Crypto(password);
+            user.ConfirmPass = Utils.Crypto(password);
+            database.Entry(user).State = EntityState.Modified;
+            database.SaveChanges();
+
+            return RedirectToAction("DangNhap");
+        }
+        public ActionResult SendEmailDone()
+        {
+            return View();
+        }
+        public ActionResult SendEmailActive()
+        {
+            return View();
+        }
+        public void SendEmail(int maNguoiDung, string urlstr, int i = 0)
+        {
+            NguoiDung nguoiDung = database.NguoiDungs.Where(s => s.MaNguoiDung == maNguoiDung).FirstOrDefault();
+            string content, subject;
+            if (i == 0)
+            {
+                content = System.IO.File.ReadAllText(Server.MapPath("~/Template/Register.html"));
+                urlstr = "https://" + urlstr + "/NguoiDung/ActiveAcc?maNguoiDung=" + nguoiDung.MaNguoiDung;
+                subject = "Kích hoạt tài khoản";
+            }
+            else
+            {
+                content = System.IO.File.ReadAllText(Server.MapPath("~/Template/ForgotPassword.html"));
+                urlstr = "https://" + urlstr + "/NguoiDung/ResetPassword?maNguoiDung=" + nguoiDung.MaNguoiDung;
+                subject = "Khôi phục mật khẩu";
+            }
+
+            content = content.Replace("{{Link}}", urlstr);
+            content = content.Replace("{{Name}}", nguoiDung.Ten);
+
+            new MailHelper().SendMail(nguoiDung.Email, subject, content);
         }
     }
 }

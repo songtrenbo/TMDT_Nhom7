@@ -11,7 +11,8 @@ namespace TMDT.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HoaDon
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,8 +25,11 @@ namespace TMDT.Models
         public int MaHoaDon { get; set; }
         public System.DateTime NgayMua { get; set; }
         public int MaKhachHang { get; set; }
+        [Required]
         public string TenKhach { get; set; }
+        [Required]
         public string DiaChi { get; set; }
+        [Required]
         public string SDT { get; set; }
         public Nullable<int> HinhThucThanhToan { get; set; }
         public Nullable<int> HinhThucGiaoHang { get; set; }
@@ -38,6 +42,10 @@ namespace TMDT.Models
         public Nullable<int> TongThanhToan { get; set; }
         public Nullable<bool> TinhTrangThanhToan { get; set; }
         public Nullable<System.DateTime> NgayNhan { get; set; }
+        public Nullable<int> NguoiHuyDon { get; set; }
+        public string LyDoHuy { get; set; }
+        public string LyDoTra { get; set; }
+        public Nullable<System.DateTime> NgayHuyDon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHoaDon> CTHoaDons { get; set; }
@@ -46,5 +54,6 @@ namespace TMDT.Models
         public virtual NguoiDung NguoiDung { get; set; }
         public virtual NguoiDung NguoiDung1 { get; set; }
         public virtual PhieuQuaTang PhieuQuaTang { get; set; }
+        public virtual NguoiDung NguoiDung2 { get; set; }
     }
 }

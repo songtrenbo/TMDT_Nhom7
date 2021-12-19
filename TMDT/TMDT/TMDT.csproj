@@ -225,6 +225,7 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\MailHelper.cs" />
     <Compile Include="Utility\PaypalConfiguration.cs" />
     <Compile Include="Utility\Utils.cs" />
   </ItemGroup>
@@ -286,13 +287,6 @@
     </None>
     <Content Include="DBLaptopDataSet.xss">
       <DependentUpon>DBLaptopDataSet.xsd</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\DBEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DBEntities.edmx.diagram">
-      <DependentUpon>DBEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -756,6 +750,13 @@
     <Content Include="Scripts\ckeditor\LICENSE.md" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
     <Content Include="Scripts\ckeditor\bender-runner.config.json" />
+    <EntityDeploy Include="Models\DBEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DBEntities.edmx.diagram">
+      <DependentUpon>DBEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
@@ -765,6 +766,7 @@
     <Content Include="Scripts\Delete.js" />
     <Content Include="Scripts\Feedback.js" />
     <Content Include="Scripts\funcGiohang.js" />
+    <Content Include="Scripts\HuyDon.js" />
     <Content Include="Scripts\InitialGioHang.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -778,6 +780,12 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\ResetPassword.js" />
     <Content Include="Scripts\UploadImage.js" />
+    <Content Include="Template\Accept.html" />
+    <Content Include="Template\Cancel.html" />
+    <Content Include="Template\Delivered.html" />
+    <Content Include="Template\ForgotPassword.html" />
+    <Content Include="Template\Ready.html" />
+    <Content Include="Template\Register.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -852,6 +860,11 @@
     <Content Include="Views\Admin\QLTinTuc.cshtml" />
     <Content Include="Views\Admin\TinTucDetail.cshtml" />
     <Content Include="Views\KhachHang\TinTucDetail.cshtml" />
+    <Content Include="Views\NguoiDung\ActiveAcc.cshtml" />
+    <Content Include="Views\NguoiDung\ForgetPassword.cshtml" />
+    <Content Include="Views\NguoiDung\ResetPassword.cshtml" />
+    <Content Include="Views\NguoiDung\SendEmailActive.cshtml" />
+    <Content Include="Views\NguoiDung\SendEmailDone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

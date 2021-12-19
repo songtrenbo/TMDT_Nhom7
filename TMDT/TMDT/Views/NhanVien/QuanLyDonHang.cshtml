@@ -2,61 +2,69 @@
 
 <h2>Quản lý đơn hàng</h2>
 
-<table class="table">
-    <tr>
-        <th scope="col">Đơn hàng</th>
-        <th scope="col">Ngày đặt</th>
-        <th scope="col">Khách hàng</th>
-        <th scope="col">Tình trạng</th>
-        <th scope="col">Tổng tiền</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="DHTable table">
+    <thead>
         <tr>
-            <td>
-                <a href="@Url.Action("DonHangChiTiet","NhanVien",new {@maDonHang=item.MaHoaDon})">#@item.MaHoaDon</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayMua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenKhach)
-            </td>
-            <td>
-                @switch (item.TinhTrang)
-                {
-                    case 1:<span>Chờ xác nhận</span>break;
-                    case 2:<span>Chờ lấy hàng</span>break;
-                    case 3:<span>Đang giao</span>break;
-                    case 4:<span>Đã giao</span>break;
-                    case 5:<span>Đã hủy</span>break;
-                    case 6:<span>Trả hàng</span>break;
-                }
-            </td>
-            <td>
-                <span class="text-danger" style="font-size:18px;font-weight:500">@Html.DisplayFor(modelItem => item.TongThanhToan)</span>
-
-
-            </td>
-            <td>
-                @switch (item.TinhTrang)
-                {
-                    case 1:
-                        <input type="button" onclick="location.href='@Url.Action("XacNhanDonHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-danger" style="text-align:right" value="Xác nhận">
-                        <input type="button" onclick="location.href='@Url.Action("HuyDonHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-outline-danger" value="Hủy đơn hàng">
-                        break;
-                    case 2:
-                        <input type="button" onclick="location.href='@Url.Action("SanSangGiaoHang", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-danger" style="text-align:right" value="Sẵn sàng giao">
-                        break;
-                    case 3:
-                        <input type="button" onclick="location.href='@Url.Action("XacNhanDaGiao", "NhanVien", new {@maDonHang=item.MaHoaDon})'" class="btn btn-danger" style="text-align:right" value="Đã giao">
-                        break;
-                }
-            </td>
+            <th scope="col">Đơn hàng</th>
+            <th scope="col">Ngày đặt</th>
+            <th scope="col">Khách hàng</th>
+            <th scope="col">Tình trạng</th>
+            <th scope="col">Tổng tiền</th>
+            <th></th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("DonHangChiTiet","NhanVien",new {@maDonHang=item.MaHoaDon})">#@item.MaHoaDon</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayMua)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenKhach)
+                </td>
+                <td>
+                    @switch (item.TinhTrang)
+                    {
+                        case 1:<span>Chờ xác nhận</span>break;
+                        case 2:<span>Chờ lấy hàng</span>break;
+                        case 3:<span>Đang giao</span>break;
+                        case 4:<span>Đã giao</span>break;
+                        case 5:<span>Đã hủy</span>break;
+                        case 6:<span>Trả hàng</span>break;
+                    }
+                </td>
+                <td>
+                    <span class="text-danger" style="font-size:18px;font-weight:500">@Html.DisplayFor(modelItem => item.TongThanhToan)</span>
+                </td>
+                <td>
+                    @switch (item.TinhTrang)
+                    {
+                        case 1:
+                            <input type="button" onclick="location.href='@Url.Action("XacNhanDonHang", "NhanVien", new {@maDonHang=item.MaHoaDon,@urlstr = Request.Url.Authority.ToString()})'" class="btn btn-danger" style="text-align:right" value="Xác nhận">
+                            <button type="button" data-id="@item.MaHoaDon" class="btn btn-outline-danger modal-Cancel" data-toggle="modal" data-target="#exampleModalCenter">Hủy đơn hàng</button>
+                            break;
+                        case 2:
+                            <input type="button" onclick="location.href='@Url.Action("SanSangGiaoHang", "NhanVien", new {@maDonHang=item.MaHoaDon,@urlstr = Request.Url.Authority.ToString()})'" class="btn btn-danger" style="text-align:right" value="Sẵn sàng giao">
+                            <button type="button" data-id="@item.MaHoaDon" class="btn btn-outline-danger modal-Cancel" data-toggle="modal" data-target="#exampleModalCenter">Hủy đơn hàng</button>
+                            break;
+                        case 3:
+                            <input type="button" onclick="location.href='@Url.Action("XacNhanDaGiao", "NhanVien", new {@maDonHang=item.MaHoaDon,@urlstr = Request.Url.Authority.ToString()})'" class="btn btn-danger" style="text-align:right" value="Đã giao">
+                            <button type="button" data-id="@item.MaHoaDon" class="btn btn-outline-danger modal-Cancel" data-toggle="modal" data-target="#exampleModalCenter">Hủy đơn hàng</button>
+                            break;
+                        case 5:
+                            <button type="button" data-id="@item.MaHoaDon" class="btn btn-outline-danger modal-Reason" data-toggle="modal" data-target="#reasonModalCenter">Xem lý do</button>
+                            break;
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
 
 </table>
 <style>
