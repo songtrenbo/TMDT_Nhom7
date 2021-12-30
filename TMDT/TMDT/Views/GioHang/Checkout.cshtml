@@ -4,7 +4,6 @@
     ViewBag.Title = "MuaHang";
     Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
 }
-<link href="~/Content/css/Checkout.css" rel="stylesheet" />
 <link href="~/Scripts/Alert/sweetalert2.css" rel="stylesheet" />
 @section scripts{
     <script src="~/Scripts/jquery-3.6.0.min.js"></script>
@@ -15,33 +14,39 @@
 
 
 <style>
-    .card {
-        margin: 20px 0 20px 0;
+    label {
+        width: 100%;
+        font-size: 1rem;
     }
 
-    .labl {
-        display: block;
+    .card-input-element + .card {
+        height: calc(36px + 2*1rem);
+        color: #0026ff;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: 2px solid transparent;
+        border-radius: 4px;
     }
 
-        .labl > input {
-            visibility: hidden;
-            position: absolute;
+        .card-input-element + .card:hover {
+            cursor: pointer;
         }
 
-            .labl > input + div {
-                cursor: pointer;
-                border: 2px solid transparent;
-            }
+    .card-input-element:checked + .card {
+        border: 2px solid #0026ff;
+        -webkit-transition: border .3s;
+        -o-transition: border .3s;
+        transition: border .3s;
+    }
 
-            .labl > input:checked + div {
-                border: 1px solid #0026ff;
-            }
 </style>
+@{var acc = (TMDT.Models.NguoiDung)Session["Account"];
+    string[] accInfo = acc == null ? new string[] { "", "", "", "" } : new string[] { acc.Ten, acc.SDT, acc.Email, acc.DiaChi };}
 <h2>Thông tin đặt hàng</h2>
 @using (Html.BeginForm("Checkout", "GioHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    var acc = (TMDT.Models.NguoiDung)Session["Account"];
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -49,25 +54,34 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Thông tin đặt hàng</h5>
+                        <h5 class="card-title" style="display:inline-block">Thông tin người đặt hàng</h5>
+                        <a href="@Url.Action("DangNhap", "NguoiDung", new {@returnUrl=Context.Request.Url })" style="color:#0026ff;float:right">Đăng nhập</a>
+                        <div class="clearfix"></div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.TenKhach, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                             <div class="col-sm-10">
-                                @Html.EditorFor(model => model.TenKhach, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên của bạn", @Value = acc.Ten } })
+                                @Html.EditorFor(model => model.TenKhach, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên của bạn", @Value = @accInfo[0] } })
                                 @Html.ValidationMessageFor(model => model.TenKhach, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                             <div class="col-sm-10">
-                                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập sdt của bạn", @type = "number", @Value = acc.SDT } })
+                                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập sdt của bạn", @type = "number", @Value = @accInfo[1] } })
                                 @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                            <div class="col-sm-10">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập email của bạn", @type = "email", @Value = @accInfo[2] } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
                             @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                             <div class="col-sm-10">
-                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập địa chỉ của bạn", @Value = acc.DiaChi } })
+                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập địa chỉ của bạn", @Value = @accInfo[3] } })
                                 @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -90,20 +104,18 @@
                     <h5 class="card-title">Phương thức thanh toán</h5>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label class="card labl">
-                                @Html.RadioButtonFor(model => model.HinhThucThanhToan, 1, new { @checked = "checked" })
-                                <div class="card-body">
-                                    <h5 class="card-title">Thanh toán khi nhận hàng</h5>
-                                    <p class="card-text">Thanh toán bằng tiền mặt khi nhận hàng tại nhà hoặc showroom</p>
+                            <label>
+                                @Html.RadioButtonFor(model => model.HinhThucThanhToan, 1, new { @class = "card-input-element d-none", @checked = "checked" })
+                                @*<input type="radio" name="demo" class="card-input-element d-none" id="demo1">*@
+                                <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                    Thanh toán khi nhận hàng
                                 </div>
                             </label>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="card labl">
-                                @Html.RadioButtonFor(model => model.HinhThucThanhToan, 2)
-                                <div class="card-body">
-                                    <h5 class="card-title">Thanh toán trực tuyến</h5>
-                                    <p class="card-text">Thanh toán qua Internet Banking, Visa, VNPAY-QR</p>
+                            <label class="mt-3">
+                                @Html.RadioButtonFor(model => model.HinhThucThanhToan, 2, new { @class = "card-input-element d-none" })
+                                @*<input type="radio" name="demo" class="card-input-element d-none" value="demo2">*@
+                                <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                    Thanh toán bằng momo
                                 </div>
                             </label>
                         </div>
@@ -118,7 +130,7 @@
                                 <h6 class="card-title">Thông tin đơn hàng</h6>
                             </div>
                             <div class="col" style="text-align:right">
-                                <a href="@Url.Action("HienThiDonHang","GioHang")" style="color:#0026ff">Chỉnh sửa</a>
+                                <a href="@Url.Action("HienThiGioHang","GioHang")" style="color:#0026ff">Chỉnh sửa</a>
                             </div>
                         </div>
                         <table class="table table-borderless" id="table-shopping-checkout">

@@ -1,7 +1,9 @@
-﻿using PayPal.Api;
+﻿using Newtonsoft.Json.Linq;
+using PayPal.Api;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +15,7 @@ namespace TMDT.Controllers
     public class GioHangController : Controller
     {
         DBLaptopEntities database = new DBLaptopEntities();
+        Cart cart = System.Web.HttpContext.Current.Session["Cart"] as Cart;
         // GET: GioHang
         public ActionResult Index()
         {
@@ -33,7 +36,6 @@ namespace TMDT.Controllers
 
         public Cart GetCart()
         {
-            Cart cart = Session["Cart"] as Cart;
             if (cart == null || Session["Cart"] == null)
             {
                 cart = new Cart();
@@ -64,15 +66,195 @@ namespace TMDT.Controllers
         {
             if (ModelState.IsValid)
             {
-                NguoiDung nguoiDung = (NguoiDung)Session["Account"];
-                Cart cart = Session["Cart"] as Cart;
-                hoaDon.MaKhachHang = nguoiDung.MaNguoiDung;
-                hoaDon.NgayMua = DateTime.Now;
-                hoaDon.NgayTao = DateTime.Now;
-                hoaDon.TinhTrang = 1;
+                try
+                {
+                    NguoiDung nguoiDung = (NguoiDung)Session["Account"];
+                    if (nguoiDung != null)
+                        hoaDon.MaKhachHang = nguoiDung.MaNguoiDung;
+                    hoaDon.NgayMua = DateTime.Now;
+                    hoaDon.TinhTrang = 1;
 
+                    database.HoaDons.Add(hoaDon);
+                    foreach (var item in cart.Items)
+                    {
+                        CTHoaDon cTHoaDon = new CTHoaDon();
+                        cTHoaDon.MaHoaDon = hoaDon.MaHoaDon;
+                        cTHoaDon.MaSanPham = item._sanPham.MaSanPham;
+                        cTHoaDon.DonGia = (int)item._sanPham.GiaBan;
+                        cTHoaDon.SoLuong = item._quantity;
+                        cTHoaDon.ThanhTien = (int)(item._quantity * item._sanPham.GiaBan);
+                        database.CTHoaDons.Add(cTHoaDon);
+                        foreach (var sp in database.SanPhams.Where(s => s.MaSanPham == cTHoaDon.MaSanPham))
+                        {
+                            sp.SoLuongTon -= item._quantity;
+                            sp.SoLuongBan += item._quantity;
+                        }
+                    }
+
+                    PhieuQuaTang phieuQuaTang = database.PhieuQuaTangs.Where(s => s.MaPhieuQuaTang == hoaDon.MaPhieuQuaTang).FirstOrDefault();
+                    if (phieuQuaTang != null)
+                    {
+                        phieuQuaTang.SoLuong--;
+                        database.Entry(phieuQuaTang).State = EntityState.Modified;
+
+                        NguoiDung_PhieuQuaTang ngVoucher = database.NguoiDung_PhieuQuaTang.Where(s => s.MaNguoiDung == hoaDon.MaKhachHang && s.MaPhieuQuaTang == hoaDon.MaPhieuQuaTang).FirstOrDefault();
+                        database.NguoiDung_PhieuQuaTang.Remove(ngVoucher);
+                    }
+                    Session["hoaDon"] = hoaDon;
+
+                    if (hoaDon.HinhThucThanhToan == 2)
+                        return PaymentWithMomo(hoaDon.TongThanhToan ?? 0);
+                }
+                catch (DbEntityValidationException e)
+                {
+                    string a = "";
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        a += ("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State) + "\n";
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            a += ("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage) + "\n";
+                        }
+                    }
+                    //throw;
+                    return Content(a);
+                }
+                Tuple<int, string> result = ConfirmPaymentClient(0);
+                switch (result.Item1)
+                {
+                    case 0:
+                        database.SaveChanges();
+                        Session["hoaDon"] = null;
+                        Session["Cart"] = null;
+                        //cart.ClearCart();
+                        return RedirectToAction("CheckOutResult", "GioHang", new { result = result.Item2 });
+                    case 49:
+                        return RedirectToAction("CheckOut", "GioHang");
+                    default:
+                        return RedirectToAction("CheckOutResult", "GioHang", new { result = result.Item2 });
+                }
+            }
+            else
+                return View();
+
+        }
+        public ActionResult PaymentWithMomo(double totalPrice)
+        {
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+            //request params need to request to MoMo system
+            string endpoint = MomoConfig.EndPoint;
+            string partnerCode = MomoConfig.PartnerCode;
+            string accessKey = MomoConfig.AccessKey;
+            string serectkey = MomoConfig.Serectkey;
+            string orderInfo = "test";
+            string returnUrl = baseUrl + "GioHang/CheckoutResult";
+            string notifyurl = baseUrl + "GioHang/SavePayment";
+
+            string amount = totalPrice.ToString();
+            string orderid = DateTime.Now.Ticks.ToString();
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            //Before sign HMAC SHA256 signature
+            string rawHash = "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(rawHash, serectkey);
+
+            //build body json request
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+
+            };
+
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+        public Tuple<int, string> ConfirmPaymentClient(int? resultCode = null)
+        {
+            if (resultCode == null)
+                resultCode = Convert.ToInt32(Request.QueryString["errorCode"]);
+
+            string result = "";
+            switch (resultCode)
+            {
+                case 0:
+                    result = "Đặt hàng và thanh toán thành công";
+                    break;
+                case 36:
+                    result = "Quá thời gian thanh toán";
+                    break;
+                case 49:
+                    result = "Quay lại";
+                    break;
+                //return RedirectToAction("CheckOut", "GioHang");
+                default:
+                    result = "Lỗi " + resultCode.ToString();
+                    break;
+            }
+            ViewBag.Result = result;
+            return new Tuple<int, string>(resultCode.Value, result);
+        }
+        public ActionResult CheckoutResult()
+         {
+            int resultCode = Convert.ToInt32(Request.QueryString["errorCode"]);
+
+            string result = "";
+            switch (resultCode)
+            {
+                case 0:
+                    result = "Đặt hàng và thanh toán thành công";
+                    HoaDon hoaDon = Session["hoaDon"] as HoaDon;
+                    if (hoaDon != null)
+                        SavePayment();
+                        //cart.ClearCart();
+                        break;
+                case 36:
+                    result = "Quá thời gian thanh toán";
+                    break;
+                case 49:
+                    result = "Quay lại";
+                    return RedirectToAction("CheckOut", "GioHang");
+                default:
+                    result = "Lỗi " + resultCode.ToString();
+                    break;
+            }
+            ViewBag.ResultCode = resultCode;
+            ViewBag.Result = result;
+            return View();
+        }
+        public void SavePayment()
+        {
+            HoaDon hoaDon = Session["hoaDon"] as HoaDon;
+            if (hoaDon!=null)
+            {
                 database.HoaDons.Add(hoaDon);
-
                 foreach (var item in cart.Items)
                 {
                     CTHoaDon cTHoaDon = new CTHoaDon();
@@ -98,20 +280,12 @@ namespace TMDT.Controllers
                     NguoiDung_PhieuQuaTang ngVoucher = database.NguoiDung_PhieuQuaTang.Where(s => s.MaNguoiDung == hoaDon.MaKhachHang && s.MaPhieuQuaTang == hoaDon.MaPhieuQuaTang).FirstOrDefault();
                     database.NguoiDung_PhieuQuaTang.Remove(ngVoucher);
                 }
-
-                //if (hoaDon.HinhThucThanhToan == 2)
-                //{
-                //    PaymentWithPaypal();
-                //}
+                else hoaDon.SoTienGiam = 0;
                 database.SaveChanges();
-                cart.ClearCart();
-                return RedirectToAction("Index", "TrangChu");
+                Session["hoaDon"] = null;
+                Session["Cart"] = null;
             }
-            else
-            {
-                return View();
-            }
-
+            
         }
         public ActionResult PaymentWithPaypal(string Cancel = null)
         {

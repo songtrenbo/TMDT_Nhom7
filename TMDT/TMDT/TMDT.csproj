@@ -226,6 +226,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\MailHelper.cs" />
+    <Compile Include="Utility\MomoConfig.cs" />
+    <Compile Include="Utility\MoMoSecurity.cs" />
+    <Compile Include="Utility\PaymentRequest.cs" />
     <Compile Include="Utility\PaypalConfiguration.cs" />
     <Compile Include="Utility\Utils.cs" />
   </ItemGroup>
@@ -242,6 +245,7 @@
     <Content Include="Content\css\sidebar.css" />
     <Content Include="Content\css\GioHang.css" />
     <Content Include="Content\css\GioHangRong.css" />
+    <Content Include="Content\css\templateMailStyle.css" />
     <Content Include="Content\images\banner_one.png" />
     <Content Include="Content\images\banner_three.png" />
     <Content Include="Content\images\banner_two.png" />
@@ -865,11 +869,11 @@
     <Content Include="Views\NguoiDung\ResetPassword.cshtml" />
     <Content Include="Views\NguoiDung\SendEmailActive.cshtml" />
     <Content Include="Views\NguoiDung\SendEmailDone.cshtml" />
+    <Content Include="Views\GioHang\CheckoutResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ThuongHieuImages\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -11,6 +11,7 @@ namespace TMDT.Controllers
     public class KhachHangController : Controller
     {
         DBLaptopEntities database = new DBLaptopEntities();
+        NguoiDung nguoiDung = System.Web.HttpContext.Current.Session["Account"] as NguoiDung;
         // GET: KhachHang
         public ActionResult Index()
         {
@@ -114,7 +115,7 @@ namespace TMDT.Controllers
         {
             ViewBag.TinhTrang = tinhTrang;
             var result = database.HoaDons.ToList();
-            result = result.Where(x => x.NguoiDung.Username == ((NguoiDung)Session["Account"]).Username).ToList();
+            result = result.Where(x => x.MaKhachHang == nguoiDung.MaNguoiDung).ToList();
             result = result.Where(s => s.TinhTrang == tinhTrang).ToList();
             result = result.OrderByDescending(s => s.NgayMua).ToList();
             return PartialView(result);
@@ -144,7 +145,6 @@ namespace TMDT.Controllers
         }
         public void Feedback(int maSP, int maHoaDon, int rating, string content)
         {
-            NguoiDung nguoiDung = (NguoiDung)Session["Account"];
             DanhGia danhGia = new DanhGia();
             danhGia.MaKhachHang = nguoiDung.MaNguoiDung;
             danhGia.Diem = rating;

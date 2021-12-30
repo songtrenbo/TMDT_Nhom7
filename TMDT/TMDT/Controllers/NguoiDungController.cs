@@ -53,7 +53,7 @@ namespace TMDT.Controllers
                 Session["Account"] = checkUser;
                 Session["TenAcc"] = checkUser.Ten;
                 //ViewBag.Ten = check.Ten;
-                if (returnUrl == null&&checkUser.MaQuyen==4||checkUser.MaQuyen==1|| checkUser.MaQuyen == 2 || checkUser.MaQuyen == 3)
+                if (returnUrl == null && checkUser.MaQuyen == 4 || checkUser.MaQuyen == 1 || checkUser.MaQuyen == 2 || checkUser.MaQuyen == 3)
                 {
                     switch (checkUser.MaQuyen)
                     {
@@ -85,9 +85,10 @@ namespace TMDT.Controllers
             NguoiDung nguoidung = new NguoiDung();
             return View(nguoidung);
         }
-        public ActionResult ThongTinCaNhan(int id)
+        public ActionResult ThongTinCaNhan()
         {
-            return View(database.NguoiDungs.Where(s => s.MaNguoiDung == id).FirstOrDefault());
+            NguoiDung nguoiDung = (NguoiDung)Session["Account"];
+            return View(database.NguoiDungs.Where(s => s.MaNguoiDung == nguoiDung.MaNguoiDung).FirstOrDefault());
         }
         [HttpPost]
         public ActionResult CapNhatThongTinCaNhan(NguoiDung nguoiDung)

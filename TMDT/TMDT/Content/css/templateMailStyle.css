@@ -1,0 +1,24 @@
+﻿.link {
+    background-color: red;
+    background-image: linear-gradient(to right, red, yellow);
+    color: #fafafa;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 20px;
+    outline: none;
+    text-decoration: none;
+    text-decoration-line: none;
+    font-size: 15px
+}
+
+    .link:hover {
+        text-decoration: none;
+        text-decoration-line: none;
+        color: #fafafa;
+        cursor: pointer;
+        box-shadow: 0.3vw 0.3vw 0.3vw #203562;
+    }
+
+span {
+    font-weight: bold;
+}

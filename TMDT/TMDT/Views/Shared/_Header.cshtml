@@ -59,7 +59,7 @@
                     <li class="nav-item dropdown">
                         @if (Session["Account"] == null)
                         {
-                            <a class="nav-link text-white" style="cursor: pointer;" onclick="location.href='@Url.Action("DangNhap", "NguoiDung", new {@returnUrl=Context.Request.Url })'">
+                            <a class="nav-link text-white" style="cursor: pointer;" onclick="location.href='@Url.Action("DangNhap", "NguoiDung")'">
                                 <i class="bi bi-person-circle" style="font-size: 1.2em;color: white;"></i> Đăng nhập
                             </a>
                         }

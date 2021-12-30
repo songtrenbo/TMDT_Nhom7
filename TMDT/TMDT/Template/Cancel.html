@@ -1,56 +1,25 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Cancel</title>
-
-    <style>
-        .link {
-            background-color: red;
-            background-image: linear-gradient(to right, red, yellow);
-            color: black;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 20px;
-            outline: none;
-            text-decoration: none;
-            text-decoration-line: none;
-            font-size: 15px
-        }
-
-            .link:hover {
-                text-decoration: none;
-                text-decoration-line: none;
-                color: #fafafa;
-                cursor: pointer;
-                box-shadow: 0.3vw 0.3vw 0.3vw #203562;
-            }
-
-        span {
-            font-weight: bold;
-        }
-    </style>
+    <link href="../Content/css/templateMailStyle.css" rel="stylesheet" />
 </head>
+
 <body>
     <div style="text-align: center;">
-        <img src="../Content/images/logo.jpg" width="200"/>
+        <img src="../Content/images/voucher_logo.png" width="200" />
     </div>
     <p>Xin chào <span>{{Name}}</span></p>
     <p>Đơn hàng của bạn đã bị hủy.</p>
     <p>Lý do: <span>{{Reason}}</span></p>
-    <div style="text-align: center;">
+    <!-- <div style="text-align: center;">
         <a href='{{Link}}' class="link">XEM CHI TIẾT ĐƠN HÀNG</a>
-    </div>
+    </div> -->
 
-    <h4>THÔNG TIN ĐƠN HÀNG - DÀNH CHO NGƯỜI MUA</h4>
-    <div>
-        Mã đơn hàng: <span>#{{MaHoaDon}}</span>
-    </div>
-    <div>
-        Ngày đặt hàng: <span>{{NgayMua}}</span>
-    </div>
-
-
+    <h4>THÔNG TIN ĐƠN HÀNG #{{MaHoaDon}} ({{NgayMua}})</h4>
+    <hr border: 2px solid red; />
     <table class="table table-borderless">
         <thead>
             <tr id="append">
@@ -62,34 +31,47 @@
                 <th>Thành tiền</th>
             </tr>
         </thead>
-        
+        <colgroup>
+            <col span="1" style="width: 15%;">
+            <col span="1" style="width: 45%;">
+            <col span="1" style="width: 15%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 15%;">
+        </colgroup>
         <tbody>
             {{Tbody}}
         </tbody>
 
         <tfoot>
             <tr>
-                <td colspan="4" style="text-align:right">Tổng tiền: </td>
-                <td colspan="2">{{TongTien}}</td>
+                <td colspan="3" style="text-align:right">Tổng tiền: </td>
+                <td style="text-align:right">{{TongTien}}</td>
+                <td></td>
             </tr>
             <tr>
-                <td colspan="4" style="text-align:right">Phí vận chuyển: </td>
-                <td colspan="2">{{PhiVanChuyen}}</td>
+                <td colspan="3" style="text-align:right">Phí vận chuyển: </td>
+                <td style="text-align:right">{{PhiVanChuyen}}</td>
+                <td></td>
             </tr>
             <tr>
-                <td colspan="4" style="text-align:right">Giảm giá: </td>
-                <td colspan="2">{{GiamGia}}</td>
+                <td colspan="3" style="text-align:right">Giảm giá: </td>
+                <td style="text-align:right">{{GiamGia}}</td>
+                <td></td>
             </tr>
             <tr>
-                <td colspan="4" style="text-align: right; vertical-align: middle">Thành tiền: </td>
-                <td colspan="2" class="text-danger" style="font-size:25px;font-weight:500; vertical-align:middle">{{ThanhTien}}</td>
+                <td colspan="3" style="text-align: right; vertical-align: middle">Thành tiền: </td>
+                <td class="text-danger"
+                    style="text-align: right; font-size:25px; font-weight: 500; vertical-align: middle">{{ThanhTien}}
+                </td>
+                <td></td>
             </tr>
             <tr>
-                <td colspan="4" style="text-align:right">Phương thức thanh toán: </td>
-                <td colspan="2">{{GiaoHang}}</td>
+                <td colspan="3" style="text-align:right">Phương thức thanh toán: </td>
+                <td style="text-align:right">{{GiaoHang}}</td>
+                <td></td>
             </tr>
         </tfoot>
     </table>
 </body>
-</html>
 
+</html>

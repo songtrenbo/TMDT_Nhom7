@@ -42,7 +42,7 @@
     //Load thông tin summary
     $(".cart").append('<div class="back-to-shop"><a href="/Home/Index">&leftarrow;</a><span class="text-muted">Back to shop</span></div>');
     $("#TotalPrice").text(tongTien);
-    if (maGiamGia != 0) {
+    if (maGiamGia.length != 0) {
         $("#ApplyButton").text("Hủy áp dụng");
         $("#VoucherInput").attr("readonly", true);
     }
@@ -77,17 +77,6 @@ function CheckoutSanPham() {
             gioHang = tmp;
             window.localStorage.setItem("gioHang", JSON.stringify(gioHang));
         }
-        else {
-            window.localStorage.removeItem("gioHang")
-        }
-        sessionStorage.removeItem("maGiamGia");
-        sessionStorage.removeItem("maPhieuQuaTang");
-        sessionStorage.removeItem("tienGiam");
-        Swal.fire({
-            icon: 'success',
-            title: 'Đặt hàng thành công',
-            showConfirmButton: false,
-            timer: 4000
-        })
     }
+
 }

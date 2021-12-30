@@ -11,6 +11,7 @@ namespace TMDT.Controllers
     public class NhanVienController : Controller
     {
         DBLaptopEntities database = new DBLaptopEntities();
+        NguoiDung nguoiDung = System.Web.HttpContext.Current.Session["Account"] as NguoiDung;
         // GET: NhanVien
         public ActionResult Index()
         {
@@ -18,10 +19,10 @@ namespace TMDT.Controllers
         }
         public PartialViewResult QuanLyDonHang(int tinhTrang = 0)
         {
-            List<HoaDon> donHang = null;
+            List<HoaDon> donHang = null; 
             if (tinhTrang == 0)
             {
-                donHang = database.HoaDons.ToList();
+                donHang = database.HoaDons.OrderBy(s=>s.TinhTrang).ThenBy(s=>s.NgayMua).ToList();
             }
             else
             {
@@ -60,7 +61,6 @@ namespace TMDT.Controllers
         }
         public ActionResult XacNhanDonHang(int maDonHang, string urlstr)
         {
-            NguoiDung nguoiDung = (NguoiDung)Session["Account"];
             var donHang = database.HoaDons.Where(s => s.MaHoaDon == maDonHang).FirstOrDefault();
             donHang.TinhTrang = 2;
             donHang.MaNVDuyet = nguoiDung.MaNguoiDung;
@@ -76,7 +76,7 @@ namespace TMDT.Controllers
             donHang.TinhTrang = 3;
             database.Entry(donHang).State = EntityState.Modified;
             database.SaveChanges();
-            SendEmail(maDonHang, urlstr, 2);
+            //SendEmail(maDonHang, urlstr, 2);
             return RedirectToAction("Index", "NhanVien");
         }
         public ActionResult XacNhanDaGiao(int maDonHang, string urlstr)
@@ -91,7 +91,6 @@ namespace TMDT.Controllers
         }
         public ActionResult HuyDonHang(int maDonHang, string reason, string urlstr)
         {
-            NguoiDung nguoiDung = Session["Account"] as NguoiDung;
             var donHang = database.HoaDons.Where(s => s.MaHoaDon == maDonHang).FirstOrDefault();
             donHang.TinhTrang = 5;
             donHang.LyDoHuy = reason;
@@ -120,23 +119,24 @@ namespace TMDT.Controllers
             HoaDon hoaDon = database.HoaDons.Where(s => s.MaHoaDon == maHoaDon).FirstOrDefault();
             var donHangCT = database.CTHoaDons.Where(s => s.MaHoaDon == maHoaDon).ToList();
             string body = "";
-
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
             foreach (var item in donHangCT)
             {
                 body += $@"<tr>
                         <td>
-                            <img src=""{item.SanPham.Hinh}"" width=""80"" />
+                            <img src=""{item.SanPham.Hinh}"" width=""80""/>
                         </td>
                         <td>
-                            <a href=""/SanPham/CT_SanPham?MaSanPham={item.MaSanPham}"">{item.SanPham.TenSanPham}</a>
+                            <a href=""{baseUrl}SanPham/CT_SanPham?MaSanPham={item.MaSanPham}"">{item.SanPham.TenSanPham}</a>
+                            <a href=""/san-pham/{item.SanPham.SeoTitle}-{item.MaSanPham}"">{item.SanPham.TenSanPham}</a>
                         </td>
-                        <td>
+                        <td style=""text-align:right;"">
                             {item.DonGia}
                         </td>
                         <td style=""text-align:center;"">
                             {item.SoLuong}
                         </td>
-                        <td>
+                        <td style=""text-align:right;"">
                             {item.ThanhTien}
                         </td>
                     </tr>";
@@ -147,10 +147,10 @@ namespace TMDT.Controllers
                     content = System.IO.File.ReadAllText(Server.MapPath("~/Template/Accept.html"));
                     subject = "Xác nhận đơn hàng";
                     break;
-                case 2:
-                    content = System.IO.File.ReadAllText(Server.MapPath("~/Template/Ready.html"));
-                    subject = "Đơn hàng đã bắt đầu giao";
-                    break;
+                //case 2:
+                //    content = System.IO.File.ReadAllText(Server.MapPath("~/Template/Ready.html"));
+                //    subject = "Đơn hàng đã bắt đầu giao";
+                //    break;
                 case 3:
                     content = System.IO.File.ReadAllText(Server.MapPath("~/Template/Delivered.html"));
                     subject = "Đơn hàng đã giao";
@@ -180,7 +180,7 @@ namespace TMDT.Controllers
             {
                 content = content.Replace("{{GiaoHang}}", "Thanh toán Online");
             }
-            new MailHelper().SendMail(hoaDon.NguoiDung.Email, subject, content);
+            new MailHelper().SendMail(hoaDon.Email, subject, content);
         }
     }
 }

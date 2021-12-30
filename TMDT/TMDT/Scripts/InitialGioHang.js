@@ -91,5 +91,6 @@
         $("#VoucherInput").removeAttr("readonly");
     }
     $("#TamTinh").text(tongTien);
+    $("#Discount").text(tienGiam);
     $("#Total").text(thanhToan);
 };

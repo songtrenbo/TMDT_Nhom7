@@ -24,23 +24,23 @@ namespace TMDT.Models
     
         public int MaHoaDon { get; set; }
         public System.DateTime NgayMua { get; set; }
-        public int MaKhachHang { get; set; }
+        public Nullable<int> MaKhachHang { get; set; }
         [Required]
         public string TenKhach { get; set; }
         [Required]
-        public string DiaChi { get; set; }
+        public string Email { get; set; }
         [Required]
         public string SDT { get; set; }
+        [Required]
+        public string DiaChi { get; set; }
         public Nullable<int> HinhThucThanhToan { get; set; }
         public Nullable<int> HinhThucGiaoHang { get; set; }
         public Nullable<int> MaNVDuyet { get; set; }
-        public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<int> MaPhieuQuaTang { get; set; }
         public Nullable<double> SoTienGiam { get; set; }
         public Nullable<int> PhiGiaoHang { get; set; }
         public Nullable<int> TinhTrang { get; set; }
-        public Nullable<int> TongThanhToan { get; set; }
-        public Nullable<bool> TinhTrangThanhToan { get; set; }
+        public Nullable<double> TongThanhToan { get; set; }
         public Nullable<System.DateTime> NgayNhan { get; set; }
         public Nullable<int> NguoiHuyDon { get; set; }
         public string LyDoHuy { get; set; }
@@ -52,8 +52,7 @@ namespace TMDT.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }
-        public virtual NguoiDung NguoiDung1 { get; set; }
         public virtual PhieuQuaTang PhieuQuaTang { get; set; }
-        public virtual NguoiDung NguoiDung2 { get; set; }
+        public virtual NguoiDung NguoiDung1 { get; set; }
     }
 }

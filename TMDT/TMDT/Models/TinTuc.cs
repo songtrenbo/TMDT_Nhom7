@@ -24,7 +24,6 @@ namespace TMDT.Models
         public int MaTinTuc { get; set; }
         public string TieuDe { get; set; }
         public string Thumbnail { get; set; }
-
         [AllowHtml]
         public string NoiDung { get; set; }
         public Nullable<int> MaSanPham { get; set; }
