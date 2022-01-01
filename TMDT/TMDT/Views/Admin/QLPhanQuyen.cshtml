@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>QLQuyen</h2>
+<h2>Quản lý phân quyền</h2>
 <style>
     tr:hover {
         background: red;
@@ -32,25 +32,25 @@
 
     @foreach (var item in Model)
     {
-<tr onclick="window.location='@Url.Action("PhanQuyenDetail", "Admin",new { id= item.MaNguoiDung})'">
-    <td>
-        @Html.DisplayFor(modelItem => item.Ten)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Username)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Quyen.TenQuyen)
-    </td>
+        <tr onclick="window.location='@Url.Action("PhanQuyenDetail", "Admin",new { id= item.MaNguoiDung})'">
+            <td>
+                @Html.DisplayFor(modelItem => item.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quyen.TenQuyen)
+            </td>
 
-</tr>
+        </tr>
     }
 
 </table>
 <style>
-        .active-2 {
-            background-color: #CA2620;
-            box-shadow: inset 5px 5px 12px #AA1B1B;
-            transition: all 0.3s ease 0s;
-        }
-    </style>
+    .active-2 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

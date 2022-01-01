@@ -55,7 +55,7 @@
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item active-1">
-                            <a class="nav-link text-white " href="@Url.Action("QLTaiKhoan","Admin")">
+                            <a class="nav-link text-white active" href="@Url.Action("QLTaiKhoan","Admin")">
                                 <i class="bi bi-people" style="font-size: 24px;"></i> Quản lý tài khoản
                             </a>
                         </li>
@@ -135,3 +135,18 @@
         </style>*@
 </body>
 </html>
+
+<script>
+        $(document).ready(function () {
+    $('.nav li').click(function(e) {
+
+        $('.nav li').removeClass('active');
+
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+        //e.preventDefault();
+    });
+});
+</script>

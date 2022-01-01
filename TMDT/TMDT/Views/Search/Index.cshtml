@@ -72,10 +72,10 @@
                                     <h5 class="dress-name" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; ">@item.TenSanPham</h5>
                                     <div class="d-flex flex-column mb-2" style="height:36px">
                                         @if (item.GiaGiam > 0)
-                                        {<span class="new-price">@item.GiaGiam</span>
-                                        <p class="old-price text-right"><del>@item.GiaBan</del></p>}
+                                        {<span class="new-price">@String.Format("{0:0,0}", item.GiaGiam)</span>
+                                        <p class="old-price text-right"><del>@String.Format("{0:0,0}", item.GiaBan)</del></p>}
                                     else
-                                    {<span class="new-price">@item.GiaBan</span>}
+                                    {<span class="new-price">@String.Format("{0:0,0}", item.GiaBan)</span>}
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center pt-1">

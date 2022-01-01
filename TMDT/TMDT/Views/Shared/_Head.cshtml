@@ -10,3 +10,17 @@
 @*<link rel="icon" class="img-fluid" href="~/Content/images/logodps.png" />*@
 <link rel="shortcut icon" type="image/png" href="~/Content/images/ic.png" />
 <script src="~/Scripts/UploadImage.js"></script>
+<script>
+        $(document).ready(function () {
+    $('.nav li').click(function(e) {
+
+        $('.nav li').removeClass('active');
+
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+        //e.preventDefault();
+    });
+});
+</script>

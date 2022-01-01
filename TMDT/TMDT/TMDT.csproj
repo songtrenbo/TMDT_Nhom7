@@ -239,6 +239,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chart.css" />
     <Content Include="Content\Chart.min.css" />
+    <Content Include="Content\css\carouselBanner.css" />
     <Content Include="Content\css\Feedback.css" />
     <Content Include="Content\css\floating-labels.css" />
     <Content Include="Content\css\product-list.css" />

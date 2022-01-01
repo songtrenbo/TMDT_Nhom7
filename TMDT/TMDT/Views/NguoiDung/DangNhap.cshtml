@@ -18,13 +18,13 @@
             <section class="col-12 col-sm-8 col-md-4 form-container">
                 <form class="form-container">
                     <div class="form-label-group">
-                        @Html.TextBoxFor(model => model.Username, new { @id = "Username", @class = "form-control", style = "field-validation-error", @placeholder = "Nhập tài khoản" })
+                        @Html.TextBoxFor(model => model.Username, new { @id = "Username", @class = "form-control", style = "field-validation-error", @placeholder = "Tài khoản" })
                         @Html.LabelFor(model => model.Username)
                         @Html.ValidationMessageFor(model => model.Username)
 
                     </div>
                     <div class="form-label-group">
-                        @Html.PasswordFor(model => model.Password, new { @id = "Password", @class = "form-control", style = "field-validation-error", @placeholder = "Nhập mật khẩu" })
+                        @Html.PasswordFor(model => model.Password, new { @id = "Password", @class = "form-control", style = "field-validation-error", @placeholder = "Mật khẩu" })
                         @Html.LabelFor(model => model.Password)
                         @Html.ValidationMessageFor(model => model.Password)
                     </div>

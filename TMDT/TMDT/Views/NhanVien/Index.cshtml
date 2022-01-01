@@ -5,46 +5,74 @@
 
 
 @section scripts{
-    <script src="~/Scripts/HuyDon.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.DHTable').DataTable();
-        });
-    </script>
+<script src="~/Scripts/HuyDon.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.DHTable').DataTable();
+    });
+</script>
 }
 
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="flex-wrap:unset">
     <li class="nav-item">
-        <a class="nav-link active" id="pills-apply-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true" style="text-align:center">Tất cả</a>
+        <a class="nav-link active" id="pills-apply-tab" data-toggle="pill" href="#pills-all" role="tab"
+            aria-controls="pills-all" aria-selected="true" style="text-align:center">Tất cả</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="pills-ready-tab" data-toggle="pill" href="#pills-apply" role="tab" aria-controls="pills-apply" aria-selected="false" style="text-align:center">Xác nhận</a>
+        <a class="nav-link" id="pills-ready-tab" data-toggle="pill" href="#pills-apply" role="tab"
+            aria-controls="pills-apply" aria-selected="false" style="text-align:center">Xác nhận</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="pills-ready-tab" data-toggle="pill" href="#pills-ready" role="tab" aria-controls="pills-ready" aria-selected="false" style="text-align:center">Chờ lấy hàng</a>
+        <a class="nav-link" id="pills-ready-tab" data-toggle="pill" href="#pills-ready" role="tab"
+            aria-controls="pills-ready" aria-selected="false" style="text-align:center">Chờ lấy hàng</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="pills-delivery-tab" data-toggle="pill" href="#pills-delivery" role="tab" aria-controls="pills-delivery" aria-selected="false" style="text-align:center">Đang giao</a>
+        <a class="nav-link" id="pills-delivery-tab" data-toggle="pill" href="#pills-delivery" role="tab"
+            aria-controls="pills-delivery" aria-selected="false" style="text-align:center">Đang giao</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="pills-delivered-tab" data-toggle="pill" href="#pills-delivered" role="tab" aria-controls="pills-delivered" aria-selected="false" style="text-align:center">Đã giao</a>
+        <a class="nav-link" id="pills-delivered-tab" data-toggle="pill" href="#pills-delivered" role="tab"
+            aria-controls="pills-delivered" aria-selected="false" style="text-align:center">Đã giao</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="pills-cancel-tab" data-toggle="pill" href="#pills-cancel" role="tab" aria-controls="pills-cancel" aria-selected="false" style="text-align:center">Đã hủy</a>
+        <a class="nav-link" id="pills-cancel-tab" data-toggle="pill" href="#pills-cancel" role="tab"
+            aria-controls="pills-cancel" aria-selected="false" style="text-align:center">Đã hủy</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="pills-refund-tab" data-toggle="pill" href="#pills-refund" role="tab" aria-controls="pills-refund" aria-selected="false" style="text-align:center">Hoàn trả</a>
+        <a class="nav-link" id="pills-refund-tab" data-toggle="pill" href="#pills-refund" role="tab"
+            aria-controls="pills-refund" aria-selected="false" style="text-align:center">Hoàn trả</a>
     </li>
 </ul>
 <div class="tab-content" id="pills-tcancelontent">
-    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 0 });}</div>
-    <div class="tab-pane fade" id="pills-apply" role="tabpanel" aria-labelledby="pills-apply-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 1 });}</div>
-    <div class="tab-pane fade" id="pills-ready" role="tabpanel" aria-labelledby="pills-ready-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 2 });}</div>
-    <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-delivery-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 3 });}</div>
-    <div class="tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 4 });}</div>
-    <div class="tab-pane fade" id="pills-cancel" role="tabpanel" aria-labelledby="pills-cancel-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 5 });}</div>
-    <div class="tab-pane fade" id="pills-refund" role="tabpanel" aria-labelledby="pills-refund-tab">@{Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 6 });}</div>
+    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+        @{
+            Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 0 });
+        }</div>
+    <div class="tab-pane fade" id="pills-apply" role="tabpanel" aria-labelledby="pills-apply-tab">
+        @{
+            Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 1 });
+        }</div>
+    <div class="tab-pane fade" id="pills-ready" role="tabpanel" aria-labelledby="pills-ready-tab">
+        @{
+            Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 2 });
+        }</div>
+    <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-delivery-tab">
+        @{
+            Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 3 });
+        }</div>
+    <div class="tab-pane fade" id="pills-delivered" role="tabpanel" aria-labelledby="pills-delivered-tab">
+        @{
+            Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 4 });
+        }</div>
+    <div class="tab-pane fade" id="pills-cancel" role="tabpanel" aria-labelledby="pills-cancel-tab">
+        @{
+            Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 5 });
+        }</div>
+    <div class="tab-pane fade" id="pills-refund" role="tabpanel" aria-labelledby="pills-refund-tab">
+        @{
+            Html.RenderAction("QuanLyDonHang", "NhanVien", new { tinhTrang = 6 });
+        }</div>
 </div>
 
 <style>
@@ -59,6 +87,7 @@
         opacity: 30%;
         color: white;
     }
+
     /*    .active-2 {
         background-color: #CA2620;
         box-shadow: inset 5px 5px 12px #AA1B1B;
@@ -76,7 +105,8 @@
 
 <!-- Button trigger modal -->
 <!-- Modal -->
-<div class="modal fade bd-example-modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade bd-example-modal" id="exampleModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -89,7 +119,8 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <textarea class="form-control" id="CancelContent" rows="3" placeholder="Lý do hủy đơn hàng"></textarea>
+                    <textarea class="form-control" id="CancelContent" rows="3"
+                        placeholder="Lý do hủy đơn hàng"></textarea>
                     <p id="CancelError" class="text-danger" rows="3"></p>
                 </div>
             </div>
@@ -103,7 +134,8 @@
 
 <!-- Button trigger modal -->
 <!-- Modal -->
-<div class="modal fade bd-example-modal" id="reasonModalCenter" tabindex="-1" role="dialog" aria-labelledby="reasonModalCenterTitle" aria-hidden="true">
+<div class="modal fade bd-example-modal" id="reasonModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="reasonModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -128,4 +160,3 @@
         </div>
     </div>
 </div>
-

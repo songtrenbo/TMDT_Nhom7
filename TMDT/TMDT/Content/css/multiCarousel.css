@@ -1,0 +1,61 @@
+﻿
+.MultiCarousel {
+    float: left;
+    overflow: hidden;
+    padding: 15px;
+    width: 100%;
+    position: relative;
+}
+
+    .MultiCarousel .MultiCarousel-inner {
+        transition: 1s ease all;
+        float: left;
+    }
+
+        .MultiCarousel .MultiCarousel-inner .item {
+            float: left;
+        }
+
+            .MultiCarousel .MultiCarousel-inner .item > div {
+                text-align: center;
+                padding: 10px;
+                margin: 10px;
+                background: #f1f1f1;
+                color: #666;
+            }
+
+    .MultiCarousel .leftLst, .MultiCarousel .rightLst {
+        position: absolute;
+        border-radius: 50%;
+        top: calc(50% - 20px);
+    }
+
+    .MultiCarousel .leftLst {
+        left: 0;
+    }
+
+    .MultiCarousel .rightLst {
+        right: 0;
+    }
+
+        .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over {
+            pointer-events: none;
+            background: #ccc;
+        }
+
+.item-thuonghieu {
+    transition: all 0.3s ease 0s;
+}
+
+    .item-thuonghieu:hover {
+        box-shadow: 2px 2px 2px black;
+        transform: translateY(-5px);
+        border-color: rgba(46, 229, 157, 0.4);
+        border: 1px;
+        box-shadow: 0px 5px 4px gray;
+    }
+
+
+.carousel-item {
+    transition: all 0.3s ease 0s;
+}

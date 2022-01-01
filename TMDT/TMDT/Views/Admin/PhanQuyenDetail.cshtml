@@ -5,10 +5,9 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>PhanQuyenDetail</h2>
+<h2>Phân quyền người dùng @Model.Ten</h2>
 
 <div>
-    <h4>NguoiDung</h4>
     <hr />
     @using (Html.BeginForm("PhanQuyenUpdate", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
@@ -66,17 +65,13 @@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-12">
                                 <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                                @Html.ActionLink("Back to List", "QLPhanQuyen")
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-md-2"></div>
             </div>
         </div>
     }
 
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

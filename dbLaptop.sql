@@ -428,7 +428,7 @@ INSERT INTO NguoiDung
 VALUES(N'Trần Văn Chuyên', N'admin', N'202cb962ac59075b964b07152d234b70', '0123456789', NULL, N'958 Phố Hằng, Xã Uyên Trưởng, Quận 53 Hồ Chí Minh', 1, N'2021-11-05 05:35:21'),
     (N'Trần Trùi Trụi', N'quanly', N'202cb962ac59075b964b07152d234b70', '0111222333', NULL, N'28 Mac Dinh Chi Street, Dakao Ward, District 1', 2, N'2021-11-05'),
     (N'Nguyễn Thị Nở', N'nhanvien', N'202cb962ac59075b964b07152d234b70', '0555222444', NULL, N'21 Huynh Tinh Cua StreetWard 8, District 3', 3, N'2021-11-05'),
-    (N'Lý Hồng Phương Nguyên', N'songtrenbo', N'202cb962ac59075b964b07152d234b70', '0987456321', 'sontrenbo1@gmail.com', N' 905 Lac Long Quan', 4, N'2021-11-05'),
+    (N'Lý Hồng Phương Nguyên', N'songtrenbo', N'202cb962ac59075b964b07152d234b70', '0987456321', 'songtrenbo1@gmail.com', N' 905 Lac Long Quan', 4, N'2021-11-05'),
     (N'Trần Minh Chí', N'minhchi32', N'202cb962ac59075b964b07152d234b70', '0987456321', 'tranminhchi0302@gmail.com', N' 905 Lac Long Quan', 4, N'2021-11-05'),
     (N'Trần Hà Tuấn Kiệt', N'tuankiet1709', N'202cb962ac59075b964b07152d234b70', '0987456321', 'thienngoaiphithien159@gmail.com', N' 905 Lac Long Quan', 4, N'2021-11-05'),
     (N'Lâm Văn Hến', N'khach1', N'202cb962ac59075b964b07152d234b70', '0987456321', NULL, N' 905 Lac Long Quan', 4, N'2021-11-05'),
@@ -465,8 +465,14 @@ FROM HoaDon
 SELECT *
 FROM DanhGia
 
-UPDATE HoaDon
-     SET TinhTrang = 4
-	 WHERE MaHoaDon = 2
+UPDATE SanPham
+     SET GiaBan = 10000
+	 WHERE MaSanPham = 10
+UPDATE SanPham
+     SET GiaGiam = 100000
+	 WHERE MaSanPham = 10
+UPDATE SanPham
+     SET SoLuongTon = 100
+	 WHERE MaSanPham = 10
 
    

@@ -3,7 +3,7 @@
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
 }
-<link rel="stylesheet" href="carousel.css">
+@* <link href="~/Content/css/multiCarousel.css" rel="stylesheet" /> *@
 <link href="~/Content/css/product-list.css" rel="stylesheet" />
 <!-- Font Awesome CSS -->
 <!--<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>-->
@@ -93,10 +93,10 @@
                                             <h5 class="dress-name" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; ">@item.TenSanPham</h5>
                                             <div class="d-flex flex-column mb-2" style="height:36px">
                                                 @if (item.GiaGiam > 0)
-                                                {<span class="new-price">@item.GiaGiam</span>
-                                                <p class="old-price text-right"><del>@item.GiaBan</del></p>}
+                                                {<span class="new-price">@String.Format("{0:0,0}", item.GiaGiam)</span>
+                                                <p class="old-price text-right"><del>@String.Format("{0:0,0}", item.GiaBan)</del></p>}
                                             else
-                                            {<span class="new-price">@item.GiaBan</span>}
+                                            {<span class="new-price">@String.Format("{0:0,0}", item.GiaBan)</span>}
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center pt-1">
@@ -122,7 +122,7 @@
 </div>
 
 
-<script src="./scripts.js"></script>
+@*<script src="./scripts.js"></script>*@
 
 <style>
     .card-hover:hover {
@@ -159,7 +159,7 @@
         }
 </style>
 
-<script>
+@* <script>
     $(document).ready(function () {
         var itemsMainDiv = ('.MultiCarousel');
         var itemsDiv = ('.MultiCarousel-inner');
@@ -266,67 +266,4 @@
         }
 
     });
-</script>
-<style>
-    .MultiCarousel {
-        float: left;
-        overflow: hidden;
-        padding: 15px;
-        width: 100%;
-        position: relative;
-    }
-
-        .MultiCarousel .MultiCarousel-inner {
-            transition: 1s ease all;
-            float: left;
-        }
-
-            .MultiCarousel .MultiCarousel-inner .item {
-                float: left;
-            }
-
-                .MultiCarousel .MultiCarousel-inner .item > div {
-                    text-align: center;
-                    padding: 10px;
-                    margin: 10px;
-                    background: #f1f1f1;
-                    color: #666;
-                }
-
-        .MultiCarousel .leftLst, .MultiCarousel .rightLst {
-            position: absolute;
-            border-radius: 50%;
-            top: calc(50% - 20px);
-        }
-
-        .MultiCarousel .leftLst {
-            left: 0;
-        }
-
-        .MultiCarousel .rightLst {
-            right: 0;
-        }
-
-            .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over {
-                pointer-events: none;
-                background: #ccc;
-            }
-</style>
-<style>
-    .item-thuonghieu {
-        transition: all 0.3s ease 0s;
-    }
-
-        .item-thuonghieu:hover {
-            box-shadow: 2px 2px 2px black;
-            transform: translateY(-5px);
-            border-color: rgba(46, 229, 157, 0.4);
-            border: 1px;
-            box-shadow: 0px 5px 4px gray;
-        }
-
-
-    .carousel-item {
-        transition: all 0.3s ease 0s;
-    }
-</style>
+</script> *@
