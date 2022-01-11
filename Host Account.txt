@@ -15,3 +15,10 @@ password: Devtauhai@123
 https://www.paypal.com/mep/dashboard
 https://www.sandbox.paypal.com/signin?returnUri=https%3A%2F%2Fwww.sandbox.paypal.com%2Fmep%2F
 https://developer.paypal.com/developer/accounts
+
+
+--momo
+username: devtauhai
+password: Devtauhai@123
+
+https://business.momo.vn/merchant/integrateInfo

@@ -1,9 +1,14 @@
-﻿@model IEnumerable<TMDT.Models.SanPham>
-
+﻿@*@model IEnumerable<TMDT.Models.SanPham>*@
+@using TMDT.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SanPham>
 @{
     ViewBag.Title = "Tìm kiếm";
     Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+
+    SanPham sanPham = new SanPham();
 }
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 <style>
     .card-hover:hover {
@@ -40,108 +45,118 @@
         }
 </style>
 <link href="~/Content/css/product-list.css" rel="stylesheet" />
-<div class="container-fluid">
-    <div class="row" style="margin:10px">
-        @if (Model.Count() > 0)
-        {
-            foreach (var item in Model)
-            {
-                <div class="col-12 col-xs-4 col-md-4 col-lg-3">
-                    <div class="card card-hover" style="box-shadow: 0px 2px 5px gray; margin-top:10px">
-                        @{ var url = "/san-pham/" + item.SeoTitle + "-" + item.MaSanPham;}
-                        <div class="card_item" onclick="location.href='@url'">
-                            <div class="image-container">
-                                <br />
-                                @if (item.NgayTao > DateTime.Now.AddDays(-54))
-                                {
-                                    <div class="first">
-                                        <div class="d-flex justify-content-between align-items-center"> <span class="discount">New</span> </div>
-                                    </div>
-                                }
-                                else if (item.LuotXem > 50)
-                                {
-                                    <div class="first">
-                                        <div class="d-flex justify-content-between align-items-center"> <span class="discount">Hot</span> </div>
-                                    </div>
-                                }
-                                <div style=" text-align: center">
-                                    <img src="@item.Hinh" class="img-fluid rounded thumbnail-image main-img" style=" height: 200px; object-fit: contain ">
-                                </div>
-                            </div>
+@using (Html.BeginForm("Index", "Search", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class=" col-md-4">
+                    @Html.DropDownList("danhMucID", (SelectList)ViewBag.danhmuc, "Nhu cầu", new { @class = "form-control" })
+                </div>
+                <div class=" col-md-4">
+                    @Html.DropDownList("cpuID", (SelectList)ViewBag.cpu, "CPU", new { @class = "form-control" })
+                </div>
+                <div class=" col-md-4">
+                    @Html.DropDownList("loaiGPUID", (SelectList)ViewBag.loaiGPU, "Card đồ họa", new { @class = "form-control" })
+                </div>
+                <div class=" col-md-4">
+                    @Html.DropDownList("sizeManHinhID", (SelectList)ViewBag.sizeManHinh, "Màn hình", new { @class = "form-control" })
+                </div>
+                <div class=" col-md-4">
+                    @Html.DropDownList("thuongHieuID", (SelectList)ViewBag.thuongHieu, "Thương hiệu", new { @class = "form-control" })
+                </div>
+                <div class=" col-md-4">
+                    <input type="submit" value="Lọc" class="btn btn-success col-12" />
+                    @*<a href="@Url.Action("Index", "Search", new {danhMucID = sanPham.MaDanhMuc, cpuID = sanPham.MaLoaiCPU, loaiGPUID = sanPham.MaLoaiGPU, sizeManHinhID = sanPham.SizeManHinh, thuongHieuID = sanPham.MaThuongHieu})" class="btn btn-success col-12">Tìm kiếm</a>*@
+                </div>
+            </div>
+        </div>
 
-                            <div class="container-fluid">
-                                @if (item.TenSanPham.Length > 45)
-                                {
-                                    <h5>@item.TenSanPham.Substring(0, 45)...</h5>
-                                }
-                                else
-                                {
-                                    if (@item.TenSanPham.Length <= 26)
+        <div class="row" style="margin:10px">
+            @{var countSP = (int)ViewBag.result;}
+            @if (Model.Count() > 0)
+            {
+                <h6 class="col-12">Có @countSP sản phẩm</h6>
+                <hr />
+                foreach (var item in Model)
+                {
+                    <div class="col-12 col-xs-4 col-md-4 col-lg-3">
+                        <div class="card card-hover" style="box-shadow: 0px 2px 5px gray; margin-top:10px">
+                            @{ var url = "/san-pham/" + item.SeoTitle + "-" + item.MaSanPham;}
+                            <div class="card_item" onclick="location.href='@url'">
+                                <div class="image-container">
+                                    <br />
+                                    @if (item.NgayTao > DateTime.Now.AddDays(-54))
+                                    {
+                                        <div class="first">
+                                            <div class="d-flex justify-content-between align-items-center"> <span class="discount">New</span> </div>
+                                        </div>
+                                    }
+                                    else if (item.LuotXem > 50)
+                                    {
+                                        <div class="first">
+                                            <div class="d-flex justify-content-between align-items-center"> <span class="discount">Hot</span> </div>
+                                        </div>
+                                    }
+                                    <div style=" text-align: center">
+                                        <img src="@item.Hinh" class="img-fluid rounded thumbnail-image main-img" style=" height: 200px; object-fit: contain ">
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    @if (item.TenSanPham.Length > 45)
+                                    {
+                                        <h5>@item.TenSanPham.Substring(0, 45)...</h5>
+                                    }
+                                    else
+                                    {
+                                        if (@item.TenSanPham.Length <= 26)
+                                        {
+                                            <br />
+                                        }
+                                        <h5>@item.TenSanPham</h5>
+                                    }
+                                    @if (item.GiaGiam > 0)
+                                    {
+                                        <h8 class=" text-left"><del>@String.Format("{0:0,0}", item.GiaBan)<span>đ</span></del></h8><br />
+                                        <h4 class="text-left" style="color:red; float:left">@String.Format("{0:0,0}", item.GiaGiam)<span>đ</span></h4>
+                                    }
+                                    else
                                     {
                                         <br />
+                                        <h4 style="color:red; float:left">@String.Format("{0:0,0}", item.GiaBan)<span>đ</span></h4>
                                     }
-                                    <h5>@item.TenSanPham</h5>
-                                }
-                                @if (item.GiaGiam > 0)
-                                {
-                                    <h8 class=" text-left"><del>@String.Format("{0:0,0}", item.GiaBan)<span>đ</span></del></h8><br />
-                                    <h4 class="text-left" style="color:red; float:left">@String.Format("{0:0,0}", item.GiaGiam)<span>đ</span></h4>
-                                }
-                                else
-                                {
-                                    <br />
-                                    <h4 style="color:red; float:left">@String.Format("{0:0,0}", item.GiaBan)<span>đ</span></h4>
-                                }
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center pt-1" style="float:right">
-                                <div>
-                                    <i class="bi bi-star-fill" style="color:#EE0033"></i>
-                                    @if (item.SoLuotRate > 0)
-                                    {<span class="rating-number">@(Math.Round(@item.DiemRate??0* 1.0 / @item.SoLuotRate?? 1))</span>}
-                                    else
-                                    {<span class="rating-number" style="margin-right:5px">Chưa có đánh giá</span>}
                                 </div>
+                                <div class="d-flex justify-content-between align-items-center pt-1" style="float:right">
+                                    <div>
+                                        <i class="bi bi-star-fill" style="color:#EE0033"></i>
+                                        @if (item.SoLuotRate > 0)
+                                        {<span class="rating-number">@(Math.Round(@item.DiemRate??0* 1.0 / @item.SoLuotRate?? 1))</span>}
+                                        else
+                                        {<span class="rating-number" style="margin-right:5px">Chưa có đánh giá</span>}
+                                    </div>
+                                </div>
+
                             </div>
 
-                            @*<div class="product-detail-container p-2">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5 class="dress-name" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; ">@item.TenSanPham</h5>
-                <div class="d-flex flex-column mb-2" style="height:36px">
-                    @if (item.GiaGiam > 0)
-                    {<span class="new-price">@String.Format("{0:0,0}", item.GiaGiam)</span>
-                    <p class="old-price text-right"><del>@String.Format("{0:0,0}", item.GiaBan)</del></p>}
-                else
-                {<span class="new-price">@String.Format("{0:0,0}", item.GiaBan)</span>}
-                </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center pt-1">
-                <div>
-                    <i class="bi bi-star-fill" style="color:#f0f489"></i>
-                    @if (item.SoLuotRate > 0)
-                    {
-                        var diemRate = item.DiemRate ?? 0 * 1.0; var soLuotRate = item.SoLuotRate ?? 1;
-                        <span class="rating-number">@(Math.Round(diemRate/ soLuotRate,1))</span>}
-                    else
-                    {<span class="rating-number">Chưa có đánh giá</span>}
-                </div> <span class="buy" onclick="location.href='@url'">Mua ngay</span>
-            </div>
-        </div>*@
                         </div>
-
                     </div>
-                </div>
+                }
             }
-        }
-        else
-        {
-            <p>Không tìm thấy sản phẩm</p>
-        }
+            else
+            {
+                <p>Không tìm thấy sản phẩm</p>
+            }
+        </div>
     </div>
-</div>
+}
+
 
 
 <script src="./scripts.js"></script>
-
+<div class="MenuPage">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, danhMucID = ViewBag.danhMucID, cpuID = ViewBag.cpuID, loaiGPUID = ViewBag.loaiGPUID, sizeManHinhID = ViewBag.sizeManHinhID, thuongHieuID = ViewBag.thuongHieuID }))
+</div>
 
 <style>
     .card_item {

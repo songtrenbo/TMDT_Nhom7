@@ -62,7 +62,7 @@
                 {
                     <div style="margin-top:25px; padding:10px;background-color:#EE0033; color:white; width:100%">
                         <h3 style="float:left">@((ViewBag.danhmuc)[i].TenDanhMuc)</h3>
-                        <a href="@Url.Action("XemTatCaSP","TrangChu", new { madanhmuc = (ViewBag.danhmuc)[i].MaDanhMuc })" style="float:right; font-size:22px">Xem tất cả<i class="bi bi-chevron-right"></i></a>
+                        <a href="@Url.Action("Index","Search", new { danhMucID = (ViewBag.danhmuc)[i].MaDanhMuc })" style="float:right; font-size:22px">Xem tất cả<i class="bi bi-chevron-right"></i></a>
                     </div>
                     int count = 0;
                     foreach (var item in ViewBag.result[i])
