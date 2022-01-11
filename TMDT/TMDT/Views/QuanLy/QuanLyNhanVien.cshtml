@@ -4,64 +4,75 @@
     ViewBag.Title = "QuanLyNhanVien";
     Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
 }
-
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#THTable').DataTable();
+        });
+    </script>
+}
 <h2 style="color:black;">Danh sách Nhân viên</h2>
 <div class="container-fluid" style="margin-top:10px">
     <p>@Html.ActionLink("Thêm nhân viên", "NhanVienCreate", "", htmlAttributes: new { @class = "btn btn-success" })</p>
 </div>
 <br />
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaNguoiDung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ten)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SDT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="THTable" class="table table-striped">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaNguoiDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SDT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaChi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Lock", "NhanVienLock", new { id = item.MaNguoiDung }) |
-                @Html.ActionLink("ResetPassword", "ResetPassword", new { id = item.MaNguoiDung }) |
-                @Html.ActionLink("Edit", "NhanVienEdit", new { id = item.MaNguoiDung }) |
-                @Html.ActionLink("Delete", "NhanVienDelete", new { id = item.MaNguoiDung })
-            </td>
+            <th>
+                Mã
+            </th>
+            <th>
+                Tên
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNguoiDung)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Lock", "NhanVienLock", new { id = item.MaNguoiDung }) |
+                    @Html.ActionLink("ResetPassword", "ResetPassword", new { id = item.MaNguoiDung }) |
+                    @Html.ActionLink("Edit", "NhanVienEdit", new { id = item.MaNguoiDung }) |
+                    @Html.ActionLink("Delete", "NhanVienDelete", new { id = item.MaNguoiDung })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
 

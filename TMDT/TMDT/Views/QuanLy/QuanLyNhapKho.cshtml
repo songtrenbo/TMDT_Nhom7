@@ -1,0 +1,71 @@
+﻿@model IEnumerable<TMDT.Models.SanPhamNhapKho>
+
+@{
+    ViewBag.Title = "QuanLyNhapKho";
+    Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
+}
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#THTable').DataTable();
+        });
+    </script>
+}
+<h2>Quản lý nhập kho</h2>
+
+<p>
+    @Html.ActionLink("Nhập kho", "NhapKho", "", htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table id="THTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Mã sản phẩm
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Giá nhập
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSanPhamNhapKho)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SanPham.TenSanPham)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayTao)
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<style>
+    .active-3 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

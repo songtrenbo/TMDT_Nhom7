@@ -22,7 +22,7 @@
             @Html.DropDownList("Month", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString() }), "Chọn tháng", new { @class = "form-control col-lg-3" })
 
 
-            @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year, 10).Select(x => new SelectListItem { Text = x.ToString() }), "Chọn năm", new { @class = "form-control col-lg-3", style = "margin-left:10px" })
+            @Html.DropDownList("Year", Enumerable.Range((DateTime.Now.Year-((DateTime.Now.Year)-2020)), (DateTime.Now.Year)-2019).Select(x => new SelectListItem { Text = x.ToString() }),"2019", new { @class = "form-control col-lg-3", style = "margin-left:10px" })
 
             <input type="submit" value="Xác nhận" class="btn btn-danger col-lg-1" style="margin-left:10px; margin-right:10px" />
             <a href="@Url.Action("GeneratePDF", "QuanLy", new {Year=ViewBag.nam, Month=ViewBag.thang})" target="_blank" class="btn btn-success col-lg-1">Xuất PDF</a>

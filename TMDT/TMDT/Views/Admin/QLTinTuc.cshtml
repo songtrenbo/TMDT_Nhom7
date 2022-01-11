@@ -6,91 +6,66 @@
 }
 
 <h2>Quản lý tin tức</h2>
-
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#THTable').DataTable();
+        });
+    </script>
+}
 <p>
     @Html.ActionLink("Thêm tin tức mới", "TinTucCreate", "", htmlAttributes: new { @class = "btn btn-success" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaTinTuc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TieuDe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Thumbnail)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.MaSanPham)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.MaNguoiTao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaNguoiSua)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayChinhSua)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.IsHide)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>*@
-        <th></th>
-    </tr>
+<table id="THTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Mã tin
+            </th>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thumbnail)
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Ngày sửa
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaTinTuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TieuDe)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Thumbnail)*@
-            <img src="@item.Thumbnail" width="100" />
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.NoiDung)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.MaSanPham)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.MaNguoiTao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaNguoiSua)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayTao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayChinhSua)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.IsHide)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "TinTucDetail", new {  id=item.MaTinTuc  }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaTinTuc)
+                </td>
+                <td>
+                    @item.TieuDe.Substring(0, 60) ...
+                </td>
+                <td>
+                    <img src="@item.Thumbnail" width="100" />
+                </td>
+                <td>
+                    @item.NgayTao.Value.Day/@item.NgayTao.Value.Month/@item.NgayTao.Value.Year
+                </td>
+                <td>
+                    @item.NgayChinhSua.Value.Day/@item.NgayChinhSua.Value.Month/@item.NgayChinhSua.Value.Year
+                </td>
+                <td>
+                    <a href="@Url.Action("TinTucEdit","Admin", new {id=item.MaTinTuc})" style="color:black"><i class="bi bi-pencil-square"></i></a> |
+                    <a href="@Url.Action("TinTucDetail","Admin", new {id=item.MaTinTuc})" style="color:black"><i class="bi bi-card-list"></i></a> |
+                    <a href="@Url.Action("TinTucDelete","Admin", new {id=item.MaTinTuc})" style="color:black"><i class="bi bi-trash-fill"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
 <style>

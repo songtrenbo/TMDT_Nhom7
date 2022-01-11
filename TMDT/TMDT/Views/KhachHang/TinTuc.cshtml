@@ -5,29 +5,31 @@
     Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
 }
 
-@*<h2>TinTuc</h2>*@
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@{
-    foreach (var item in Model)
-    {
-        <div class="container" style="margin:20px;">
-            <div class="row item" style="padding:10px; border:1px solid gray" onclick="location.href='@Url.Action("TinTucDetail", "KhachHang", new { id = item.MaTinTuc })'">
-                <img src="@item.Thumbnail" class="col-md-3"/>
-                <div class="col-md-9">
-                    <h4>@item.TieuDe</h4>
-                    @Html.Raw(!String.IsNullOrEmpty(item.NoiDung) ? new string(item.NoiDung.Take(340).ToArray()) : item.NoiDung) ...
+<br />
+<div class="container">
+    <h2>Tin tức mới</h2>
+    @{
+        foreach (var item in Model)
+        {
+            <div class="container" style="margin:20px;">
+                <div class="row item" style="padding:10px;" onclick="location.href='@Url.Action("TinTucDetail", "KhachHang", new { id = item.MaTinTuc })'">
+                    <img src="@item.Thumbnail" class="col-md-3" />
+                    <div class="col-md-9">
+                        <h4>@item.TieuDe</h4>
+                        @Html.Raw(!String.IsNullOrEmpty(item.NoiDung) ? new string(item.NoiDung.Take(340).ToArray()) : item.NoiDung) ...
+                    </div>
                 </div>
             </div>
-        </div>
+            <hr />
+        }
     }
-}
+</div>
 
 <style>
     .item:hover {
-        box-shadow:3px 5px 5px gray;
-        cursor:pointer;
+        cursor: pointer;        
+    }
+    .item:hover h4{
+        color:#ff0000;
     }
 </style>

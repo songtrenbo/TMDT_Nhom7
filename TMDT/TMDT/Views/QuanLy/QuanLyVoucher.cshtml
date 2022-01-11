@@ -4,115 +4,101 @@
     ViewBag.Title = "QuanLyVoucher";
     Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
 }
-
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#THTable').DataTable();
+        });
+    </script>
+}
 <h2>Quản lý voucher</h2>
 
 <p>
     @Html.ActionLink("Tạo voucher mới", "VoucherCreate", "", htmlAttributes: new { @class = "btn btn-success" })
 </p>
-<table class="table">
-    <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.MaPhieuQuaTang)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.TenPhieuQuaTang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaGiamGia)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.LoaiPhamVi)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.GiaTri)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.GiaTriDonHangToiThieu)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.NgayKichHoat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayKetThuc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-<tr>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.MaPhieuQuaTang)
-        </td>*@
-    <td>
-        @Html.DisplayFor(modelItem => item.TenPhieuQuaTang)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MaGiamGia)
-    </td>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.LoaiPhamVi)
-        </td>*@
-    <td>
-        @Html.DisplayFor(modelItem => item.GiaTri) VNĐ
-    </td>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.GiaTriDonHangToiThieu)
-        </td>*@
-    <td>
-        @Html.DisplayFor(modelItem => item.SoLuong)
-    </td>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.NgayTao)
-        </td>*@
-    <td>
-        @*@Html.DisplayFor(modelItem => item.NgayKichHoat)*@
-        @item.NgayKichHoat.Day/@item.NgayKichHoat.Month/@item.NgayKichHoat.Year
-    </td>
-    <td>
-        @*@Html.DisplayFor(modelItem => item.NgayKetThuc)*@
-        @item.NgayKetThuc.Day/@item.NgayKetThuc.Month/@item.NgayKetThuc.Year
-    </td>
-    <td>
-        @switch (item.Status)
+<table id="THTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenPhieuQuaTang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaGiamGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaTri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </th>
+            <th>
+                Ngày kích hoạt
+            </th>
+            <th>
+                Ngày kết thúc
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
         {
-            case 1:
-                <p> Không kích hoạt</p>
-                break;
-            case 2:
-                <p>Kích hoạt</p>
-                break;
-            case 3:
-                <p>Kết thúc</p>
-                break;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenPhieuQuaTang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaGiamGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaTri) VNĐ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @item.NgayKichHoat.Day/@item.NgayKichHoat.Month/@item.NgayKichHoat.Year
+                </td>
+                <td>
+                    @item.NgayKetThuc.Day/@item.NgayKetThuc.Month/@item.NgayKetThuc.Year
+                </td>
+                <td>
+                    @switch (item.Status)
+                    {
+                        case 1:
+                            <p> Không kích hoạt</p>
+                            break;
+                        case 2:
+                            <p>Kích hoạt</p>
+                            break;
+                        case 3:
+                            <p>Kết thúc</p>
+                            break;
+                    }
+
+                </td>
+                @if (item.Status == 3)
+                {
+                    <td>
+                        @Html.ActionLink("Sửa", "EditVoucher", new { id = item.MaPhieuQuaTang }) | Thay đổi trạng thái
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Sửa", "EditVoucher", new { id = item.MaPhieuQuaTang }) |
+                        @Html.ActionLink("Thay đổi trạng thái", "ThayDoiTrangThai", new { id = item.MaPhieuQuaTang })
+                    </td>
+                }
+
+            </tr>
         }
+    </tbody>
 
-    </td>
-    @if (item.Status == 3)
-    {
-        <td>
-            @Html.ActionLink("Sửa", "EditVoucher", new { id = item.MaPhieuQuaTang }) | Thay đổi trạng thái
-        </td>
-    }
-    else
-    {
-        <td>
-            @Html.ActionLink("Sửa", "EditVoucher", new { id = item.MaPhieuQuaTang }) |
-            @Html.ActionLink("Thay đổi trạng thái", "ThayDoiTrangThai", new { id = item.MaPhieuQuaTang })
-        </td>
-    }
-
-</tr>
-}
 </table>
 <style>
     .active-5 {

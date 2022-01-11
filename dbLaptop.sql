@@ -475,4 +475,9 @@ UPDATE SanPham
      SET SoLuongTon = 100
 	 WHERE MaSanPham = 10
 
-   
+   UPDATE SanPham
+     SET DiemRate = 10
+	 WHERE MaSanPham = 3
+UPDATE SanPham
+     SET SoLuotRate = 3
+	 WHERE MaSanPham = 3

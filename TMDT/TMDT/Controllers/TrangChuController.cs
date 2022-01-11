@@ -36,5 +36,12 @@ namespace TMDT.Controllers
             return View();
         }
 
+        public ActionResult XemTatCaSP(int madanhmuc)
+        {
+            var sanpham = database.SanPhams.Where(s => s.MaDanhMuc == madanhmuc).FirstOrDefault();
+            ViewBag.danhmuc = sanpham.DanhMuc.TenDanhMuc;
+            var sanphams = database.SanPhams.Where(s => s.MaDanhMuc == madanhmuc).ToList();
+            return View(sanphams);
+        }
     }
 }

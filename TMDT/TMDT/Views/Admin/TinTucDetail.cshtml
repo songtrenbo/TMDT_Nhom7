@@ -30,7 +30,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Thumbnail)
+            <img src="@Url.Content(Model.Thumbnail)" id="previewImg" style="width:300px" />
         </dd>
 
         <dt>
@@ -42,31 +42,23 @@
 
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.MaSanPham)
+            Tên sản phẩm
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaSanPham)
-        </dd>
+        @if (Model.MaSanPham != null)
+        {
+            <dd>
+                @Html.DisplayFor(model => model.SanPham.TenSanPham)
+            </dd>
+        }
+        else
+        {
+            <dd>
+                Không có liên kết sản phẩm
+            </dd>
+        }
 
         <dt>
-            @Html.DisplayNameFor(model => model.MaNguoiTao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaNguoiTao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaNguoiSua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaNguoiSua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayTao)
+            Ngày đăng
         </dt>
 
         <dd>
@@ -74,31 +66,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NgayChinhSua)
+            Cập nhật lần cuối
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NgayChinhSua)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsHide)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsHide)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<style>
+    .active-3 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

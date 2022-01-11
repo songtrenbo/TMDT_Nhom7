@@ -1,27 +1,20 @@
 ﻿@model TMDT.Models.TinTuc
 
 @{
-    ViewBag.Title = "TinTucCreate";
+    ViewBag.Title = "TinTucEdit";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Tạo tin tức mới</h2>
+<h2>Sửa tin tức</h2>
 
 
-@using (Html.BeginForm("TinTucCreate", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("TinTucEdit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.MaTinTuc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaTinTuc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaTinTuc, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
     <div class="form-group">
         @Html.LabelFor(model => model.TieuDe, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -31,14 +24,6 @@
         </div>
     </div>
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.Thumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Thumbnail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Thumbnail, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
     <input type="file" name="UploadImage" onchange="ChangeImage(this, document.getElementById('previewImg'))" />
     <div class="form-group">
         <p class="col-md-12">Hình đại diện tin tức</p>
@@ -46,9 +31,6 @@
             <img src="@Url.Content(Model.Thumbnail)" id="previewImg" style="width:300px" />
         </div>
     </div>
-
-
-
 
 
     <div class="form-group">
@@ -60,7 +42,7 @@
     </div>
 
     <div class="form-group">
-        <p class = "control-label col-md-10">Sản phẩm liên kết với tin tức</p>
+        <p class="control-label col-md-10">Sản phẩm liên kết với tin tức</p>
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.MaSanPham, (SelectList)ViewBag.SanPham, "Không chọn sản phẩm liên kết", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.MaSanPham, "", new { @class = "text-danger" })
@@ -68,10 +50,19 @@
     </div>
 
 
+    @Html.HiddenFor(model => model.MaTinTuc)
+    @Html.HiddenFor(model => model.MaNguoiTao)
+    @Html.HiddenFor(model => model.MaNguoiSua)
+    @Html.HiddenFor(model => model.NgayTao)
+    @Html.HiddenFor(model => model.NgayChinhSua)
+    @Html.HiddenFor(model => model.IsDeleted)
+    @Html.HiddenFor(model => model.IsHide)
 
+
+  
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Tạo mới" class="btn btn-success" />
+            <input type="submit" value="Lưu tin tức" class="btn btn-success" />
             <a href="@Url.Action("QLTinTuc","Admin")" class="btn btn-outline-danger">Trở về</a>
             <h5 class="text-danger">@ViewBag.IsExist</h5>
         </div>
@@ -80,9 +71,9 @@
 }
 
 
-@*@section Scripts {
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}*@
+}
 <style>
     .active-3 {
         background-color: #CA2620;

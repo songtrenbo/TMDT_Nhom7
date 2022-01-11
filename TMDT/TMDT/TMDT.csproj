@@ -849,7 +849,6 @@
     <Content Include="Views\KhachHang\VoucherHetHan.cshtml" />
     <Content Include="Views\NhanVien\QuanLyDonHang.cshtml" />
     <Content Include="Views\NhanVien\DonHangChiTiet.cshtml" />
-    <Content Include="Views\QuanLy\NhapKho.cshtml" />
     <Content Include="Views\QuanLy\QuanLySanPham.cshtml" />
     <Content Include="Views\QuanLy\SanPhamCreate.cshtml" />
     <Content Include="Views\QuanLy\SanPhamDetails.cshtml" />
@@ -871,6 +870,10 @@
     <Content Include="Views\NguoiDung\SendEmailActive.cshtml" />
     <Content Include="Views\NguoiDung\SendEmailDone.cshtml" />
     <Content Include="Views\GioHang\CheckoutResult.cshtml" />
+    <Content Include="Views\Admin\TinTucEdit.cshtml" />
+    <Content Include="Views\QuanLy\QuanLyNhapKho.cshtml" />
+    <Content Include="Views\QuanLy\NhapKho.cshtml" />
+    <Content Include="Views\TrangChu\XemTatCaSP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

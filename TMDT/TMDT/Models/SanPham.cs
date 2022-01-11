@@ -11,6 +11,7 @@ namespace TMDT.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web;
 
@@ -29,27 +30,40 @@ namespace TMDT.Models
         }
     
         public int MaSanPham { get; set; }
+        [Display(Name = "Tên sản phẩm")]
         public string TenSanPham { get; set; }
         public int MaDanhMuc { get; set; }
         public string SeoTitle { get; set; }
         public int MaThuongHieu { get; set; }
         public Nullable<int> SoLuongTon { get; set; }
         public Nullable<int> SoLuongBan { get; set; }
+        [Display(Name = "Giá bán")]
         public Nullable<double> GiaBan { get; set; }
+        [Display(Name = "Giá giảm")]
         public Nullable<double> GiaGiam { get; set; }
+        [Display(Name = "Điểm rate")]
         public Nullable<int> DiemRate { get; set; }
+        [Display(Name = "Số lượt rate")]
         public Nullable<int> SoLuotRate { get; set; }
+        [Display(Name = "Lượt xem")]
         public Nullable<int> LuotXem { get; set; }
+        [Display(Name = "Bảo hành")]
         public int BaoHanh { get; set; }
         public int MaLoaiCPU { get; set; }
+        [Display(Name = "Thông tin CPU")]
         public string CPUInfo { get; set; }
         public string RAM { get; set; }
         public int MaLoaiGPU { get; set; }
+        [Display(Name = "Thông tin GPU")]
         public string GPUInfo { get; set; }
+        [Display(Name = "Size màn hình")]
         public int SizeManHinh { get; set; }
+        [Display(Name = "Màn hình")]
         public string ManHinh { get; set; }
         public string Pin { get; set; }
+        [Display(Name = "Lưu trữ")]
         public string LuuTru { get; set; }
+        [Display(Name = "Khối lượng")]
         public Nullable<double> KhoiLuong { get; set; }
         public string Hinh { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }

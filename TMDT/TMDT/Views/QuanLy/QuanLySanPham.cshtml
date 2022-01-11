@@ -4,69 +4,88 @@
     ViewBag.Title = "Quản lý sản phẩm";
     Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
 }
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#THTable').DataTable();
+        });
+    </script>
+}
 <h2>Quản lý sản phẩm</h2>
 <p>
     @Html.ActionLink("Thêm sản phẩm", "SanPhamCreate", "", htmlAttributes: new { @class = "btn btn-success" })
 </p>
-<table class="table table-striped">
-    <tr>
-        <th scope="col">
-            Tên sản phẩm
-        </th>
-        <th scope="col">
-            Danh mục
-        </th>
-        <th scope="col">
-            Thương hiệu
-        </th>
-        <th scope="col">
-            Số lượng tồn
-        </th>
-        <th scope="col">
-            Giá bán
-        </th>
-        <th scope="col">
-            Giá giảm
-        </th>
-        <th>Action</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="THTable" class="table table-striped">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenSanPham)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DanhMuc.TenDanhMuc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThuongHieu.TenThuongHieu)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.SoLuongTon)
-            </td>
-            <td class="text-right">
-                @Html.DisplayFor(modelItem => item.GiaBan)
-            </td>
-            <td class="text-right">
-                @if (item.GiaGiam != 0)
-                {
-                    @Html.DisplayFor(modelItem => item.GiaGiam)
-                }
-            </td>
-            <td>
-                <a href="@Url.Action("SanPhamEdit", "QuanLy", new {id=item.MaSanPham})" style="color:black"><i class="bi bi-pencil-square"></i></a> |
-                <a href="@Url.Action("SanPhamDetails","QuanLy", new {id=item.MaSanPham})" style="color:black"><i class="bi bi-card-list"></i></a>
-                @if (item.IsHide == true)
-                {
-                    <a href="@Url.Action("SanPhamHide","QuanLy", new {id=item.MaSanPham})" style="color:black"><i class="bi bi-eye-slash-fill"></i></a>
-                }
-                else
-                {
-                    <a href="@Url.Action("SanPhamHide","QuanLy", new {id=item.MaSanPham})" style="color:black"><i class="bi bi-eye-fill"></i></a>
-                }
-            </td>
+            <th scope="col">
+                Tên sản phẩm
+            </th>
+            <th scope="col">
+                Danh mục
+            </th>
+            <th scope="col">
+                Thương hiệu
+            </th>
+            <th scope="col">
+                Số lượng tồn
+            </th>
+            <th scope="col">
+                Giá bán
+            </th>
+            <th scope="col">
+                Giá giảm
+            </th>
+            <th>Action</th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSanPham)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DanhMuc.TenDanhMuc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThuongHieu.TenThuongHieu)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.SoLuongTon)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.GiaBan)
+                </td>
+                <td class="text-right">
+                    @if (item.GiaGiam != 0)
+                    {
+                        @Html.DisplayFor(modelItem => item.GiaGiam)
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("SanPhamEdit", "QuanLy", new {id=item.MaSanPham})" style="color:black"><i class="bi bi-pencil-square"></i></a> |
+                    <a href="@Url.Action("SanPhamDetails","QuanLy", new {id=item.MaSanPham})" style="color:black"><i class="bi bi-card-list"></i></a>
+                    @if (item.IsHide == true)
+                    {
+                        <a href="@Url.Action("SanPhamHide","QuanLy", new {id=item.MaSanPham})" style="color:black"><i class="bi bi-eye-slash-fill"></i></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("SanPhamHide","QuanLy", new {id=item.MaSanPham})" style="color:black"><i class="bi bi-eye-fill"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<style>
+    .active-2 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

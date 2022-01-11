@@ -175,6 +175,67 @@ namespace TMDT.Controllers
             var tintuc = database.TinTucs.Where(s => s.MaTinTuc == id).FirstOrDefault();
             return View(tintuc);
         }
+        public ActionResult TinTucEdit(int id)
+        {
+            List<SanPham> sanphams = database.SanPhams.ToList();
+            ViewBag.SanPham = new SelectList(sanphams, "MaSanPham", "TenSanPham");
+            return View(database.TinTucs.Where(s=>s.MaTinTuc==id).FirstOrDefault());
+        }
+        [HttpPost]
+        public ActionResult TinTucEdit(int id, TinTuc tintuc)
+        {
+            var acc = (NguoiDung)Session["Account"];
+            //var check_ID = database.TinTucs.Where(s => s.MaTinTuc == tintuc.MaTinTuc).FirstOrDefault();
+            try
+            {
+                if (tintuc.UploadImage != null)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(tintuc.UploadImage.FileName);
+                    string extent = Path.GetExtension(tintuc.UploadImage.FileName);
+                    filename = filename + extent;
+                    tintuc.Thumbnail = "/Content/images/" + filename;
+                    tintuc.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/images/"), filename));
+                }
+                else
+                {
+                    string img = database.TinTucs.Where(s => s.MaTinTuc == id).Select(s => s.Thumbnail).FirstOrDefault();
+                    tintuc.Thumbnail = img;
+                }
+                tintuc.NgayChinhSua = DateTime.Now;
+                tintuc.MaNguoiSua = acc.MaNguoiDung;
+                //tintuc.IsDeleted = false;
+                //tintuc.IsHide = false;
+                database.Entry(tintuc).State = EntityState.Modified;
+                database.SaveChanges();
+                return RedirectToAction("QLTinTuc");
+            }
+            catch (DbEntityValidationException e)
+            {
+                string a = "";
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    a += ("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State) + "\n";
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        a += ("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage) + "\n";
+                    }
+                }
+                return Content(a);
+            }
+            catch (InvalidOperationException e)
+            {
+                return Content(e.Data.Values.ToString());
+            }
+        }
+        public ActionResult TinTucDelete(int id)
+        {
+            var tintuc = database.TinTucs.Where(s => s.MaTinTuc == id).FirstOrDefault();
+            database.TinTucs.Remove(tintuc);
+            database.SaveChanges();
+            return RedirectToAction("QLTinTuc");
+        }
         #endregion
     }
 }

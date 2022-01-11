@@ -4,13 +4,6 @@
     ViewBag.Title = "SanPhamDetails";
     Layout = "~/Views/Shared/_LayoutQuanLy.cshtml";
 }
-<style>
-    .active-1 {
-        background-color: #CA2620;
-        box-shadow: inset 5px 5px 12px #AA1B1B;
-        transition: all 0.3s ease 0s;
-    }
-</style>
 <div>
     <h2>Chi tiết sản phẩm</h2>
     <hr/>
@@ -105,7 +98,7 @@
                     <td colspan="2">
                         @Model.LoaiGPU.TenLoaiGPU @Model.GPUInfo
                     </td>
-                </tr>v
+                </tr>
                 <tr>
                     <th scope="row">
                         Màn hình
@@ -157,11 +150,18 @@
 
             </tbody>
         </table>
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @Html.ActionLink("Edit", "SanPhamEdit", new { id = Model.MaSanPham }) |
                 <a href="@Url.Action("QuanLySanPham","QuanLy")" class="btn btn-outline-danger">Trở về</a>
             </div>
-        </div>
+        </div>*@
     </div>
 </div>
+<style>
+    .active-2 {
+        background-color: #CA2620;
+        box-shadow: inset 5px 5px 12px #AA1B1B;
+        transition: all 0.3s ease 0s;
+    }
+</style>

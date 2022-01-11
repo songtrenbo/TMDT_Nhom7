@@ -11,14 +11,17 @@ namespace TMDT.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CTHoaDon
     {
         public int MaCTHoaDon { get; set; }
         public int MaHoaDon { get; set; }
         public int MaSanPham { get; set; }
         public double DonGia { get; set; }
+        [Display(Name = "Số lượng")]
         public int SoLuong { get; set; }
+        [Display(Name = "Thành tiền")]
         public int ThanhTien { get; set; }
     
         public virtual HoaDon HoaDon { get; set; }

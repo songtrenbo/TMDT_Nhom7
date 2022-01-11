@@ -1,0 +1,123 @@
+﻿@model IEnumerable<TMDT.Models.SanPham>
+
+@{
+    ViewBag.Title = "XemTatCaSP";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+<link href="~/Content/css/product-list.css" rel="stylesheet" />
+
+<div class="container-fluid">
+
+    <div class="row" style="margin:10px">
+        <div style="margin-top:25px; padding:10px;background-color:#EE0033; color:white; width:100%">
+            <h3 style="float:left">@ViewBag.danhmuc</h3>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-xs-4 col-md-4 col-lg-3">
+                <div class="card card-hover" style="box-shadow: 0px 2px 5px gray; margin-top:10px">
+                    @{ var url = "/san-pham/" + item.SeoTitle + "-" + item.MaSanPham;}
+                    <div class="card_item" onclick="location.href='@url'">
+                        <div class="image-container">
+                            <br />
+                            @if (item.NgayTao > DateTime.Now.AddDays(-54))
+                            {
+                                <div class="first">
+                                    <div class="d-flex justify-content-between align-items-center"> <span class="discount">New</span> </div>
+                                </div>
+                            }
+                            else if (item.LuotXem > 50)
+                            {
+                                <div class="first">
+                                    <div class="d-flex justify-content-between align-items-center"> <span class="discount">Hot</span> </div>
+                                </div>
+                            }
+                            <div style=" text-align: center">
+                                <img src="@item.Hinh" class="img-fluid rounded thumbnail-image main-img" style=" height: 200px; object-fit: contain ">
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            @if (item.TenSanPham.Length > 45)
+                            {
+                                <h5>@item.TenSanPham.Substring(0, 45)...</h5>
+                            }
+                            else
+                            {
+                                <h5>@item.TenSanPham</h5>
+                            }
+                            @if (item.GiaGiam > 0)
+                            {
+                                <h8 class=" text-left"><del>@String.Format("{0:0,0}", item.GiaBan)<span>đ</span></del></h8><br />
+                                <h4 class="text-left" style="color:red; float:left">@String.Format("{0:0,0}", item.GiaGiam)<span>đ</span></h4>
+                            }
+                            else
+                            {
+                                <br />
+                                <h4 style="color:red; float:left">@String.Format("{0:0,0}", item.GiaBan)<span>đ</span></h4>
+                            }
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center pt-1" style="float:right">
+                            <div>
+                                <i class="bi bi-star-fill" style="color:#EE0033"></i>
+                                @if (item.SoLuotRate > 0)
+                                {<span class="rating-number" style="margin-right:5px">@(Math.Round(@item.DiemRate??0 * 1.0 / @item.SoLuotRate??0,1))</span>}
+                                else
+                                {<span class="rating-number" style="margin-right:5px">Chưa có đánh giá</span>}
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+<style>
+    .card_item {
+        transition: all 0.3s ease 0s;
+    }
+
+    .image-container {
+        transition: all 0.3s ease 0s;
+    }
+
+    .card_item:hover {
+        box-shadow: 0px 0px 15px #C7C7C7;
+    }
+
+        .card_item:hover .image-container {
+            transform: translateY(-8px);
+        }
+
+    .card:hover {
+        cursor: pointer;
+    }
+
+    .card-text {
+        color: gray;
+    }
+
+    .btn-buy {
+        width: 70%;
+        padding: 10px;
+        margin-left: 15%;
+        background-color: white;
+        border: none;
+        color: #EE0033;
+        box-shadow: 0px 2px 15px #F24060;
+        transition: all 0.3s ease 0s;
+    }
+
+        .btn-buy:hover {
+            background-color: #2EE59D;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            border-color: rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+</style>

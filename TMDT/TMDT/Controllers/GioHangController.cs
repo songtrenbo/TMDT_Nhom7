@@ -142,39 +142,41 @@ namespace TMDT.Controllers
         }
         public ActionResult PaymentWithMomo(double totalPrice)
         {
-            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-            //request params need to request to MoMo system
-            string endpoint = MomoConfig.EndPoint;
-            string partnerCode = MomoConfig.PartnerCode;
-            string accessKey = MomoConfig.AccessKey;
-            string serectkey = MomoConfig.Serectkey;
-            string orderInfo = "test";
-            string returnUrl = baseUrl + "GioHang/CheckoutResult";
-            string notifyurl = baseUrl + "GioHang/SavePayment";
+            try
+            {
+                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+                //request params need to request to MoMo system
+                string endpoint = MomoConfig.EndPoint;
+                string partnerCode = MomoConfig.PartnerCode;
+                string accessKey = MomoConfig.AccessKey;
+                string serectkey = MomoConfig.Serectkey;
+                string orderInfo = "test";
+                string returnUrl = baseUrl + "GioHang/CheckoutResult";
+                string notifyurl = baseUrl + "GioHang/SavePayment";
 
-            string amount = totalPrice.ToString();
-            string orderid = DateTime.Now.Ticks.ToString();
-            string requestId = DateTime.Now.Ticks.ToString();
-            string extraData = "";
+                string amount = totalPrice.ToString();
+                string orderid = DateTime.Now.Ticks.ToString();
+                string requestId = DateTime.Now.Ticks.ToString();
+                string extraData = "";
 
-            //Before sign HMAC SHA256 signature
-            string rawHash = "partnerCode=" +
-                partnerCode + "&accessKey=" +
-                accessKey + "&requestId=" +
-                requestId + "&amount=" +
-                amount + "&orderId=" +
-                orderid + "&orderInfo=" +
-                orderInfo + "&returnUrl=" +
-                returnUrl + "&notifyUrl=" +
-                notifyurl + "&extraData=" +
-                extraData;
+                //Before sign HMAC SHA256 signature
+                string rawHash = "partnerCode=" +
+                    partnerCode + "&accessKey=" +
+                    accessKey + "&requestId=" +
+                    requestId + "&amount=" +
+                    amount + "&orderId=" +
+                    orderid + "&orderInfo=" +
+                    orderInfo + "&returnUrl=" +
+                    returnUrl + "&notifyUrl=" +
+                    notifyurl + "&extraData=" +
+                    extraData;
 
-            MoMoSecurity crypto = new MoMoSecurity();
-            //sign signature SHA256
-            string signature = crypto.signSHA256(rawHash, serectkey);
+                MoMoSecurity crypto = new MoMoSecurity();
+                //sign signature SHA256
+                string signature = crypto.signSHA256(rawHash, serectkey);
 
-            //build body json request
-            JObject message = new JObject
+                //build body json request
+                JObject message = new JObject
             {
                 { "partnerCode", partnerCode },
                 { "accessKey", accessKey },
@@ -190,11 +192,16 @@ namespace TMDT.Controllers
 
             };
 
-            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+                string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
 
-            JObject jmessage = JObject.Parse(responseFromMomo);
+                JObject jmessage = JObject.Parse(responseFromMomo);
 
-            return Redirect(jmessage.GetValue("payUrl").ToString());
+                return Redirect(jmessage.GetValue("payUrl").ToString());
+            }
+            catch
+            {
+                return View("HienThiGioHang");
+            }
         }
         public Tuple<int, string> ConfirmPaymentClient(int? resultCode = null)
         {

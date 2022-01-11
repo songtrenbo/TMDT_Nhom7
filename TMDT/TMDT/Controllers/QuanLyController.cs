@@ -292,10 +292,6 @@ namespace TMDT.Controllers
         }
         #endregion
 
-        public ActionResult QuanLyNhapKho()
-        {
-            return View();
-        }
 
 
         #region QLNhanVien
@@ -417,7 +413,7 @@ namespace TMDT.Controllers
             return View(phieuquatang);
         }
         [HttpPost]
-        public ActionResult VoucherCreate(PhieuQuaTang phieuquatang, string ngayBatDau, string ngayKetThuc)
+        public ActionResult VoucherCreate(PhieuQuaTang phieuquatang, string ngayKetThuc)
         {
             var check_ID = database.PhieuQuaTangs.Where(s => s.MaPhieuQuaTang == phieuquatang.MaPhieuQuaTang).FirstOrDefault();
 
@@ -496,6 +492,10 @@ namespace TMDT.Controllers
         #region QLBaoCao
         public ActionResult QuanLyBaoCao(string searching, string Year, string Month)
         {
+            if (Year == "")
+            {
+                Year = (DateTime.Now.Year-3).ToString();
+            }
             var dates = database.HoaDons.Where(s => (s.NgayMua.Year + "-" + s.NgayMua.Month + "-" + s.NgayMua.Day) == searching).ToList();
 
             var ngaymua = dates.ToList();
@@ -508,12 +508,6 @@ namespace TMDT.Controllers
                 ViewBag.ngay = item.NgayMua;
             }
             ViewBag.sl = soluong;
-
-            //List<int> thangs = new List<int>(12);
-            //List<int> gianhap = new List<int>();
-            //List<int> doanhthu = new List<int>();
-            //List<int> giagiam = new List<int>();
-
 
 
             if (Month != "" && Year != null)
@@ -842,25 +836,34 @@ namespace TMDT.Controllers
         }
         #endregion
 
-
-
+        #region QLNhapKho
+        public ActionResult QuanLyNhapKho()
+        {
+            var nhapkho = database.SanPhamNhapKhoes.ToList();
+            return View(nhapkho);
+        }
         public ActionResult NhapKho()
         {
+            List<SanPham> sanphams = database.SanPhams.ToList();
+            ViewBag.SanPham = new SelectList(sanphams, "MaSanPham", "TenSanPham");
             SanPhamNhapKho sp = new SanPhamNhapKho();
             return View(sp);
         }
         [HttpPost]
-        public ActionResult NhapKho(SanPhamNhapKho sanphamkho)
+        public ActionResult NhapKho(SanPhamNhapKho sp)
         {
-            var check_ID = database.SanPhamNhapKhoes.Where(s => s.MaSanPhamNhapKho == sanphamkho.MaSanPhamNhapKho).FirstOrDefault();
-            if (check_ID != null)
-            {
-                database.SanPhamNhapKhoes.Add(sanphamkho);
-                database.SaveChanges();
-                return RedirectToAction("QuanLyVoucher");
-            }
-            return View();
+            sp.NgayTao = DateTime.Now;
+            
+            database.Configuration.ValidateOnSaveEnabled = false;
+            database.SanPhamNhapKhoes.Add(sp);
+            database.SaveChanges();
+            return RedirectToAction("QuanLyNhapKho");
         }
+        #endregion
+
+
+
+
         public ActionResult QuanLyFeedback()
         {
             var feedback = database.DanhGias.Where(s => s.IsApproved == false && s.IsDeleted == false).ToList();

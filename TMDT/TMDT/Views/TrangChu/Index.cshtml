@@ -52,14 +52,18 @@
 <br />
 
 
-<div class="container">
+
+<div class="container-fluid">
     <div class="row" style="margin:10px">
         @{
             for (int i = 0; i < ViewBag.result.Count; i++)
             {
                 if (ViewBag.result[i].Count > 0)
                 {
-                    <h3 class="col-12">@((ViewBag.danhmuc)[i].TenDanhMuc)</h3>
+                    <div style="margin-top:25px; padding:10px;background-color:#EE0033; color:white; width:100%">
+                        <h3 style="float:left">@((ViewBag.danhmuc)[i].TenDanhMuc)</h3>
+                        <a href="@Url.Action("XemTatCaSP","TrangChu", new { madanhmuc = (ViewBag.danhmuc)[i].MaDanhMuc })" style="float:right; font-size:22px">Xem tất cả<i class="bi bi-chevron-right"></i></a>
+                    </div>
                     int count = 0;
                     foreach (var item in ViewBag.result[i])
                     {
@@ -68,11 +72,12 @@
                             break;
                         }
                         <div class="col-12 col-xs-4 col-md-4 col-lg-3">
-                            <div class="card card-hover" style=" margin-top:20px">
+                            <div class="card card-hover" style="box-shadow: 0px 2px 5px gray; margin-top:10px">
                                 @{ var url = "/san-pham/" + item.SeoTitle + "-" + item.MaSanPham;}
-                                <div class="card" onclick="location.href='@url'">
+                                <div class="card_item" onclick="location.href='@url'">
                                     <div class="image-container">
-                                        @if (item.NgayTao > DateTime.Now.AddDays(-14))
+                                        <br />
+                                        @if (item.NgayTao > DateTime.Now.AddDays(-54))
                                         {
                                             <div class="first">
                                                 <div class="d-flex justify-content-between align-items-center"> <span class="discount">New</span> </div>
@@ -85,30 +90,60 @@
                                             </div>
                                         }
                                         <div style=" text-align: center">
-                                            <img src="@item.Hinh" class="img-fluid rounded thumbnail-image" style=" height: 200px; object-fit: contain ">
+                                            <img src="@item.Hinh" class="img-fluid rounded thumbnail-image main-img" style=" height: 200px; object-fit: contain ">
                                         </div>
                                     </div>
-                                    <div class="product-detail-container p-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="dress-name" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; ">@item.TenSanPham</h5>
-                                            <div class="d-flex flex-column mb-2" style="height:36px">
-                                                @if (item.GiaGiam > 0)
-                                                {<span class="new-price">@String.Format("{0:0,0}", item.GiaGiam)</span>
-                                                <p class="old-price text-right"><del>@String.Format("{0:0,0}", item.GiaBan)</del></p>}
+                                    <div class="container-fluid">
+                                        @if (item.TenSanPham.Length > 45)
+                                        {
+                                            <h5>@item.TenSanPham.Substring(0, 45)...</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5>@item.TenSanPham</h5>
+                                        }
+                                        @if (item.GiaGiam > 0)
+                                        {
+                                            <h8 class=" text-left"><del>@String.Format("{0:0,0}", item.GiaBan)<span>đ</span></del></h8><br />
+                                            <h4 class="text-left" style="color:red; float:left">@String.Format("{0:0,0}", item.GiaGiam)<span>đ</span></h4>
+                                        }
+                                        else
+                                        {
+                                            <br />
+                                            <h4 style="color:red; float:left">@String.Format("{0:0,0}", item.GiaBan)<span>đ</span></h4>
+                                        }
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center pt-1" style="float:right">
+                                        <div>
+                                            <i class="bi bi-star-fill" style="color:#EE0033"></i>
+                                            @if (item.SoLuotRate > 0)
+                                            {<span class="rating-number" style="margin-right:5px">@(Math.Round(@item.DiemRate * 1.0 / @item.SoLuotRate,1))</span>}
                                             else
-                                            {<span class="new-price">@String.Format("{0:0,0}", item.GiaBan)</span>}
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center pt-1">
-                                            <div>
-                                                <i class="bi bi-star-fill" style="color:#f0f489"></i>
-                                                @if (item.SoLuotRate > 0)
-                                                {<span class="rating-number">@(Math.Round(@item.DiemRate * 1.0 / @item.SoLuotRate,1))</span>}
-                                                else
-                                                {<span class="rating-number">Chưa có đánh giá</span>}
-                                            </div> <span class="buy" onclick="location.href='@url'">Mua ngay</span>
+                                            {<span class="rating-number" style="margin-right:5px">Chưa có đánh giá</span>}
                                         </div>
                                     </div>
+                                    @*<div class="product-detail-container p-2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5 class="dress-name" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; ">@item.TenSanPham</h5>
+
+                                                <div class="d-flex flex-column mb-2" style="height:36px">
+                                                    @if (item.GiaGiam > 0)
+                                                    {<span class="new-price">@item.GiaGiam</span>
+                                                    <p class="old-price text-right"><del>@item.GiaBan</del></p>}
+                                                else
+                                                {<span class="new-price">@item.GiaBan</span>}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center pt-1">
+                                                <div>
+                                                    <i class="bi bi-star-fill" style="color:#f0f489"></i>
+                                                    @if (item.SoLuotRate > 0)
+                                                    {<span class="rating-number">@(Math.Round(@item.DiemRate * 1.0 / @item.SoLuotRate,1))</span>}
+                                                    else
+                                                    {<span class="rating-number">Chưa có đánh giá</span>}
+                                                </div> <span class="buy" onclick="location.href='@url'">Mua ngay</span>
+                                            </div>
+                                        </div>*@
                                 </div>
 
                             </div>
@@ -122,14 +157,60 @@
 </div>
 
 
+
 @*<script src="./scripts.js"></script>*@
 
+@*<style>
+        .card-hover:hover {
+            background-color: white;
+            color: black;
+            box-shadow: 3px 2px 10px gray;
+        }
+
+        .card:hover {
+            cursor: pointer;
+        }
+
+        .card-text {
+            color: gray;
+        }
+
+        .btn-buy {
+            width: 70%;
+            padding: 10px;
+            margin-left: 15%;
+            background-color: white;
+            border: none;
+            color: #EE0033;
+            box-shadow: 0px 2px 15px #F24060;
+            transition: all 0.3s ease 0s;
+        }
+
+            .btn-buy:hover {
+                background-color: #2EE59D;
+                box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+                border-color: rgba(46, 229, 157, 0.4);
+                color: #fff;
+                transform: translateY(-5px);
+            }
+    </style>*@
+
 <style>
-    .card-hover:hover {
-        background-color: white;
-        color: black;
-        box-shadow: 3px 2px 10px gray;
+    .card_item {
+        transition: all 0.3s ease 0s;
     }
+
+    .image-container {
+        transition: all 0.3s ease 0s;
+    }
+
+    .card_item:hover {
+        box-shadow: 0px 0px 15px #C7C7C7;
+    }
+
+        .card_item:hover .image-container {
+            transform: translateY(-8px);
+        }
 
     .card:hover {
         cursor: pointer;
@@ -158,112 +239,175 @@
             transform: translateY(-5px);
         }
 </style>
-
 @* <script>
-    $(document).ready(function () {
-        var itemsMainDiv = ('.MultiCarousel');
-        var itemsDiv = ('.MultiCarousel-inner');
-        var itemWidth = "";
+        $(document).ready(function () {
+            var itemsMainDiv = ('.MultiCarousel');
+            var itemsDiv = ('.MultiCarousel-inner');
+            var itemWidth = "";
 
-        $('.leftLst, .rightLst').click(function () {
-            var condition = $(this).hasClass("leftLst");
-            if (condition)
-                click(0, this);
-            else
-                click(1, this)
-        });
-
-        ResCarouselSize();
-
-
-
-
-        $(window).resize(function () {
-            ResCarouselSize();
-        });
-
-        //this function define the size of the items
-        function ResCarouselSize() {
-            var incno = 0;
-            var dataItems = ("data-items");
-            var itemClass = ('.item');
-            var id = 0;
-            var btnParentSb = '';
-            var itemsSplit = '';
-            var sampwidth = $(itemsMainDiv).width();
-            var bodyWidth = $('body').width();
-            $(itemsDiv).each(function () {
-                id = id + 1;
-                var itemNumbers = $(this).find(itemClass).length;
-                btnParentSb = $(this).parent().attr(dataItems);
-                itemsSplit = btnParentSb.split(',');
-                $(this).parent().attr("id", "MultiCarousel" + id);
-
-
-                if (bodyWidth >= 1200) {
-                    incno = itemsSplit[3];
-                    itemWidth = sampwidth / incno;
-                }
-                else if (bodyWidth >= 992) {
-                    incno = itemsSplit[2];
-                    itemWidth = sampwidth / incno;
-                }
-                else if (bodyWidth >= 768) {
-                    incno = itemsSplit[1];
-                    itemWidth = sampwidth / incno;
-                }
-                else {
-                    incno = itemsSplit[0];
-                    itemWidth = sampwidth / incno;
-                }
-                $(this).css({ 'transform': 'translateX(0px)', 'width': itemWidth * itemNumbers });
-                $(this).find(itemClass).each(function () {
-                    $(this).outerWidth(itemWidth);
-                });
-
-                $(".leftLst").addClass("over");
-                $(".rightLst").removeClass("over");
-
+            $('.leftLst, .rightLst').click(function () {
+                var condition = $(this).hasClass("leftLst");
+                if (condition)
+                    click(0, this);
+                else
+                    click(1, this)
             });
-        }
+
+            ResCarouselSize();
 
 
-        //this function used to move the items
-        function ResCarousel(e, el, s) {
-            var leftBtn = ('.leftLst');
-            var rightBtn = ('.rightLst');
-            var translateXval = '';
-            var divStyle = $(el + ' ' + itemsDiv).css('transform');
-            var values = divStyle.match(/-?[\d\.]+/g);
-            var xds = Math.abs(values[4]);
-            if (e == 0) {
-                translateXval = parseInt(xds) - parseInt(itemWidth * s);
-                $(el + ' ' + rightBtn).removeClass("over");
 
-                if (translateXval <= itemWidth / 2) {
-                    translateXval = 0;
-                    $(el + ' ' + leftBtn).addClass("over");
-                }
+
+            $(window).resize(function () {
+                ResCarouselSize();
+            });
+
+            //this function define the size of the items
+            function ResCarouselSize() {
+                var incno = 0;
+                var dataItems = ("data-items");
+                var itemClass = ('.item');
+                var id = 0;
+                var btnParentSb = '';
+                var itemsSplit = '';
+                var sampwidth = $(itemsMainDiv).width();
+                var bodyWidth = $('body').width();
+                $(itemsDiv).each(function () {
+                    id = id + 1;
+                    var itemNumbers = $(this).find(itemClass).length;
+                    btnParentSb = $(this).parent().attr(dataItems);
+                    itemsSplit = btnParentSb.split(',');
+                    $(this).parent().attr("id", "MultiCarousel" + id);
+
+
+                    if (bodyWidth >= 1200) {
+                        incno = itemsSplit[3];
+                        itemWidth = sampwidth / incno;
+                    }
+                    else if (bodyWidth >= 992) {
+                        incno = itemsSplit[2];
+                        itemWidth = sampwidth / incno;
+                    }
+                    else if (bodyWidth >= 768) {
+                        incno = itemsSplit[1];
+                        itemWidth = sampwidth / incno;
+                    }
+                    else {
+                        incno = itemsSplit[0];
+                        itemWidth = sampwidth / incno;
+                    }
+                    $(this).css({ 'transform': 'translateX(0px)', 'width': itemWidth * itemNumbers });
+                    $(this).find(itemClass).each(function () {
+                        $(this).outerWidth(itemWidth);
+                    });
+
+                    $(".leftLst").addClass("over");
+                    $(".rightLst").removeClass("over");
+
+                });
             }
-            else if (e == 1) {
-                var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
-                translateXval = parseInt(xds) + parseInt(itemWidth * s);
-                $(el + ' ' + leftBtn).removeClass("over");
 
-                if (translateXval >= itemsCondition - itemWidth / 2) {
-                    translateXval = itemsCondition;
-                    $(el + ' ' + rightBtn).addClass("over");
+
+            //this function used to move the items
+            function ResCarousel(e, el, s) {
+                var leftBtn = ('.leftLst');
+                var rightBtn = ('.rightLst');
+                var translateXval = '';
+                var divStyle = $(el + ' ' + itemsDiv).css('transform');
+                var values = divStyle.match(/-?[\d\.]+/g);
+                var xds = Math.abs(values[4]);
+                if (e == 0) {
+                    translateXval = parseInt(xds) - parseInt(itemWidth * s);
+                    $(el + ' ' + rightBtn).removeClass("over");
+
+                    if (translateXval <= itemWidth / 2) {
+                        translateXval = 0;
+                        $(el + ' ' + leftBtn).addClass("over");
+                    }
                 }
+                else if (e == 1) {
+                    var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
+                    translateXval = parseInt(xds) + parseInt(itemWidth * s);
+                    $(el + ' ' + leftBtn).removeClass("over");
+
+                    if (translateXval >= itemsCondition - itemWidth / 2) {
+                        translateXval = itemsCondition;
+                        $(el + ' ' + rightBtn).addClass("over");
+                    }
+                }
+                $(el + ' ' + itemsDiv).css('transform', 'translateX(' + -translateXval + 'px)');
             }
-            $(el + ' ' + itemsDiv).css('transform', 'translateX(' + -translateXval + 'px)');
+
+            //It is used to get some elements from btn
+            function click(ell, ee) {
+                var Parent = "#" + $(ee).parent().attr("id");
+                var slide = $(Parent).attr("data-slide");
+                ResCarousel(ell, Parent, slide);
+            }
+
+        });
+    </script> *@
+
+<style>
+    .MultiCarousel {
+        float: left;
+        overflow: hidden;
+        padding: 15px;
+        width: 100%;
+        position: relative;
+    }
+
+        .MultiCarousel .MultiCarousel-inner {
+            transition: 1s ease all;
+            float: left;
         }
 
-        //It is used to get some elements from btn
-        function click(ell, ee) {
-            var Parent = "#" + $(ee).parent().attr("id");
-            var slide = $(Parent).attr("data-slide");
-            ResCarousel(ell, Parent, slide);
+            .MultiCarousel .MultiCarousel-inner .item {
+                float: left;
+            }
+
+                .MultiCarousel .MultiCarousel-inner .item > div {
+                    text-align: center;
+                    padding: 10px;
+                    margin: 10px;
+                    background: #f1f1f1;
+                    color: #666;
+                }
+
+        .MultiCarousel .leftLst, .MultiCarousel .rightLst {
+            position: absolute;
+            border-radius: 50%;
+            top: calc(50% - 20px);
         }
 
-    });
-</script> *@
+        .MultiCarousel .leftLst {
+            left: 0;
+        }
+
+        .MultiCarousel .rightLst {
+            right: 0;
+        }
+
+            .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over {
+                pointer-events: none;
+                background: #ccc;
+            }
+</style>
+<style>
+    .item-thuonghieu {
+        transition: all 0.3s ease 0s;
+    }
+
+        .item-thuonghieu:hover {
+            box-shadow: 2px 2px 2px black;
+            transform: translateY(-5px);
+            border-color: rgba(46, 229, 157, 0.4);
+            border: 1px;
+            box-shadow: 0px 5px 4px gray;
+        }
+
+
+    .carousel-item {
+        transition: all 0.3s ease 0s;
+    }
+</style>
