@@ -31,7 +31,7 @@
             <div class="form-group has-search mb-3 w-auto my-auto d-none d-sm-flex">
                 <span class="fa fa-search form-control-feedback"></span>
                 @using (Html.BeginForm("Index", "Search", FormMethod.Get))
-                {@Html.TextBox("name", null, new { id = "SearchBox", @class = "form-control search", @placeholder = "Search" })}
+                {@Html.TextBox("name", null, new { id = "SearchBox", @class = "form-control search", @placeholder = "Search", @Value = ViewBag.name })}
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

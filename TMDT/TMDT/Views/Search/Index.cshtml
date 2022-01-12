@@ -155,7 +155,7 @@
 
 <script src="./scripts.js"></script>
 <div class="MenuPage">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, danhMucID = ViewBag.danhMucID, cpuID = ViewBag.cpuID, loaiGPUID = ViewBag.loaiGPUID, sizeManHinhID = ViewBag.sizeManHinhID, thuongHieuID = ViewBag.thuongHieuID }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, name = ViewBag.name, danhMucID = ViewBag.danhMucID, cpuID = ViewBag.cpuID, loaiGPUID = ViewBag.loaiGPUID, sizeManHinhID = ViewBag.sizeManHinhID, thuongHieuID = ViewBag.thuongHieuID }))
 </div>
 
 <style>

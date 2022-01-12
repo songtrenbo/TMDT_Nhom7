@@ -30,6 +30,11 @@ namespace TMDT.Controllers
             ViewBag.thuongHieu = new SelectList(thuongHieu, "MaThuongHieu", "TenThuongHieu", thuongHieuID); ;
             var listSP = database.SanPhams.Where(x => x.IsHide == false).OrderByDescending(x => x.NgayTao).ToList();
             var result = new List<SanPham>(listSP);
+            if (!String.IsNullOrEmpty(name))
+            {
+                result = result.Where(s => s.TenSanPham.ToLower().Contains(name.ToLower())).ToList();
+                ViewBag.name = name;
+            }
             if (danhMucID != 0)
             {
                 result = result.Where(s => s.DanhMuc.MaDanhMuc == danhMucID).ToList();
